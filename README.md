@@ -4,3 +4,4 @@ El objetivo es crear una plataforma donde los usuarios puedan buscar, explorar y
 Documentacion:
 https://docs.google.com/document/d/1zk4CFyxA3AgP1QFNleRnKFWFeCD8ba9El9Gj3MpbZmM/edit
 
+https://github.com/users/HernanElichiry/projects/2
