@@ -3,6 +3,7 @@ import Navbar from '../navbar/navbar';
 import { HomePageText } from '../Background/Background';
 
 
+
 function HomePage() {
   
   return (
