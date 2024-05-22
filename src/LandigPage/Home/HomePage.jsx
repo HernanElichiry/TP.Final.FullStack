@@ -1,18 +1,20 @@
-
-import Navbar from '../navbar/navbar';
-import { HomePageText } from '../Background/Background';
-
-
+import Navbar from "../navbar/navbar";
+import { HomePageText } from "../Background/Background";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 function HomePage() {
-  
   return (
     <>
-        <Navbar/>
-        <HomePageText>//componente que integra: texto de presentacion, la imagen de einstein y la barra de navegacion</HomePageText> 
-  
+      <div>
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<HomePageText />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </div>
     </>
-  )
+  );
 }
 
 export default HomePage;
