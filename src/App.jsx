@@ -5,15 +5,18 @@ import "./../node_modules/bulma/css/bulma.css";
 import Navbar from "./LandigPage/navbar/navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
+
 function App() {
   return (
     <>
+
      <BrowserRouter>
         <Navbar />
           <Routes>
             <Route path="/" element={<HomePage/>}/>
           </Routes>
-      </BrowserRouter>
+      </BrowserRouter>  
+
     </>
   );
 }
