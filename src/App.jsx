@@ -1,16 +1,16 @@
-import React from 'react'
+import React from "react";
 //import './App.css'
-import HomePage from './LandigPage/Home/HomePage'
-import "./../node_modules/bulma/css/bulma.css"
+import HomePage from "./LandigPage/Home/HomePage";
+import "./../node_modules/bulma/css/bulma.css";
+import Navbar from "./LandigPage/navbar/navbar";
 
 function App() {
-  
   return (
     <>
-    <HomePage></HomePage>
-        
+      <Navbar />
+      <HomePage></HomePage>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
