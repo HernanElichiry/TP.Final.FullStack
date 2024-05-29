@@ -1,7 +1,18 @@
+
+import Navbar from "../navbar/navbar";
+import { HomePageText } from "../Background/Background";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+
+import React from 'react';
+import Navbar from '../navbar/navbar';
+import { HomePageText } from '../Background/Background';
+import ResponsiveCarousel from '../Carousel/ResponsiveCarousel';
+
 import React from "react";
 import Navbar from "../navbar/navbar";
 import { HomePageText } from "../Background/Background";
 import ResponsiveCarousel from "../Carousel/ResponsiveCarousel";
+
 
 const courses = [
   {
@@ -114,6 +125,30 @@ const courses = [
   },
 ];
 
+
+
+function HomePage() {
+  return (
+    <>
+
+      <div>
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<HomePageText />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </div>
+
+        <Navbar/>
+        <HomePageText></HomePageText> {/*componente que integra: texto de presentacion, la imagen de einstein y la barra de navegacion*/}   
+        <div className='big-box'>
+        <ResponsiveCarousel courses={courses} text='Mejor valorados!'/>
+        <ResponsiveCarousel courses={courses} text='En promocion!'/>
+        <ResponsiveCarousel courses={courses} text='Las mejores universidades promocionan en ENSTEIN'/>
+        </div>
+  
+
 function HomePage() {
   return (
     <>
@@ -127,6 +162,7 @@ function HomePage() {
           text="Las mejores universidades promocionan en ENSTEIN"
         />
       </div>
+
     </>
   );
 }
