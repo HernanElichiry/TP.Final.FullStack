@@ -7,7 +7,7 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
-import ChangePasswordForm from './changePasword';
+import { Link, Outlet } from 'react-router-dom';
 
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
@@ -21,10 +21,13 @@ function getItem(label, key, icon, children) {
 const items = [
   getItem('Hans', '1', <PieChartOutlined />),
   getItem('User', 'sub1', <UserOutlined />, [
-    getItem('Change Pasword', '3'),
-    getItem('Data', '4'),
+    getItem(<Link to="change-password">Change Password</Link>, '3'),
+    getItem(<Link to="data">Data</Link>, '4'),
   ]),
-  getItem('Courses', 'sub2', <TeamOutlined />, [getItem('My courses', '6'), getItem('Favorites', '8')]),
+  getItem('Courses', 'sub2', <TeamOutlined />, [
+    getItem(<Link to="my-courses">My courses</Link>, '6'),
+    getItem(<Link to="favorites">Favorites</Link>, '8'),
+  ]),
   getItem('Files', '9', <FileOutlined />),
 ];
 const UserMenu = () => {
@@ -71,7 +74,7 @@ const UserMenu = () => {
               textAlign: 'center',
             }}
           >
-            <ChangePasswordForm></ChangePasswordForm>
+            <Outlet />
           </div>
         </Content>
         <Footer

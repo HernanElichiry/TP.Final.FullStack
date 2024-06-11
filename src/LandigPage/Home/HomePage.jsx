@@ -127,8 +127,6 @@ function HomePage() {
           courses={courses}
           text="Las mejores universidades promocionan en EINSTEIN"
         />
-        <UserMenu></UserMenu>
-        <LoginForm></LoginForm>
       </div>
     </>
   );
