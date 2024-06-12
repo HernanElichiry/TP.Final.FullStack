@@ -2,6 +2,7 @@
 import React from "react";
 import "./navbar.css";
 import logoImage from "./logo2.png";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -56,9 +57,10 @@ function Navbar() {
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="buttons">
+                <Link to="login">
                 <a class="button is-primary">
                   <strong>Sign up</strong>
-                </a>
+                </a></Link>
                 <a class="button is-light">Log in</a>
               </div>
             </div>
