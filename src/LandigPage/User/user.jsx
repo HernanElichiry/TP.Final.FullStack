@@ -10,6 +10,8 @@ import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import { Link, Outlet } from 'react-router-dom';
 
 const { Header, Content, Footer, Sider } = Layout;
+
+// Función getItem para crear elementos de menú
 function getItem(label, key, icon, children) {
   return {
     key,
@@ -18,6 +20,8 @@ function getItem(label, key, icon, children) {
     label,
   };
 }
+
+// Definición de los items del menú
 const items = [
   getItem('Hans', '1', <PieChartOutlined />),
   getItem('User', 'sub1', <UserOutlined />, [
@@ -30,41 +34,28 @@ const items = [
   ]),
   getItem('Files', '9', <FileOutlined />),
 ];
+
+// Definición de los items del breadcrumb
+const breadcrumbItems = [
+  { title: 'User' },
+  { title: 'Hans' },
+];
+
 const UserMenu = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
   return (
-    <Layout
-      style={{
-        minHeight: '100vh',
-      }}
-    >
+    <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="demo-logo-vertical" />
         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
       </Sider>
       <Layout>
-        <Header
-          style={{
-            padding: 0,
-            background: colorBgContainer,
-          }}
-        />
-        <Content
-          style={{
-            margin: '0 16px',
-          }}
-        >
-          <Breadcrumb
-            style={{
-              margin: '16px 0',
-            }}
-          >
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Hans</Breadcrumb.Item>
-          </Breadcrumb>
+        <Header style={{ padding: 0, background: colorBgContainer }} />
+        <Content style={{ margin: '0 16px' }}>
+          <Breadcrumb style={{ margin: '16px 0' }} items={breadcrumbItems} />
           <div
             style={{
               padding: 24,
@@ -77,15 +68,12 @@ const UserMenu = () => {
             <Outlet />
           </div>
         </Content>
-        <Footer
-          style={{
-            textAlign: 'center',
-          }}
-        >
+        <Footer style={{ textAlign: 'center' }}>
           Ant Design ©{new Date().getFullYear()} Created by Ant UED
         </Footer>
       </Layout>
     </Layout>
   );
 };
+
 export default UserMenu;
