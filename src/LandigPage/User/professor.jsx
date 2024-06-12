@@ -20,17 +20,18 @@ function getItem(label, key, icon, children) {
 }
 const items = [
   getItem('Hans', '1', <PieChartOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [
+  getItem('Professor', 'sub1', <UserOutlined />, [
     getItem(<Link to="change-password">Change Password</Link>, '3'),
     getItem(<Link to="data">Data</Link>, '4'),
   ]),
   getItem('Courses', 'sub2', <TeamOutlined />, [
-    getItem(<Link to="my-courses">My courses</Link>, '6'),
-    getItem(<Link to="favorites">Favorites</Link>, '8'),
+    getItem(<Link to="add-courses">Add Courses</Link>, '6'),
+    getItem(<Link to="my-courses">My courses</Link>, '8'),
+    getItem(<Link to="favorites">Favorites</Link>, '10'),
   ]),
   getItem('Files', '9', <FileOutlined />),
 ];
-const UserMenu = () => {
+const ProfessorMenu = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -62,7 +63,7 @@ const UserMenu = () => {
               margin: '16px 0',
             }}
           >
-            <Breadcrumb.Item>User</Breadcrumb.Item>
+            <Breadcrumb.Item>Professor</Breadcrumb.Item>
             <Breadcrumb.Item>Hans</Breadcrumb.Item>
           </Breadcrumb>
           <div
@@ -88,4 +89,4 @@ const UserMenu = () => {
     </Layout>
   );
 };
-export default UserMenu;
+export default ProfessorMenu;

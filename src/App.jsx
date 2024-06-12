@@ -11,6 +11,7 @@ import DataComponent from "./LandigPage/User/dataComponent";
 import LoginForm from "./LandigPage/Login/login";
 import MyCourses from "./LandigPage/User/myCourses";
 import Favorites from "./LandigPage/User/favorites";
+import ProfessorMenu from "./LandigPage/User/professor";
 
 function App() {
   return (
@@ -22,6 +23,12 @@ function App() {
            <Route path="Login" element={<LoginForm />} /> 
          {/*  <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />*/}
           <Route path="/usermenu/*" element={<UserMenu />} >
+            <Route path="change-password" element={<ChangePasswordForm />} />
+            <Route path="data" element={<DataComponent />} />
+            <Route path="my-courses" element={<MyCourses />} />
+            <Route path="favorites" element={<Favorites />} />
+            </Route>
+            <Route path="/professormenu/*" element={<ProfessorMenu />} >
             <Route path="change-password" element={<ChangePasswordForm />} />
             <Route path="data" element={<DataComponent />} />
             <Route path="my-courses" element={<MyCourses />} />

@@ -11,7 +11,16 @@ const LoginForm = () => {
      // Lógica de autenticación aquí
     // Si es exitoso:
 
-    navigate('/usermenu');
+
+    if(email === "user@gmail.com")
+    {
+      navigate('/usermenu');
+    }
+    else{
+      if(email === "profesor@gmail.com")
+      navigate('/professormenu/');
+    }
+  
   };
 
   return (
@@ -24,21 +33,21 @@ const LoginForm = () => {
             <div className="form-group">
               <label htmlFor="email">Usuario : </label>
               <input
-                type="email"
+               // type="email"
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                required
+                
               />
             </div>
             <div className="form-group">
               <label htmlFor="password">Contraseña :</label>
               <input
-                type="password"
+                /*type="password"*/
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required
+                
               />
             </div>
             <button onClick={handleLogin} type="submit" className="login-btn">
