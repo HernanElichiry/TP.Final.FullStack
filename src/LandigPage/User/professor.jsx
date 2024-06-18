@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
+
   UserOutlined,
+  SettingOutlined,
+  CloseCircleOutlined,
+  ReadOutlined
 } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import { Link, Outlet } from 'react-router-dom';
@@ -23,17 +23,17 @@ function getItem(label, key, icon, children) {
 
 // Definición de los items del menú
 const items = [
-  getItem('Hans', '1', <PieChartOutlined />),
+  getItem('Hans', '1', <SettingOutlined />),
   getItem('Professor', 'sub1', <UserOutlined />, [
     getItem(<Link to="change-password">Change Password</Link>, '3'),
     getItem(<Link to="data">Data</Link>, '4'),
   ]),
-  getItem('Courses', 'sub2', <TeamOutlined />, [
+  getItem('Courses', 'sub2', <ReadOutlined />, [
     getItem(<Link to="add-courses">Add Courses</Link>, '6'),
     getItem(<Link to="my-courses">My courses</Link>, '8'),
     getItem(<Link to="favorites">Favorites</Link>, '10'),
   ]),
-  getItem('Files', '9', <FileOutlined />),
+  getItem('Log out', '9', <CloseCircleOutlined />),
 ];
 
 // Definición de los items del breadcrumb

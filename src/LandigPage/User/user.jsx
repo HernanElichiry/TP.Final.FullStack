@@ -32,7 +32,7 @@ const items = [
     getItem(<Link to="my-courses">My courses</Link>, '6'),
     getItem(<Link to="favorites">Favorites</Link>, '8'),
   ]),
-  getItem('Files', '9', <FileOutlined />),
+  getItem('Log out', '9', <FileOutlined />),
 ];
 
 // Definición de los items del breadcrumb
