@@ -1,5 +1,5 @@
 
-//import './App.css'
+import './App.css'
 
 import HomePage from "./LandigPage/Home/HomePage";
 import "./../node_modules/bulma/css/bulma.css";
@@ -23,7 +23,6 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="Login" element={<LoginForm />} />
           <Route path="register" element={<RegisterForm />} />
-          {/*  <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />*/}
           <Route path="/usermenu/*" element={<UserMenu />}>
             <Route path="change-password" element={<ChangePasswordForm />} />
             <Route path="data" element={<DataComponent />} />

@@ -22,7 +22,7 @@ const LoginForm = () => {
       {/* <Navbar></Navbar> */}
       <div className="app-container">
         <div className="login-container">
-          <h2>Iniciar sesión</h2>
+          <h2 className="login-h2">Iniciar sesión</h2>
           <form onSubmit={handleLogin} className="login-form">
             <div className="form-group">
               <label htmlFor="email">Usuario : </label>

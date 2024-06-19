@@ -18,7 +18,7 @@ const RegisterForm = () => {
     <div>
       <div className="app-container">
         <div className="login-container">
-          <h2>Register</h2>
+          <h2 className="login-h2">Register</h2>
           <form onSubmit={handleLogin} className="login-form">
             <div className="form-group">
               <label htmlFor="email">Usuario : </label>
