@@ -14,6 +14,7 @@ export const ProductCard = ({ product }) => {
       <p>{product.description}</p>
       <p>Rating: {product.rating} estrellas</p>
       <p>Precio: {product.price}</p>
+      <button className="button is-primary is-small">Show More</button>
     </div>
     </>
   );
