@@ -1,11 +1,14 @@
 import React from "react";
-import './ProductCard.css'
+import './ProductCard.css';
+
+
 
 
 
 export const ProductCard = ({ product }) => {
   return (
   <>
+  
     <div className="card-product-container">
       <div className="card-product-image">
       <img src={product.image} alt={product.title} width={200} />
@@ -15,7 +18,9 @@ export const ProductCard = ({ product }) => {
       <p>Rating: {product.rating} estrellas</p>
       <p>Precio: {product.price}</p>
       <button className="button is-primary is-small">Show More</button>
+
     </div>
+
     </>
   );
 };
