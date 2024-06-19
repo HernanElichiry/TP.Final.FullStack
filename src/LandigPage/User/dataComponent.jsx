@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
-import './dataComponent.css'
-import { Form, Input, Button, DatePicker } from 'antd';
-
+import React, { useState } from "react";
+import "./dataComponent.css";
+import { Form, Input, Button, DatePicker } from "antd";
 
 const DataComponent = () => {
   const [userData, setUserData] = useState({
-    firstName: '',
-    lastName: '',
+    firstName: "",
+    lastName: "",
     birthDate: null,
-    email: '',
+    email: "",
   });
 
   const handleChange = (e) => {
@@ -29,7 +28,7 @@ const DataComponent = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Aquí puedes enviar userData a tu backend o API
-    console.log('Datos del usuario actualizados:', userData);
+    console.log("Datos del usuario actualizados:", userData);
   };
 
   return (
@@ -62,7 +61,7 @@ const DataComponent = () => {
           name="birthDate"
           value={userData.birthDate ? moment(userData.birthDate) : null}
           onChange={handleDateChange}
-          style={{ width: '100%' }}
+          style={{ width: "100%" }}
         />
       </Form.Item>
       <Form.Item label="Email">

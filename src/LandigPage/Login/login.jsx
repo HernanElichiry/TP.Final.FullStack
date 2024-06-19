@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import "./login.css";
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -7,20 +7,14 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-
-     // Lógica de autenticación aquí
+    // Lógica de autenticación aquí
     // Si es exitoso:
 
-
-    if(email === "user@gmail.com")
-    {
-      navigate('/usermenu');
+    if (email === "user@gmail.com") {
+      navigate("/usermenu");
+    } else {
+      if (email === "profesor@gmail.com") navigate("/professormenu/");
     }
-    else{
-      if(email === "profesor@gmail.com")
-      navigate('/professormenu/');
-    }
-  
   };
 
   return (
@@ -33,11 +27,10 @@ const LoginForm = () => {
             <div className="form-group">
               <label htmlFor="email">Usuario : </label>
               <input
-               // type="email"
+                // type="email"
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                
               />
             </div>
             <div className="form-group">
@@ -47,7 +40,6 @@ const LoginForm = () => {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                
               />
             </div>
             <button onClick={handleLogin} type="submit" className="login-btn">

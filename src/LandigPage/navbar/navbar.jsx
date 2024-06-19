@@ -60,8 +60,8 @@ function Navbar() {
                   <strong>Sign up</strong>
                 </Link>
                 <Link to="Login" className="button is-light">
-                 <strong>Log in</strong>
-                 </Link>
+                  <strong>Log in</strong>
+                </Link>
               </div>
             </div>
           </div>

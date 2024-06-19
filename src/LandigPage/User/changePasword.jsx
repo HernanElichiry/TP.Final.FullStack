@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import './ChangePassword.css';
-import { Form, Input, Button } from 'antd';
+import React, { useState } from "react";
+import "./ChangePassword.css";
+import { Form, Input, Button } from "antd";
 
 const ChangePasswordForm = () => {
   const [passwordData, setPasswordData] = useState({
-    currentPassword: '',
-    newPassword: '',
-    confirmPassword: '',
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
   });
 
   const handleChange = (e) => {
@@ -20,7 +20,7 @@ const ChangePasswordForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Aquí puedes añadir la lógica para cambiar la contraseña
-    console.log('Datos de la contraseña:', passwordData);
+    console.log("Datos de la contraseña:", passwordData);
   };
 
   return (

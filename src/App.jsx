@@ -21,21 +21,21 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
-           <Route path="Login" element={<LoginForm />} /> 
-           <Route path="register" element= {<RegisterForm />}/>
-         {/*  <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />*/}
-          <Route path="/usermenu/*" element={<UserMenu />} >
+          <Route path="Login" element={<LoginForm />} />
+          <Route path="register" element={<RegisterForm />} />
+          {/*  <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />*/}
+          <Route path="/usermenu/*" element={<UserMenu />}>
             <Route path="change-password" element={<ChangePasswordForm />} />
             <Route path="data" element={<DataComponent />} />
             <Route path="my-courses" element={<MyCourses />} />
             <Route path="favorites" element={<Favorites />} />
-            </Route>
-            <Route path="/professormenu/*" element={<ProfessorMenu />} >
+          </Route>
+          <Route path="/professormenu/*" element={<ProfessorMenu />}>
             <Route path="change-password" element={<ChangePasswordForm />} />
             <Route path="data" element={<DataComponent />} />
             <Route path="my-courses" element={<MyCourses />} />
             <Route path="favorites" element={<Favorites />} />
-            </Route>
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>
