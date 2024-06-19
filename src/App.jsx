@@ -12,6 +12,7 @@ import LoginForm from "./LandigPage/Login/login";
 import MyCourses from "./LandigPage/User/myCourses";
 import Favorites from "./LandigPage/User/favorites";
 import ProfessorMenu from "./LandigPage/User/professor";
+import RegisterForm from "./LandigPage/Login/register";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
            <Route path="Login" element={<LoginForm />} /> 
+           <Route path="register" element= {<RegisterForm />}/>
          {/*  <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />*/}
           <Route path="/usermenu/*" element={<UserMenu />} >
             <Route path="change-password" element={<ChangePasswordForm />} />

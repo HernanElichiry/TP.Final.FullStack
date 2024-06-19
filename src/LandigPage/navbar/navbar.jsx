@@ -56,10 +56,12 @@ function Navbar() {
           <div className="navbar-end">
             <div className="navbar-item">
               <div className="buttons">
-                <Link to="login" className="button is-primary">
+                <Link to="register" className="button is-primary">
                   <strong>Sign up</strong>
                 </Link>
-                <a className="button is-light">Log in</a>
+                <Link to="Login" className="button is-light">
+                 <strong>Log in</strong>
+                 </Link>
               </div>
             </div>
           </div>
