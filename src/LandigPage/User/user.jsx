@@ -32,7 +32,7 @@ const items = [
     getItem(<Link to="data">Data</Link>, "4",<EditFilled />),
   ]),
   getItem("Courses", "sub2", <ReadOutlined />, [
-    getItem(<Link to="my-courses">My courses</Link>, "6"),<AuditOutlined />,
+    getItem(<Link to="my-courses">My courses</Link>, "6",<AuditOutlined />),
     getItem(<Link to="favorites">Favorites</Link>, "8",<PushpinFilled />),
   ]),
   getItem("Log out", "9", <CloseCircleOutlined />),
