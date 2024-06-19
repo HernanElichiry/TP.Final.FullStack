@@ -1,10 +1,12 @@
 .app-container {
     display: flex;
     align-items: center;
-    height: 100vh;
     background-image: url('../Background/einstein4.png'); /* Ruta a tu imagen */
-    background-size: cover;
+    background-size: 1000px auto;
     background-position: center;
+    background-repeat: no-repeat;
+    height: 80vh; /* Resta la altura de la navbar */
+    width: 100vw;
   }
 
 
@@ -21,7 +23,7 @@
   h2{
     justify-content: center;
     display: flex;
-    font-weight: bold;
+    
 
   }
   
@@ -34,6 +36,7 @@
     margin-bottom: 15px;
     display: flex;
     align-items: center;
+ 
   }
   
   label {

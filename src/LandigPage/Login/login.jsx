@@ -31,6 +31,7 @@ const LoginForm = () => {
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                
               />
             </div>
             <div className="form-group">
