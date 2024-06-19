@@ -1,8 +1,7 @@
 import { HomePageText } from "../Background/Background";
 import React from "react";
 import ResponsiveCarousel from "../Carousel/ResponsiveCarousel";
-import UserMenu from "../User/user";
-import LoginForm from "../Login/login";
+
 
 const courses = [
   {

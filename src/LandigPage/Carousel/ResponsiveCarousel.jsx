@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ProductCard } from "./Card/ProductCard";
-import './Card/ProductCard.css'; // Estilos para ProductCard y el carrusel
+import "./Card/ProductCard.css"; // Estilos para ProductCard y el carrusel
 
 function ResponsiveCarousel({ courses, text = "inserte texto" }) {
   var settings = {
@@ -20,8 +20,8 @@ function ResponsiveCarousel({ courses, text = "inserte texto" }) {
           slidesToShow: 4,
           slidesToScroll: 4,
           infinite: true,
-          dots: true
-        }
+          dots: true,
+        },
       },
       {
         breakpoint: 1024,
@@ -29,25 +29,25 @@ function ResponsiveCarousel({ courses, text = "inserte texto" }) {
           slidesToShow: 3,
           slidesToScroll: 3,
           infinite: true,
-          dots: true
-        }
+          dots: true,
+        },
       },
       {
         breakpoint: 768,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          initialSlide: 2
-        }
+          initialSlide: 2,
+        },
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   return (
@@ -55,7 +55,7 @@ function ResponsiveCarousel({ courses, text = "inserte texto" }) {
       <div className="slider-container">
         <h2 className="Slider-description">{text}</h2>
         <Slider {...settings}>
-          {courses.map(course => (
+          {courses.map((course) => (
             <ProductCard key={course.id} product={course} />
           ))}
         </Slider>

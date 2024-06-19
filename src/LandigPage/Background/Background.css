@@ -6,24 +6,22 @@
     height: 100%;
     z-index: -1;  
   }*/
-  
 
-  .landingpage-container{
-    display: flex; 
-    
+.landingpage-container {
+  display: flex;
+  margin: 20px; /* Puedes ajustar este valor según tus necesidades */
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  }
+.landingpage-text h1 {
+  color: #ffb300;
+  font-weight: bold;
+  font-size: 80px;
 
-  .landingpage-text h1{
-    color: #ffb300;
-    font-weight: bold;
-    font-size: 80px;
-  }
-  
-  
-    .landingpage-text p { 
-        font-size: 20px;
-        
-    
-    }
-  
+}
+
+.landingpage-text p {
+
+  font-size: 20px;
+}
