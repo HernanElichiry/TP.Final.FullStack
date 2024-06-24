@@ -13,6 +13,7 @@ import Favorites from "./LandigPage/User/favorites";
 import ProfessorMenu from "./LandigPage/User/professor";
 import RegisterForm from "./LandigPage/Login/register";
 import { UserProvider } from "./LandigPage/User/UserContext";
+import AddCourseForm from "./LandigPage/User/AddCourseForm";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
               <Route path="favorites" element={<Favorites />} />
             </Route>
             <Route path="/professormenu/*" element={<ProfessorMenu />}>
+              <Route path="add-course" element={<AddCourseForm/>} />
               <Route path="change-password" element={<ChangePasswordForm />} />
               <Route path="data" element={<DataComponent />} />
               <Route path="my-courses" element={<MyCourses />} />
