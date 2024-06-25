@@ -61,14 +61,7 @@ function ResponsiveCarousel({ courses, text = "inserte texto" }) {
           ))}
         </Slider>
       </div>
-      <FloatButton
-            shape="circle"
-            type="primary"
-            style={{
-              right: 94,
-            }}
-            icon={<CustomerServiceOutlined />}
-          />
+
     </div>
   );
 }
