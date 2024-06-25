@@ -5,6 +5,7 @@ import einsteinImage from "../Background/einstein4.png";
 const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isProfessor, setIsProfessor] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -21,16 +22,59 @@ const RegisterForm = () => {
           <h2 className="login-h2">Register</h2>
           <form onSubmit={handleLogin} className="login-form">
             <div className="form-group">
-              <label htmlFor="email">Usuario : </label>
+              <label htmlFor="name">Name : </label>
               <input
-                // type="email"
+                id="name"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="last-name">Last Name : </label>
+              <input
+                id="lastname"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="birthdate">Birth Date : </label>
+              <input
+                id="birthdate"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">Email : </label>
+              <input
+                type="email"
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="password">Contraseña :</label>
+              <label htmlFor="user">User Name:</label>
+              <input
+                /*type="password"*/
+                id="user"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password :</label>
+              <input
+                /*type="password"*/
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="password">Repeat Password :</label>
               <input
                 /*type="password"*/
                 id="password"
@@ -39,23 +83,15 @@ const RegisterForm = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="password">Contraseña :</label>
+              <label htmlFor="isProfessor">Is Professor?</label>
               <input
-                /*type="password"*/
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                type="checkbox"
+                id="isProfessor"
+                checked={isProfessor}
+                onChange={(e) => setIsProfessor(e.target.checked)}
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="password">Contraseña :</label>
-              <input
-                /*type="password"*/
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
+
             <button onClick={handleLogin} type="submit" className="login-btn">
               Register
             </button>

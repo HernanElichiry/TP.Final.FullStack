@@ -33,7 +33,7 @@ const items = [
     getItem(<Link to="data">Data</Link>, "4",<EditFilled />),
   ]),
   getItem("Courses", "sub2", <ReadOutlined />, [
-    getItem(<Link to="add-courses">Add Courses</Link>, "6",<FormOutlined />),
+    getItem(<Link to="add-course">Add Courses</Link>, "6",<FormOutlined />),
     getItem(<Link to="my-courses">My courses</Link>, "8",<AuditOutlined />),
     getItem(<Link to="favorites">Favorites</Link>, "10",<PushpinFilled />),
   ]),

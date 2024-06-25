@@ -1,0 +1,60 @@
+.formcont{
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(90, 60, 60, 0.1);
+  border-radius: 8px;
+}
+
+.formcont h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 10px;
+  background-color: #1890ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-submit:hover {
+  background-color: #40a9ff;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+
+.form-group textarea {
+  resize: vertical;
+  height: 200px; /* Altura por defecto más grande */
+  min-height: 200px; /* Altura mínima */
+}
+
+.form-input{
+  background-color: rgb(255, 255, 255);
+  color: #333;
+  font-weight: bold;
+}

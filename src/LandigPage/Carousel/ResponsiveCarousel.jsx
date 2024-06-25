@@ -4,7 +4,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ProductCard } from "./Card/ProductCard";
 import "./Card/ProductCard.css"; // Estilos para ProductCard y el carrusel
-
+import { CustomerServiceOutlined } from "@ant-design/icons";
+import { FloatButton } from "antd";
 function ResponsiveCarousel({ courses, text = "inserte texto" }) {
   var settings = {
     dots: true,
@@ -60,6 +61,14 @@ function ResponsiveCarousel({ courses, text = "inserte texto" }) {
           ))}
         </Slider>
       </div>
+      <FloatButton
+            shape="circle"
+            type="primary"
+            style={{
+              right: 94,
+            }}
+            icon={<CustomerServiceOutlined />}
+          />
     </div>
   );
 }
