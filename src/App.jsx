@@ -14,12 +14,14 @@ import ProfessorMenu from "./LandigPage/User/professor";
 import RegisterForm from "./LandigPage/Login/register";
 import { UserProvider } from "./LandigPage/User/UserContext";
 import AddCourseForm from "./LandigPage/User/AddCourseForm";
+import { FavoritesProvider } from "./LandigPage/User/FavoritesContext";
 
 function App() {
   return (
     <div>
       <BrowserRouter>
         <UserProvider>
+          <FavoritesProvider>
           <Navbar />
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -39,6 +41,7 @@ function App() {
               <Route path="favorites" element={<Favorites />} />
             </Route>
           </Routes>
+          </FavoritesProvider>
         </UserProvider>
       </BrowserRouter>
     </div>

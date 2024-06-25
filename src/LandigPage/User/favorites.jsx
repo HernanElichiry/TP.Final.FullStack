@@ -1,4 +1,4 @@
-import { FavCard } from "./FavCard/FavCard";
+/*import { FavCard } from "./FavCard/FavCard";
 
 const course = [
   {
@@ -16,6 +16,25 @@ const Favorites = () => {
   return (
     <div>
       <FavCard course={course} />
+    </div>
+  );
+};
+
+export default Favorites;*/
+
+import React, { useContext } from 'react';
+import FavCard from './FavCard/FavCard'; // Asegúrate de que este es el camino correcto a tu componente FavCard
+import { FavoritesContext } from './FavoritesContext';  // Importar el contexto de favoritos
+import './FavCard/FavCard.css';
+
+const Favorites = () => {
+  const { favorites } = useContext(FavoritesContext);
+
+  return (
+    <div>
+      {favorites.map((course) => (
+        <FavCard key={course.id} course={course} />
+      ))}
     </div>
   );
 };
