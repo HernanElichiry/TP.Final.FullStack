@@ -1,4 +1,5 @@
 import React from "react";
+
 import './ProductCard.css';
 
 
@@ -20,6 +21,7 @@ export const ProductCard = ({ product }) => {
       <button className="button is-primary is-small">Show More</button>
 
     </div>
+
 
     </>
   );

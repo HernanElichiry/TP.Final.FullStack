@@ -1,7 +1,3 @@
-import { HomePageText } from "../Background/Background";
-import React from "react";
-import ResponsiveCarousel from "../Carousel/ResponsiveCarousel";
-
 const courses = [
   {
     id: 1,
@@ -13,7 +9,8 @@ const courses = [
   },
   {
     id: 2,
-    image: "https://tecdn.b-cdn.net/img/new/standard/nature/186.jpg",
+    image:
+      "src/LandigPage/navbar/vecteezy_physics-icon-logo-vector-illustration-molecular-atom_11301216.jpg",
     title: "Curso de Química",
     description: "Descripción del curso de química",
     rating: 4,
@@ -112,21 +109,18 @@ const courses = [
   },
 ];
 
-function HomePage() {
-  return (
-    <>
-      <HomePageText />
-      {/*componente que integra: texto de presentacion, la imagen de einstein y la barra de navegacion*/}
-      <div className="big-box">
-        <ResponsiveCarousel courses={courses} text="Mejor valorados!" />
-        <ResponsiveCarousel courses={courses} text="En promocion!" />
-        <ResponsiveCarousel
-          courses={courses}
-          text="Las mejores universidades promocionan en EINSTEIN"
-        />
-      </div>
-    </>
-  );
-}
+export const getCourses = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(courses);
+    }, 200);
+  });
+};
 
-export default HomePage;
+export const getCourseById = (courseId) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(courses.find((course) => course.id == courseId));
+    }, 200);
+  });
+};
