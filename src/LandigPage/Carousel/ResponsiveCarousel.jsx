@@ -1,12 +1,14 @@
-import React from "react";
-import Slider from "react-slick";
+import React, { useContext } from 'react';
+import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { ProductCard } from "./Card/ProductCard";
-import "./Card/ProductCard.css"; // Estilos para ProductCard y el carrusel
-import { CustomerServiceOutlined } from "@ant-design/icons";
-import { FloatButton } from "antd";
+import { ProductCard } from './Card/ProductCard';
+import './Card/ProductCard.css'; // Estilos para ProductCard y el carrusel
+import { FavoritesContext } from '../User/FavoritesContext'; // Importar el contexto de favoritos
+
 function ResponsiveCarousel({ courses, text = "inserte texto" }) {
+  const { favorites, toggleFavorite } = useContext(FavoritesContext);
+
   var settings = {
     dots: true,
     infinite: false,
@@ -57,11 +59,15 @@ function ResponsiveCarousel({ courses, text = "inserte texto" }) {
         <h2 className="Slider-description">{text}</h2>
         <Slider {...settings}>
           {courses.map((course) => (
-            <ProductCard key={course.id} product={course} />
+            <ProductCard
+              key={course.id}
+              product={course}
+              onFavoriteToggle={toggleFavorite}
+              isFavorited={favorites.some((fav) => fav.id === course.id)}
+            />
           ))}
         </Slider>
       </div>
-
     </div>
   );
 }
