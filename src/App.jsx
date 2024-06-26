@@ -1,5 +1,5 @@
 import "./App.css";
-
+import { UserProvider } from "./LandigPage/User/UserContext/UserContext";
 import HomePage from "./LandigPage/Home/HomePage";
 import "./../node_modules/bulma/css/bulma.css";
 import Navbar from "./LandigPage/navbar/navbar";
@@ -14,6 +14,9 @@ import FavoritesAlumno from "./LandigPage/User/User/UserFavorite";
 import FavoritesProfessor from "./LandigPage/User/Profesor/ProfessorFavorite";
 import ProfessorMenu from "./LandigPage/User/Profesor/professor";
 import RegisterForm from "./LandigPage/Login/register";
+import { FavoritesProvider } from "./LandigPage/User/FavoritesContext";
+import AddCourseForm from "./LandigPage/User/AddCourseForm/AddCourseForm";
+import { Footer } from "antd/es/layout/layout";
 
 
 function App() {
@@ -47,7 +50,7 @@ function App() {
               />
             </Route>
           </Routes>
-          <Footer></Footer>
+          <Footer />
           </FavoritesProvider>
         </UserProvider>
       </BrowserRouter>
