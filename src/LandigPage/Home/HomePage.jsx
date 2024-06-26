@@ -1,8 +1,9 @@
 import { HomePageText } from "../Background/Background";
 import React from "react";
 import ResponsiveCarousel from "../Carousel/ResponsiveCarousel";
+import { courses } from "../MockCourses/MockCourses";
 
-const courses = [
+/*const courses = [
   {
     id: 1,
     image: "https://tecdn.b-cdn.net/img/new/standard/nature/186.jpg",
@@ -110,7 +111,7 @@ const courses = [
     rating: 5,
     price: "****",
   },
-];
+];*/
 
 function HomePage() {
   return (

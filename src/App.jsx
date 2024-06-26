@@ -16,37 +16,48 @@ import ProfessorMenu from "./LandigPage/User/Profesor/professor";
 import RegisterForm from "./LandigPage/Login/register";
 import { UserProvider } from "./LandigPage/User/UserContext/UserContext";
 import AddCourseForm from "./LandigPage/User/AddCourseForm/AddCourseForm";
+import { FavoritesProvider } from "./LandigPage/User/FavoritesContext";
+import Footer from "./LandigPage/Footer/Footer";
 
 function App() {
   return (
     <div>
       <BrowserRouter>
         <UserProvider>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="Login" element={<LoginForm />} />
-            <Route path="register" element={<RegisterForm />} />
-            <Route path="/usermenu/*" element={<UserMenu />}>
-              <Route path="change-password" element={<ChangePasswordForm />} />
-              <Route path="data" element={<DataComponent />} />
-              <Route path="my-courses-alumno" element={<MyCoursesAlumno />} />
-              <Route path="favorites-alumno" element={<FavoritesAlumno />} />
-            </Route>
-            <Route path="/professormenu/*" element={<ProfessorMenu />}>
-              <Route path="add-course" element={<AddCourseForm />} />
-              <Route path="change-password" element={<ChangePasswordForm />} />
-              <Route path="data" element={<DataComponent />} />
-              <Route
-                path="my-courses-professor"
-                element={<MyCoursesProfessor />}
-              />
-              <Route
-                path="favorites-professor"
-                element={<FavoritesProfessor />}
-              />
-            </Route>
-          </Routes>
+          <FavoritesProvider>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="Login" element={<LoginForm />} />
+              <Route path="register" element={<RegisterForm />} />
+              <Route path="/usermenu/*" element={<UserMenu />}>
+                <Route
+                  path="change-password"
+                  element={<ChangePasswordForm />}
+                />
+                <Route path="data" element={<DataComponent />} />
+                <Route path="my-courses-alumno" element={<MyCoursesAlumno />} />
+                <Route path="favorites-alumno" element={<FavoritesAlumno />} />
+              </Route>
+              <Route path="/professormenu/*" element={<ProfessorMenu />}>
+                <Route path="add-course" element={<AddCourseForm />} />
+                <Route
+                  path="change-password"
+                  element={<ChangePasswordForm />}
+                />
+                <Route path="data" element={<DataComponent />} />
+                <Route
+                  path="my-courses-professor"
+                  element={<MyCoursesProfessor />}
+                />
+                <Route
+                  path="favorites-professor"
+                  element={<FavoritesProfessor />}
+                />
+              </Route>
+            </Routes>
+            <Footer></Footer>
+          </FavoritesProvider>
         </UserProvider>
       </BrowserRouter>
     </div>
