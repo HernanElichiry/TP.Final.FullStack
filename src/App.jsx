@@ -15,6 +15,7 @@ import RegisterForm from "./LandigPage/Login/register";
 import { UserProvider } from "./LandigPage/User/UserContext";
 import AddCourseForm from "./LandigPage/User/AddCourseForm";
 import { FavoritesProvider } from "./LandigPage/User/FavoritesContext";
+import Footer from "./LandigPage/Footer/Footer";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
               <Route path="favorites" element={<Favorites />} />
             </Route>
           </Routes>
+          <Footer></Footer>
           </FavoritesProvider>
         </UserProvider>
       </BrowserRouter>
