@@ -1,6 +1,6 @@
 import React from "react";
 
-const MyCourses = () => {
+const MyCoursesUser = () => {
   return (
     <div>
       <h2>My Courses</h2>
@@ -9,4 +9,4 @@ const MyCourses = () => {
   );
 };
 
-export default MyCourses;
+export default MyCoursesUser;

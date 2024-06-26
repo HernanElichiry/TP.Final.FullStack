@@ -1,0 +1,22 @@
+.card-course-container {
+    background-color: #fffffff6;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 0px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    margin: 0 10px;
+    height: 370px; /* Ajusta la altura mínima según necesites */
+    overflow: hidden; /* Oculta el contenido que desborda del contenedor */
+    cursor: pointer;
+  }
+
+.card-course-image img {
+    width: 25%;
+    height: 200px; /* Ajusta la altura de las imágenes según necesites */
+    object-fit: cover; /* Ajusta la forma en que las imágenes se ajustan al contenedor */
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: filter 0.3s ease-in-out; /* Agrega una transición suave al cambio de filtro */
+  }
+
