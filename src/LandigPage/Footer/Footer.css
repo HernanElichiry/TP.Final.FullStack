@@ -1,4 +1,4 @@
-.footer {
+.footer-app {
   margin-top: 50px;
   background-color: #ffffff;
   color: rgb(34, 34, 34);
@@ -8,6 +8,7 @@
 
 .footer-container {
   max-width: 1200px;
+  background-color: #ffffff;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;

@@ -2,7 +2,7 @@ import { HomePageText } from "../Background/Background";
 import React from "react";
 import ResponsiveCarousel from "../Carousel/ResponsiveCarousel";
 import { courses } from "../MockCourses/MockCourses";
-
+import FooterApp from "../Footer/Footer"
 /*const courses = [
   {
     id: 1,
@@ -126,6 +126,7 @@ function HomePage() {
           text="Las mejores universidades promocionan en EINSTEIN"
         />
       </div>
+      <FooterApp />
     </>
   );
 }

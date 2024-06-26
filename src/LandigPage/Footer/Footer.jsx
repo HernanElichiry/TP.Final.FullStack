@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import './Footer.css';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 
-function Footer() {
+function FooterApp() {
   return (
-    <footer className="footer">
+    <footer className="footer-app">
       <div className="footer-container">
         <div className="footer-left">
           <h3>Einstein Academy</h3>
@@ -38,4 +38,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default FooterApp;
