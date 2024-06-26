@@ -7,7 +7,7 @@ import {
   LockOutlined,
   PushpinFilled,
   EditFilled,
-  AuditOutlined
+  AuditOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 import { Link, Outlet } from "react-router-dom";
@@ -28,12 +28,24 @@ function getItem(label, key, icon, children) {
 const items = [
   getItem("Hans", "1", <SettingOutlined />),
   getItem("User", "sub1", <UserOutlined />, [
-    getItem(<Link to="change-password">Change Password</Link>, "3",<LockOutlined />),
-    getItem(<Link to="data">Data</Link>, "4",<EditFilled />),
+    getItem(
+      <Link to="change-password">Change Password</Link>,
+      "3",
+      <LockOutlined />
+    ),
+    getItem(<Link to="data">Data</Link>, "4", <EditFilled />),
   ]),
   getItem("Courses", "sub2", <ReadOutlined />, [
-    getItem(<Link to="my-courses">My courses</Link>, "6",<AuditOutlined />),
-    getItem(<Link to="favorites">Favorites</Link>, "8",<PushpinFilled />),
+    getItem(
+      <Link to="my-courses-alumno">My courses</Link>,
+      "6",
+      <AuditOutlined />
+    ),
+    getItem(
+      <Link to="favorites-alumno">Favorites</Link>,
+      "8",
+      <PushpinFilled />
+    ),
   ]),
   getItem("Log out", "9", <CloseCircleOutlined />),
 ];

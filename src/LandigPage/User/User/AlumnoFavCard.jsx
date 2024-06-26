@@ -1,8 +1,8 @@
 import React from "react";
-import "./FavCard.css";
-import foto from "./fotos/fisica.jpg";
+import "./AlumnoFavCard.css";
+import foto from "./fotos/progra.jpg";
 
-export const FavCard = () => {
+export const AlumnoFavCard = () => {
   return (
     <>
       <div className="card-course-container">

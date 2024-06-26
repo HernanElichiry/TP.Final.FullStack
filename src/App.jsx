@@ -4,16 +4,18 @@ import HomePage from "./LandigPage/Home/HomePage";
 import "./../node_modules/bulma/css/bulma.css";
 import Navbar from "./LandigPage/navbar/navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import UserMenu from "./LandigPage/User/user";
-import ChangePasswordForm from "./LandigPage/User/changePasword";
-import DataComponent from "./LandigPage/User/dataComponent";
+import UserMenu from "./LandigPage/User/User/user";
+import ChangePasswordForm from "./LandigPage/User/ChangePassword/changePasword";
+import DataComponent from "./LandigPage/User/DataComponent/dataComponent";
 import LoginForm from "./LandigPage/Login/login";
-import MyCourses from "./LandigPage/User/myCourses";
-import Favorites from "./LandigPage/User/favorites";
-import ProfessorMenu from "./LandigPage/User/professor";
+import MyCoursesAlumno from "./LandigPage/User/User/MyCoursesUser";
+import MyCoursesProfessor from "./LandigPage/User/Profesor/MyCoursesProfessor";
+import FavoritesAlumno from "./LandigPage/User/User/UserFavorite";
+import FavoritesProfessor from "./LandigPage/User/Profesor/ProfessorFavorite";
+import ProfessorMenu from "./LandigPage/User/Profesor/professor";
 import RegisterForm from "./LandigPage/Login/register";
-import { UserProvider } from "./LandigPage/User/UserContext";
-import AddCourseForm from "./LandigPage/User/AddCourseForm";
+import { UserProvider } from "./LandigPage/User/UserContext/UserContext";
+import AddCourseForm from "./LandigPage/User/AddCourseForm/AddCourseForm";
 
 function App() {
   return (
@@ -28,15 +30,21 @@ function App() {
             <Route path="/usermenu/*" element={<UserMenu />}>
               <Route path="change-password" element={<ChangePasswordForm />} />
               <Route path="data" element={<DataComponent />} />
-              <Route path="my-courses" element={<MyCourses />} />
-              <Route path="favorites" element={<Favorites />} />
+              <Route path="my-courses-alumno" element={<MyCoursesAlumno />} />
+              <Route path="favorites-alumno" element={<FavoritesAlumno />} />
             </Route>
             <Route path="/professormenu/*" element={<ProfessorMenu />}>
-              <Route path="add-course" element={<AddCourseForm/>} />
+              <Route path="add-course" element={<AddCourseForm />} />
               <Route path="change-password" element={<ChangePasswordForm />} />
               <Route path="data" element={<DataComponent />} />
-              <Route path="my-courses" element={<MyCourses />} />
-              <Route path="favorites" element={<Favorites />} />
+              <Route
+                path="my-courses-professor"
+                element={<MyCoursesProfessor />}
+              />
+              <Route
+                path="favorites-professor"
+                element={<FavoritesProfessor />}
+              />
             </Route>
           </Routes>
         </UserProvider>

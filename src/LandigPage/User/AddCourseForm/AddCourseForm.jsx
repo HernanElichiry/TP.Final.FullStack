@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './AddCourseForm.css';
+import "./AddCourseForm.css";
 
 const AddCourseForm = () => {
   const [courseName, setCourseName] = useState("");
@@ -27,8 +27,9 @@ const AddCourseForm = () => {
       <h2>Agregar Curso</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label  htmlFor="courseName">Nombre del Curso</label>
-          <input className="form-input"
+          <label htmlFor="courseName">Nombre del Curso</label>
+          <input
+            className="form-input"
             type="text"
             id="courseName"
             value={courseName}
@@ -37,8 +38,9 @@ const AddCourseForm = () => {
           />
         </div>
         <div className="form-group">
-          <label  htmlFor="courseDescription">Descripción del Curso</label>
-          <textarea className="form-input"
+          <label htmlFor="courseDescription">Descripción del Curso</label>
+          <textarea
+            className="form-input"
             id="courseDescription"
             value={courseDescription}
             onChange={(e) => setCourseDescription(e.target.value)}
@@ -46,8 +48,9 @@ const AddCourseForm = () => {
           />
         </div>
         <div className="form-group">
-          <label  htmlFor="courseDuration">Duración del Curso</label>
-          <input className="form-input"
+          <label htmlFor="courseDuration">Duración del Curso</label>
+          <input
+            className="form-input"
             type="text"
             id="courseDuration"
             value={courseDuration}
@@ -57,7 +60,8 @@ const AddCourseForm = () => {
         </div>
         <div className="form-group">
           <label htmlFor="instructor">Instructor</label>
-          <input className="form-input"
+          <input
+            className="form-input"
             type="text"
             id="instructor"
             value={instructor}
@@ -66,8 +70,9 @@ const AddCourseForm = () => {
           />
         </div>
         <div className="form-group">
-          <label  htmlFor="startDate">Fecha de Inicio</label>
-          <input className="form-input"
+          <label htmlFor="startDate">Fecha de Inicio</label>
+          <input
+            className="form-input"
             type="date"
             id="startDate"
             value={startDate}
@@ -76,8 +81,9 @@ const AddCourseForm = () => {
           />
         </div>
         <div className="form-group">
-          <label  htmlFor="difficultyLevel">Nivel de Dificultad</label>
-          <select className="form-input"
+          <label htmlFor="difficultyLevel">Nivel de Dificultad</label>
+          <select
+            className="form-input"
             id="difficultyLevel"
             value={difficultyLevel}
             onChange={(e) => setDifficultyLevel(e.target.value)}
@@ -89,7 +95,9 @@ const AddCourseForm = () => {
             <option value="advanced">Avanzado</option>
           </select>
         </div>
-        <button type="submit" className="btn-submit">Agregar Curso</button>
+        <button type="submit" className="btn-submit">
+          Agregar Curso
+        </button>
       </form>
     </div>
   );

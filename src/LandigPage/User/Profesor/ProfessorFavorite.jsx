@@ -1,4 +1,4 @@
-import { FavCard } from "./FavCard/FavCard";
+import { FavCardProfessor } from "./ProfessorFavCard";
 
 const course = [
   {
@@ -12,12 +12,12 @@ const course = [
   },
 ];
 
-const Favorites = () => {
+const FavoritesProfessor = () => {
   return (
     <div>
-      <FavCard course={course} />
+      <FavCardProfessor course={course} />
     </div>
   );
 };
 
-export default Favorites;
+export default FavoritesProfessor;

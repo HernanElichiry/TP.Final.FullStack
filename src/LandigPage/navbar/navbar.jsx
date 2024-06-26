@@ -4,7 +4,7 @@ import "./navbar.css";
 import logoImage from "./logo2.png";
 import { Link } from "react-router-dom";
 
-import { useUser } from "../User/UserContext";
+import { useUser } from "../User/UserContext/UserContext";
 
 function Navbar() {
   const { user, logout } = useUser();
