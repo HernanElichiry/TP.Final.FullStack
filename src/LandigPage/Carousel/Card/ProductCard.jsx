@@ -1,10 +1,10 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
-import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
-import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
-import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
-import './ProductCard.css';
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
+import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
+import "./ProductCard.css";
 
 export const ProductCard = ({ product, onFavoriteToggle, isFavorited }) => {
   const handleFavoriteClick = () => {
@@ -15,9 +15,9 @@ export const ProductCard = ({ product, onFavoriteToggle, isFavorited }) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       stars.push(
-        <FontAwesomeIcon 
-          key={i} 
-          icon={i <= product.rating ? solidStar : regularStar} 
+        <FontAwesomeIcon
+          key={i}
+          icon={i <= product.rating ? solidStar : regularStar}
           className="rating-star"
         />
       );
@@ -35,8 +35,14 @@ export const ProductCard = ({ product, onFavoriteToggle, isFavorited }) => {
       <p className="rating-container">{renderStars()}</p>
       <div className="price-favorite-container">
         <p>Precio: {product.price}</p>
-        <button className="favorite-button" onClick={handleFavoriteClick}>
-          <FontAwesomeIcon icon={isFavorited ? solidHeart : regularHeart} className={isFavorited ? "" : "selected"} />
+      </div>
+      <div className="buttons">
+        <button className="show-more-button">Show More</button>
+        <button className="transparent-button" onClick={handleFavoriteClick}>
+          <FontAwesomeIcon
+            icon={isFavorited ? solidHeart : regularHeart}
+            className={isFavorited ? "" : "selected"}
+          />
         </button>
       </div>
     </div>
