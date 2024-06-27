@@ -1,52 +1,46 @@
 .card-product-container {
- 
   background-color: #fffffff6;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 0px;
- 
+  padding: 10px;
   transition: transform 0.3s ease;
   margin: 0 10px;
-  height: 350px; /* Ajusta la altura mínima según necesites */
-  overflow: hidden; /* Oculta el contenido que desborda del contenedor */
-  cursor: pointer; 
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
 }
 
-
 .card-product-image img {
-width: 100%;
-height: 200px; /* Ajusta la altura de las imágenes según necesites */
-object-fit: cover; /* Ajusta la forma en que las imágenes se ajustan al contenedor */
-border-radius: 8px;
-margin-bottom: 15px;
-transition: filter 0.3s ease-in-out; /* Agrega una transición suave al cambio de filtro */
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  transition: filter 0.3s ease-in-out;
 }
 
 .card-product-image img:hover {
-filter: brightness(110%); }
+  filter: brightness(110%);
+}
 
-/* Estilos para el texto */
 .card-product-container h2,
 .card-product-container p {
-  margin: 0; /* Elimina los márgenes para asegurarte de que el texto esté alineado correctamente */
-
+  margin: 0;
 }
 
 .card-product-container h2 {
   font-size: 18px;
   margin-bottom: 10px;
-  color: #333; /* Cambia el color del texto según necesites */
- 
+  color: #333;
 }
 
 .card-product-container p {
   font-size: 14px;
-  color: #555; /* Cambia el color del texto según necesites */
+  color: #555;
   margin-left: 15px;
-  
 }
-
-/* En el archivo donde estás importando ProductCard.css */
 
 .slider-align {
   display: flex;
@@ -54,90 +48,98 @@ filter: brightness(110%); }
 }
 
 .slider-container {
-
-  width: 1300px; /* Ajusta el ancho según tus necesidades */
+  width: 1300px;
   margin: 15px auto;
 }
 
-
-.Slider-description{
- font-size: 22px;
- color: #ffffff;
-
-
+.Slider-description {
+  font-size: 22px;
+  color: #ffffff;
 }
 
-
-/* Mostrar menos tarjetas en pantallas pequeñas */
 @media (max-width: 1200px) {
-.slick-slide {
-  padding: 0 10px; /* Ajusta el espacio entre las tarjetas */
-}
+  .slick-slide {
+    padding: 0 10px;
+  }
 }
 
 @media (max-width: 768px) {
-.slick-slide {
-  padding: 0 20px; /* Ajusta el espacio entre las tarjetas */
+  .slick-slide {
+    padding: 0 20px;
+  }
+
+  .slick-slide:nth-last-child(n+5) {
+    display: none;
+  }
 }
 
-.slick-slide:nth-last-child(n+5) {
-  display: none; /* Oculta las tarjetas que van más allá de la cuarta en pantallas pequeñas */
-} }
+.big-box {
+  margin-top: 60px;
+}
 
-.big-box{
-  margin-top: 60px; 
-  }
+.Slider-description {
+  padding: 0.7rem;
+}
 
-  .Slider-description{
-    padding: 0.7rem;
-   
-  }
+.price-favorite-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
 
-  .price-favorite-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 15px;
-  }
-  
-  .favorite-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .favorite-button .fa-heart {
-    color: #da0505; /* Color para el corazón sin seleccionar */
-    transition: color 0.3s ease-in-out;
-  }
- 
-  
-  .card-product-container button {
-    background-color: none ;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
-  }
-  
-  .card-product-container button:hover {
-    background-color: none;
-    transform: translateY(-2px);
-  }
-  
-  .card-product-container button:active {
-    background-color: none;
-    transform: translateY(1px);
-  }
+.favorite-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
 
+.favorite-button .fa-heart {
+  color: #da0505;
+  transition: color 0.3s ease-in-out;
+}
 
-  .rating-star {
-    color: rgb(44, 43, 43);
-    
-    margin-right: 3px; /* Ajusta el margen entre las estrellas si es necesario */
-  }
-  
+.card-product-container .buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px 0; /* Espacio alrededor de los botones */
+}
+
+.card-product-container .buttons .show-more-button {
+  background-color: #007bff; /* Color del botón */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  margin: 0 5px; /* Espacio entre botones */
+  flex: 1; /* Los botones ocupan el mismo espacio */
+}
+
+.card-product-container .buttons .show-more-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.card-product-container .buttons .show-more-button:active {
+  background-color: #003f7f;
+  transform: translateY(1px);
+}
+
+.card-product-container .buttons .transparent-button {
+  background: none; /* Sin fondo */
+  color: #da0505; /* Color del ícono del corazón */
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px; /* Ajusta el padding según sea necesario */
+  margin: 0 5px; /* Espacio entre botones */
+}
+
+.rating-star {
+  color: rgb(44, 43, 43);
+  margin-right: 3px;
+}
