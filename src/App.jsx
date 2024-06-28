@@ -17,6 +17,7 @@ import RegisterForm from "./LandigPage/Login/register";
 import { FavoritesProvider } from "./LandigPage/User/FavoritesContext";
 import AddCourseForm from "./LandigPage/User/AddCourseForm/AddCourseForm";
 import CourseDetail from "./LandigPage/DetailPage/CourseDetail";
+import SearchResults from "./LandigPage/SearchResult/SearchResults";
 
 
 
@@ -45,6 +46,7 @@ function App() {
                 <Route path="my-courses-professor" element={<MyCoursesProfessor />} />
                 <Route path="favorites-professor" element={<FavoritesProfessor />}/>
               </Route>
+              <Route path="/search/:searchTerm" element={<SearchResults />} />
               <Route path="/course/:id" element={<CourseDetail />} />
             </Routes>
           </FavoritesProvider>
