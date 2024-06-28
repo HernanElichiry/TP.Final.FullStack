@@ -5,19 +5,21 @@
   padding: 10px;
   transition: transform 0.3s ease;
   margin: 0 10px;
-  height: auto;
+  width: 250px;  /* Ancho fijo */
+  height: 350px; /* Alto fijo */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
+  overflow: hidden; /* Para manejar contenido que excede el tamaño */
 }
 
 .card-product-image img {
   width: 100%;
-  height: 200px;
+  height: 150px; /* Ajustado para el alto fijo de la tarjeta */
   object-fit: cover;
   border-radius: 8px;
-  margin-bottom: 15px;
+  margin-bottom: 10px; /* Ajuste menor para mantener espacio */
   transition: filter 0.3s ease-in-out;
 }
 
@@ -31,7 +33,7 @@
 }
 
 .card-product-container h2 {
-  font-size: 18px;
+  font-size: 16px; /* Ajustado para un tamaño fijo */
   margin-bottom: 10px;
   color: #333;
 }
@@ -40,6 +42,7 @@
   font-size: 14px;
   color: #555;
   margin-left: 15px;
+  flex-grow: 1; /* Para que el texto ocupe el espacio disponible */
 }
 
 .slider-align {
