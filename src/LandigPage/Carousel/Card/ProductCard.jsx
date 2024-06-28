@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
@@ -7,8 +8,16 @@ import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import "./ProductCard.css";
 
 export const ProductCard = ({ product, onFavoriteToggle, isFavorited }) => {
+  const navigate = useNavigate(); // me permite el direccionamiento
+
+
   const handleFavoriteClick = () => {
     onFavoriteToggle(product);
+  };
+
+
+  const handleCardClick = () => {   //funcion para manejar el redireccionamiento a la couseDetail al hacer click
+    navigate(`/course/${product.id}`);
   };
 
   const renderStars = () => {
@@ -37,7 +46,7 @@ export const ProductCard = ({ product, onFavoriteToggle, isFavorited }) => {
         <p>Precio: {product.price}</p>
       </div>
       <div className="buttons">
-        <button className="show-more-button">Show More</button>
+        <button className="show-more-button" onClick={handleCardClick} >Show More</button>
         <button className="transparent-button" onClick={handleFavoriteClick}>
           <FontAwesomeIcon
             icon={isFavorited ? solidHeart : regularHeart}
