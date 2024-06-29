@@ -72,7 +72,8 @@ function Navbar() {
                 </>
               ) : (
                 <div className="navbar-item">
-                  <span>Welcome, {user.email}</span>
+                  <strong className="user-email">{user.email}</strong>
+
                   <button onClick={logout} className="button is-primary">
                     Log out
                   </button>
