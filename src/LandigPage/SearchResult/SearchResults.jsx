@@ -37,8 +37,8 @@ const SearchResults = () => {
   }, [searchTerm]);
 
   return (
+  <> <SearchBar className = "search-page" /> 
     <div className="search-results">
-      <SearchBar />
       <div className="product-list">
         {searchResults.length > 0 ? (
           searchResults.map(course => (
@@ -48,7 +48,9 @@ const SearchResults = () => {
           <p>No se encontraron resultados para "{searchTerm}".</p>
         )}
       </div>
-    </div>
+    </div> 
+    </>
+ 
   );
 };
 
