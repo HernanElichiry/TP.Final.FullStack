@@ -8,3 +8,38 @@
     gap: 20px;
   }
   
+    /**/
+    .search-page {
+      /*border: solid 1px;*/
+      display: flex;
+      margin-left: 1rem ;
+      margin-top: 0;
+      width: 630px;
+    }
+    
+    .search-page input {
+      background-color: #ffffff;
+      color: #000000;
+      padding: 10px 16px;
+      font-size: 16px;
+      border: 0px solid #ccc;
+      border-radius: 4px;
+      width: 500px;
+    }
+    
+    .search-page button {
+      margin: 5px;
+      padding: 10px 16px;
+      font-size: 16px;
+      background-color: #ffb300;
+      color: #242424;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .search- button:hover {
+      background-color: #ffdd00
+    }
+    

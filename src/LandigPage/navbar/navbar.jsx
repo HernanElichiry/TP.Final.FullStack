@@ -13,7 +13,7 @@ function Navbar() {
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <a className="navbar-item" href="/">
-          <img src={logoImage} width={40} alt="Logo" />
+         {/* <img src={logoImage} width={40} alt="Logo" />*/}
           EINSTEIN
         </a>
         <a
@@ -71,13 +71,21 @@ function Navbar() {
                   </Link>
                 </>
               ) : (
+                <>
                 <div className="navbar-item">
                   <strong className="user-email">{user.email}</strong>
+                  </div>
+                  <Link
+                    to={user.role === "user" ? "/usermenu" : "/professormenu"}
+                    className="button is-light"
+                  >
+                    Menu
+                  </Link>
 
                   <button onClick={logout} className="button is-primary">
                     Log out
                   </button>
-                </div>
+                </>
               )}
             </div>
           </div>

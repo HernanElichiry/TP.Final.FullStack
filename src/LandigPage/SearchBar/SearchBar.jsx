@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './SearchBar.css'; 
 import { useNavigate } from 'react-router-dom';
 
-function SearchBar({ onSearch }) {
+function SearchBar({ onSearch,  className = "search-bar" }) {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -20,7 +20,7 @@ function SearchBar({ onSearch }) {
  
 
   return (
-    <form className="search-bar" onSubmit={handleSubmit}>
+    <form className={className}  onSubmit={handleSubmit}>
       <div>
        <input
         type="text"
