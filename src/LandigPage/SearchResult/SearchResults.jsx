@@ -7,7 +7,7 @@ import './SearchResults.css';
 const SearchResults = () => {
   const { searchTerm } = useParams();
   const [searchResults, setSearchResults] = useState([]);
-
+console.log(searchTerm);
   useEffect(() => {
     if (searchTerm) {
       const normalizedSearchTerm = searchTerm.toLowerCase().trim();
