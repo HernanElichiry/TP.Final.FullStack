@@ -48,7 +48,7 @@ function Navbar() {
                 Gardening
               </Link>
               <Link to="/Fotografie" className="navbar-item">
-              Fotografie
+              Photography
               </Link>
               <hr className="navbar-divider" />
               <Link to="/report" className="navbar-item">
