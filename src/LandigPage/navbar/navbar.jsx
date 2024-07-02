@@ -39,20 +39,20 @@ function Navbar() {
             Documentation
           </Link>
           <div className="navbar-item has-dropdown is-hoverable">
-            <a className="navbar-link">More</a>
+            <a className="navbar-link">Categories</a>
             <div className="navbar-dropdown">
-              <Link to="/about" className="navbar-item">
-                About
+              <Link to="/Programmin" className="navbar-item">
+                Programmin
               </Link>
-              <Link to="/jobs" className="navbar-item">
-                Jobs
+              <Link to="/Gardening" className="navbar-item">
+                Gardening
               </Link>
-              <Link to="/contact" className="navbar-item">
-                Contact
+              <Link to="/Fotografie" className="navbar-item">
+              Fotografie
               </Link>
               <hr className="navbar-divider" />
               <Link to="/report" className="navbar-item">
-                Report an issue
+               
               </Link>
             </div>
           </div>
