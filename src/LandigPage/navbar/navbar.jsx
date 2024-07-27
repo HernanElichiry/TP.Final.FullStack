@@ -1,10 +1,11 @@
 // Navbar.js
 import React from "react";
 import "./navbar.css";
-import logoImage from "./logo2.png";
+//import logoImage from "./logo2.png";
 import { Link } from "react-router-dom";
-
 import { useUser } from "../User/UserContext/UserContext";
+import categories from "../Categorias/categoriesRow"; 
+import { NavLink } from 'react-router-dom';
 
 function Navbar() {
   const { user, logout } = useUser();
@@ -14,7 +15,7 @@ function Navbar() {
       <div className="navbar-brand">
         <a className="navbar-item" href="/">
          {/* <img src={logoImage} width={40} alt="Logo" />*/}
-          EINSTEIN
+         <strong className="navbar-title">EINSTEIN</strong> 
         </a>
         <a
           role="button"
@@ -33,28 +34,23 @@ function Navbar() {
       <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
           <Link to="/" className="navbar-item">
-            Home
+            Test Vocacional
           </Link>
-          <Link to="/documentation" className="navbar-item">
-            Documentation
+          <Link to="/" className="navbar-item">
+            Bolsa de trabajo
+          </Link>
+          <Link to="/" className="navbar-item">
+            Capacitaciones gratuitas
           </Link>
           <div className="navbar-item has-dropdown is-hoverable">
-            <a className="navbar-link">More</a>
-            <div className="navbar-dropdown">
-              <Link to="/about" className="navbar-item">
-                About
-              </Link>
-              <Link to="/jobs" className="navbar-item">
-                Jobs
-              </Link>
-              <Link to="/contact" className="navbar-item">
-                Contact
-              </Link>
-              <hr className="navbar-divider" />
-              <Link to="/report" className="navbar-item">
-                Report an issue
-              </Link>
-            </div>
+            <a className="navbar-link">Categorias</a>
+            <div class="navbar-dropdown">
+           {categories.map((category) => (
+           <NavLink key={category.id} to={`CategoriesPage/${category.name}`} className="navbar-item">
+             {category.name}
+           </NavLink>
+           ))}
+           </div>
           </div>
         </div>
 

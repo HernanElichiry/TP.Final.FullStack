@@ -16,6 +16,11 @@
     
    
   }
+
+  .navbar-title {
+    font-size: 20px;
+    color: aliceblue;
+  }
   
   .navbar-logo a {
     color: #fff;

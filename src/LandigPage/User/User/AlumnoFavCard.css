@@ -20,3 +20,23 @@
     transition: filter 0.3s ease-in-out; /* Agrega una transición suave al cambio de filtro */
   }
 
+/**/
+
+
+.fav-card button {
+ 
+
+  color: red;
+  cursor: pointer;
+ size: 1.5rem;
+  transition: color 0.2s;
+}
+
+.fav-card button:hover {
+  color: darkred;
+}
+
+
+
+
+

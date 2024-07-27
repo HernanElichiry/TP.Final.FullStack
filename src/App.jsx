@@ -18,8 +18,7 @@ import { FavoritesProvider } from "./LandigPage/User/FavoritesContext";
 import AddCourseForm from "./LandigPage/User/AddCourseForm/AddCourseForm";
 import CourseDetail from "./LandigPage/DetailPage/CourseDetail";
 import SearchResults from "./LandigPage/SearchResult/SearchResults";
-
-
+import CategoriesPage from "./LandigPage/Categorias/CategoriesPage";
 
 
 function App() {
@@ -33,6 +32,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="Login" element={<LoginForm />} />
               <Route path="register" element={<RegisterForm />} />
+              <Route path="/CategoriesPage/:categoryName" element={<CategoriesPage/>} />
               <Route path="/usermenu/*" element={<UserMenu />}>
                 <Route path="change-password" element={<ChangePasswordForm />}/>
                 <Route path="data" element={<DataComponent />} />
@@ -48,6 +48,7 @@ function App() {
               </Route>
               <Route path="/search/:searchTerm" element={<SearchResults />} />
               <Route path="/course/:id" element={<CourseDetail />} />
+           
             </Routes>
           </FavoritesProvider>
         </UserProvider>

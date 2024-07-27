@@ -9,19 +9,21 @@
 
 .landingpage-container {
   display: flex;
-  margin: 20px; /* Puedes ajustar este valor según tus necesidades */
+  margin: 20px; 
   padding: 0;
   box-sizing: border-box;
 }
 
-.landingpage-text h1 {
+.landingpage-text h1 strong{
   color: #ffb300;
   font-weight: bold;
-  font-size: 80px;
+  font-size: 120px;
 
 }
 
 .landingpage-text p {
+  color: rgb(222, 235, 246);
 
-  font-size: 20px;
+  font-size: 50px;
+  font-weight: bold;
 }
