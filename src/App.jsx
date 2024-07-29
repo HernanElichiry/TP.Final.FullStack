@@ -19,6 +19,7 @@ import AddCourseForm from "./LandigPage/User/AddCourseForm/AddCourseForm";
 import CourseDetail from "./LandigPage/DetailPage/CourseDetail";
 import SearchResults from "./LandigPage/SearchResult/SearchResults";
 import CategoriesPage from "./LandigPage/Categorias/CategoriesPage";
+import Admin from "./LandigPage/admin/admin";
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <FavoritesProvider>
             <Navbar />
             <Routes>
+              <Route path="admin" element={<Admin />} />
               <Route path="/" element={<HomePage />} />
               <Route path="Login" element={<LoginForm />} />
               <Route path="register" element={<RegisterForm />} />
