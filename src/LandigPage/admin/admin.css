@@ -1,0 +1,10 @@
+.admin-container {
+    display: flex;
+    align-items: center;
+    background-image: url('admin.png'); /* Ruta a tu imagen */
+    background-size: 800px auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 80vh; /* Resta la altura de la navbar */
+    width: 100vw;
+  }
