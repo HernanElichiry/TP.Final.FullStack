@@ -12,7 +12,7 @@ export const ProductCard = ({ product, onFavoriteToggle, isFavorited }) => {
 
 
   const handleFavoriteClick = () => {
-    onFavoriteToggle(product);
+    onFavoriteToggle(product); //Funcion que marca o desmarca como favorito la card. funcion traida del context
   };
 
 
@@ -20,7 +20,8 @@ export const ProductCard = ({ product, onFavoriteToggle, isFavorited }) => {
     navigate(`/course/${product.id}`);
   };
 
-  const renderStars = () => {
+  const renderStars = () => {   // Esta Función para renderizar las estrellas de acuerdo a la valoración del curso
+
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       stars.push(
@@ -40,8 +41,7 @@ export const ProductCard = ({ product, onFavoriteToggle, isFavorited }) => {
         <img src={product.image} alt={product.title} />
       </div>
       <h2>{product.title}</h2>
-      <p>Description</p>
-      <p className="rating-container">{renderStars()}</p>
+      <p className="rating-container">{renderStars()}</p> {/* en vez de mostrar la valoracion uso un metodo que muestra una estrella por cada punto*/ }
       <div className="price-favorite-container">
         <p>Precio: {product.price}</p>
       </div>

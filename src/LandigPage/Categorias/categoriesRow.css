@@ -1,0 +1,32 @@
+.categories {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 10px;
+  overflow-x: auto; /* Añadido para permitir el desplazamiento horizontal */
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 15px; /* Espaciado entre categorías */
+  cursor: pointer; /* Cambia el cursor al pasar sobre la categoría */
+  transition: transform 0.3s; /* Transición suave al hacer hover */
+}
+
+.category:hover {
+  transform: scale(1.1); /* Efecto de aumento al hacer hover */
+}
+
+.category span {
+  font-size: 12px;
+  margin-top: 5px;
+  color: #333;
+}
+
+.category svg {
+  color: #ea9009; /* Color del icono */
+  font-size: 2em;
+}

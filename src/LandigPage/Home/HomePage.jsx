@@ -3,6 +3,14 @@ import React from "react";
 import ResponsiveCarousel from "../Carousel/ResponsiveCarousel";
 import { courses } from "../MockCourses/MockCourses";
 import FooterApp from "../Footer/Footer";
+import Testimonials from "../Components/Testimonials";
+import Description from "../Components/Description";
+import FAQ from "../Components/FAQ";
+import InfoSection from "../Components/InfoSection";
+import Jobs from "../Components/Jobs";
+import SubscriptionSection from "../Components/SuscriptionSection";
+import Banner from "../Components/Banner";
+import TrustSection from "../Components/EnterpriseSection";
 
     // Copias ordenadas del arreglo courses
   const bestRatedCourses = [...courses].sort((a, b) => b.rating - a.rating); // Ordenar por valoración
@@ -12,18 +20,26 @@ import FooterApp from "../Footer/Footer";
 function HomePage() {
   return (
     <>
-
-
       <HomePageText />
       {/*componente que integra: texto de presentacion, la imagen de einstein y la barra de navegacion*/}
       <div className="big-box">
-        <ResponsiveCarousel courses={bestRatedCourses} text="Mejor valorados!" />
-        <ResponsiveCarousel courses={promotionCourses} text="En promocion!" />
+        <Description></Description>
+        <TrustSection></TrustSection>
+    
+        <ResponsiveCarousel courses={bestRatedCourses} text=" Carreras mejor valorados" />
+         <InfoSection></InfoSection>
+        <ResponsiveCarousel courses={promotionCourses} text=" Cursos en promocion" />
         <ResponsiveCarousel
           courses={universityCourses}
           text="Las mejores universidades promocionan en EINSTEIN"
-        />
-      </div> 
+      
+        />  
+        <Jobs></Jobs>
+        <SubscriptionSection></SubscriptionSection>
+        <Testimonials></Testimonials>
+      </div>
+   
+      <FAQ></FAQ>
       <FooterApp />
     </>
   );

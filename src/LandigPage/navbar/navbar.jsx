@@ -1,10 +1,11 @@
 // Navbar.js
 import React from "react";
 import "./navbar.css";
-import logoImage from "./logo2.png";
+//import logoImage from "./logo2.png";
 import { Link } from "react-router-dom";
-
 import { useUser } from "../User/UserContext/UserContext";
+import categories from "../Categorias/categoriesRow";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
   const { user, logout } = useUser();
@@ -13,8 +14,8 @@ function Navbar() {
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <a className="navbar-item" href="/">
-         {/* <img src={logoImage} width={40} alt="Logo" />*/}
-          EINSTEIN
+          {/* <img src={logoImage} width={40} alt="Logo" />*/}
+          <strong className="navbar-title">EINSTEIN</strong>
         </a>
         <a
           role="button"
@@ -33,27 +34,26 @@ function Navbar() {
       <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
           <Link to="/" className="navbar-item">
-            Home
+            Test Vocacional
           </Link>
-          <Link to="/documentation" className="navbar-item">
-            Documentation
+          <Link to="/" className="navbar-item">
+            Bolsa de trabajo
+          </Link>
+          <Link to="/" className="navbar-item">
+            Capacitaciones gratuitas
           </Link>
           <div className="navbar-item has-dropdown is-hoverable">
-            <a className="navbar-link">Categories</a>
-            <div className="navbar-dropdown">
-              <Link to="/Programmin" className="navbar-item">
-                Programmin
-              </Link>
-              <Link to="/Gardening" className="navbar-item">
-                Gardening
-              </Link>
-              <Link to="/Fotografie" className="navbar-item">
-              Photography
-              </Link>
-              <hr className="navbar-divider" />
-              <Link to="/report" className="navbar-item">
-               
-              </Link>
+            <a className="navbar-link">Categorias</a>
+            <div class="navbar-dropdown">
+              {categories.map((category) => (
+                <NavLink
+                  key={category.id}
+                  to={`CategoriesPage/${category.name}`}
+                  className="navbar-item"
+                >
+                  {category.name}
+                </NavLink>
+              ))}
             </div>
           </div>
         </div>
@@ -72,8 +72,8 @@ function Navbar() {
                 </>
               ) : (
                 <>
-                <div className="navbar-item">
-                  <strong className="user-email">{user.email}</strong>
+                  <div className="navbar-item">
+                    <strong className="user-email">{user.email}</strong>
                   </div>
                   <Link
                     to={user.role === "user" ? "/usermenu" : "/professormenu"}

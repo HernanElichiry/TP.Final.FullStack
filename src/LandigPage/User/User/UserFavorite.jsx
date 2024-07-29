@@ -1,4 +1,4 @@
-import { AlumnoFavCard } from "./AlumnoFavCard";
+/*import { AlumnoFavCard } from "./AlumnoFavCard";
 
 const course = [
   {
@@ -15,6 +15,25 @@ const FavoritesAlumno = () => {
   return (
     <div>
       <AlumnoFavCard course={course} />
+    </div>
+  );
+};
+
+export default FavoritesAlumno;*/
+
+import React, { useContext } from 'react';
+import { FavoritesContext } from '../FavoritesContext'; // Importar el contexto de favoritos
+import { AlumnoFavCard } from '/src/LandigPage/User/User/AlumnoFavCard.jsx'
+
+
+const FavoritesAlumno = () => {
+  const { favorites } = useContext(FavoritesContext);
+
+  return (
+    <div>
+      {favorites.map((course) => (
+        <AlumnoFavCard key={course.id} course={course} />
+      ))}
     </div>
   );
 };
