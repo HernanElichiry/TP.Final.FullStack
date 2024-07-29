@@ -59,7 +59,7 @@ const CourseDetail = () => {
             <p className="original-price">${course.price * 1.2}</p>
             <p className="discounted-price">${course.price}</p>
             <p className="installments">¡Hasta 12 cuotas!</p>
-            <button className="enroll-button">Ver Curso</button>
+            <button className="enroll-button">Comprar ahora</button>
           </div>
         </div>
       </div>

@@ -176,7 +176,6 @@ body {
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
  
 }
 
@@ -226,13 +225,22 @@ body {
 
 /* jobs */
 
+.jobs-main-container {
+  
+  display: flex;
+  flex-wrap:wrap;
+ 
+  height: 600px;
+}
+
 .jobs-section {
+ 
   margin-top: 80px;
   padding: 40px;
   text-align: center;
   background-color: #ffffff;
   height: 300px;
-
+  
 }
 
 .jobs-section h1 {
@@ -309,7 +317,7 @@ body {
   align-items: center;
   padding: 20px;
   background-color: none;
-  margin-top: 190px; 
+ 
   margin-left: 30px;
 }
 

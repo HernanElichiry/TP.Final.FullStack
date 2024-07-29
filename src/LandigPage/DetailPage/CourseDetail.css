@@ -73,13 +73,18 @@
 }
 
 .course-content section {
+ 
   margin-bottom: 20px;
+  padding: 20px;
+  
 }
 
 .course-content h2 {
+  
   font-size: 40px;
   font-weight: bold;
   color: #fefff7;
+  
 }
 
 .course-content p,
@@ -87,6 +92,8 @@
 .course-content li {
   font-size: 16px;
   color: #d9d9d9;
+ 
+  
 }
 
 .course-content ul {
@@ -128,25 +135,29 @@
 .course-plan {
   display: flex;
   width: 100%;
-  height: 400px;
+
   margin-top: 25px;
   padding: 20px;
   flex-direction: column;
+  
 }
 
 .course-plan h2 {
+  margin-left: 25px;
   font-size: 35px;
 }
 
 .course-plan ul {
+  
   display: flex;
   flex-wrap: wrap;
   padding: 0;
-  margin: 0;
+  margin: 20px;
   list-style-type: none; /* Elimina los puntos de la lista */
 }
 
 .course-plan ul li {
+ 
   flex: 1 1 50%; /* Ajusta el tamaño para que cada ítem ocupe el 50% del ancho del contenedor */
   padding: 10px;
   font-size: 20px;
@@ -157,31 +168,33 @@
 .course-price-section {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   margin-top: 20px;
+  
+  align-self: center;
+  width: 80%;
 }
 
 .course-price-section .original-price {
-  font-size: 16px;
+  font-size: 20px;
   color: #999999;
   text-decoration: line-through; /* tachar*/
 }
 
 .course-price-section .discounted-price {
-  font-size: 24px;
+  font-size: 60px;
   font-weight: bold;
   color:  #ffb300;
   margin: 5px 0;
 }
 
 .course-price-section .installments {
-  font-size: 16px;
+  font-size: 25px;
   color: #ffffff;
   margin-bottom: 10px;
 }
 
 .course-price-section .enroll-button {
-  align-self: flex-end;
+ 
   background-color: #ffb300;
   color: #000000;
   padding: 10px 20px;

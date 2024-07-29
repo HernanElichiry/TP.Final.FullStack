@@ -1,32 +1,31 @@
-.categories {
+/* CategoriesPage.css */
+.search-results {
+  padding: 20px;
+}
+
+.product-list {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: #f0f0f0;
-  padding: 10px;
-  overflow-x: auto; /* Añadido para permitir el desplazamiento horizontal */
+  flex-wrap: wrap; /* Usar flex-wrap para ajustar las tarjetas */
+  gap: 20px; /* Espacio entre las tarjetas */
+  justify-content: center; /* Centrar las tarjetas */
 }
 
-.category {
+/* Ajustes para diferentes tamaños de pantalla */
+@media (min-width: 600px) {
+  .product-list {
+    justify-content: space-around; /* Distribuir uniformemente las tarjetas */
+  }
+}
+
+@media (min-width: 900px) {
+  .product-list {
+    justify-content: flex-start; /* Distribuir desde el inicio en pantallas más grandes */
+  }
+}
+
+.search-page {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 15px; /* Espaciado entre categorías */
-  cursor: pointer; /* Cambia el cursor al pasar sobre la categoría */
-  transition: transform 0.3s; /* Transición suave al hacer hover */
-}
-
-.category:hover {
-  transform: scale(1.1); /* Efecto de aumento al hacer hover */
-}
-
-.category span {
-  font-size: 12px;
-  margin-top: 5px;
-  color: #333;
-}
-
-.category svg {
-  color: #ea9009; /* Color del icono */
-  font-size: 2em;
+  margin-left: 1rem;
+  margin-top: 0;
+  width: 630px;
 }
