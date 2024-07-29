@@ -1,45 +1,56 @@
 .search-results {
-    padding: 20px;
-  }
-  
+  padding: 20px;
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap; /* Usar flex-wrap para ajustar las tarjetas */
+  gap: 20px; /* Espacio entre las tarjetas */
+  justify-content: center; /* Centrar las tarjetas */
+}
+
+/* Ajustes para diferentes tamaños de pantalla */
+@media (min-width: 600px) {
   .product-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    justify-content: space-around; /* Distribuir uniformemente las tarjetas */
   }
-  
-    /**/
-    .search-page {
-      /*border: solid 1px;*/
-      display: flex;
-      margin-left: 1rem ;
-      margin-top: 0;
-      width: 630px;
-    }
-    
-    .search-page input {
-      background-color: #ffffff;
-      color: #000000;
-      padding: 10px 16px;
-      font-size: 16px;
-      border: 0px solid #ccc;
-      border-radius: 4px;
-      width: 500px;
-    }
-    
-    .search-page button {
-      margin: 5px;
-      padding: 10px 16px;
-      font-size: 16px;
-      background-color: #ffb300;
-      color: #242424;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    
-    .search- button:hover {
-      background-color: #ffdd00
-    }
-    
+}
+
+@media (min-width: 900px) {
+  .product-list {
+    justify-content: flex-start; /* Distribuir desde el inicio en pantallas más grandes */
+  }
+}
+
+.search-page {
+  display: flex;
+  margin-left: 1rem;
+  margin-top: 0;
+  width: 630px;
+}
+
+.search-page input {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 10px 16px;
+  font-size: 16px;
+  border: 0px solid #ccc;
+  border-radius: 4px;
+  width: 500px;
+}
+
+.search-page button {
+  margin: 5px;
+  padding: 10px 16px;
+  font-size: 16px;
+  background-color: #ffb300;
+  color: #242424;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-page button:hover {
+  background-color: #ffdd00;
+}

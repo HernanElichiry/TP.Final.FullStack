@@ -5,6 +5,7 @@ import foto from'../Background/wallpaper2.jpg'
 
 const Jobs = () => {
   return (
+    <div className='jobs-main-container'>
     <div className="jobs-section">
       <h1>Bolsa de Empleo. Y ahora qué?</h1>
       <p>
@@ -25,6 +26,7 @@ const Jobs = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };
