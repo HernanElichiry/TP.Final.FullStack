@@ -44,7 +44,7 @@ function Navbar() {
           </Link>
           <div className="navbar-item has-dropdown is-hoverable">
             <a className="navbar-link">Categorias</a>
-            <div class="navbar-dropdown">
+            <div className="navbar-dropdown">
               {categories.map((category) => (
                 <NavLink
                   key={category.id}
