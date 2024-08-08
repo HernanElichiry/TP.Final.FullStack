@@ -5,7 +5,7 @@ body {
 
 /* Testimonials Styles */
 #testimonios {
-  margin-top: 150px;
+  margin-top: 90px;
 }
 
 .testimonio-container {
@@ -119,6 +119,7 @@ body {
 /* info section */
 
 .info-section {
+  background-color: #2c2d44;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -312,13 +313,11 @@ body {
 /* Suscription */
 
 .subscription-container {
+  background-color: #2c2d44;
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding: 20px;
-  background-color: none;
- 
-  margin-left: 30px;
 }
 
 .subscription-text {
