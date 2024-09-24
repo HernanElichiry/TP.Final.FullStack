@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
-import einsteinImage from "../Background/einstein4.png";
 const RegisterForm = () => {
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [birthdate, setBirthdate] = useState(null);
   const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [isProfessor, setIsProfessor] = useState(false);
   const navigate = useNavigate();
 
@@ -15,75 +20,102 @@ const RegisterForm = () => {
     navigate("/Login");
   };
 
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleConfirmPassword = (e) => {
+    setConfirmPassword(e.target.value);
+
+    //Verifico que las contraseñas sean iguales
+
+    if (e.target.value !== password) {
+      setErrorMessage("Las contraseñas no coinciden");
+    } else {
+      setErrorMessage("");
+    }
+  };
+
   return (
     <div>
       <div className="app-container">
         <div className="login-container">
-          <h2 className="login-h2">Register</h2>
+          <h2 className="login-h2">Regístrate</h2>
           <form onSubmit={handleLogin} className="login-form">
             <div className="form-group">
-              <label htmlFor="name">Name : </label>
               <input
                 id="name"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Nombre"
+                className="styled-input"
               />
             </div>
             <div className="form-group">
-              <label htmlFor="last-name">Last Name : </label>
               <input
                 id="lastname"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                placeholder="Apellido"
+                className="styled-input"
               />
             </div>
             <div className="form-group">
-              <label htmlFor="birthdate">Birth Date : </label>
               <input
                 id="birthdate"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={
+                  birthdate ? birthdate.toISOString().substring(0, 10) : "" //convertidor de string a Date
+                }
+                onChange={(e) => setBirthdate(new Date(e.target.value))}
+                placeholder="Fecha de nacimiento"
+                className="styled-input"
               />
             </div>
             <div className="form-group">
-              <label htmlFor="email">Email : </label>
               <input
                 type="email"
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                placeholder="Correo electrónico"
+                className="styled-input"
               />
             </div>
             <div className="form-group">
-              <label htmlFor="user">User Name:</label>
               <input
                 /*type="password"*/
                 id="user"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+                placeholder="Nombre de usuario"
+                className="styled-input"
               />
             </div>
             <div className="form-group">
-              <label htmlFor="password">Password :</label>
               <input
                 /*type="password"*/
                 id="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handlePasswordChange}
+                placeholder="Contraseña"
+                className="styled-input"
               />
             </div>
 
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+
             <div className="form-group">
-              <label htmlFor="password">Repeat Password :</label>
               <input
                 /*type="password"*/
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                id="confirmPassword"
+                value={confirmPassword}
+                onChange={handleConfirmPassword}
+                placeholder="Repetir contraseña"
+                className="styled-input"
               />
             </div>
             <div className="form-group">
-              <label htmlFor="isProfessor">Is Professor?</label>
+              <label htmlFor="isProfessor">Eres profesor?</label>
               <input
                 type="checkbox"
                 id="isProfessor"
@@ -93,7 +125,7 @@ const RegisterForm = () => {
             </div>
 
             <button onClick={handleLogin} type="submit" className="login-btn">
-              Register
+              Regístrate
             </button>
           </form>
         </div>
