@@ -1,60 +1,134 @@
-.formcont{
-  max-width: 1000px;
-  margin: 50px auto;
-  padding: 20px;
-  background: #ffffff;
-  box-shadow: 0 0 10px rgba(90, 60, 60, 0.1);
+/* Contenedor del formulario */
+.formcont {
+  max-width: 900px;
+  margin: auto;
+  padding: 30px;
   border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Título del formulario */
 .formcont h2 {
   text-align: center;
-  margin-bottom: 20px;
-  font-weight: bold;
-  color: #333;
+  margin-bottom: 25px;
+  color: #333333;
+  font-size: 1.5em;
+  font-weight: 600;
 }
 
-.btn-submit {
-  width: 100%;
-  padding: 10px;
-  background-color: #1890ff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.btn-submit:hover {
-  background-color: #40a9ff;
-}
+/* Contenedor de los campos del formulario */
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
+/* Etiquetas */
 .form-group label {
   display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #555555;
 }
 
-.form-group input,
-.form-group textarea,
-.form-group select {
+/* Campos de entrada */
+.form-input {
   width: 100%;
-  padding: 8px;
+  padding: 12px;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+
+
+
+/* Estilo para los campos de entrada */
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #ffffff; /* Fondo blanco */
+  color: #333333; /* Texto negro */
   box-sizing: border-box;
 }
 
-
-.form-group textarea {
-  resize: vertical;
-  height: 200px; /* Altura por defecto más grande */
-  min-height: 200px; /* Altura mínima */
+/* Asegurarte de que los campos de tipo number también sigan este estilo */
+.form-input[type="number"] {
+  background-color: #ffffff; /* Fondo blanco */
+  color: #333333; /* Texto negro */
 }
 
-.form-input{
-  background-color: rgb(255, 255, 255);
-  color: #333;
-  font-weight: bold;
+
+/* Mensajes de error */
+.error-message {
+  color: #e74c3c;
+  font-size: 0.875em;
+  margin-top: 5px;
+}
+
+/* Checkbox para temas */
+.checkbox-group {
+  margin-bottom: 10px;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  color: #555555;
+}
+
+/* Sección de clases */
+/* Contenedor de las clases */
+.class-container {
+  display: flex;
+  flex-direction: column; /* Asegura que las secciones de clase estén en una columna */
+  gap: 20px; /* Espacio entre cada sección de clase */
+  width: 100%;
+}
+
+/* Sección de clases */
+.class-section {
+  padding: 15px;
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  background-color: #f7f7f7;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Botón de añadir video */
+button[type="button"] {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+button[type="button"]:hover {
+  background-color: #0056b3;
+}
+
+/* Botón de enviar */
+button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 6px;
+  background-color: #28a745;
+  color: white;
+  font-size: 1.125em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #218838;
 }
