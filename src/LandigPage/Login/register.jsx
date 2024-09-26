@@ -21,13 +21,21 @@ const RegisterForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validar que las contraseñas coincidan antes de enviar
+    if (password !== confirmPassword) {
+      setErrorMessage("Las contraseñas no coinciden");
+      return;
+    }
+
     const userData = {
-      completeName,
+      name: completeName, // Cambia esto
       birthdate: birthdate.toISOString().substring(0, 10),
       email,
       password,
-      roleId: isProfessor ? 2 : 1, // si es profesor asigna valor (2), si es alumno asigna valor (1)
+      roleId: isProfessor ? 2 : 1,
     };
+
+    console.log("User Data to Send:", userData); // Agregar este log
 
     try {
       const res = await fetch("http://localhost:3000/users", {
@@ -39,10 +47,34 @@ const RegisterForm = () => {
       });
 
       if (res.ok) {
-        navigate("/Login"); //navega despues del registro exitoso
+        navigate("/Login");
       } else {
         const errorData = await res.json();
-        setErrorMessage(errorData || "Error al registrar un usuario");
+        // Manejo de errores en función de los mensajes del backend
+        setErrorMessage(""); // Limpiar mensajes de error anteriores
+        // Suponiendo que errorData.errors es un objeto con mensajes de error
+        const errors = errorData.errors;
+
+        if (errors) {
+          // Mostrar los mensajes de error específicos para cada campo
+          if (errors.name) {
+            setErrorMessage(errors.name);
+          }
+          if (errors.email) {
+            setErrorMessage(errors.email);
+          }
+          if (errors.birthdate) {
+            setErrorMessage(errors.birthdate);
+          }
+          if (errors.password) {
+            setErrorMessage(errors.password);
+          }
+          if (errors.roleId) {
+            setErrorMessage(errors.roleId);
+          }
+        } else {
+          setErrorMessage("Error al registrar un usuario");
+        }
       }
     } catch (error) {
       setErrorMessage("Error al conectar con el servidor");
@@ -121,13 +153,13 @@ const RegisterForm = () => {
               />
             </div>
 
-            {errorMessage && (
+            {/* {errorMessage && (
               <p className="error-message">
                 {typeof errorMessage === "string"
                   ? errorMessage
                   : errorMessage.message}
               </p>
-            )}
+            )} */}
 
             <div className="form-group">
               <input
