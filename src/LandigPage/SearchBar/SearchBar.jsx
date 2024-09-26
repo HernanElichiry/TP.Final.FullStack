@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import './SearchBar.css'; 
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import "./SearchBar.css";
+import { useNavigate } from "react-router-dom";
 
 function SearchBar({ className = "search-bar" }) {
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -24,7 +24,7 @@ function SearchBar({ className = "search-bar" }) {
           value={searchTerm}
           onChange={handleChange}
         />
-        <button type="submit">Buscar</button> 
+        <button type="submit">Buscar</button>
       </div>
     </form>
   );

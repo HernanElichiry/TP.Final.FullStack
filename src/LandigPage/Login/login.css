@@ -29,13 +29,6 @@
     font-size: 16px;
   }
 
-  .error-message {
-    color: red;
-    font-size: 18px;
-    font-weight: bold;
-  }
-
-
   .login-container {
     background-color: rgba(255, 255, 255, 0.8); 
     width: 450px; /* Asegúrate de incluir 'px' para el ancho */
@@ -46,8 +39,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     color: #000; /* Color del texto en el contenedor de login */
 }
-.login-h2{
 
+.login-h2{
   justify-content: center;
   display: flex;
   color: #000;
@@ -64,8 +57,8 @@
   .form-group {
     margin-bottom: 15px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column; /* Alinea los elementos en columna */
+    align-items: stretch;   /* Asegúrate de que los inputs ocupen el ancho completo */
   }
 
   .styled-input::placeholder {
@@ -98,6 +91,7 @@
   .login-btn:hover {
     background-color: #45a049;
   }
+  
   .form-group label {
     width: 150px; /* Ajusta el ancho según tus necesidades */
     margin-right: 10px;

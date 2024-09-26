@@ -32,7 +32,7 @@ const RegisterForm = () => {
       birthdate: birthdate.toISOString().substring(0, 10),
       email,
       password,
-      roleId: isProfessor ? 2 : 1,
+      role_id: isProfessor ? 2 : 1,
     };
 
     console.log("User Data to Send:", userData); // Agregar este log
@@ -69,8 +69,8 @@ const RegisterForm = () => {
           if (errors.password) {
             setErrorMessage(errors.password);
           }
-          if (errors.roleId) {
-            setErrorMessage(errors.roleId);
+          if (errors.role_id) {
+            setErrorMessage(errors.role_id);
           }
         } else {
           setErrorMessage("Error al registrar un usuario");
@@ -112,15 +112,6 @@ const RegisterForm = () => {
                 className="styled-input"
               />
             </div>
-            {/* <div className="form-group">
-              <input
-                id="lastname"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                placeholder="Apellido"
-                className="styled-input"
-              />
-            </div> */}
             <div className="form-group">
               <input
                 id="birthdate"
@@ -152,14 +143,6 @@ const RegisterForm = () => {
                 className="styled-input"
               />
             </div>
-
-            {/* {errorMessage && (
-              <p className="error-message">
-                {typeof errorMessage === "string"
-                  ? errorMessage
-                  : errorMessage.message}
-              </p>
-            )} */}
 
             <div className="form-group">
               <input
