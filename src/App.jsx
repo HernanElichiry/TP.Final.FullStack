@@ -20,6 +20,7 @@ import CourseDetail from "./LandigPage/DetailPage/CourseDetail";
 import SearchResults from "./LandigPage/SearchResult/SearchResults";
 import CategoriesPage from "./LandigPage/Categorias/CategoriesPage";
 import Admin from "./LandigPage/admin/admin";
+import CoursePlatform from "./LandigPage/User/Profesor/ProfessorCoursesPlataform/ProfessorCoursesPlataform";
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
                 <Route path="my-courses-professor" element={<MyCoursesProfessor />} />
                 <Route path="favorites-professor" element={<FavoritesProfessor />}/>
               </Route>
+              <Route path= "/course-platform/:id" element={<CoursePlatform/>} />
               <Route path="/search/:searchTerm" element={<SearchResults />} />
               <Route path="/course/:id" element={<CourseDetail />} />
            
