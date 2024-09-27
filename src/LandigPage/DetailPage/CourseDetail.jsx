@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { courses } from '../MockCourses/MockCourses';
 import './CourseDetail.css';
@@ -12,12 +12,26 @@ import instructorVideo from '../Components/instructot.video.mp4';
 import foto from "../Components/foto.jpg";
 
 const CourseDetail = () => {
-  const { id } = useParams();
-  const course = courses.find(course => course.id === parseInt(id));
+  const { id } = useParams(); // Obtener el ID del curso desde la URL
+  const [course, setCourse] = useState(null); // Estado para almacenar el curso
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+
+    const fetchCourse = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/courses/${id}`); // Solicitud GET para obtener el curso por ID
+        const data = await response.json();
+        console.log(data);
+        setCourse(data); // Guardar el curso en el estado
+      } catch (error) {
+        console.error("Error al obtener el curso:", error);
+      }
+    };
+
+    fetchCourse();
+  }, [id]); // Ejecutar cada vez que cambie el ID
+
 
   if (!course) {
     return <div>Curso no encontrado</div>;
@@ -28,7 +42,7 @@ const CourseDetail = () => {
       <div className="course-header" style={{ backgroundImage: `url(${course.image})` }}>
         <div className="course-overlay">
           <h1>{course.title}</h1>
-          <h2>For {course.instructor}</h2>
+          <h2>For {course.instructor.name}</h2>
           <h3>{course.duration} Hs</h3>
         </div>
       </div>
@@ -47,11 +61,12 @@ const CourseDetail = () => {
           <div className="course-info-section">
             <h2>Detalles del curso</h2>
             <div className="course-details">
-              <p><strong>Categoría:</strong> {course.category}</p>
+              <p><strong>Categoría:</strong> {course.category.name}</p>
               <p><strong>Plataforma:</strong> {course.platform}</p>
               <p><strong>Tipo de capacitación:</strong></p>
-              <p><strong>Valoración:</strong> {course.rating}</p>
-              <p><strong>Modalidad:</strong></p>
+              <p><strong>Valoración:</strong>  </p>
+              <p><strong>Topics:</strong> {course.courseTopics[0].topic.topic}</p>
+              <p><strong>Topics:</strong> {course.courseTopics[1].topic.topic}</p>
               <p><strong>Precio:</strong> {course.price} dólares</p>
             </div>
           </div>
@@ -66,8 +81,12 @@ const CourseDetail = () => {
       <div className='course-plan'>
         <h2><strong>Plan de estudio</strong></h2>
         <ul>
-          <li>Clase 1 inserte aqui la informacion sobre la clase</li>
-          <li>Clase 2 inserte aqui la informacion sobre la clase</li>
+          
+          {//PONER MAP
+          
+          }
+          <li>Clase 1 : {course.classes[0].title}</li>
+          <li>Clase 2 {course.classes[1].title}</li>
           <li>Clase 3 inserte aqui la informacion sobre la clase </li>
           <li>Clase 4 inserte aqui la informacion sobre la clase </li>
           <li>Clase 5 inserte aqui la informacion sobre la clase</li>
@@ -80,9 +99,9 @@ const CourseDetail = () => {
       </div>
       <div className="instructor-section">
         <div className="instructor-info">
-          <img src={foto} alt={course.instructor} className="instructor-photo" />
+          <img src={foto} alt={course.instructor.name} className="instructor-photo" />
           <div className="instructor-description">
-            <h2>Sobre {course.instructor}</h2>
+            <h2>Sobre {course.instructor.name}</h2>
             <p>{course.description}</p>
           </div>
         </div>
