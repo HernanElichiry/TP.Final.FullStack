@@ -5,14 +5,13 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { v4 as uuidv4 } from "uuid";
 import "./AddCourseForm.css";
-
 import Cleave from 'cleave.js/react';
 import 'cleave.js/dist/addons/cleave-phone.us';
 
 const AddCourseForm = () => {
   const { control, handleSubmit, formState: { errors }, watch, setError } = useForm();
  // const [selectedTopics, setSelectedTopics] = useState([]);
-  const [classes, setClasses] = useState([{ id: uuidv4(), video: { videoId: uuidv4(), name: "", url: "" }, file: { name: "", url: "" }, className: "" }]);
+  const [classes, setClasses] = useState([{ id: uuidv4(), video: { videoId: uuidv4(), name: "", url: "" }, file: { name: "", url: "" }, title: "" }]);
   const [noDates, setNoDates] = useState(false);
   
   const startDate = watch('startDate');
@@ -65,6 +64,7 @@ const AddCourseForm = () => {
   const addNewClass = () => {
     setClasses([...classes, { id: uuidv4(), video: { videoId: uuidv4(), name: "", url: "" }, file: { name: "", url: "" }, className: "" }]);
   };
+  
   const handleRemoveClass = (index) => {
     // Crea una copia de las clases
     const updatedClasses = [...classes];
@@ -76,7 +76,8 @@ const AddCourseForm = () => {
     setValue("classes", updatedClasses);
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    
     if (!noDates && new Date(data.endDate) <= new Date(data.startDate)) {
       setError("endDate", { type: "manual", message: "La fecha de finalización debe ser posterior a la de inicio." });
       return;
@@ -109,12 +110,33 @@ const AddCourseForm = () => {
             name: classItem.file.name,
             url: classItem.file.url,
         },
-        className: classItem.className,
+        className: classItem.title,
     })),
   };
 
     console.log("Curso agregado:", combinedData);
+
+
+  /*  try {
+      const response = await fetch("http://localhost:3000/courses", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(combinedData),
+      });
+  
+      if (response.ok) {
+        console.log('Curso agregado exitosamente');
+      } else {
+        console.error('Error al agregar el curso');
+      }
+    } catch (error) {
+      console.error('Error en la solicitud:', error);
+    }*/
   };
+
+
 
 
   return (
@@ -320,11 +342,11 @@ const AddCourseForm = () => {
 
        {/* Nombre de la clase */}
         <div className="form-group">
-        <label htmlFor={`className-${classItem.id}`}>Nombre de la clase</label>
+        <label htmlFor={`title-${classItem.id}`}>Nombre de la clase</label>
         <Controller
-        name={`classes[${index}].className`}
+        name={`classes[${index}].title`}
         control={control}
-        defaultValue={classItem.className || ""}
+        defaultValue={classItem.title || ""}
         rules={{
           required: "El nombre del archivo requerido.",
           maxLength: {
@@ -335,12 +357,12 @@ const AddCourseForm = () => {
         render={({ field }) => (
           <input
             className="form-input"
-            id={`className-${classItem.id}`}
+            id={`title-${classItem.id}`}
             {...field}
             onChange={(e) => {
               field.onChange(e.target.value);
               const updatedClasses = [...classes];
-              updatedClasses[index].className = e.target.value; // Actualizar el estado local
+              updatedClasses[index].title = e.target.value; // Actualizar el estado local
               setClasses(updatedClasses);
             }} 
           />
