@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+/*import React, { useState} from 'react';
 import './ProfessorCoursePlataform.css';
+import { useForm, Controller } from 'react-hook-form';*/
 
-const courseData = {
+const  initialCourseData = {
+  id: "course-1",
   courseName: "curso avanzado de programación",
   courseDescription: "Curso para aprender los conceptos avanzados de programación.",
   courseDuration: "50",
@@ -146,11 +148,96 @@ const courseData = {
   ]
 };
 
+import React, { useState } from 'react';
+import './ProfessorCoursePlataform.css';
+import ReactPlayer from 'react-player';
+import { v4 as uuidv4 } from 'uuid';
 
 const CoursePlatform = () => {
-  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [courseData, setCourseData] = useState(initialCourseData);
   const [expandedClassIndex, setExpandedClassIndex] = useState(null);
   const [selectedClass, setSelectedClass] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [classData, setClassData] = useState({
+    videoName: '',
+    videoFile: null,
+    fileName: '',
+    fileFile: null,
+    classname: ''
+  });
+  const [modifiedClasses, setModifiedClasses] = useState([]);
+  const [deletedClasses, setDeletedClasses] = useState([]);
+
+//// creando nueva clase
+const [newClassData, setNewClassData] = useState({
+  id: `class-${uuidv4()}`,
+  videoName: '',
+  videoFile: null,
+  fileName: '',
+  fileFile: null,
+  classname: ''
+});
+// Arreglo para almacenar todas las clases nuevas creadas
+  const [newClasses, setNewClasses] = useState([]);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false); // Estado para controlar el modal de creación de clases
+
+// Función que abre el modal para crear una clase nueva
+const openCreateModal = () => {
+  setNewClassData({
+    videoName: '',
+    videoFile: null,
+    fileName: '',
+    fileFile: null,
+    classname: ''
+  });
+  setIsCreateModalOpen(true);
+};
+
+
+const closeCreateModal = () => {
+  setIsCreateModalOpen(false);
+};
+  
+// Función que maneja la creación de una nueva clase en el estado `newClasses`
+const handleCreateClassInState = () => {
+  const newClass = {
+    id: `class-${uuidv4()}`, // ID único para la nueva clase
+    video: {
+      name: newClassData.videoName,
+      url: newClassData.videoFile ? URL.createObjectURL(newClassData.videoFile) : null, // Crear URL solo si hay un archivo de video
+    },
+    file: {
+      name: newClassData.fileName,
+      url: newClassData.fileFile ? URL.createObjectURL(newClassData.fileFile) : null, // Crear URL solo si hay un archivo
+    },
+    classname: newClassData.classname
+  };
+
+  // Guardar la nueva clase en el estado `newClasses`
+  setNewClasses((prevNewClasses) => [...prevNewClasses, newClass]);
+
+  // Actualizar el estado `courseData` para reflejar los cambios en el frontend
+  setCourseData((prevCourseData) => ({
+    ...prevCourseData,
+    classes: [...prevCourseData.classes, newClass], // Agregar la nueva clase
+  }));
+
+  setIsCreateModalOpen(false); // Cerrar el modal
+};
+//////////////// cerrando nueva clase
+
+
+
+  const handleDeleteClass = (classId) => {
+    setDeletedClasses((prevClasses) => 
+      prevClasses.includes(classId) ? prevClasses : [...prevClasses, classId]
+    );
+  
+    setCourseData((prevCourseData) => {
+      const updatedClasses = prevCourseData.classes.filter((classItem) => classItem.id !== classId);
+      return { ...prevCourseData, classes: updatedClasses };
+    });
+  };
 
   const toggleClassContent = (index) => {
     setExpandedClassIndex(expandedClassIndex === index ? null : index);
@@ -159,72 +246,391 @@ const CoursePlatform = () => {
     }
   };
 
+  const openUpdateModal = (classItem) => {
+    
+    setSelectedClass(classItem);
+    setClassData({
+      videoName: classItem.video.name,
+      videoFile: null, 
+      fileName: classItem.file.name,
+      fileFile: null, 
+      classname: classItem.classname
+    });
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setClassData({
+      videoName: '',
+      videoFile: null,
+      fileName: '',
+      fileFile: null,
+      classname: ''
+    });
+  };
+
+  const handleFileChange = (event) => {
+    const { name, files } = event.target;
+    if (files.length > 0) {
+      setClassData((prevData) => ({
+        ...prevData,
+        [name]: files[0], 
+      }));
+    }
+  };
+
+  const handleUpdateClassInState = () => {
+    const updatedClass = {
+      ...selectedClass,
+      video: {
+        name: classData.videoName || selectedClass.video.name,
+        url: classData.videoFile ? URL.createObjectURL(classData.videoFile) : selectedClass.video.url,
+      },
+      file: {
+        name: classData.fileName || selectedClass.file.name,
+        url: classData.fileFile ? URL.createObjectURL(classData.fileFile) : selectedClass.file.url,
+      },
+      classname: classData.classname || selectedClass.classname,
+    };
+  
+   
+  
+    // Actualiza el estado de courseData
+    setCourseData((prevCourseData) => {
+      const updatedClasses = prevCourseData.classes.map((classItem) =>
+        classItem.id === selectedClass.id ? updatedClass : classItem
+      );
+      return { ...prevCourseData, classes: updatedClasses };
+    });
+  
+    // Actualiza el estado de modifiedClasses
+    setModifiedClasses((prevClasses) => {
+      const existingClassIndex = prevClasses.findIndex((item) => item.id === updatedClass.id);
+      if (existingClassIndex !== -1) {
+        const newClasses = [...prevClasses];
+        newClasses[existingClassIndex] = updatedClass; // Reemplaza la clase existente
+        return newClasses;
+      }
+      return [...prevClasses, updatedClass]; // Agrega la nueva clase
+    });
+  
+    setIsModalOpen(false); // Cierra el modal
+  };
+
+  const handleSaveAllChanges = async () => {
+    if (modifiedClasses.length === 0 && deletedClasses.length === 0 && newClasses.length === 0) {
+      alert('No hay cambios para guardar.');
+      return;
+    }
+
+  // Función que envía todas las clases nuevas al backend
+  if (newClasses.length > 0) {
+    const newclassFormData = new FormData();
+    console.log("Nuevas Clases:", newClasses);
+  
+    newClasses.forEach((newClass, index) => {
+      // Aquí se envían los nombres de los archivos, no los objetos
+      if (newClass.video.file) {
+        newclassFormData.append(`class_${index}_video`, newClass.video.name); // Usa newClass.video.name
+      }
+      if (newClass.file.file) {
+        newclassFormData.append(`class_${index}_file`, newClass.file.name); // Usa newClass.file.name
+      }
+      newclassFormData.append(`class_${index}_name`, newClass.classname);
+     
+      newclassFormData.append(`class_${index}_videoUrl`, newClass.video.url);
+      newclassFormData.append(`class_${index}_fileUrl`, newClass.file.url);
+    });
+  
+    // Enviar la solicitud al backend (ajusta el endpoint según tu API)
+    try {
+      const response = await fetch('/api/classes', {
+        method: 'POST',
+        body: newclassFormData,
+      });
+      if (response.ok) {
+        console.log('Clases creadas exitosamente');
+      } else {
+        const errorResponse = await response.json(); // Obtiene la respuesta de error
+        console.error('Error al crear las clases:', errorResponse);
+      }
+    } catch (error) {
+      console.error('Error en la petición:', error);
+    }
+  }
+  
+    // Filtrar las clases modificadas para no incluir aquellas que fueron eliminadas
+    if (modifiedClasses.length > 0) {
+    const filteredModifiedClasses = modifiedClasses.filter(
+      (classItem) => !deletedClasses.includes(classItem.id)
+    );
+  
+    console.log("Clases modificadas (sin las eliminadas):", filteredModifiedClasses);
+    const formData = new FormData();
+   // formData.append('course_id', courseData.id);
+  
+    // Agregar las clases modificadas para la solicitud PATCH
+    filteredModifiedClasses.forEach((classItem) => {
+      formData.append(`class_id`, classItem.id);
+      formData.append(`title`, classItem.classname);
+      formData.append(`videoName`, classItem.video.name);
+      formData.append(`fileName`, classItem.file.name);
+  
+      // Verificar si se ha subido un nuevo video o archivo
+      formData.append(`videoUrl`, classItem.videoFile ? classItem.video.url : classItem.video.url);
+      formData.append(`fileUrl`, classItem.fileFile ? classItem.file.url : classItem.file.url);
+  
+      if (classItem.videoFile) {
+        formData.append(`videoFile`, classItem.videoFile);
+      }
+      if (classItem.fileFile) {
+        formData.append(`fileFile`, classItem.fileFile);
+      }
+    });
+  
+    //console.log("Datos que se enviarán a la API (clases modificadas):", Array.from(formData.entries()));
+  
+    // Realizar la solicitud PATCH para las clases modificadas
+    try {
+      const patchResponse = await fetch('/api/update-classes', {
+        method: 'PATCH',
+        body: formData,
+      });
+  
+      if (patchResponse.ok) {
+        alert('Los cambios de las clases se han actualizado con éxito');
+      } else {
+        alert('Hubo un error al actualizar las clases.');
+      }
+    } catch (error) {
+      console.error('Error al guardar los cambios:', error);
+      alert('Hubo un problema con la actualización.');
+    } }
+
+
+  
+    // Procesar las clases eliminadas
+    if (deletedClasses.length > 0) {
+      console.log("Clases eliminadas:", deletedClasses);
+      try {
+        const deleteResponse = await fetch('/api/delete-classes', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ classIds: deletedClasses }), //en el backend, se verá así: {"classIds": ["class-1", "class-2"]}
+        });
+  
+        if (deleteResponse.ok) {
+          alert('Las clases eliminadas se han procesado con éxito');
+          setDeletedClasses([]); // Limpia la lista de eliminadas
+        } else {
+          alert('Hubo un error al eliminar las clases.');
+        }
+      } catch (error) {
+        console.error('Error al eliminar las clases:', error);
+        alert('Hubo un problema con la eliminación.');
+      }
+    }
+  
+    // Reiniciar el estado de clases modificadas y eliminadas
+    setModifiedClasses([]);
+    setDeletedClasses([]);
+    setNewClasses([]);
+  };
+
   return (
-    <div className="course-platform">
-      {/* Sección izquierda: lista de clases */}
-      <div className="course-list-container">
-        <div className="course-details">
-          <h1>{courseData.courseName}</h1>
-          <p>Fecha de Inicio: {courseData.startDate}</p>
-          <p>Fecha de Finalización: {courseData.endDate}</p>
-
-          <h2>Clases</h2>
-          <ul className="course-list">
-            {courseData.classes.map((classItem, classIndex) => (
-              <li key={classIndex} className="class-section">
-                <div>
-                  <h3 onClick={() => toggleClassContent(classIndex)}>
-                    {classItem.classname}
-                  </h3>
-                </div>
-                <div className={`class-content ${expandedClassIndex === classIndex ? 'open' : ''}`}>
-                  <div className="class-video">
-                    <p onClick={() => setSelectedVideo(classItem.video.url)}>
-                      {classItem.video.name}
-                    </p>
+      <>
+      <div className="course-platform">
+        <div className="course-list-container">
+          <div className="course-details">
+            <h1>{courseData.courseName}</h1>
+             <p>Fecha de Inicio: {courseData.startDate}</p>
+             <p>Fecha de Finalización: {courseData.endDate}</p>
+            <h2>Clases</h2>
+            <ul className="course-list">
+              {courseData.classes.map((classItem, classIndex) => (
+                <li key={classItem.id} className="class-section">
+                  <div>
+                    <h3 onClick={() => toggleClassContent(classIndex)}>{classItem.classname}</h3>
                   </div>
-                  <div className="attachment-item">
-                    <a href={classItem.file.url} target="_blank" rel="noopener noreferrer">
-                      {classItem.file.name}
-                    </a>
+                  <div className={`class-content ${expandedClassIndex === classIndex ? 'open' : ''}`}>
+                    <div className="class-video">
+                      <p onClick={() => openUpdateModal(classItem)}>{classItem.video.name}</p>
+                    </div>
+                    <div className="attachment-item">
+                      <a href={classItem.file.url} target="_blank" rel="noopener noreferrer">{classItem.file.name}</a>
+                    </div>
                   </div>
-                </div>
-              </li>
-            ))}
-          </ul>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </div>
 
-      {/* Sección derecha: reproductor de video */}
-      <div className="video-player">
-        {selectedVideo ? (
-          <>
-            <video controls>
-              <source src={selectedVideo} type="video/mp4" />
-              Tu navegador no soporta la etiqueta de video.
-            </video>
-            <div className="video-actions">
-              {selectedClass && (
-                <>
-                  <a
-                    href={selectedClass.file.url}
-                    className="btn download-btn"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Descargar Material
-                  </a>
-                  <button className="btn completed-btn">Clase Completada</button>
-                  <button className="btn query-btn">Hacer Consulta al Profesor</button>
-                </>
-              )}
-            </div>
-          </>
-        ) : (
-          <p>Selecciona un video para reproducir</p>
-        )}
-      </div>
+        <div className="video-player">
+      
+      {selectedClass && (
+        <>
+          <ReactPlayer 
+            url={selectedClass.video.url} 
+            controls 
+            width="100%" 
+            height="auto" 
+          />
+          <div className="video-actions">
+            <button className="btn query-btn" onClick={() => openUpdateModal(selectedClass)}>
+              Actualizar Clase
+            </button>
+          </div>
+        </>
+      )}
     </div>
+
+        {isModalOpen && (
+          <div className="modal">
+            <div className="modal-content">
+              <h2>Actualizar Clase</h2>
+              <button onClick={closeModal} style={{ float: 'right', marginBottom: '10px' }}>Cerrar</button>
+              <form onSubmit={(e) => { e.preventDefault(); handleUpdateClassInState(); }}>
+              <div className="form-group">
+               <label htmlFor="classname">Nombre de la Clase</label>
+                <input
+                  type="text"
+                  className="form-input"
+                   id="classname"
+                     value={classData.classname} // Vincular con el estado de classname
+                   onChange={(e) => setClassData({ ...classData, classname: e.target.value })} // Actualizar el estado
+                     />
+                   </div>
+                <div className="form-group">
+                  <label htmlFor="videoName">Nombre del Video</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    id="videoName"
+                    value={classData.videoName}
+                    onChange={(e) => setClassData({ ...classData, videoName: e.target.value })}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="videoFile">Selecciona Video</label>
+                  <input
+                    type="file"
+                    accept="video/*"
+                    name="videoFile"
+                    onChange={handleFileChange}
+                    className="form-input"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="fileName">Nombre del Archivo</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    id="fileName"
+                    value={classData.fileName}
+                    onChange={(e) => setClassData({ ...classData, fileName: e.target.value })}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="fileFile">Selecciona Archivo</label>
+                  <input
+                    type="file"
+                    accept=".pdf,.docx,.pptx"
+                    name="fileFile"
+                    onChange={handleFileChange}
+                    className="form-input"
+                  />
+                </div>
+
+                <div className="modal-actions">
+                  <button type="submit" className="btn update-btn">Actualizar Clase</button>
+                  <button className="btn update-btn" onClick={() => handleDeleteClass(selectedClass.id)}> Eliminar Clase </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
+       
+      </div>
+      <div className="save-changes-container">
+          <button className="btn save-changes-btn" onClick={handleSaveAllChanges}>Guardar Todos los Cambios</button>
+          <button className="btn create-btn" onClick={openCreateModal}>Agregar Nueva Clase</button>
+        </div>
+
+        {isCreateModalOpen && (
+  <div className="modal">
+    <div className="modal-content">
+      <h2>Crear Nueva Clase</h2>
+      <button onClick={closeCreateModal} style={{ float: 'right', marginBottom: '10px' }}>Cerrar</button>
+      <form onSubmit={(e) => { e.preventDefault(); handleCreateClassInState(); }}>
+        <div className="form-group">
+          <label htmlFor="classname">Nombre de la Clase</label>
+          <input
+            type="text"
+            className="form-input"
+            id="classname"
+            value={newClassData.classname}
+            onChange={(e) => setNewClassData({ ...newClassData, classname: e.target.value })}
+          />
+        </div>
+        
+        <div className="form-group">
+          <label htmlFor="videoName">Nombre del Video</label>
+          <input
+            type="text"
+            className="form-input"
+            id="videoName"
+            value={newClassData.videoName}
+            onChange={(e) => setNewClassData({ ...newClassData, videoName: e.target.value })}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="videoFile">Selecciona Video</label>
+          <input
+            type="file"
+            accept="video/*"
+            name="videoFile"
+            onChange={(e) => setNewClassData({ ...newClassData, videoFile: e.target.files[0] })}
+            className="form-input"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="fileName">Nombre del Archivo</label>
+          <input
+            type="text"
+            className="form-input"
+            id="fileName"
+            value={newClassData.fileName}
+            onChange={(e) => setNewClassData({ ...newClassData, fileName: e.target.value })}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="fileFile">Selecciona Archivo</label>
+          <input
+            type="file"
+            accept=".pdf,.docx,.pptx"
+            name="fileFile"
+            onChange={(e) => setNewClassData({ ...newClassData, fileFile: e.target.files[0] })}
+            className="form-input"
+          />
+        </div>
+
+        <div className="modal-actions">
+          <button type="submit" className="btn update-btn">Crear Clase</button>
+        </div>
+      </form>
+    </div>
+  </div>
+)}
+    </>
   );
 };
 

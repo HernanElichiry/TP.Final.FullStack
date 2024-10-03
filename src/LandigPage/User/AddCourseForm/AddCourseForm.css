@@ -5,7 +5,12 @@
   padding: 30px;
   border-radius: 8px;
   background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra más sutil */
+  transition: transform 0.3s; /* Añadir transición al contenedor */
+}
+
+.formcont:hover {
+  transform: translateY(-2px); /* Efecto de elevación al pasar el ratón */
 }
 
 /* Título del formulario */
@@ -13,8 +18,9 @@
   text-align: center;
   margin-bottom: 25px;
   color: #333333;
-  font-size: 1.5em;
+  font-size: 1.75em; /* Tamaño de fuente más grande */
   font-weight: 600;
+  letter-spacing: 1px; /* Espaciado de letras */
 }
 
 /* Contenedor de los campos del formulario */
@@ -38,27 +44,20 @@
   border-radius: 6px;
   box-sizing: border-box;
   font-size: 1em;
+  transition: border-color 0.3s ease; /* Transición en el borde */
 }
 
-
-
-/* Estilo para los campos de entrada */
+/* Estilo para los campos de entrada (removido el duplicado) */
 .form-input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background-color: #ffffff; /* Fondo blanco */
-  color: #333333; /* Texto negro */
-  box-sizing: border-box;
+  background-color: #ffffff;
+  color: #333333;
 }
 
-/* Asegurarte de que los campos de tipo number también sigan este estilo */
+/* Campos de tipo number */
 .form-input[type="number"] {
-  background-color: #ffffff; /* Fondo blanco */
-  color: #333333; /* Texto negro */
+  background-color: #ffffff;
+  color: #333333;
 }
-
 
 /* Mensajes de error */
 .error-message {
@@ -80,11 +79,10 @@
 }
 
 /* Sección de clases */
-/* Contenedor de las clases */
 .class-container {
   display: flex;
-  flex-direction: column; /* Asegura que las secciones de clase estén en una columna */
-  gap: 20px; /* Espacio entre cada sección de clase */
+  flex-direction: column;
+  gap: 20px;
   width: 100%;
 }
 
@@ -93,9 +91,9 @@
   padding: 15px;
   border: 1px solid #dddddd;
   border-radius: 6px;
-  background-color: #f7f7f7;
+  background-color: #f9f9f9; /* Color de fondo más claro */
   width: 100%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Sombra más suave */
 }
 
 /* Botón de añadir video */
@@ -108,11 +106,12 @@ button[type="button"] {
   color: white;
   cursor: pointer;
   font-size: 1em;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s; /* Transición de fondo y elevación */
 }
 
 button[type="button"]:hover {
   background-color: #0056b3;
+  transform: translateY(-2px); /* Efecto de elevación al pasar el ratón */
 }
 
 /* Botón de enviar */
@@ -126,9 +125,27 @@ button[type="submit"] {
   color: white;
   font-size: 1.125em;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s; /* Transición de fondo y elevación */
 }
 
 button[type="submit"]:hover {
   background-color: #218838;
+  transform: translateY(-2px); /* Efecto de elevación al pasar el ratón */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .formcont {
+    padding: 15px; /* Reducir padding en pantallas pequeñas */
+  }
+
+  .formcont h2 {
+    font-size: 1.5em; /* Ajustar tamaño de fuente del título */
+  }
+
+  .form-input,
+  button[type="button"],
+  button[type="submit"] {
+    font-size: 0.9em; /* Ajustar tamaño de fuente en pantallas pequeñas */
+  }
 }
