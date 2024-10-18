@@ -18,7 +18,7 @@
     border-radius: 4px;
     width: 1000px;
     height: 50px; /* Altura del input */
-  box-sizing: border-box; /* Asegura que el padding esté incluido en la altura */
+    box-sizing: border-box; /* Asegura que el padding esté incluido en la altura */
   }
   
   .search-button {
