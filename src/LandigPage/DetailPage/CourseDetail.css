@@ -55,7 +55,7 @@
 
 .course-main-content,
 .course-sidebar {
-  flex: 1 1 50%;
+  flex: 0 1 40%;
   box-sizing: border-box;
 }
 
@@ -69,7 +69,9 @@
 .course-sidebar {
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 20px;
+  flex: 0 1 60%;
 }
 
 .course-content section {
@@ -103,13 +105,13 @@
 
 .course-info-section {
   padding: 15px;
-  border-radius: 8px;
+  border-radius: px;
   margin-bottom: 10px;
 }
 
 .course-info-section h2 {
-  font-size: 20px;
-  color: #333333;
+  font-size: 30px;
+  color: #f3ebeb;
   margin-bottom: 10px;
 }
 
@@ -162,6 +164,7 @@
   padding: 10px;
   font-size: 20px;
   margin-bottom: 10px;
+  color: #fefff7;
 }
 
 /* Enroll button and price section */

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
@@ -10,6 +10,7 @@ import "./ProductCard.css";
 
 export const ProductCard = ({ product, onFavoriteToggle, isFavorited }) => {
   const navigate = useNavigate(); // me permite el direccionamiento
+  const [imageUrl, setImageUrl] = useState(''); // Estado para almacenar la URL de la imagen
 
   const { user } = useUser(); // Obtén el usuario logueado del contexto
 
@@ -39,11 +40,30 @@ export const ProductCard = ({ product, onFavoriteToggle, isFavorited }) => {
     }
     return stars;
   };
+  useEffect(() =>{
+    const fetchImage = async() => {
+
+    // Construir la URL de la imagen del curso
+    const imageResponse = await fetch(`http://localhost:3000/uploads/images/${product.media.filename}`, {
+      method: 'GET',
+      mode: 'cors',
+      credentials: 'include',
+    });
+
+    // Convertir la imagen a Blob y luego a URL
+        const imageBlob = await imageResponse.blob();
+        setImageUrl(URL.createObjectURL(imageBlob)); // Guardar la URL de la imagen
+  }
+
+  fetchImage();
+  },);
+
+
 
   return (
     <div className="card-product-container">
       <div className="card-product-image">
-        <img src={product.image} alt={product.title} />
+        <img src={imageUrl} alt={product.title} />
       </div>
       <h2>{product.title}</h2>
       <p className="rating-container">{renderStars()}</p> {/* en vez de mostrar la valoracion uso un metodo que muestra una estrella por cada punto*/ }

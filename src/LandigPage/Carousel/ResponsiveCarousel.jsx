@@ -8,7 +8,7 @@ import { FavoritesContext } from '../User/FavoritesContext'; // Importar el cont
 
 function ResponsiveCarousel({ courses, text = "inserte texto" }) {
   const { favorites, toggleFavorite } = useContext(FavoritesContext);
-
+  console.log("HOLAAA");
   var settings = {
     dots: true,
     infinite: true, // Hacer que el carrusel sea infinito
@@ -61,6 +61,7 @@ function ResponsiveCarousel({ courses, text = "inserte texto" }) {
         <h2 className="Slider-description">{text}</h2>
         <Slider {...settings}>
           {courses.map((course) => (
+            
             <ProductCard
               key={course.id}
               product={course}
