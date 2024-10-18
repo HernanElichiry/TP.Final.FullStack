@@ -16,15 +16,18 @@ function SearchBar({ className = "search-bar" }) {
   };
 
   return (
-    <form className={className} onSubmit={handleSubmit}>
-      <div>
+    <form className="search-bar" onSubmit={handleSubmit}>
+      <div className="search-container">
         <input
+          className="search-input"
           type="text"
           placeholder="¿Qué te gustaría aprender?"
           value={searchTerm}
           onChange={handleChange}
         />
-        <button type="submit">Buscar</button>
+        <button className="search-button" type="submit">
+          Buscar
+        </button>
       </div>
     </form>
   );

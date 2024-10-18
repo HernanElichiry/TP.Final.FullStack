@@ -2,7 +2,7 @@ import React from "react";
 import "./Background.css";
 import SearchBar from "../SearchBar/SearchBar";
 import einsteinImage from "./einstein4.png";
-import { Row, Col } from "antd";
+
 
 export const HomePageText = () => {
   return (
