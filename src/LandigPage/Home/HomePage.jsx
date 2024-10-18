@@ -33,7 +33,7 @@ function HomePage() {
          const response = await fetch("http://localhost:3000/courses"); // URL de la API
          const data = await response.json();
          setCourses(data);
- 
+        console.log(data);
  
          // Ordenar las copias de los cursos
         // setBestRatedCourses([...data].sort((a, b) => b.rating - a.rating));

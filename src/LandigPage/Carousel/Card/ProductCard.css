@@ -25,14 +25,14 @@
 
 .card-product-image {
   width: 100%;
-  height: 200px;  /* Aumentamos la altura de la imagen */
+  height: 210px;  /* Aumentamos la altura de la imagen */
   overflow: hidden; /* Oculta cualquier desbordamiento */
   border-radius: 8px 8px 0 0;  /* Ajustamos el borde superior redondeado */
 }
 
 .card-product-image img {
   width: 100%;
-  height: 100%;
+  height: 80%;
   object-fit: cover;
   transition: filter 0.3s ease-in-out;
 }
