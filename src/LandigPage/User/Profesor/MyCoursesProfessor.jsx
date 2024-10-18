@@ -1,6 +1,7 @@
 import React from "react";
 import  ProfesorCoursesCard  from "./ProfesorCoursesCard/PorfesorCoursesCard";
 import {course as mockCourses} from "./ProfesorCoursesCard/Mock";
+import './MyCoursesProfessor.css';
 
 /*Logica para la base de datos
 es suficiente traer los cursos desde la base de datos en el componente MyCoursesProfessor y luego, al hacer clic en la tarjeta del curso, redirigir al componente de la plataforma de edición (CoursePlatform) con el id del curso. Aquí están los pasos clave:
@@ -20,12 +21,15 @@ Rellenas el formulario de edición con los datos del curso y permites la edició
 
 const MyCoursesProfessor = () => {
   return (
-    <div>
+    <div className="my-courses-container">
       <h2>My Courses</h2>
-      {/* Aquí iría tu contenido de My Courses */}
-      {mockCourses.map((course) => (
-        <ProfesorCoursesCard key={course.id} course={course} />
-      ))}
+      <div className="courses-grid">
+        {mockCourses.map((course) => (
+          <ProfesorCoursesCard key={course.id} course={course} />
+        ))}
+        
+        
+      </div>
     </div>
   );
 };

@@ -5,16 +5,21 @@ import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
+import { useUser } from "../../User/UserContext/UserContext"; 
 import "./ProductCard.css";
 
 export const ProductCard = ({ product, onFavoriteToggle, isFavorited }) => {
   const navigate = useNavigate(); // me permite el direccionamiento
 
+  const { user } = useUser(); // Obtén el usuario logueado del contexto
 
   const handleFavoriteClick = () => {
-    onFavoriteToggle(product); //Funcion que marca o desmarca como favorito la card. funcion traida del context
+    if (!user) {
+      navigate('/login'); // Redirige a la página de login si el usuario no está logueado
+    } else {
+      onFavoriteToggle(product); // Ejecuta la función si el usuario está logueado
+    }
   };
-
 
   const handleCardClick = () => {   //funcion para manejar el redireccionamiento a la couseDetail al hacer click
     navigate(`/course/${product.id}`);

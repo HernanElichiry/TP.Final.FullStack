@@ -1,6 +1,4 @@
-/*import React, { useState} from 'react';
-import './ProfessorCoursePlataform.css';
-import { useForm, Controller } from 'react-hook-form';*/
+
 
 const  initialCourseData = {
   id: "course-1",
@@ -148,10 +146,12 @@ const  initialCourseData = {
   ]
 };
 
-import React, { useState } from 'react';
+import React, { useState } from 'react'; // mas useEffect
 import './ProfessorCoursePlataform.css';
 import ReactPlayer from 'react-player';
 import { v4 as uuidv4 } from 'uuid';
+//import { useParams } from 'react-router-dom';
+
 
 const CoursePlatform = () => {
   const [courseData, setCourseData] = useState(initialCourseData);
@@ -167,6 +167,50 @@ const CoursePlatform = () => {
   });
   const [modifiedClasses, setModifiedClasses] = useState([]);
   const [deletedClasses, setDeletedClasses] = useState([]);
+
+
+  //// ahora funciona con un objeto pero deberiamos hacer el llamado a la api
+ /* const { id } = useParams(); // Aquí obtenemos el parámetro 'id' de la URL
+
+  useEffect(() => {
+    // Función asíncrona para buscar el curso desde la API
+    const fetchCourse = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`/api/courses/${id}`); // Haces la solicitud a la API
+        if (!response.ok) {
+          throw new Error("Error al cargar el curso");
+        }
+        const data = await response.json(); // Parsear el JSON de la respuesta
+        setCourseData(data); // Almacenar los datos del curso
+      } catch (err) {
+        setError(err.message); // Manejar errores de la solicitud
+      } finally {
+        setLoading(false); // Termina la carga
+      }
+    };
+
+    fetchCourse(); // Llamada a la función asíncrona
+  }, [id]);
+
+  // Si está cargando, muestra un mensaje de carga
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  // Si hubo un error, mostrar el mensaje de error
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  // Si courseData aún es null, mostrar un mensaje de curso no encontrado
+  if (!courseData) {
+    return <div>Curso no encontrado</div>;
+  }
+
+  // Si todo va bien, renderizas los datos del curso*/
+
+
 
 //// creando nueva clase
 const [newClassData, setNewClassData] = useState({
