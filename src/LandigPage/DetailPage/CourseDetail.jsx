@@ -66,7 +66,6 @@ const CourseDetail = () => {
         setImageUrl(URL.createObjectURL(imageBlob)); // Guardar la URL de la imagen
         const videoBlob = await videoResponse.blob();
         setVideoUrl(URL.createObjectURL(videoBlob)); // Guardar la URL del video
-
       } catch (error) {
         console.error("Error al obtener el curso o la imagen:", error);
       }
@@ -117,13 +116,15 @@ const CourseDetail = () => {
               </p>
               <p>
                 <strong>Valoración:</strong>{" "}
-              </p>
-              <p>
-                <strong>Topics:</strong> {course.courseTopics[0].topic.topic}
-              </p>
-              <p>
-                <strong>Topics:</strong> {course.courseTopics[1].topic.topic}
-              </p>
+              </p>     
+              {course.courseTopics.map((courseTopic, index) => (
+                 <p>
+                <strong key={index}>Topics: 
+                </strong> {courseTopic.topic.topic}
+                {index < course.courseTopics.length - 1 }
+                </p>
+              ))}
+             
               <p>
                 <strong>Precio:</strong> {course.price} dólares
               </p>
@@ -142,9 +143,6 @@ const CourseDetail = () => {
           <strong>Plan de estudio</strong>
         </h2>
         <ul>
-          {
-            //PONER MAP
-          }
           {course.classes.map((clase, index) => (
             <li key={index}>
               Clase {index + 1}: {clase.title}
