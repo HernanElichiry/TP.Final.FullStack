@@ -22,7 +22,6 @@ const CourseDetail = () => {
       try {
         const response = await fetch(`http://localhost:3000/courses/${id}`); // Solicitud GET para obtener el curso por ID
         const data = await response.json();
-        console.log(data);
         setCourse(data); // Guardar el curso en el estado
       } catch (error) {
         console.error("Error al obtener el curso:", error);
@@ -36,10 +35,14 @@ const CourseDetail = () => {
   if (!course) {
     return <div>Curso no encontrado</div>;
   }
+  // Construir la URL de la imagen del curso
+  const imageUrl = `http://localhost:3000/uploads/images/${course.media.filename}`;
 
+  console.log(imageUrl);
   return (
     <div className="course-detail">
-      <div className="course-header" style={{ backgroundImage: `url(${course.image})` }}>
+      <div className="course-header" style={{ backgroundImage: `url(${imageUrl})` }}>
+      <img src={imageUrl} alt={course.title} />
         <div className="course-overlay">
           <h1>{course.title}</h1>
           <h2>For {course.instructor.name}</h2>
