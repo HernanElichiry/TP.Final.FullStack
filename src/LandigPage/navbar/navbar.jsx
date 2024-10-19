@@ -7,8 +7,10 @@ import { useUser } from "../User/UserContext/UserContext";
 import categories from "../Categorias/categoriesRow";
 import { NavLink } from "react-router-dom";
 
+
 function Navbar() {
   const { user, logout } = useUser();
+  
 
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -76,7 +78,7 @@ function Navbar() {
                     <strong className="user-email">{user.email}</strong>
                   </div>
                   <Link
-                    to={user.role === "user" ? "/usermenu" : "/professormenu"}
+                    to={user.rol === 3 ? "/usermenu" : "/professormenu"}
                     className="button is-light"
                   >
                     Menu
