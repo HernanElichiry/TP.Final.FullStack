@@ -7,13 +7,18 @@ import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import "./ProductCard.css";
 
-export const ProductCard = ({ product, onFavoriteToggle, isFavorited }) => {
+export const ProductCard = ({ product, onFavoriteToggle, isFavorited, user }) => {
   const navigate = useNavigate(); // me permite el direccionamiento
   const [imageUrl, setImageUrl] = useState(''); // Estado para almacenar la URL de la imagen
 
 
   const handleFavoriteClick = () => {
-    onFavoriteToggle(product); //Funcion que marca o desmarca como favorito la card. funcion traida del context
+
+    if (user) {
+      onFavoriteToggle(product); // Llama a la función para alternar favorito
+    } else {
+      alert("Inicia sesión para agregar a favoritos."); // Mensaje para usuarios no logueados
+    }
   };
 
 
