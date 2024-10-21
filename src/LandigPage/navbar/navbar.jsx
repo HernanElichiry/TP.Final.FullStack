@@ -7,13 +7,15 @@ import { useUser } from "../User/UserContext/UserContext";
 import categories from "../Categorias/categoriesRow";
 import { NavLink } from "react-router-dom";
 
-
 function Navbar() {
   const { user, logout } = useUser();
-  
 
   return (
-    <nav className="navbar" role="navigation" aria-label="main navigation">
+    <nav
+      className="navbar is-dark"
+      role="navigation"
+      aria-label="main navigation"
+    >
       <div className="navbar-brand">
         <a className="navbar-item" href="/">
           {/* <img src={logoImage} width={40} alt="Logo" />*/}
