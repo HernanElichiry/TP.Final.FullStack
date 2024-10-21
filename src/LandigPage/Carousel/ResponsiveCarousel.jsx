@@ -5,10 +5,13 @@ import "slick-carousel/slick/slick-theme.css";
 import { ProductCard } from './Card/ProductCard';
 import './Card/ProductCard.css'; // Estilos para ProductCard y el carrusel
 import { FavoritesContext } from '../User/FavoritesContext'; // Importar el contexto de favoritos
+import { useUser } from '../User/UserContext/UserContext';
 
 function ResponsiveCarousel({ courses, text = "inserte texto" }) {
   const { favorites, toggleFavorite } = useContext(FavoritesContext);
-  console.log("HOLAAA");
+  const {user} = useUser();
+
+
   var settings = {
     dots: true,
     infinite: true, // Hacer que el carrusel sea infinito
@@ -65,8 +68,11 @@ function ResponsiveCarousel({ courses, text = "inserte texto" }) {
             <ProductCard
               key={course.id}
               product={course}
-              onFavoriteToggle={toggleFavorite}
-              isFavorited={favorites.some((fav) => fav.id === course.id)}
+              onFavoriteToggle={user ? toggleFavorite : null}
+              isFavorited={user ? favorites.some((fav) => fav.id === course.id) : false}
+              user={user}
+              // onFavoriteToggle={toggleFavorite}
+              // isFavorited={favorites.some((fav) => fav.id === course.id)}
             />
           ))}
         </Slider>

@@ -10,21 +10,34 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const { login } = useUser();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     // Lógica de autenticación aquí
-    // Si es exitoso:
-    if (email === "user@gmail.com" && password === "1234") {
-      login({ email, role: "user" });
-      navigate("/usermenu");
-    } else if (email === "profesor@gmail.com" && password === "1234") {
-      login({ email, role: "profesor" });
-      navigate("/professormenu");
-    } else {
-      // Manejo de errores aquí
-      alert("Credenciales incorrectas");
+      try{
+        const response = await fetch("http://localhost:3000/auth/login",{
+          method: "POST",
+          headers : {
+              "content-Type":"application/json",
+          },
+          body: JSON.stringify({email,password})
+        });
+
+        if(!response.ok){
+          throw new Error("Email o Contraseña Invalido");
+        }
+
+        const data = await response.json();
+
+        login(data.accest_token);
+
+        navigate("/")
+        
+      }catch (error) {
+        console.error("Error en el login:", error);
+        alert("Error al iniciar sesión, verifique sus credenciales.");
+      }
     }
-  };
+  
 
   return (
     <div>

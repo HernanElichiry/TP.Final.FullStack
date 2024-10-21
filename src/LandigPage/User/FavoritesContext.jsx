@@ -1,17 +1,57 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
+import { useUser } from './UserContext/UserContext';
 
 export const FavoritesContext = createContext();
 
 export const FavoritesProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
+  const { user } = useUser(); // Obtener el usuario desde el contexto
 
-  const toggleFavorite = (product) => {
+  // Función para cargar los favoritos del usuario desde el backend
+  const loadFavorites = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/favorites/${user.sub}`, {
+        headers: {
+          Authorization: `Bearer ${user.token}`, // Agrega el token de autenticación si es necesario
+        },
+      });
+      const data = await response.json();
+      setFavorites(data); // Aquí asumimos que `data` es un array de los cursos favoritos
+    } catch (error) {
+      console.error('Error al cargar los favoritos:', error);
+    }
+  };
+
+  // Hacer el fetch cuando el componente se monta para obtener los favoritos del usuario
+  useEffect(() => {
+    if (user && user.sub) {
+      loadFavorites(); // Solo cargamos los favoritos si el usuario está logeado
+    }
+  }, [user]);
+
+  const toggleFavorite = (course) => {
     setFavorites((prevFavorites) => {
-      if (prevFavorites.some((fav) => fav.id === product.id)) {
-        return prevFavorites.filter((fav) => fav.id !== product.id);
-      } else {
-        return [...prevFavorites, product];
-      }
+      const isFavorite = prevFavorites.some((fav) => fav.id === course.id);
+      const url = `http://localhost:3000/favorites/${user.sub}/${course.id}`;
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+       //   Authorization: `Bearer ${user.token}`, // Incluye el token si es necesario
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+
+          if (data) {
+            setFavorites([...prevFavorites, course]); // Agregar curso a favoritos
+          } else {
+            setFavorites(prevFavorites.filter((fav) => fav.id !== course.id)); // Eliminar curso de favoritos
+          }
+        })
+        .catch((error) => console.error('Error al alternar favorito:', error));
+
+      return prevFavorites;
     });
   };
 
