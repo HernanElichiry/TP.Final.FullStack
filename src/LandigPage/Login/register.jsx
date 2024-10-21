@@ -45,7 +45,13 @@ const RegisterForm = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(userData),
+        body: JSON.stringify({
+          completeName,
+          email,
+          birthdate,
+          password,
+          role_id,
+        }),
       });
 
       if (res.ok) {
@@ -126,7 +132,9 @@ const RegisterForm = () => {
               /> */}
               <DatePicker
                 selected={birthdate}
-                onChange={() => setBirthdate(date)}
+                onChange={(date) => setBirthdate(date)}
+                placeholderText="Fecha de nacimiento"
+                className="styled-input"
               />
             </div>
             <div className="form-group">
