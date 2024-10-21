@@ -11,7 +11,7 @@
     cursor: pointer;
   }
 
-  img {
+  .img-fav {
     width: 25%;
     height: 200px; /* Ajusta la altura de las imágenes según necesites */
     object-fit: cover; /* Ajusta la forma en que las imágenes se ajustan al contenedor */

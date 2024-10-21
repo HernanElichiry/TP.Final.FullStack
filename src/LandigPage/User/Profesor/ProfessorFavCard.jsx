@@ -72,7 +72,7 @@ export const FavCardProfessor = ({ course }) => {
 
   return (
     <div className="fav-card" onClick={handleCardClick} aria-label={`Ver detalles del curso ${course.title}`}>
-      <img src={imageUrl} alt={`Imagen del curso ${course.title}`} />
+      <img className='img-fav' src={imageUrl} alt={`Imagen del curso ${course.title}`} />
       <div className="fav-card-content">
         <h3>{course.title}</h3>
         <p>Precio: {course.price} <button onClick={handleRemoveFavorite} className="remove-button">
