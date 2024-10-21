@@ -145,7 +145,7 @@ const CourseDetail = () => {
           </div>
         </div>
         <div className="instructor-video">
-        <iframe
+        {/* <iframe
           width="560"
           height="315"
           src={course.media.videoUrl.replace("watch?v=", "embed/")}
@@ -153,7 +153,8 @@ const CourseDetail = () => {
           style={{ border: 'none' }}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-        ></iframe>
+        ></iframe> */}
+        <video></video>
       </div>
       </div>
       <Testimonials />

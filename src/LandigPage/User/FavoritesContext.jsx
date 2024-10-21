@@ -39,6 +39,7 @@ export const FavoritesProvider = ({ children }) => {
           'Content-Type': 'application/json',
        //   Authorization: `Bearer ${user.token}`, // Incluye el token si es necesario
         },
+        
       })
         .then((response) => response.json())
         .then((data) => {
