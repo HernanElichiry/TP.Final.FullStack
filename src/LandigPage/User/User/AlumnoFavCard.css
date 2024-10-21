@@ -11,7 +11,7 @@
     cursor: pointer;
   }
 
-.card-course-image img {
+  img {
     width: 25%;
     height: 200px; /* Ajusta la altura de las imágenes según necesites */
     object-fit: cover; /* Ajusta la forma en que las imágenes se ajustan al contenedor */
@@ -19,7 +19,7 @@
     margin-bottom: 15px;
     transition: filter 0.3s ease-in-out; /* Agrega una transición suave al cambio de filtro */
   }
-
+  
 /**/
 
 
