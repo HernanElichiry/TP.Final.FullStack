@@ -7,14 +7,12 @@ import PaymentMethods from "../Components/PaymentMethods";
 import FAQ from "../Components/FAQ";
 import FooterApp from "../Footer/Footer";
 import Modalities from "../Components/Modalities";
-import instructorVideo from "../Components/instructot.video.mp4";
 import foto from "../Components/foto.jpg";
 
 const CourseDetail = () => {
   const { id } = useParams(); // Obtener el ID del curso desde la URL
   const [course, setCourse] = useState(null); // Estado para almacenar el curso
   const [imageUrl, setImageUrl] = useState(""); // Estado para almacenar la URL de la imagen
-  const [videoUrl, setVideoUrl] = useState(""); // Estado para almacenar la URL del video del instructor
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -25,7 +23,6 @@ const CourseDetail = () => {
         const response = await fetch(`http://localhost:3000/courses/${id}`, {
           method: "GET",
           mode: "cors", // Permitir solicitudes entre diferentes orígenes
-          credentials: "include", // Incluir credenciales como cookies
         });
 
         if (!response.ok) {
@@ -36,6 +33,7 @@ const CourseDetail = () => {
         setCourse(data); // Guardar el curso en el estado
 
         // Construir la URL de la imagen del curso
+
         const imageResponse = await fetch(
           `http://localhost:3000/uploads/images/${data.media.filename}`,
           {
@@ -49,23 +47,9 @@ const CourseDetail = () => {
           throw new Error("Error al obtener la imagen");
         }
 
-        const videoResponse = await fetch(
-          `http://localhost:3000/uploads/videos/${data.media.videoname}`,
-          {
-            method: "GET",
-            mode: "cors",
-            credentials: "include",
-          }
-        );
-
-        if (!videoResponse.ok) {
-          throw new Error("Error al obtener la Video");
-        }
         // Convertir la imagen a Blob y luego a URL
         const imageBlob = await imageResponse.blob();
         setImageUrl(URL.createObjectURL(imageBlob)); // Guardar la URL de la imagen
-        const videoBlob = await videoResponse.blob();
-        setVideoUrl(URL.createObjectURL(videoBlob)); // Guardar la URL del video
       } catch (error) {
         console.error("Error al obtener el curso o la imagen:", error);
       }
@@ -77,6 +61,7 @@ const CourseDetail = () => {
   if (!course) {
     return <div>Curso no encontrado</div>;
   }
+
 
   return (
     <div className="course-detail">
@@ -96,9 +81,9 @@ const CourseDetail = () => {
             <h2>Sobre el curso</h2>
             <p>{course.description}</p>
             <h2>Requisitos</h2>
-            <p>{course.description}</p>
+            <p>{course.requisitos}</p> {/* Asegúrate de tener un campo diferente si es necesario */}
             <h2>Certificación</h2>
-            <p>{course.description}</p>
+            <p>{course.certificacion}</p> {/* Asegúrate de tener un campo diferente si es necesario */}
           </section>
         </div>
         <div className="course-sidebar">
@@ -112,19 +97,16 @@ const CourseDetail = () => {
                 <strong>Plataforma:</strong> {course.platform}
               </p>
               <p>
-                <strong>Tipo de capacitación:</strong>
+                <strong>Tipo de capacitación:</strong> {course.type} {/* Asegúrate de tener este dato */}
               </p>
               <p>
-                <strong>Valoración:</strong>{" "}
-              </p>     
-              {course.courseTopics.map((courseTopic, index) => (
-                 <p>
-                <strong key={index}>Topics: 
-                </strong> {courseTopic.topic.topic}
-                {index < course.courseTopics.length - 1 }
+                <strong>Valoración:</strong> {course.rating} {/* Asegúrate de tener este dato */}
+              </p>
+              {course.courseTopics.map((courseTopic,index) => (
+                <p key={index}>
+                  <strong>Topics: </strong> {courseTopic.topic.topic}
                 </p>
               ))}
-             
               <p>
                 <strong>Precio:</strong> {course.price} dólares
               </p>
@@ -143,9 +125,9 @@ const CourseDetail = () => {
           <strong>Plan de estudio</strong>
         </h2>
         <ul>
-          {course.classes.map((clase, index) => (
+          {course.classes.map((clase,index) => (
             <li key={index}>
-              Clase {index + 1}: {clase.title}
+              Clase: {clase.title}
             </li>
           ))}
         </ul>
@@ -159,20 +141,20 @@ const CourseDetail = () => {
           />
           <div className="instructor-description">
             <h2>Sobre {course.instructor.name}</h2>
-            <p>{course.description}</p>
+            <p>{course.instructor.description}</p> {/* Asegúrate de tener un campo para la descripción del instructor */}
           </div>
         </div>
         <div className="instructor-video">
-          <video
-            controls
-            onError={(e) => {
-              console.error("Error al cargar el video", e);
-            }}
-          >
-            <source src={videoUrl} type="video/mp4" />
-            Tu navegador no soporta el elemento de video.
-          </video>
-        </div>
+        <iframe
+          width="560"
+          height="315"
+          src={course.media.videoUrl.replace("watch?v=", "embed/")}
+          title="Video del curso"
+          style={{ border: 'none' }}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      </div>
       </div>
       <Testimonials />
       <PaymentMethods />
