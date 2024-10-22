@@ -21,7 +21,7 @@ const RegisterForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+   // e.preventDefault();
 
     // Validar que las contraseñas coincidan antes de enviar
     if (password !== confirmPassword) {

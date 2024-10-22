@@ -12,7 +12,7 @@ export const ProductCard = ({ product, onFavoriteToggle, isFavorited, user }) =>
   const navigate = useNavigate(); // me permite el direccionamiento
   const [imageUrl, setImageUrl] = useState(''); // Estado para almacenar la URL de la imagen
 
-  const { user } = useUser(); // Obtén el usuario logueado del contexto
+  //const { user } = useUser(); // Obtén el usuario logueado del contexto
 
   const handleFavoriteClick = () => {
 
