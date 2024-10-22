@@ -8,6 +8,7 @@ import FAQ from "../Components/FAQ";
 import Jobs from "../Components/Jobs";
 import SubscriptionSection from "../Components/SuscriptionSection";
 import TrustSection from "../Components/EnterpriseSection";
+import InfoSection from "../Components/InfoSection";
 
   //   // Copias ordenadas del arreglo courses
   // const bestRatedCourses = [...courses].sort((a, b) => b.rating - a.rating); // Ordenar por valoración
