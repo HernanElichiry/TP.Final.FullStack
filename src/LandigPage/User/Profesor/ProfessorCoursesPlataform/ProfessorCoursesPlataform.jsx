@@ -1,6 +1,7 @@
 
 
-const  initialCourseData = {
+
+/*const  initialCourseData = {
   id: "course-1",
   courseName: "curso avanzado de programación",
   courseDescription: "Curso para aprender los conceptos avanzados de programación.",
@@ -144,83 +145,96 @@ const  initialCourseData = {
       classname: "Aplicaciones Fullstack con Node.js"
     }
   ]
-};
+};*/
 
-import React, { useState } from 'react'; // mas useEffect
+import React, { useState, useEffect } from 'react'; // mas useEffect
 import './ProfessorCoursePlataform.css';
 import ReactPlayer from 'react-player';
 import { v4 as uuidv4 } from 'uuid';
-//import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 
 const CoursePlatform = () => {
-  const [courseData, setCourseData] = useState(initialCourseData);
-  const [expandedClassIndex, setExpandedClassIndex] = useState(null);
-  const [selectedClass, setSelectedClass] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [classData, setClassData] = useState({
-    videoName: '',
-    videoFile: null,
-    fileName: '',
-    fileFile: null,
-    classname: ''
-  });
-  const [modifiedClasses, setModifiedClasses] = useState([]);
-  const [deletedClasses, setDeletedClasses] = useState([]);
+  const { id } = useParams(); // Aquí obtenemos el parámetro 'id' de la URL
 
+  const [courseData, setCourseData] = useState({
+    id: "",
+    courseName: "",
+    //courseDescription: "",
+    //courseDuration: "",
+    // category: "",
+    //presentationVideo: "",
+   // backgroundImage: "",
+    startDate: "",
+    endDate: "",
+    noDate: false,
+    //selectedTopics: [],
+    classes: []
+  }); // creamos una variable de estado donde almacenaremos los datos de back
 
-  //// ahora funciona con un objeto pero deberiamos hacer el llamado a la api
- /* const { id } = useParams(); // Aquí obtenemos el parámetro 'id' de la URL
+  //traemos los datos del back 
 
   useEffect(() => {
-    // Función asíncrona para buscar el curso desde la API
     const fetchCourse = async () => {
       try {
-        setLoading(true);
-        const response = await fetch(`/api/courses/${id}`); // Haces la solicitud a la API
-        if (!response.ok) {
-          throw new Error("Error al cargar el curso");
-        }
-        const data = await response.json(); // Parsear el JSON de la respuesta
-        setCourseData(data); // Almacenar los datos del curso
-      } catch (err) {
-        setError(err.message); // Manejar errores de la solicitud
-      } finally {
-        setLoading(false); // Termina la carga
+        const response = await fetch(`http://localhost:3000/courses/${id}`); // Llamada a la API con el ID
+        const data = await response.json(); // Convertir la respuesta a JSON
+        console.log('Datos antes de almacenar en el estado:', data);
+        
+        // Transformar los datos a la estructura que necesitas
+        const transformedData = {
+          id: `course-${data.id}`,
+          courseName: data.title || "", 
+          //courseDescription: data.description || "", /// este dato no lo uso
+          //courseDuration: data.duration ? String(data.duration) : "", //este tampoco
+         // category: data.category.name || "", //este tampoco
+          //presentationVideo: `https://example.com/path/to/${data.media.videoname}` || "", // esto tampoco
+         // backgroundImage: `https://example.com/path/to/${data.media.filename}` || "", // esto tampoco
+          startDate: "", // Puedes asignar una fecha de inicio si la tienes
+          endDate: "", // Puedes asignar una fecha de finalización si la tienes
+          noDate: false,
+         // selectedTopics: data.courseTopics.map(topic => topic.topic.topic), // Extraer los nombres de los temas
+          classes: data.classes.map((cls, index) => ({
+            id: `class-${index + 1}`, // Asignar un ID único
+            video: {
+              id: `video-${index + 1}`, // ID para el video
+              name: cls.title, // Título de la clase
+              url: `https://example.com/path/to/${data.media.videoname}` // URL del video (ajusta esto según tu lógica)
+            },
+            file: {
+              name: "", // Aquí puedes agregar lógica si tienes archivos asociados
+              url: "" // Aquí puedes agregar la URL si la tienes
+            },
+            classname: cls.title // Nombre de la clase
+          }))
+        };
+
+        setCourseData(transformedData); // Almacenamos los datos transformados en el estado
+      } catch (error) {
+        console.error('Error al obtener los datos del curso:', error);
       }
     };
 
-    fetchCourse(); // Llamada a la función asíncrona
-  }, [id]);
-
-  // Si está cargando, muestra un mensaje de carga
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  // Si hubo un error, mostrar el mensaje de error
-  if (error) {
-    return <div>{error}</div>;
-  }
-
-  // Si courseData aún es null, mostrar un mensaje de curso no encontrado
-  if (!courseData) {
-    return <div>Curso no encontrado</div>;
-  }
-
-  // Si todo va bien, renderizas los datos del curso*/
+    fetchCourse(); // Ejecutar la llamada a la API
+  }, [id]); // Ejecutar cuando el ID cambie
 
 
+  // bien, ya tenemos los datos para manipularlos!! :)
+  //ahora Bien, esta plataforma busca poder crear nuevas clases, editar las ya existentes y elminar las que sean necesarias
 
-//// creando nueva clase
-const [newClassData, setNewClassData] = useState({
-  id: `class-${uuidv4()}`,
+  
+  
+
+//////////////////////// creando nueva clase
+const [newClassData, setNewClassData] = useState({ // defino la estructura de una nueva clase, ponemos un id pero lo debe hacer el back
+  //id: `class-${uuidv4()}`,
   videoName: '',
   videoFile: null,
   fileName: '',
   fileFile: null,
   classname: ''
 });
+
 // Arreglo para almacenar todas las clases nuevas creadas
   const [newClasses, setNewClasses] = useState([]);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false); // Estado para controlar el modal de creación de clases
@@ -237,7 +251,7 @@ const openCreateModal = () => {
   setIsCreateModalOpen(true);
 };
 
-
+// funcion apra cerrar el modal
 const closeCreateModal = () => {
   setIsCreateModalOpen(false);
 };
@@ -268,20 +282,28 @@ const handleCreateClassInState = () => {
 
   setIsCreateModalOpen(false); // Cerrar el modal
 };
-//////////////// cerrando nueva clase
+////////////////////////////////////// cerrando nueva clase
 
 
+/////////////////////////// logica para eliminar clase
+
+const [deletedClasses, setDeletedClasses] = useState([]); //guardo las clases que voy a borrar
 
   const handleDeleteClass = (classId) => {
     setDeletedClasses((prevClasses) => 
       prevClasses.includes(classId) ? prevClasses : [...prevClasses, classId]
-    );
+    ); // selecciono la clase que quiero borrar, capto su id y lo guardo a un estado para luego enviar esos id al back
   
-    setCourseData((prevCourseData) => {
+    setCourseData((prevCourseData) => { // para reflejar los cambios en el front antes de hacer una solicitud quito el la clase
+      //que pienso eliminar
       const updatedClasses = prevCourseData.classes.filter((classItem) => classItem.id !== classId);
       return { ...prevCourseData, classes: updatedClasses };
     });
   };
+///////////////////////////////// fin de la seccion de eliminacion de clases 
+
+//////// funcion que maneja el menu desplegable para cada clase
+const [expandedClassIndex, setExpandedClassIndex] = useState(null);
 
   const toggleClassContent = (index) => {
     setExpandedClassIndex(expandedClassIndex === index ? null : index);
@@ -289,19 +311,33 @@ const handleCreateClassInState = () => {
       setSelectedClass(courseData.classes[index]);
     }
   };
+//////////////////////////////////
 
-  const openUpdateModal = (classItem) => {
+  /// actualizacion de clases
+  const [selectedClass, setSelectedClass] = useState(null); //1. seleciono la clase para editar
+  const [isModalOpen, setIsModalOpen] = useState(false); // manejo del modal de edicion
+  const [classData, setClassData] = useState({ // 
+    videoName: '',
+    videoFile: null,
+    fileName: '',
+    fileFile: null,
+    classname: ''
+  });
+  const [modifiedClasses, setModifiedClasses] = useState([]); // guardo las clases que ya modifique
+
+
+  const openUpdateModal = (classItem) => { // abro el modal y lo seteo con los datos de la clase
     
-    setSelectedClass(classItem);
-    setClassData({
+    setSelectedClass(classItem); // la clase que seleccione la guardo en un estado
+    setClassData({   // seteo el modal con esa informacion
       videoName: classItem.video.name,
       videoFile: null, 
       fileName: classItem.file.name,
       fileFile: null, 
       classname: classItem.classname
     });
-    setIsModalOpen(true);
-  };
+    setIsModalOpen(true); // abro el modal y ya lo veo seteado con la info de la clse que seleccione
+  };  
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -312,7 +348,7 @@ const handleCreateClassInState = () => {
       fileFile: null,
       classname: ''
     });
-  };
+  }; // sierro el modal y borro los estados
 
   const handleFileChange = (event) => {
     const { name, files } = event.target;
@@ -340,7 +376,7 @@ const handleCreateClassInState = () => {
   
    
   
-    // Actualiza el estado de courseData
+    // Actualiza el estado de courseData para ver los cambios en front
     setCourseData((prevCourseData) => {
       const updatedClasses = prevCourseData.classes.map((classItem) =>
         classItem.id === selectedClass.id ? updatedClass : classItem
@@ -348,19 +384,18 @@ const handleCreateClassInState = () => {
       return { ...prevCourseData, classes: updatedClasses };
     });
   
-    // Actualiza el estado de modifiedClasses
-    setModifiedClasses((prevClasses) => {
-      const existingClassIndex = prevClasses.findIndex((item) => item.id === updatedClass.id);
-      if (existingClassIndex !== -1) {
-        const newClasses = [...prevClasses];
-        newClasses[existingClassIndex] = updatedClass; // Reemplaza la clase existente
-        return newClasses;
-      }
-      return [...prevClasses, updatedClass]; // Agrega la nueva clase
-    });
+    // Actualiza el estado de modifiedClasses dejando las clases modificadas listas para ser enviadas al back
   
+    setModifiedClasses((prevClasses) => [
+      ...prevClasses.filter(item => item.id !== updatedClass.id), // Filtra clases existentes
+      updatedClass // Agrega la clase actualizada
+  ]);
+
     setIsModalOpen(false); // Cierra el modal
   };
+
+
+//////////// logica para enviar los cambios al backend
 
   const handleSaveAllChanges = async () => {
     if (modifiedClasses.length === 0 && deletedClasses.length === 0 && newClasses.length === 0) {
@@ -375,16 +410,16 @@ const handleCreateClassInState = () => {
   
     newClasses.forEach((newClass, index) => {
       // Aquí se envían los nombres de los archivos, no los objetos
-      if (newClass.video.file) {
-        newclassFormData.append(`class_${index}_video`, newClass.video.name); // Usa newClass.video.name
+      if (newClass.video.url) { /// ponerle indice `fileFiles[${index}]`
+        newclassFormData.append(`videoName`, newClass.video.name); // Usa newClass.video.name
       }
-      if (newClass.file.file) {
-        newclassFormData.append(`class_${index}_file`, newClass.file.name); // Usa newClass.file.name
+      if (newClass.file.url) {
+        newclassFormData.append(`fileName`, newClass.file.name); // Usa newClass.file.name
       }
-      newclassFormData.append(`class_${index}_name`, newClass.classname);
+      newclassFormData.append(`title`, newClass.classname);
      
-      newclassFormData.append(`class_${index}_videoUrl`, newClass.video.url);
-      newclassFormData.append(`class_${index}_fileUrl`, newClass.file.url);
+      newclassFormData.append(`videoUrl`, newClass.video.url);
+      newclassFormData.append(`fileUrl`, newClass.file.url);
     });
   
     // Enviar la solicitud al backend (ajusta el endpoint según tu API)
@@ -432,8 +467,10 @@ const handleCreateClassInState = () => {
         formData.append(`fileFile`, classItem.fileFile);
       }
     });
-  
-    //console.log("Datos que se enviarán a la API (clases modificadas):", Array.from(formData.entries()));
+
+
+    
+    console.log("Datos que se enviarán a la API (clases modificadas):", Array.from(formData.entries()));
   
     // Realizar la solicitud PATCH para las clases modificadas
     try {
@@ -482,8 +519,17 @@ const handleCreateClassInState = () => {
     setNewClasses([]);
   };
 
+  if (!courseData) {
+    return <p> Cargandooo...</p>; // Evita renderizar si los datos aún no están disponibles
+  }
+
   return (
       <>
+
+<div className="save-changes-container">
+          <button className="btn save-changes-btn" onClick={handleSaveAllChanges}>Guardar Todos los Cambios</button>
+          <button className="btn create-btn" onClick={openCreateModal}>Agregar Nueva Clase</button>
+        </div>
       <div className="course-platform">
         <div className="course-list-container">
           <div className="course-details">
@@ -499,7 +545,7 @@ const handleCreateClassInState = () => {
                   </div>
                   <div className={`class-content ${expandedClassIndex === classIndex ? 'open' : ''}`}>
                     <div className="class-video">
-                      <p onClick={() => openUpdateModal(classItem)}>{classItem.video.name}</p>
+                      <p >{classItem.video.name}</p>
                     </div>
                     <div className="attachment-item">
                       <a href={classItem.file.url} target="_blank" rel="noopener noreferrer">{classItem.file.name}</a>
@@ -601,10 +647,7 @@ const handleCreateClassInState = () => {
 
        
       </div>
-      <div className="save-changes-container">
-          <button className="btn save-changes-btn" onClick={handleSaveAllChanges}>Guardar Todos los Cambios</button>
-          <button className="btn create-btn" onClick={openCreateModal}>Agregar Nueva Clase</button>
-        </div>
+     
 
         {isCreateModalOpen && (
   <div className="modal">
@@ -678,4 +721,4 @@ const handleCreateClassInState = () => {
   );
 };
 
-export default CoursePlatform;
+export default CoursePlatform; 

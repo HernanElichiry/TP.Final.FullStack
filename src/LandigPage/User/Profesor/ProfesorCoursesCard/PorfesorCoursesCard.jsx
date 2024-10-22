@@ -1,7 +1,7 @@
 import './ProfesorCoursesCard.css'; 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-import Image from "./wallpaper2.jpg";
+//import Image from "./wallpaper2.jpg";
 import Modal from 'react-modal'; // Importa react-modal
 
 
@@ -10,8 +10,28 @@ const ProfesorCoursesCard = ({ course }) => {
   const [isDeleteConfirm, setIsDeleteConfirm] = useState(false);
   const [formValues, setFormValues] = useState(course);
   const [videoFile, setVideoFile] = useState(null);
-  const [backgroundImageFile, setBackgroundImageFile] = useState(null);
+  const [backgroundImageFile, setBackgroundImageFile] = useState(null); // Estado para almacenar la URL de la imagen
   const [errorMessages, setErrorMessages] = useState({});
+
+  useEffect(() =>{
+    const fetchImage = async() => {
+
+    // Construir la URL de la imagen del curso
+    const imageResponse = await fetch(`http://localhost:3000/uploads/images/${course.media.filename}`, {
+      method: 'GET',
+      mode: 'cors',
+      credentials: 'include',
+    });
+
+    // Convertir la imagen a Blob y luego a URL
+        const imageBlob = await imageResponse.blob();
+        setBackgroundImageFile(URL.createObjectURL(imageBlob)); // Guardar la URL de la imagen
+  }
+
+  fetchImage();
+  }, [] );
+
+ 
 
 
   const handleClick = () => {
@@ -252,12 +272,12 @@ const handleVideoFileChange = (e) => {
   return (
     <div className="profesor-course-card" >
       <div className="profesor-course-image">
-        <img src={Image} alt={course.courseName} onClick={handleClick} />
+        <img src={backgroundImageFile} alt={course.title} onClick={handleClick} />
       </div>
       <div className="profesor-course-info">
-        <h2 className="profesor-course-title">{course.courseName}</h2>
+        <h2 className="profesor-course-title">{course.title}</h2>
         <p className="profesor-course-details">
-          {course.classes.length} Clases - {course.courseDuration} Horas
+          {course.classes.length} Clases - {course.duration} Horas
         </p>
       </div>
       <div className="course-buttons">
@@ -291,7 +311,7 @@ const handleVideoFileChange = (e) => {
     <input
       type="text"
       name="courseName"
-      value={formValues.courseName}
+      value={formValues.title}
       onChange={handleFormChange}
     />
     {errorMessages.courseName && <p className="error">{errorMessages.courseName}</p>}
@@ -300,7 +320,7 @@ const handleVideoFileChange = (e) => {
       <textarea
         id="courseDescription" // Agrega id para que coincida con htmlFor
         name="courseDescription"
-        value={formValues.courseDescription}
+        value={formValues.description}
         onChange={handleFormChange}  
       />
        {errorMessages.courseDescription && <p className="error">{errorMessages.courseDescription}</p>}
@@ -310,7 +330,7 @@ const handleVideoFileChange = (e) => {
         type="text"
         id="category" // Agrega id para que coincida con htmlFor
         name="category"
-        value={formValues.category}
+        value={formValues.category.name}
         onChange={handleFormChange}
       /> {errorMessages.category && <p className="error">{errorMessages.category}</p>}
       
@@ -334,7 +354,7 @@ const handleVideoFileChange = (e) => {
         type="text"
         id="courseDuration" // Agrega id para que coincida con htmlFor
         name="courseDuration"
-        value={formValues.courseDuration}
+        value={formValues.duration}
         onChange={handleFormChange}
       />
       {errorMessages.courseDuration && <p className="error">{errorMessages.courseDuration}</p>}
