@@ -5,12 +5,14 @@ import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
+import { useUser } from "../../User/UserContext/UserContext"; 
 import "./ProductCard.css";
 
 export const ProductCard = ({ product, onFavoriteToggle, isFavorited, user }) => {
   const navigate = useNavigate(); // me permite el direccionamiento
   const [imageUrl, setImageUrl] = useState(''); // Estado para almacenar la URL de la imagen
 
+  const { user } = useUser(); // Obtén el usuario logueado del contexto
 
   const handleFavoriteClick = () => {
 
@@ -20,7 +22,6 @@ export const ProductCard = ({ product, onFavoriteToggle, isFavorited, user }) =>
       alert("Inicia sesión para agregar a favoritos."); // Mensaje para usuarios no logueados
     }
   };
-
 
   const handleCardClick = () => {   //funcion para manejar el redireccionamiento a la couseDetail al hacer click
     navigate(`/course/${product.id}`);
