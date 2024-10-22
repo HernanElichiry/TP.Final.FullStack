@@ -1,4 +1,4 @@
-import React from "react";
+
 import  ProfesorCoursesCard  from "./ProfesorCoursesCard/PorfesorCoursesCard";
 //import {course as mockCourses} from "./ProfesorCoursesCard/Mock";
 import './MyCoursesProfessor.css';

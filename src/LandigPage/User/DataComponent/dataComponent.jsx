@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./dataComponent.css";
 import { Form, Input, Button, DatePicker } from "antd";
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./ChangePassword.css";
 import { Form, Input, Button } from "antd";
 

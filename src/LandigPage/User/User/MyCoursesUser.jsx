@@ -1,4 +1,4 @@
-import React from "react";
+
 import foto from './fotos/Cursos.png';
 import cursoBarista from './fotos/curso barista.png';
 

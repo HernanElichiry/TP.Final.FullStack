@@ -1,4 +1,4 @@
-import React from 'react';
+
 import './Components.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChalkboardTeacher } from "@fortawesome/free-solid-svg-icons";

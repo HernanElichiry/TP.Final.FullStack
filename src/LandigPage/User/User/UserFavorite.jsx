@@ -21,7 +21,7 @@ const FavoritesAlumno = () => {
 
 export default FavoritesAlumno;*/
 
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { FavoritesContext } from '../FavoritesContext'; // Importar el contexto de favoritos
 import { AlumnoFavCard } from '/src/LandigPage/User/User/AlumnoFavCard.jsx'
 

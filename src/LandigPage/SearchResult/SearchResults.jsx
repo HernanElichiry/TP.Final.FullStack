@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { courses } from '../MockCourses/MockCourses';
 import { ProductCard } from '../Carousel/Card/ProductCard';
