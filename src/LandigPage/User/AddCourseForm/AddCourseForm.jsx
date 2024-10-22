@@ -1,5 +1,7 @@
 
-import { useState } from "react";
+
+import  { useState, useEffect } from "react";
+
 import { useForm, Controller } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -11,17 +13,32 @@ import 'cleave.js/dist/addons/cleave-phone.us';
 const AddCourseForm = () => {
   const { control, handleSubmit, formState: { errors }, watch, setError } = useForm();
  // const [selectedTopics, setSelectedTopics] = useState([]);
-  const [classes, setClasses] = useState([{ id: uuidv4(), video: { videoId: uuidv4(), name: "", url: "" }, file: { name: "", url: "" }, title: "" }]);
+  const [classes, setClasses] = useState([{ id: uuidv4(), video: { videoId: uuidv4(), name: "", url: "" }, file: { name: "", url: "" }, className: "" }]);
   const [noDates, setNoDates] = useState(false);
   
   const startDate = watch('startDate');
+
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/categories');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setCategories(data); // Asumiendo que `data` es un arreglo de categorías
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
   
-  const categories = [
-    "Desarrollo Web", "Diseño Gráfico", "Marketing Digital", "Negocios", "Finanzas", 
-    "Inteligencia Artificial", "Ciencia de Datos", "Fotografía", "Escritura Creativa",
-    "Idiomas", "Salud y Bienestar", "Música", "Desarrollo Personal", "Programación",
-    "Ciberseguridad"
-  ];
+
 
   const availableTopics = ["HTML", "CSS", "JavaScript", "React", "Node.js"];
 
@@ -61,6 +78,9 @@ const AddCourseForm = () => {
     setClasses(updatedClasses); // Actualiza el estado
   };
   
+ 
+
+
   const addNewClass = () => {
     setClasses([...classes, { id: uuidv4(), video: { videoId: uuidv4(), name: "", url: "" }, file: { name: "", url: "" }, className: "" }]);
   };
@@ -76,7 +96,7 @@ const AddCourseForm = () => {
     setValue("classes", updatedClasses);
   };
 
-  const onSubmit = async (data) => {
+  /*const onSubmit = async (data) => {
     
     if (!noDates && new Date(data.endDate) <= new Date(data.startDate)) {
       setError("endDate", { type: "manual", message: "La fecha de finalización debe ser posterior a la de inicio." });
@@ -117,7 +137,7 @@ const AddCourseForm = () => {
     console.log("Curso agregado:", combinedData);
 
 
-  /*  try {
+   try {
       const response = await fetch("http://localhost:3000/courses", {
         method: 'POST',
         headers: {
@@ -133,10 +153,73 @@ const AddCourseForm = () => {
       }
     } catch (error) {
       console.error('Error en la solicitud:', error);
+    }
+  };*/
+
+
+  const onSubmit = async (data) => {
+    if (!noDates && new Date(data.endDate) <= new Date(data.startDate)) {
+      setError("endDate", { type: "manual", message: "La fecha de finalización debe ser posterior a la de inicio." });
+      return;
+    }
+  
+    const formData = new FormData();
+  
+    // Agregar los datos del curso
+    formData.append('title', data.courseName);
+    formData.append('description', data.courseDescription);
+    formData.append('duration', data.courseDuration);
+    formData.append('category', data.category);
+    formData.append('certification', data.certification);
+    formData.append('platform', data.institution);
+    formData.append('requirements', data.requirements);
+    formData.append('presentationVideo', data.presentationVideo[0]); // Suponiendo que es un archivo
+    formData.append('backgroundImage', data.backgroundImage[0]); // Suponiendo que es un archivo
+    formData.append('startDate', data.startDate);
+    formData.append('endDate', data.endDate);
+    formData.append('noDate', noDates);
+   // formData.append('topics', data.topics);
+    formData.append("topics", JSON.stringify(data.topics)); 
+    formData.append('price', data.price);
+  
+    // Agregar clases
+    classes.forEach((classItem) => {
+      // Verificar que classItem.file tenga nombre y url
+      if (classItem.file && classItem.file.name && classItem.file.url) {
+        formData.append(`classes[${classItem.id}][className]`, classItem.title);
+        formData.append(`classes[${classItem.id}][file][name]`, classItem.file.name);
+        formData.append(`classes[${classItem.id}][file]`, classItem.file.url); // Aquí se añade el archivo (URL)
+  
+        // Si el video también tiene un nombre y URL
+        if (classItem.video && classItem.video.name && classItem.video.url) {
+          formData.append(`classes[${classItem.id}][video][name]`, classItem.video.name);
+          formData.append(`classes[${classItem.id}][video][url]`, classItem.video.url); // Aquí se añade el URL del video
+        }
+      }
+    });
+
+
+    // Para verificar que los datos están correctos antes de enviar
+console.log("Datos del formulario a enviar:");
+for (const [key, value] of formData.entries()) {
+  console.log(`${key}:`, value);
+}
+  
+    /*try {
+      const response = await fetch("http://localhost:3000/courses/user_id", {
+        method: 'POST',
+        body: formData, // Enviar formData directamente
+      });
+  
+      if (response.ok) {
+        console.log('Curso agregado exitosamente');
+      } else {
+        console.error('Error al agregar el curso');
+      }
+    } catch (error) {
+      console.error('Error en la solicitud:', error);
     }*/
   };
-
-
 
 
   return (
@@ -182,24 +265,25 @@ const AddCourseForm = () => {
           />
           {errors.courseDuration && <p className="error-message">{errors.courseDuration.message}</p>}
         </div>
-
-        {/* Categoría */}
-        <div className="form-group">
-          <label htmlFor="category">Categoría</label>
-          <Controller
-            name="category"
-            control={control}
-            defaultValue=""
-            rules={{ required: "Selecciona una categoría." }}
-            render={({ field }) => (
-              <select className="form-input" id="category" {...field}>
-                <option value="">Selecciona una categoría</option>
-                {categories.map((cat, index) => <option key={index} value={cat}>{cat}</option>)}
-              </select>
-            )}
-          />
-          {errors.category && <p className="error-message">{errors.category.message}</p>}
-        </div>
+ {/* Categoría */}
+ <div className="form-group">
+        <label htmlFor="category">Categoría</label>
+        <Controller
+          name="category"
+          control={control}
+          defaultValue=""
+          rules={{ required: "Selecciona una categoría." }}
+          render={({ field }) => (
+            <select className="form-input" id="category" {...field}>
+              <option value="">Selecciona una categoría</option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>{cat.name}</option> // Usa cat.name aquí
+              ))}
+            </select>
+          )}
+        />
+        {errors.category && <p className="error-message">{errors.category.message}</p>}
+      </div>
         
          {/* Temas */}
          <div className="form-group">
@@ -371,8 +455,8 @@ const AddCourseForm = () => {
       {errors.classes?.[index]?.className && <p className="error-message">{errors.classes[index].className.message}</p>}
     </div>
 
-  {/* Video de Clase */}
-   <div className="form-group">
+ {/* Video de Clase */}
+<div className="form-group">
   <label htmlFor={`classVideo-${classItem.id}`}>Video de Clase</label>
   <Controller
     name={`classes[${index}].video.file`}
@@ -398,6 +482,11 @@ const AddCourseForm = () => {
           if (file) {
             field.onChange([file]); // Envuelve el archivo en un array
             handleFileChange(index, "video", file); // Procesa el archivo
+
+            // Guardar solo la URL del video como blob en el estado
+            const updatedClasses = [...classes];
+            updatedClasses[index].video.url = URL.createObjectURL(file); // Establece la URL del archivo en el estado
+            setClasses(updatedClasses);
           } else {
             field.onChange([]); // Limpia el valor como un array vacío
             handleFileChange(index, "video", null); // Limpia el estado
@@ -410,7 +499,6 @@ const AddCourseForm = () => {
     <p className="error-message">{errors.classes[index].video.file.message}</p>
   )}
 </div>
-
 
 
     {/* Campo para el nombre del video */}
