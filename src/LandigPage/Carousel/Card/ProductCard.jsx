@@ -8,17 +8,18 @@ import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { useUser } from "../../User/UserContext/UserContext"; 
 import "./ProductCard.css";
 
-export const ProductCard = ({ product, onFavoriteToggle, isFavorited }) => {
+export const ProductCard = ({ product, onFavoriteToggle, isFavorited, user }) => {
   const navigate = useNavigate(); // me permite el direccionamiento
   const [imageUrl, setImageUrl] = useState(''); // Estado para almacenar la URL de la imagen
 
   const { user } = useUser(); // Obtén el usuario logueado del contexto
 
   const handleFavoriteClick = () => {
-    if (!user) {
-      navigate('/login'); // Redirige a la página de login si el usuario no está logueado
+
+    if (user) {
+      onFavoriteToggle(product); // Llama a la función para alternar favorito
     } else {
-      onFavoriteToggle(product); // Ejecuta la función si el usuario está logueado
+      alert("Inicia sesión para agregar a favoritos."); // Mensaje para usuarios no logueados
     }
   };
 

@@ -29,6 +29,7 @@ import { AlumnoFavCard } from '/src/LandigPage/User/User/AlumnoFavCard.jsx'
 const FavoritesAlumno = () => {
   const { favorites } = useContext(FavoritesContext);
 
+  
   return (
     <div>
       {favorites.map((course) => (

@@ -11,7 +11,11 @@ function Navbar() {
   const { user, logout } = useUser();
 
   return (
-    <nav className="navbar" role="navigation" aria-label="main navigation">
+    <nav
+      className="navbar is-dark"
+      role="navigation"
+      aria-label="main navigation"
+    >
       <div className="navbar-brand">
         <a className="navbar-item" href="/">
           {/* <img src={logoImage} width={40} alt="Logo" />*/}
@@ -76,7 +80,7 @@ function Navbar() {
                     <strong className="user-email">{user.email}</strong>
                   </div>
                   <Link
-                    to={user.role === "user" ? "/usermenu" : "/professormenu"}
+                    to={user.rol === 3 ? "/usermenu" : "/professormenu"}
                     className="button is-light"
                   >
                     Menu

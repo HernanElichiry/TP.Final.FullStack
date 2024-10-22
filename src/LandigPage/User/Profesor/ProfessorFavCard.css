@@ -1,61 +1,38 @@
-.favorites-container {
-
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  padding: 16px;
-}
-
-
-
-.fav-card {
-  width: calc(25% - 16px); /* Ajusta el ancho de la tarjeta para mostrar 4 tarjetas por fila */
-  margin-bottom: 16px;
-  border: 1px solid #e0e0e0;
+.card-course-container {
+  background-color: #fffffff6;
   border-radius: 8px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 0px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  margin: 0 10px;
+  height: 370px; /* Ajusta la altura mínima según necesites */
+  overflow: hidden; /* Oculta el contenido que desborda del contenedor */
+  cursor: pointer;
 }
 
-@media (max-width: 1200px) {
-  .fav-card {
-    width: calc(33.33% - 16px); /* Mostrar 3 tarjetas por fila en pantallas más pequeñas */
-  }
+.img-fav {
+  width: 25%;
+  height: 200px; /* Ajusta la altura de las imágenes según necesites */
+  object-fit: cover; /* Ajusta la forma en que las imágenes se ajustan al contenedor */
+  border-radius: 8px;
+  margin-bottom: 15px;
+  transition: filter 0.3s ease-in-out; /* Agrega una transición suave al cambio de filtro */
 }
 
-@media (max-width: 768px) {
-  .fav-card {
-    width: calc(50% - 16px); /* Mostrar 2 tarjetas por fila en pantallas aún más pequeñas */
-  }
+/**/
+
+
+.fav-card button {
+
+
+color: red;
+cursor: pointer;
+size: 1.5rem;
+transition: color 0.2s;
 }
 
-@media (max-width: 480px) {
-  .fav-card {
-    width: 100%; /* Mostrar 1 tarjeta por fila en dispositivos móviles */
-  }
+.fav-card button:hover {
+color: darkred;
 }
 
-.fav-card img {
- 
-  width: 100%; /* La imagen ocupa el ancho completo de la tarjeta */
-  height: auto; /* Altura automática para mantener la proporción */
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-}
-
-.fav-card-content {
-  
-  padding: 12px;
-}
-
-.fav-card h3 {
-  margin-top: 8px;
-  font-size: 16px;
-}
-
-.fav-card p {
-  margin-top: 4px;
-  font-size: 14px;
-  color: #555555;
-}

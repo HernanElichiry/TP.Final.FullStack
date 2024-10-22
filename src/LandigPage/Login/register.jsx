@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import "./login.css";
 const RegisterForm = () => {
   const [completeName, setCompleteName] = useState("");
@@ -38,12 +40,18 @@ const RegisterForm = () => {
     console.log("User Data to Send:", userData); // Agregar este log
 
     try {
-      const res = await fetch("http://localhost:3000/users", {
+      const res = await fetch("http://localhost:3000/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(userData),
+        body: JSON.stringify({
+          completeName,
+          email,
+          birthdate,
+          password,
+          role_id,
+        }),
       });
 
       if (res.ok) {
@@ -113,13 +121,19 @@ const RegisterForm = () => {
               />
             </div>
             <div className="form-group">
-              <input
+              {/* <input
                 id="birthdate"
                 value={
                   birthdate ? birthdate.toISOString().substring(0, 10) : "" //convertidor de string a Date
                 }
                 onChange={(e) => setBirthdate(new Date(e.target.value))}
                 placeholder="Fecha de nacimiento"
+                className="styled-input"
+              /> */}
+              <DatePicker
+                selected={birthdate}
+                onChange={(date) => setBirthdate(date)}
+                placeholderText="Fecha de nacimiento"
                 className="styled-input"
               />
             </div>
