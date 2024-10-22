@@ -1,4 +1,4 @@
-import React from 'react';
+
 import './ProfesorCoursesCard.css'; 
 
 const ProfesorCoursesCard = ({ course }) => {

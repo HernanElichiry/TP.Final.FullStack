@@ -2,7 +2,7 @@
 
 
 
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { FavoritesContext } from '../FavoritesContext'; // Importar el contexto de favoritos
 import { FavCardProfessor } from "./ProfessorFavCard";
 

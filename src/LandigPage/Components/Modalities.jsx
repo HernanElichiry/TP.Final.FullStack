@@ -1,4 +1,4 @@
-import React from 'react';
+
 import './Modalities.css';
 import foto from './foto.jpg'
 

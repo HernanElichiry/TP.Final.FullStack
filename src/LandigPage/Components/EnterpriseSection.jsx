@@ -1,4 +1,4 @@
-import React from 'react';
+
 import './Components.css';
 import logo2 from './logo2.png'
 

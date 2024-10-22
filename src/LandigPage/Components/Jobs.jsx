@@ -1,4 +1,4 @@
-import React from 'react';
+
 import './Components.css';
 
 import foto from'../Background/wallpaper2.jpg'
