@@ -123,7 +123,7 @@ const RegisterForm = () => {
       <div className="app-container">
         <div className="login-container">
           <h2 className="login-h2">Regístrate</h2>
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
+          {<p className="error-message">{errorMessage}</p>}
           <form onSubmit={handleSubmit} className="login-form">
             <div className="form-group">
               <input
