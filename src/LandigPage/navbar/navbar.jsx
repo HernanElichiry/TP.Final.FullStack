@@ -1,5 +1,4 @@
 // Navbar.js
-import React from "react";
 import "./navbar.css";
 //import logoImage from "./logo2.png";
 import { Link } from "react-router-dom";

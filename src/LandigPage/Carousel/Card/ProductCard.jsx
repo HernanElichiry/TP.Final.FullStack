@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import { useEffect,useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
@@ -11,8 +11,7 @@ import "./ProductCard.css";
 export const ProductCard = ({ product, onFavoriteToggle, isFavorited, user }) => {
   const navigate = useNavigate(); // me permite el direccionamiento
   const [imageUrl, setImageUrl] = useState(''); // Estado para almacenar la URL de la imagen
-
-  //const { user } = useUser(); // Obtén el usuario logueado del contexto
+ 
 
   const handleFavoriteClick = () => {
 

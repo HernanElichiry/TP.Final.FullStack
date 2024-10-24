@@ -1,4 +1,4 @@
-import React from 'react';
+
 import './Components.css';
 import descuento from './descuento.jpg'
 
