@@ -58,12 +58,14 @@ const RegisterForm = () => {
       return;
     }
 
+    const role_id = isProfessor ? 2 : 1;
+
     const userData = {
       name: completeName, // Cambia esto
       birthdate: birthdate ? birthdate.toISOString().substring(0, 10) : null,
       email,
       password,
-      role_id: isProfessor ? 2 : 1,
+      role_id,
     };
 
     console.log("User Data to Send:", userData); // Agregar este log
@@ -74,13 +76,7 @@ const RegisterForm = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          completeName,
-          email,
-          birthdate,
-          password,
-          role_id,
-        }),
+        body: JSON.stringify(userData),
       });
 
       if (res.ok) {
