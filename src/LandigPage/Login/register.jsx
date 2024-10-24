@@ -8,8 +8,10 @@ const RegisterForm = () => {
   const [birthdate, setBirthdate] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPw, setShowPw] = useState(false);
+  const [showConfirmPw, setShowConfirmPw] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [isProfessor, setIsProfessor] = useState(false);
   const navigate = useNavigate();
 
@@ -20,6 +22,11 @@ const RegisterForm = () => {
     navigate("/Login");
   };
 
+  // Expresiones regulares para validaciones
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const passwordRegex =
+    /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -29,12 +36,36 @@ const RegisterForm = () => {
       return;
     }
 
+    if (completeName.trim() === "") {
+      setErrorMessage("El campo 'Nombre y Apellido' no puede estar vacío.");
+      return;
+    }
+
+    if (!birthdate) {
+      setErrorMessage("El campo 'Fecha de Nacimiento' no puede estar vacío.");
+      return;
+    }
+
+    if (!emailRegex.test(email)) {
+      setErrorMessage("El 'Correo Electrónico' no tiene un formato válido.");
+      return;
+    }
+
+    if (!passwordRegex.test(password)) {
+      setErrorMessage(
+        "La 'Contraseña' debe tener al menos 8 caracteres, una mayúscula, un numero y un caracter especial."
+      );
+      return;
+    }
+
+    const role_id = isProfessor ? 2 : 1;
+
     const userData = {
       name: completeName, // Cambia esto
-      birthdate: birthdate.toISOString().substring(0, 10),
+      birthdate: birthdate ? birthdate.toISOString().substring(0, 10) : null,
       email,
       password,
-      role_id: isProfessor ? 2 : 1,
+      role_id,
     };
 
     console.log("User Data to Send:", userData); // Agregar este log
@@ -45,44 +76,14 @@ const RegisterForm = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          completeName,
-          email,
-          birthdate,
-          password,
-          role_id,
-        }),
+        body: JSON.stringify(userData),
       });
 
       if (res.ok) {
         navigate("/Login");
       } else {
-        const errorData = await res.json();
-        // Manejo de errores en función de los mensajes del backend
-        setErrorMessage(""); // Limpiar mensajes de error anteriores
-        // Suponiendo que errorData.errors es un objeto con mensajes de error
-        const errors = errorData.errors;
-
-        if (errors) {
-          // Mostrar los mensajes de error específicos para cada campo
-          if (errors.name) {
-            setErrorMessage(errors.name);
-          }
-          if (errors.email) {
-            setErrorMessage(errors.email);
-          }
-          if (errors.birthdate) {
-            setErrorMessage(errors.birthdate);
-          }
-          if (errors.password) {
-            setErrorMessage(errors.password);
-          }
-          if (errors.role_id) {
-            setErrorMessage(errors.role_id);
-          }
-        } else {
-          setErrorMessage("Error al registrar un usuario");
-        }
+        const errorData = await res.json(); // Captura el error del servidor
+        setErrorMessage(errorData.message || "Error al registrar un usuario");
       }
     } catch (error) {
       setErrorMessage("Error al conectar con el servidor");
@@ -105,11 +106,20 @@ const RegisterForm = () => {
     }
   };
 
+  const togglePwVisibility = () => {
+    setShowPw((prev) => !prev);
+  };
+
+  const toggleConfirmPwVisibility = () => {
+    setShowConfirmPw((prev) => !prev);
+  };
+
   return (
     <div>
       <div className="app-container">
         <div className="login-container">
           <h2 className="login-h2">Regístrate</h2>
+          {<p className="error-message">{errorMessage}</p>}
           <form onSubmit={handleSubmit} className="login-form">
             <div className="form-group">
               <input
@@ -121,15 +131,6 @@ const RegisterForm = () => {
               />
             </div>
             <div className="form-group">
-              {/* <input
-                id="birthdate"
-                value={
-                  birthdate ? birthdate.toISOString().substring(0, 10) : "" //convertidor de string a Date
-                }
-                onChange={(e) => setBirthdate(new Date(e.target.value))}
-                placeholder="Fecha de nacimiento"
-                className="styled-input"
-              /> */}
               <DatePicker
                 selected={birthdate}
                 onChange={(date) => setBirthdate(date)}
@@ -149,25 +150,40 @@ const RegisterForm = () => {
             </div>
             <div className="form-group">
               <input
-                /*type="password"*/
+                type={showPw ? "text" : "password"}
                 id="password"
                 value={password}
                 onChange={handlePasswordChange}
                 placeholder="Contraseña"
                 className="styled-input"
               />
+              <button
+                type="button"
+                className="pw-button"
+                onClick={togglePwVisibility}
+              >
+                {showPw ? "Ocultar Contraseña" : "Mostrar Contraseña"}
+              </button>
             </div>
 
             <div className="form-group">
               <input
-                /*type="password"*/
+                type={showConfirmPw ? "text" : "password"}
                 id="confirmPassword"
                 value={confirmPassword}
                 onChange={handleConfirmPassword}
                 placeholder="Repetir contraseña"
                 className="styled-input"
               />
+              <button
+                type="button"
+                className="pw-button"
+                onClick={toggleConfirmPwVisibility}
+              >
+                {showConfirmPw ? "Ocultar Contraseña" : "Mostrar Contraseña"}
+              </button>
             </div>
+
             <div>
               <label htmlFor="isProfessor" className="checkbox-container">
                 <span className="checkbox-label"> ¿Eres profesor? </span>
