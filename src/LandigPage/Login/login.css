@@ -96,3 +96,15 @@
     width: 150px; /* Ajusta el ancho según tus necesidades */
     margin-right: 10px;
   }
+
+.pw-button {
+  padding: 2px 5px 2px 5px;
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #45a049 !important;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
