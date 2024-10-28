@@ -19,14 +19,14 @@ body {
 
 .titulo {
   color: #f4f4f4;
-  font-size: 35px;
+  font-size: 35px; /* Mantener tamaño de fuente para escritorio */
   font-weight: bold;
-  margin-left: 50px;
+  margin-left: 50px; /* Margen izquierdo para escritorio */
 }
 
 .testimonio {
   flex: 1;
-  min-width: 500px;
+  min-width: 500px; /* Mantener ancho mínimo para escritorio */
   margin: 10px;
   padding: 20px;
   background-color: #f4f4f4;
@@ -60,9 +60,44 @@ body {
   margin-right: 5px;
 }
 
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  .testimonio-container {
+    flex-direction: column; /* Cambiar a columna en móviles */
+    align-items: center; /* Centrar elementos en móviles */
+    width: 100%; /* Ampliar contenedor a 100% en móviles */
+  }
 
+  .titulo {
+    font-size: 24px; /* Tamaño de fuente reducido para móviles */
+    margin-left: 0; /* Eliminar margen izquierdo en móviles */
+    text-align: center; /* Centrar título en móviles */
+  }
 
-/**/
+  .testimonio {
+    min-width: 90%; /* Ajustar el ancho mínimo para móviles */
+    margin: 10px 0; /* Espaciado vertical entre testimonios */
+  }
+
+  .testimonio-header {
+    justify-content: center; /* Centrar el encabezado en móviles */
+  }
+
+  .testimonio-image {
+    width: 40px; /* Reducir el tamaño de la imagen en móviles */
+    height: 40px;
+  }
+
+  .testimonio p {
+    font-size: 0.9em; /* Tamaño de fuente reducido para móviles */
+  }
+
+  .rating .star {
+    font-size: 25px; /* Tamaño de estrella reducido para móviles */
+  }
+}
+
+/*Descrtipcopn*/
 
 .description-section {
   text-align: center;
@@ -106,14 +141,43 @@ body {
 }
 
 .description-column h4 strong {
-  color:  #ffb300;
-
+  color: #ffb300;
 }
 
 .description-column p {
   color: #fbf8f8;
   line-height: 1.6;
-  
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .description-section h3 {
+    width: 80%; /* Aumenta el ancho en pantallas más pequeñas */
+    margin-left: 10%; /* Centra más el título */
+  }
+
+  .description-row {
+    justify-content: center; /* Centra las columnas en pantallas pequeñas */
+  }
+
+  .description-column {
+    min-width: 150px; /* Reduce el ancho mínimo de las columnas */
+    max-width: 100%; /* Permite que las columnas ocupen el 100% del ancho disponible */
+  }
+}
+
+@media (max-width: 480px) {
+  .description-section h3 {
+    font-size: 18px; /* Ajusta el tamaño de la fuente del título para móviles */
+  }
+
+  .description-column h4 {
+    font-size: 16px; /* Ajusta el tamaño de la fuente de los encabezados para móviles */
+  }
+
+  .description-column p {
+    font-size: 12px; /* Ajusta el tamaño de la fuente del párrafo para móviles */
+  }
 }
 
 /* info section */
@@ -225,30 +289,25 @@ body {
 }
 
 /* jobs */
-
 .jobs-main-container {
-  
   display: flex;
-  flex-wrap:wrap;
- 
-  height: 600px;
+  flex-wrap: wrap;
+  height: 600px; /* Mantener altura fija para escritorio */
 }
 
 .jobs-section {
- 
   margin-top: 80px;
   padding: 40px;
   text-align: center;
   background-color: #ffffff;
-  height: 300px;
-  
+  height: 300px; /* Mantener altura fija para escritorio */
 }
 
 .jobs-section h1 {
   color: #000000;
   font-size: 2rem;
   margin-bottom: 10px;
-  font-weight: bold ;
+  font-weight: bold;
 }
 
 .jobs-section p {
@@ -268,50 +327,92 @@ body {
 .jobs-rectangle {
   display: flex;
   margin-top: 30px;
-  width: 600px;
-  height: 200px;
+  width: 600px; /* Mantener ancho fijo para escritorio */
+  height: 200px; /* Mantener altura fija para escritorio */
   padding: 0px;
   background-color: #f5f5f5;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
- 
 }
 
 .jobs-rectangle a {
   text-decoration: none;
   color: #000000;
   font-size: 2rem;
-  
   text-align: center;
   width: 50%;
   padding: 40px;
- 
   font-weight: bold;
 }
-
-
 
 .image-container {
   width: 50%;
   height: 100%;
-  /*padding-bottom: 40%; /* This creates a 40% height relative to the width */
   position: relative;
   overflow: hidden;
   border-radius: 10px 10px 0 0;
- 
 }
 
 .image-container img {
   position: absolute;
   top: 50%;
   left: 50%;
- 
-  
   transform: translate(-50%, -50%);
 }
-/* Suscription */
 
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  .jobs-main-container {
+    height: auto; /* Permitir que el contenedor ajuste su altura en móviles */
+    padding: 10px; /* Espaciado reducido */
+  }
+
+  .jobs-section {
+    padding: 20px; /* Espaciado reducido */
+    height: auto; /* Permitir que la altura ajuste según el contenido */
+  }
+
+  .jobs-section h1 {
+    font-size: 1.5rem; /* Tamaño de fuente reducido para móviles */
+  }
+
+  .jobs-section p {
+    font-size: 0.8rem; /* Tamaño de fuente reducido para móviles */
+    margin-bottom: 15px; /* Espaciado reducido */
+    width: 90%; /* Ancho ajustado para móviles */
+    margin-left: 5%; /* Centrar el párrafo */
+  }
+
+  .jobs-links {
+    flex-direction: column; /* Cambiar a columna en móviles */
+    align-items: center; /* Centrar los elementos */
+    gap: 10px; /* Espaciado reducido */
+  }
+
+  .jobs-rectangle {
+    width: 90%; /* Ancho ajustado para móviles */
+    height: 100px; /* Altura ajustada para móviles */
+    margin-top: 10px; /* Espaciado reducido */
+  }
+
+  .jobs-rectangle a {
+    font-size: 1rem; /* Tamaño de fuente reducido para móviles */
+    padding: 10px; /* Espaciado ajustado */
+  }
+
+  .image-container {
+    width: 100%; /* Ancho completo para móviles */
+    height: 70%; /* Ajustar altura para móviles */
+  }
+
+  .image-container img {
+    width: 100%; /* Ajustar la imagen para que ocupe todo el contenedor */
+    height: 100%; /* Ajustar la altura de la imagen */
+    object-fit: cover; /* Asegurar que la imagen cubra el contenedor sin distorsión */
+  }
+}
+/* Suscription */
 .subscription-container {
   background-color: #2c2d44;
   display: flex;
@@ -321,17 +422,15 @@ body {
 }
 
 .subscription-text {
-  max-width: 50%;
+  max-width: 50%; /* Mantener el ancho máximo para escritorio */
   text-align: left;
- 
 }
 
 .subscription-text h2 {
-  font-size: 1.5em;
+  font-size: 35px; /* Mantener tamaño de fuente para escritorio */
   margin-bottom: 10px;
-   font-size: 35px;
   color: #ddd;
-   width: 100%;
+  width: 100%;
 }
 
 .subscribe-button {
@@ -343,15 +442,15 @@ body {
 }
 
 .subscribe-button:hover {
-  background-color:  #f8e624;
+  background-color: #f8e624;
   color: rgb(0, 0, 0);
 }
 
 .subscription-image {
   background-color: #f8e624;
   border-radius: 5%;
-  width: 600px;
-  height: 600px;
+  width: 600px; /* Mantener ancho para escritorio */
+  height: 600px; /* Mantener altura para escritorio */
   padding: 15px;
 }
 
@@ -361,27 +460,35 @@ body {
   border-radius: 5%;
 }
 
-/**/
-.banner-links {
-  display: flex;
-  justify-content:space-around;
-  padding: 50px;
-}
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  .subscription-container {
+    flex-direction: column; /* Cambiar a columna en móviles */
+    align-items: center; /* Centrar elementos en móviles */
+    padding: 10px; /* Espaciado reducido */
+  }
 
-.banner-rectangle {
-  width: 600px;
-  height: 200px;
-  padding: 20px;
-  background-color: #f5f5f5;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
+  .subscription-text {
+    max-width: 90%; /* Ancho máximo ajustado para móviles */
+    text-align: center; /* Centrar texto en móviles */
+    margin-bottom: 20px; /* Espaciado inferior */
+  }
 
-.banner-rectangle a {
-  text-decoration: none;
-  color: #000000;
-  font-size: 1.1rem;
+  .subscription-text h2 {
+    font-size: 1.5em; /* Tamaño de fuente reducido para móviles */
+    margin-bottom: 10px; /* Espaciado ajustado */
+  }
+
+  .subscription-image {
+    width: 90%; /* Ancho ajustado para móviles */
+    height: auto; /* Permitir ajuste automático de altura en móviles */
+    margin-bottom: 20px; /* Espaciado inferior */
+  }
+
+  .subscribe-button {
+    padding: 8px 16px; /* Espaciado ajustado */
+    font-size: 0.9em; /* Tamaño de fuente reducido para móviles */
+  }
 }
 
 /* Trust Section Styles */
