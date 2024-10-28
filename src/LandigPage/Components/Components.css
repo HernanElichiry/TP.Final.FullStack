@@ -384,33 +384,69 @@ body {
   font-size: 1.1rem;
 }
 
-/* Enterprise section */
-
+/* Trust Section Styles */
 .trust-section {
   text-align: center;
   padding: 30px 20px;
-  background-color: #f8f9fa;
+  background-color: #f8f9fa; /* Fondo claro */
   margin-top: 60px;
 }
 
 .trust-section h1 {
-  font-size: 1.5rem;
+  font-size: 1.5rem; /* Tamaño de fuente */
   margin-bottom: 20px;
-  color: #000000;
+  color: #000000; /* Color del texto */
 }
 
 .logos-row {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-around; /* Espaciado entre logos */
   align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
+  flex-wrap: wrap; /* Para que se ajusten en pantallas pequeñas */
+  gap: 20px; /* Espacio entre los logos */
 }
 
 .company-logo {
-  max-width: 350px;
-  max-height: 175px;
+  max-width: 350px; /* Ancho máximo */
+  max-height: 175px; /* Alto máximo */
+  object-fit: contain; /* Asegura que la imagen mantenga su proporción */
 }
+
+/* Media Queries para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .trust-section {
+    padding: 20px 10px; /* Reducir el padding */
+  }
+
+  .trust-section h1 {
+    font-size: 1.2rem; /* Tamaño de fuente más pequeño */
+  }
+
+  .logos-row {
+    justify-content: center; /* Centrar los logos */
+  }
+
+  .company-logo {
+    max-width: 200px; /* Ancho máximo más pequeño */
+    max-height: 100px; /* Alto máximo más pequeño */
+  }
+}
+
+@media (max-width: 480px) {
+  .trust-section {
+    padding: 15px 5px; /* Más reducido en pantallas muy pequeñas */
+  }
+
+  .trust-section h1 {
+    font-size: 1rem; /* Tamaño de fuente aún más pequeño */
+  }
+
+  .company-logo {
+    max-width: 150px; /* Ancho máximo aún más pequeño */
+    max-height: 75px; /* Alto máximo aún más pequeño */
+  }
+}
+
 
 /* payment */
 

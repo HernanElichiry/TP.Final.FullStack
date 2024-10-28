@@ -50,7 +50,7 @@ function HomePage() {
       <div className="big-box">
         <Description></Description>
         <TrustSection></TrustSection>
-        <InfoSection></InfoSection> 
+        {/* <InfoSection></InfoSection>  */}
         {/* <ResponsiveCarousel courses={bestRatedCourses} text=" Carreras mejor valorados" />
         */}
         <ResponsiveCarousel courses={promotionCourses} text=" Cursos en promocion" />

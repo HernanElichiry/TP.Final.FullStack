@@ -12,26 +12,26 @@
 .search-input {
   background-color: #ffffff;
   color: #000000;
-  padding: 10px 16px;
-  font-size: 16px;
+  padding: 10px 20px; /* Padding para mayor tamaño */
+  font-size: 18px; /* Tamaño de la fuente */
   border: 0;
   border-radius: 4px;
-  flex: 1;
-  height: 50px;
+  flex: 0 0 70%; /* 70% del espacio disponible */
+  height: 60px; /* Altura del input */
   box-sizing: border-box;
 }
 
 .search-button {
-  width: 100px;
-  font-size: 16px;
+  flex: 0 0 30%; /* 30% del espacio disponible */
+  font-size: 16px; 
   background-color: #ffb300;
   color: #242424;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  height: 50px;
-  margin-left: 10px;
+  height: 60px; /* Igualar la altura con el input */
+  margin-left: 10px; /* Espacio entre el input y el botón */
   box-sizing: border-box;
 }
 
@@ -44,7 +44,14 @@
   .search-bar {
     width: 90%;
   }
+
+  .search-input {
+    height: 50px; /* Ajusta la altura del input en móviles */
+    font-size: 16px; /* Ajusta el tamaño de la fuente en móviles */
+  }
+
   .search-button {
-    width: 80px;
+    width: auto; /* Permite que el botón use el 30% sin un ancho fijo */
+    height: 50px; /* Igualar la altura en móviles también */
   }
 }

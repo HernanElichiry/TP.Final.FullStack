@@ -62,6 +62,14 @@
     color: #070707
   }
 }
+@media screen and (max-width: 920px) {
+  .landingpage-text h1 strong {
+    font-size: 10vw; /* Tamaño relativo para pantallas pequeñas */
+  }
+  .landingpage-text p {
+    font-size: 5vw; /* Tamaño relativo para pantallas pequeñas */
+  }
+}
 
 @media screen and (max-width: 768px) {
   .landingpage-text h1 strong {
