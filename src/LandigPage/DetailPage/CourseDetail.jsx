@@ -81,9 +81,9 @@ const CourseDetail = () => {
             <h2>Sobre el curso</h2>
             <p>{course.description}</p>
             <h2>Requisitos</h2>
-            <p>{course.requisitos}</p> {/* Asegúrate de tener un campo diferente si es necesario */}
+            <p>{course.category.requisitos}</p> {/* Asegúrate de tener un campo diferente si es necesario */}
             <h2>Certificación</h2>
-            <p>{course.certificacion}</p> {/* Asegúrate de tener un campo diferente si es necesario */}
+            <p>{course.category.certificacion}</p> {/* Asegúrate de tener un campo diferente si es necesario */}
           </section>
         </div>
         <div className="course-sidebar">

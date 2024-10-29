@@ -19,15 +19,16 @@ function ResponsiveCarousel({ courses, text = "inserte texto" }) {
     slidesToShow: 4,
     slidesToScroll: 1,
     arrows: false, // Eliminar las flechas de navegación
-    autoplay: true, // Hacer que las diapositivas se deslicen automáticamente
-    autoplaySpeed: 6000, // Velocidad de la transición automática en milisegundos
+    autoplay: false, // Hacer que las diapositivas se deslicen automáticamente
+    // Velocidad de la transición automática en milisegundos
     responsive: [
       {
         breakpoint: 1200,
         settings: {
           slidesToShow: 4,
           slidesToScroll: 1,
-          infinite: courses.length > 4, // Aplica también aquí la condición
+          initialSlide: 2,
+          infinite: courses.length > 1, // Aplica también aquí la condición
           dots: true,
         },
       },
@@ -54,7 +55,8 @@ function ResponsiveCarousel({ courses, text = "inserte texto" }) {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-          infinite: courses.length > 2, // Evitar repeticiones en caso de menos de 2 elementos
+          initialSlide: 2,
+          infinite: courses.length > 1, // Evitar repeticiones en caso de menos de 2 elementos
         },
       },
     ],
