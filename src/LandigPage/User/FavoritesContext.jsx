@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
 import { useUser } from './UserContext/UserContext';
+import Cookies from 'js-cookie';
 
 export const FavoritesContext = createContext();
 
@@ -9,10 +10,11 @@ export const FavoritesProvider = ({ children }) => {
 
   // Función para cargar los favoritos del usuario desde el backend
   const loadFavorites = async () => {
+    const token = Cookies.get('token');
     try {
       const response = await fetch(`http://localhost:3000/favorites/${user.sub}`, {
         headers: {
-          Authorization: `Bearer ${user.token}`, // Agrega el token de autenticación si es necesario
+          Authorization: `Bearer ${token}`, // Agrega el token de autenticación si es necesario
         },
       });
       const data = await response.json();
@@ -31,13 +33,14 @@ export const FavoritesProvider = ({ children }) => {
 
   const toggleFavorite = (course) => {
     setFavorites((prevFavorites) => {
+      const token = Cookies.get('token');
       const isFavorite = prevFavorites.some((fav) => fav.id === course.id);
       const url = `http://localhost:3000/favorites/${user.sub}/${course.id}`;
       fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-       //   Authorization: `Bearer ${user.token}`, // Incluye el token si es necesario
+          Authorization: `Bearer ${token}`, // Incluye el token si es necesario
         },
         
       })
