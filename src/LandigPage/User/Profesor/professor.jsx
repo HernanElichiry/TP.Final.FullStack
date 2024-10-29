@@ -13,54 +13,66 @@ import {
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 import { Link, Outlet } from "react-router-dom";
 import { useUser } from "../UserContext/UserContext";
+import Cookies from "js-cookie";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 
-// Función getItem para crear elementos de menú
-function getItem(label, key, icon, children) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  };
-}
-
-// Definición de los items del menú
-const items = [
-  getItem("Hans", "1", <SettingOutlined />),
-  getItem("Professor", "sub1", <UserOutlined />, [
-    getItem(
-      <Link to="change-password">Change Password</Link>,
-      "3",
-      <LockOutlined />
-    ),
-    getItem(<Link to="data">Data</Link>, "4", <EditFilled />),
-  ]),
-  getItem("Courses", "sub2", <ReadOutlined />, [
-    getItem(<Link to="add-course">Add Courses</Link>, "6", <FormOutlined />),
-    getItem(
-      <Link to="my-courses-professor">My courses</Link>,
-      "8",
-      <AuditOutlined />
-    ),
-    getItem(
-      <Link to="favorites-professor">Favorites</Link>,
-      "10",
-      <PushpinFilled />
-    ),
-  ]),
-  getItem("Log out", "9", <CloseCircleOutlined />),
-];
-
-// Definición de los items del breadcrumb
-const breadcrumbItems = [{ title: "Professor" }, { title: "Hans" }];
-
-const ProfessorMenu = () => {
+function Sidebar() {
+  const { logout } = useUser(); // Función de logout desde el contexto
   const [collapsed, setCollapsed] = useState(false);
+
+  // Uso del tema para obtener colores y bordes
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  // Definición de los items del breadcrumb
+  const breadcrumbItems = [{ title: "Professor" }, { title: "Hans" }];
+
+  // Función getItem para crear elementos de menú
+  function getItem(label, key, icon, children) {
+    return {
+      key,
+      icon,
+      children,
+      label,
+    };
+  }
+
+  // Definición de los items del menú con evento logout en el item "Log out"
+  const items = [
+    getItem("Hans", "1", <SettingOutlined />),
+    getItem("Professor", "sub1", <UserOutlined />, [
+      getItem(
+        <Link to="change-password">Change Password</Link>,
+        "3",
+        <LockOutlined />
+      ),
+      getItem(<Link to="data">Data</Link>, "4", <EditFilled />),
+    ]),
+    getItem("Courses", "sub2", <ReadOutlined />, [
+      getItem(<Link to="add-course">Add Courses</Link>, "6", <FormOutlined />),
+      getItem(
+        <Link to="my-courses-professor">My courses</Link>,
+        "8",
+        <AuditOutlined />
+      ),
+      getItem(
+        <Link to="favorites-professor">Favorites</Link>,
+        "10",
+        <PushpinFilled />
+      ),
+    ]),
+    getItem("Log out", "9", <CloseCircleOutlined />), // Item para el logout
+  ];
+
+  // Manejador del clic en el menú
+  const handleMenuClick = (e) => {
+    if (e.key === "9") {
+      // Verifica si la key es la de "Log out"
+      logout(); // Ejecuta la función de logout del contexto
+    }
+  };
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -75,6 +87,7 @@ const ProfessorMenu = () => {
           defaultSelectedKeys={["1"]}
           mode="inline"
           items={items}
+          onClick={handleMenuClick} // Asigna el manejador de clics al menú
         />
       </Sider>
       <Layout>
@@ -96,6 +109,6 @@ const ProfessorMenu = () => {
       </Layout>
     </Layout>
   );
-};
+}
 
-export default ProfessorMenu;
+export default Sidebar;
