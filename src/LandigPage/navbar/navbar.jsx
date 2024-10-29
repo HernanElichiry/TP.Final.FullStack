@@ -41,10 +41,14 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar is-dark" role="navigation" aria-label="main navigation">
+    <nav
+      className="navbar is-dark"
+      role="navigation"
+      aria-label="main navigation"
+    >
       <div className="navbar-brand">
         <a className="navbar-item" href="/">
-          <strong className="navbar-title">EINSTEIN</strong>
+          <strong className="navbar-title">Einstein.</strong>
         </a>
         <button
           className={`navbar-burger ${isActive ? "is-active" : ""}`}
@@ -64,22 +68,36 @@ function Navbar() {
           <Link to="/" className="navbar-item" onClick={handleLinkClick}>
             Test Vocacional
           </Link>
-          <Link to="/bolsa-de-trabajo" className="navbar-item" onClick={handleLinkClick}>
+          <Link
+            to="/bolsa-de-trabajo"
+            className="navbar-item"
+            onClick={handleLinkClick}
+          >
             Bolsa de trabajo
           </Link>
-          <Link to="/capacitaciones" className="navbar-item" onClick={handleLinkClick}>
+          <Link
+            to="/capacitaciones"
+            className="navbar-item"
+            onClick={handleLinkClick}
+          >
             Capacitaciones gratuitas
           </Link>
           {/* Categorías desplegable */}
-          <div 
-            className={`navbar-item has-dropdown ${isDropdownActive ? "is-active" : ""}`}
+          <div
+            className={`navbar-item has-dropdown ${
+              isDropdownActive ? "is-active" : ""
+            }`}
             onMouseEnter={() => setIsDropdownActive(true)}
             onMouseLeave={() => setIsDropdownActive(false)}
           >
             <a className="navbar-link" onClick={handleCategoriesClick}>
               Categorías
             </a>
-            <div className={`navbar-dropdown ${isDropdownActive ? "is-active" : ""}`}>
+            <div
+              className={`navbar-dropdown ${
+                isDropdownActive ? "is-active" : ""
+              }`}
+            >
               {categories.map((category) => (
                 <Link
                   key={category.id}
@@ -100,10 +118,18 @@ function Navbar() {
             <div className="buttons">
               {!user ? (
                 <>
-                  <Link to="/register" className="button is-primary" onClick={handleLinkClick}>
+                  <Link
+                    to="/register"
+                    className="button is-primary"
+                    onClick={handleLinkClick}
+                  >
                     <strong>Sign up</strong>
                   </Link>
-                  <Link to="/login" className="button is-light" onClick={handleLinkClick}>
+                  <Link
+                    to="/login"
+                    className="button is-light"
+                    onClick={handleLinkClick}
+                  >
                     Log in
                   </Link>
                 </>
@@ -114,12 +140,11 @@ function Navbar() {
                   </div>
                   <Link
                     to={user.rol === 3 ? "/usermenu" : "/professormenu"}
-                    className="button is-light"
+                    className="button is-primary"
                     onClick={handleLinkClick}
                   >
                     Menu
                   </Link>
-                  <button onClick={logout} className="button is-primary">Log out</button>
                 </>
               )}
             </div>
@@ -131,4 +156,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
