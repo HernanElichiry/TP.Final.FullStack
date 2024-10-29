@@ -1,30 +1,81 @@
-/*.background-image {
-    position: fixed;
-    top: 0;
-    left: 0%;
-    width: 100%;
-    height: 100%;
-    z-index: -1;  
-  }*/
-
 .landingpage-container {
   display: flex;
-  margin: 20px; 
-  padding: 0;
+  align-items: center; /* Centra verticalmente el contenido */
+  justify-content: space-between; /* Espacia los elementos */
+  height: 100vh;
+  padding: 20px;
   box-sizing: border-box;
+  position: relative;
+  overflow: hidden; /* Para evitar desplazamientos indeseados */
 }
 
-.landingpage-text h1 strong{
+.landingpage-text {
+  z-index: 1; /* Asegura que el texto esté sobre la imagen */
+}
+
+.background-img {
+  width: 50%; /* La imagen ocupa la mitad del contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
+  object-fit: cover; /* Cubre el área sin distorsionar */
+  z-index: 0; /* Se coloca detrás del texto */
+}
+
+/* Media Queries para Responsividad */
+@media screen and (max-width: 768px) {
+  .background-img {
+    display: none; /* Oculta la imagen en pantallas pequeñas */
+  }
+  
+  .landingpage-container {
+    background-image: url('./einstein4.png');
+    background-size: cover; /* La imagen cubre todo el contenedor */
+    background-position: center; /* Centra la imagen */
+  }
+
+  .landingpage-text {
+    text-align: center; /* Alinea el texto al centro en pantallas pequeñas */
+  }
+}
+
+.landingpage-text h1 strong {
   color: #ffb300;
   font-weight: bold;
-  font-size: 120px;
+  font-size: 120px; /* Tamaño grande */
   margin-left: 1.5%;
 }
 
 .landingpage-text p {
   color: rgb(222, 235, 246);
-
-  font-size: 50px;
+  font-size: 50px; /* Tamaño grande */
   font-weight: bold;
   margin-left: 3%;
+}
+
+/* Media Queries para Responsividad */
+@media screen and (max-width: 1024px) {
+  .landingpage-text h1 strong {
+    font-size: 8vw; /* Tamaño relativo para pantallas pequeñas */
+    color: #070707
+  }
+  .landingpage-text p {
+    font-size: 4vw; /* Tamaño relativo para pantallas pequeñas */
+    color: #070707
+  }
+}
+@media screen and (max-width: 920px) {
+  .landingpage-text h1 strong {
+    font-size: 10vw; /* Tamaño relativo para pantallas pequeñas */
+  }
+  .landingpage-text p {
+    font-size: 5vw; /* Tamaño relativo para pantallas pequeñas */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .landingpage-text h1 strong {
+    font-size: 10vw; /* Tamaño relativo para pantallas pequeñas */
+  }
+  .landingpage-text p {
+    font-size: 5vw; /* Tamaño relativo para pantallas pequeñas */
+  }
 }

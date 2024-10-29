@@ -1,59 +1,92 @@
+/* Estilos base para la navbar */
 .navbar {
-    background-color: #01031c ;
-    height: 60px;
-    display: flex;
-    justify-content: center;
+  background-color: #01031c;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1800px;
+  padding: 0 20px;
+}
+
+.navbar-title {
+  font-size: 20px;
+  color: aliceblue;
+}
+
+.navbar-logo a {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Estilos para el menú de navegación en pantallas grandes */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+.nav-item {
+  margin-right: 20px;
+  white-space: nowrap;
+}
+
+.nav-links {
+  font-size: 1.2rem;
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-links:hover {
+  color: #ffd21f;
+}
+
+.user-email {
+  color: #fff;
+  margin-right: 5px;
+  padding-right: 7px;
+}
+
+/* Estilos específicos para el menú hamburguesa en pantallas móviles */
+.navbar-menu {
+  display: none; /* Oculta el menú por defecto */
+}
+
+/* Muestra el menú hamburguesa cuando está activo */
+.navbar-burger.is-active + .navbar-menu {
+  display: block;
+}
+
+.has-dropdown.is-active .navbar-dropdown {
+  display: block; /* Mostrar cuando el dropdown está activo */
+}
+.navbar-dropdown {
+  display: none; /* Ocultar por defecto */
+}
+
+/* Muestra el menú horizontal en pantallas grandes */
+@media (min-width: 1024px) {
+  .navbar-menu {
+    display: flex !important;
+    opacity: 1 !important;
     align-items: center;
-    margin-left: 1.5%;
   }
-  
-  .navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 1800px;
-    padding: 0 20px;
-    
-   
+  .navbar-burger {
+    display: none; /* Oculta el botón hamburguesa en pantallas grandes */
   }
+}
 
-  .navbar-title {
-    font-size: 20px;
-    color: aliceblue;
-  }
-  
-  .navbar-logo a {
-    color: #fff;
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-decoration: none;
-  }
-  
-  .nav-menu {
-  
-    display: flex;
-    list-style: none;
-  }
-  
-  .nav-item {
-    margin-right: 20px;
-  }
-  
-  .nav-links {
-    font-size: 1.2rem;
-    color: #fff;
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
-  
-  .nav-links:hover {
-    color: #ffd21f;
-  }
+/* Estilos para el menú desplegable */
+.navbar-dropdown {
+  display: none; /* Ocultar por defecto */
+}
 
-  .user-email {
-    color: #fff;
-    margin-right: 5px;
-    padding-right: 7px;
-  }
-
+.has-dropdown.is-active .navbar-dropdown {
+  display: block; /* Mostrar cuando el dropdown está activo */
+}

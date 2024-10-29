@@ -1,60 +1,85 @@
-
 .faq {
-  background-color:#2c2d44 ;
+  background-color: #2c2d44;
 }
 
 .faq-container {
-  
+  width: 70%;
+  margin: 0 auto;
+  padding: 25px;
+  margin-top: 30px;
+}
 
-    width: 70%;
-    margin: 0 auto;
-    padding: 25px;
-   
-    margin-left: 30px;
-    margin-top: 30px;
+.faq-container h2 {
+  padding-bottom: 50px;
+  font-size: 35px; /* Tamaño de fuente para escritorio */
+  color: #fff;
+  font-weight: bold;
+}
+
+.faq-item {
+  cursor: pointer;
+}
+
+.faq-question {
+  color: #f8e624;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 0px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-answer {
+  color: rgb(142, 142, 172);
+  font-size: 20px;
+  padding: 0px 0;
+}
+
+.arrow {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+
+.arrow.open {
+  transform: rotate(180deg);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid black;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  .faq-container {
+    width: 90%; /* Aumentar ancho en móviles */
+    padding: 15px; /* Reducir padding en móviles */
+    margin-left: 0; /* Eliminar margen izquierdo en móviles */
   }
 
-   
   .faq-container h2 {
-     padding-bottom: 50px;
-      font-size: 35px;
-      color: #fff;
-      font-weight: bold;
-    }
-  
-  .faq-item {
-    cursor: pointer;
-    
+    font-size: 28px; /* Tamaño de fuente reducido para móviles */
+    padding-bottom: 30px; /* Reducir espacio inferior */
   }
-  
+
   .faq-question {
-   color: #f8e624;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 0px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    font-size: 18px; /* Tamaño de fuente reducido para móviles */
   }
-  
+
   .faq-answer {
-    color: rgb(142, 142, 172);
-    font-size: 20px;
-    padding: 0px 0;
+    font-size: 18px; /* Tamaño de fuente reducido para respuestas en móviles */
   }
-  
+
   .arrow {
-    font-size: 20px;
-    transition: transform 0.3s ease;
+    font-size: 18px; /* Tamaño de la flecha reducido para móviles */
   }
-  
-  .arrow.open {
-    transform: rotate(180deg);
+
+  .faq-mobile-toggle {
+    color: #fff;
+    font-size: 16px;
+    padding-top: 15px;
+    cursor: pointer;
+    text-align: center;
   }
-  
-  hr {
-    border: none;
-    border-top: 1px solid black;
-   
-  }
-  
+}
