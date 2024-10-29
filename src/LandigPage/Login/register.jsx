@@ -58,7 +58,7 @@ const RegisterForm = () => {
       return;
     }
 
-    const role_id = isProfessor ? 2 : 1;
+    const role_id = isProfessor ? 2 : 3;
 
     const userData = {
       name: completeName, // Cambia esto
