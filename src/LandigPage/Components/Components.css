@@ -10,8 +10,8 @@ body {
 
 .testimonio-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  flex-wrap: wrap; /* Permite que los testimonios se envuelvan */
+  justify-content: space-between; /* Distribuye el espacio entre testimonios */
   width: 94%;
   margin-left: 3%;
   margin-top: 15px;
@@ -19,35 +19,37 @@ body {
 
 .titulo {
   color: #f4f4f4;
-  font-size: 35px; /* Mantener tamaño de fuente para escritorio */
+  font-size: 35px; /* Tamaño de fuente para escritorio */
   font-weight: bold;
   margin-left: 50px; /* Margen izquierdo para escritorio */
 }
 
 .testimonio {
-  flex: 1;
-  min-width: 500px; /* Mantener ancho mínimo para escritorio */
+  flex: 1 1 30%; /* Permite que cada testimonio ocupe al menos 30% del ancho */
   margin: 10px;
-  padding: 20px;
+  padding: 15px; /* Reducir padding para que sea más compacto */
   background-color: #f4f4f4;
   border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* Asegurar que el padding no afecte el ancho */
 }
 
 .testimonio-header {
   display: flex;
   align-items: center;
+  margin-bottom: 10px; /* Espacio entre el encabezado y el contenido */
 }
 
 .testimonio-image {
-  width: 50px;
-  height: 50px;
+  width: 40px; /* Tamaño más pequeño para imagen */
+  height: 40px;
   border-radius: 50%;
   margin-right: 10px;
 }
 
 .testimonio p {
   color: #000000;
-  margin: 10px 0;
+  margin: 5px 0; /* Reducir margen para texto */
 }
 
 .testimonio p strong {
@@ -55,28 +57,38 @@ body {
 }
 
 .rating .star {
-  font-size: 30px;
+  font-size: 25px; /* Tamaño de estrella más pequeño */
   color: gold;
-  margin-right: 5px;
+  margin-right: 3px;
+}
+
+.toggle-button {
+  background-color: transparent; /* Botón transparente */
+  border: none; /* Sin borde */
+  color: #007bff; /* Color azul */
+  cursor: pointer; /* Cursor de puntero */
+  margin-bottom: 10px; /* Espacio debajo del botón */
+  font-size: 14px; /* Tamaño de fuente del botón */
+  text-align: left; /* Alinear a la izquierda */
 }
 
 /* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
   .testimonio-container {
-    flex-direction: column; /* Cambiar a columna en móviles */
-    align-items: center; /* Centrar elementos en móviles */
-    width: 100%; /* Ampliar contenedor a 100% en móviles */
-  }
-
-  .titulo {
-    font-size: 24px; /* Tamaño de fuente reducido para móviles */
-    margin-left: 0; /* Eliminar margen izquierdo en móviles */
-    text-align: center; /* Centrar título en móviles */
+    flex-direction: row; /* Mantener en fila en móviles */
+    justify-content: space-around; /* Espaciado entre testimonios */
   }
 
   .testimonio {
-    min-width: 90%; /* Ajustar el ancho mínimo para móviles */
-    margin: 10px 0; /* Espaciado vertical entre testimonios */
+    flex: 1 1 calc(33.333% - 20px); /* Ajustar para que tres testimonios quepan en la línea */
+    max-width: calc(33.333% - 20px); /* Limitar ancho máximo */
+    margin: 10px; /* Margen entre testimonios */
+  }
+
+  .titulo {
+    font-size: 20px; /* Tamaño de fuente reducido para móviles */
+    margin-left: 0; /* Eliminar margen izquierdo en móviles */
+    text-align: center; /* Centrar título en móviles */
   }
 
   .testimonio-header {
@@ -84,19 +96,22 @@ body {
   }
 
   .testimonio-image {
-    width: 40px; /* Reducir el tamaño de la imagen en móviles */
-    height: 40px;
+    width: 30px; /* Reducir el tamaño de la imagen en móviles */
+    height: 30px;
   }
 
   .testimonio p {
-    font-size: 0.9em; /* Tamaño de fuente reducido para móviles */
+    font-size: 0.7em; /* Tamaño de fuente reducido para móviles */
   }
 
   .rating .star {
-    font-size: 25px; /* Tamaño de estrella reducido para móviles */
+    font-size: 20px; /* Tamaño de estrella reducido para móviles */
+  }
+
+  .toggle-button {
+    font-size: 12px; /* Tamaño de fuente del botón en móviles */
   }
 }
-
 /*Descrtipcopn*/
 
 .description-section {

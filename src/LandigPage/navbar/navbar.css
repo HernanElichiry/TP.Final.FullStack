@@ -1,3 +1,5 @@
+
+
 .navbar {
     background-color: #01031c ;
     height: 60px;
@@ -5,6 +7,7 @@
     justify-content: center;
     align-items: center;
     margin-left: 1.5%;
+    overflow: visible; 
   }
   
   .navbar-container {
@@ -34,10 +37,12 @@
   
     display: flex;
     list-style: none;
+    transition: opacity 0.3s ease; /* Suaviza la transición */
   }
   
   .nav-item {
     margin-right: 20px;
+    white-space: nowrap;
   }
   
   .nav-links {
@@ -56,4 +61,13 @@
     margin-right: 5px;
     padding-right: 7px;
   }
+  .navbar-menu.is-active {
+    display: block; /* Muestra el menú cuando está activo */
+    opacity: 1; /* Asegúrate de que la opacidad sea 1 cuando está activo */
+  }
+  .navbar-burger.is-active + .navbar-menu {
+    display: block; /* Asegura que el menú se muestre cuando el burger está activo */
+    opacity: 1; /* Asegura que el menú sea visible */
+  }
+
 

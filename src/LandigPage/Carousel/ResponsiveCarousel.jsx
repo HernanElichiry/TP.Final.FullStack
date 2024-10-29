@@ -14,7 +14,7 @@ function ResponsiveCarousel({ courses, text = "inserte texto" }) {
 
   var settings = {
     dots: true,
-    infinite: true, // Hacer que el carrusel sea infinito
+    infinite: courses.length > 4, // Desactivar el carrusel infinito si hay menos de 4 elementos
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -27,7 +27,7 @@ function ResponsiveCarousel({ courses, text = "inserte texto" }) {
         settings: {
           slidesToShow: 4,
           slidesToScroll: 1,
-          infinite: true,
+          infinite: courses.length > 4, // Aplica también aquí la condición
           dots: true,
         },
       },
@@ -36,7 +36,7 @@ function ResponsiveCarousel({ courses, text = "inserte texto" }) {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
-          infinite: true,
+          infinite: courses.length > 3, // Evitar repeticiones en caso de menos de 3 elementos
           dots: true,
         },
       },
@@ -46,13 +46,15 @@ function ResponsiveCarousel({ courses, text = "inserte texto" }) {
           slidesToShow: 2,
           slidesToScroll: 1,
           initialSlide: 2,
+          infinite: courses.length > 2, // Evitar repeticiones en caso de menos de 2 elementos
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1,
+          infinite: courses.length > 2, // Evitar repeticiones en caso de menos de 2 elementos
         },
       },
     ],
