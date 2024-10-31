@@ -30,7 +30,7 @@ const RegisterForm = () => {
     /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+   // e.preventDefault();
 
     // Validar que las contraseñas coincidan antes de enviar
     if (password !== confirmPassword) {

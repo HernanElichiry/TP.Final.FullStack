@@ -1,7 +1,5 @@
-
-
 import  { useState, useEffect } from "react";
-
+import Cookies from 'js-cookie';
 import { useForm, Controller } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -9,152 +7,53 @@ import { v4 as uuidv4 } from "uuid";
 import "./AddCourseForm.css";
 import Cleave from 'cleave.js/react';
 import 'cleave.js/dist/addons/cleave-phone.us';
+import { useUser } from "../UserContext/UserContext";
 
 const AddCourseForm = () => {
-  const { control, handleSubmit, formState: { errors }, watch, setError } = useForm();
- // const [selectedTopics, setSelectedTopics] = useState([]);
-  const [classes, setClasses] = useState([{ id: uuidv4(), video: { videoId: uuidv4(), name: "", url: "" }, file: { name: "", url: "" }, className: "" }]);
-  const [noDates, setNoDates] = useState(false);
-  
+  const { control, handleSubmit, formState: { errors }, watch, setError,  setValue } = useForm();
+  const {user} = useUser(); 
   const startDate = watch('startDate');
-
-
+  const [noDates, setNoDates] = useState(false);
+  const [backgroundImage, setBackgroundImage] = useState(null); // Variable de estado para la imagen
   const [categories, setCategories] = useState([]);
+  const [availableTopics, setAvailableTopics] = useState([]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState("");
 
   useEffect(() => {
-    const fetchCategories = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/categories');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setCategories(data); // Asumiendo que `data` es un arreglo de categorías
+        const response = await fetch('http://localhost:3000/categories/Categories-With-Topics');
+        const categoriesData = await response.json();
+        setCategories(categoriesData);
       } catch (error) {
-        console.error('Error fetching categories:', error);
+        console.error('Error fetching data:', error);
       }
     };
 
-    fetchCategories();
+    fetchData();
   }, []);
-  
 
-
-  const availableTopics = ["HTML", "CSS", "JavaScript", "React", "Node.js"];
-
- /* const handleTopicChange = (e) => {
-    const topic = e.target.value;
-    setSelectedTopics((prev) =>
-      prev.includes(topic) ? prev.filter((t) => t !== topic) : [...prev, topic]
-    );
-  };*/
-
-  const handleFileChange = (index, field, file) => {
-    const updatedClasses = [...classes];
-  
-    if (file) {
-      // Si hay archivo, actualiza la información
-      if (field === "video") {
-        updatedClasses[index][field] = {
-          videoId: uuidv4(),
-          name: file.name,
-          url: URL.createObjectURL(file), // Genera una URL temporal para el archivo
-        };
-      } else {
-        updatedClasses[index][field] = {
-          name: file.name,
-          url: URL.createObjectURL(file),
-        };
-      }
+  useEffect(() => {
+    // Filtra los tópicos disponibles según la categoría seleccionada
+    if (selectedCategoryId) {
+      const selectedCategory = categories.find(cat => cat.id === parseInt(selectedCategoryId));
+      const filteredTopics = selectedCategory ? selectedCategory.topics : [];
+      setAvailableTopics(filteredTopics);
+      setValue("topics", []); // Resetea la selección de tópicos al cambiar de categoría
     } else {
-      // Si no hay archivo, limpia el campo
-      updatedClasses[index][field] = {
-        videoId: "",
-        name: "",
-        url: "",
-      };
+      setAvailableTopics([]);
     }
+  }, [selectedCategoryId, categories, setValue]);
+
   
-    setClasses(updatedClasses); // Actualiza el estado
+  const videoUrl = watch('videoUrl'); // Observa el valor de videoUrl
+  const [isPreviewVisible, setIsPreviewVisible] = useState(false);
+
+  // Función para verificar si la URL es un enlace válido de YouTube
+  const isYouTubeUrl = (url) => {
+    const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/;
+    return youtubeRegex.test(url);
   };
-  
- 
-
-
-  const addNewClass = () => {
-    setClasses([...classes, { id: uuidv4(), video: { videoId: uuidv4(), name: "", url: "" }, file: { name: "", url: "" }, className: "" }]);
-  };
-  
-  const handleRemoveClass = (index) => {
-    // Crea una copia de las clases
-    const updatedClasses = [...classes];
-    // Elimina la clase en la posición dada
-    updatedClasses.splice(index, 1);
-    // Actualiza el estado
-    setClasses(updatedClasses);
-    // Actualiza el formulario
-    setValue("classes", updatedClasses);
-  };
-
-  /*const onSubmit = async (data) => {
-    
-    if (!noDates && new Date(data.endDate) <= new Date(data.startDate)) {
-      setError("endDate", { type: "manual", message: "La fecha de finalización debe ser posterior a la de inicio." });
-      return;
-    }
-
-    const combinedData = {
-      id: uuidv4(),
-      courseName: data.courseName,
-      courseDescription: data.courseDescription,
-      courseDuration: data.courseDuration,
-      category: data.category,
-      certification: data.certification,
-      institution: data.institution,
-      requirements: data.requirements,
-      presentationVideo: URL.createObjectURL(data.presentationVideo[0]),
-      backgroundImage: URL.createObjectURL(data.backgroundImage[0]),
-      startDate: data.startDate,
-      endDate: data.endDate,
-      noDate: noDates,
-      topics: data.topics,
-      price: data.price,
-      classes: classes.map((classItem) => ({
-        id: classItem.id,
-        video: {
-            id: classItem.video.videoId,
-            name: classItem.video.name,
-            url: classItem.video.url,
-        },
-        file: {
-            name: classItem.file.name,
-            url: classItem.file.url,
-        },
-        className: classItem.title,
-    })),
-  };
-
-    console.log("Curso agregado:", combinedData);
-
-
-   try {
-      const response = await fetch("http://localhost:3000/courses", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(combinedData),
-      });
-  
-      if (response.ok) {
-        console.log('Curso agregado exitosamente');
-      } else {
-        console.error('Error al agregar el curso');
-      }
-    } catch (error) {
-      console.error('Error en la solicitud:', error);
-    }
-  };*/
 
 
   const onSubmit = async (data) => {
@@ -162,42 +61,34 @@ const AddCourseForm = () => {
       setError("endDate", { type: "manual", message: "La fecha de finalización debe ser posterior a la de inicio." });
       return;
     }
-  
+  console.log(data.topics)
+    const token = Cookies.get('token'); // Obtén el token de las cookies
     const formData = new FormData();
   
     // Agregar los datos del curso
     formData.append('title', data.courseName);
     formData.append('description', data.courseDescription);
     formData.append('duration', data.courseDuration);
-    formData.append('category', data.category);
-    formData.append('certification', data.certification);
     formData.append('platform', data.institution);
-    formData.append('requirements', data.requirements);
-    formData.append('presentationVideo', data.presentationVideo[0]); // Suponiendo que es un archivo
-    formData.append('backgroundImage', data.backgroundImage[0]); // Suponiendo que es un archivo
-    formData.append('startDate', data.startDate);
-    formData.append('endDate', data.endDate);
-    formData.append('noDate', noDates);
-   // formData.append('topics', data.topics);
-    formData.append("topics", JSON.stringify(data.topics)); 
-    formData.append('price', data.price);
+    formData.append('category_id', data.category.toString());
+    formData.append('instructor_id',  user.sub.toString());
   
-    // Agregar clases
-    classes.forEach((classItem) => {
-      // Verificar que classItem.file tenga nombre y url
-      if (classItem.file && classItem.file.name && classItem.file.url) {
-        formData.append(`classes[${classItem.id}][className]`, classItem.title);
-        formData.append(`classes[${classItem.id}][file][name]`, classItem.file.name);
-        formData.append(`classes[${classItem.id}][file]`, classItem.file.url); // Aquí se añade el archivo (URL)
+    if (videoUrl) {    
+      formData.append('videoUrl', data.videoUrl.toString());  
+    }
   
-        // Si el video también tiene un nombre y URL
-        if (classItem.video && classItem.video.name && classItem.video.url) {
-          formData.append(`classes[${classItem.id}][video][name]`, classItem.video.name);
-          formData.append(`classes[${classItem.id}][video][url]`, classItem.video.url); // Aquí se añade el URL del video
-        }
-      }
-    });
+    if(backgroundImage) {
+    formData.append('file', backgroundImage); //le pongo file y no filename por el interceptor
+   } 
 
+   /*if(!noDates) {
+  formData.append('startDate', data.startDate);
+  formData.append('endDate', data.endDate);
+  }*/
+    
+formData.append('price', data.price);
+data.topics.forEach(topic => formData.append('topicIds[]', topic));
+  
 
     // Para verificar que los datos están correctos antes de enviar
 console.log("Datos del formulario a enviar:");
@@ -205,20 +96,24 @@ for (const [key, value] of formData.entries()) {
   console.log(`${key}:`, value);
 }
   
-    /*try {
-      const response = await fetch("http://localhost:3000/courses/user_id", {
-        method: 'POST',
-        body: formData, // Enviar formData directamente
-      });
-  
-      if (response.ok) {
-        console.log('Curso agregado exitosamente');
-      } else {
-        console.error('Error al agregar el curso');
-      }
-    } catch (error) {
-      console.error('Error en la solicitud:', error);
-    }*/
+try {
+  const response = await fetch("http://localhost:3000/courses", {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`, 
+    },
+    body: formData,
+  });
+
+  if (response.ok) {
+    console.log('Curso agregado exitosamente');
+  } else {
+    const errorData = await response.json(); // Intentar obtener el cuerpo de la respuesta en JSON
+    console.error('Error al agregar el curso:', errorData);
+  }
+} catch (error) {
+  console.error('Error en la solicitud:', error);
+}
   };
 
 
@@ -265,8 +160,8 @@ for (const [key, value] of formData.entries()) {
           />
           {errors.courseDuration && <p className="error-message">{errors.courseDuration.message}</p>}
         </div>
- {/* Categoría */}
- <div className="form-group">
+       {/* Categoría */}
+       <div className="form-group">
         <label htmlFor="category">Categoría</label>
         <Controller
           name="category"
@@ -274,53 +169,59 @@ for (const [key, value] of formData.entries()) {
           defaultValue=""
           rules={{ required: "Selecciona una categoría." }}
           render={({ field }) => (
-            <select className="form-input" id="category" {...field}>
+            <select
+              className="form-input"
+              id="category"
+              {...field}
+              onChange={(e) => {
+                setSelectedCategoryId(e.target.value);
+                field.onChange(e.target.value);
+              }}
+            >
               <option value="">Selecciona una categoría</option>
               {categories.map((cat) => (
-                <option key={cat.id} value={cat.id}>{cat.name}</option> // Usa cat.name aquí
+                <option key={cat.id} value={cat.id}>{cat.name}</option>
               ))}
             </select>
           )}
         />
         {errors.category && <p className="error-message">{errors.category.message}</p>}
       </div>
-        
-         {/* Temas */}
-         <div className="form-group">
-        <label>Temas (máx. 5)</label>
+
+      {/* Tópicos */}
+      <div className="form-group">
+        <label>Temas (mínimo 3)</label>
         <Controller
           name="topics"
-           control={control}
-           defaultValue={[]}
-           rules={{
-            validate: (value) => value.length >= 2 || "Selecciona al menos 2 topics."
-           }}
+          control={control}
+          defaultValue={[]}
+          rules={{
+            validate: (value) => value.length >= 1 || "Selecciona al menos 1 tópicos."
+          }}
           render={({ field }) => (
-          <>
-          {availableTopics.map((topic, index) => (
-          <label key={index} >
-            <input
-              type="checkbox"
-              value={topic}
-              checked={field.value.includes(topic)}
-              onChange={(e) => {
-                const newValue = e.target.checked
-                  ? [...field.value, topic]
-                  : field.value.filter((t) => t !== topic);
-                field.onChange(newValue);
-              }}
-            />
-            {topic}
-          </label>
-           ))}
-          </>
-           )}
-          />
-  
-  {/* Mostrar mensaje de error si hay un error en "topics" */}
-  {errors.topics && <p className="error-message" >{errors.topics.message} </p>} 
-         </div>
-
+            <>
+              {availableTopics.map((topic) => (
+                <label key={topic.id}>
+                  <input
+                    type="checkbox"
+                    value={topic.id}
+                    checked={field.value.includes(topic.id)}
+                    onChange={(e) => {
+                      const newValue = e.target.checked
+                        ? [...field.value, topic.id] // Añadir tópico
+                        : field.value.filter((t) => t !== topic.id); // Quitar tópico
+                      
+                      field.onChange(newValue); // Actualiza el valor en el formulario
+                    }}
+                  />
+                  {topic.topic}
+                </label>
+              ))}
+            </>
+          )}
+        />
+        {errors.topics && <p className="error-message">{errors.topics.message}</p>}
+      </div>
        {/* Institución */}
          <div className="form-group">
   <label htmlFor="institution">Institución</label>
@@ -340,281 +241,64 @@ for (const [key, value] of formData.entries()) {
   {errors.institution && <p className="error-message">{errors.institution.message}</p>}
         </div>
 
-        {/* Requisitos */}
+        {/* Imagen de Fondo */}
         <div className="form-group">
-  <label htmlFor="requirements">Requisitos</label>
-  <Controller
-    name="requirements"
-     control={control}
-    defaultValue=""
-    rules={{ 
-     
-      maxLength: {
-        value: 100,
-        message: "Los requisitos no pueden superar los 100 caracteres."
-      }
-    }}
-    render={({ field }) => <textarea className="form-input" id="requirements" 
-    placeholder = "Por ej: se recomienda tener conocimientos de ingles  "   {...field} />}
-  />
-  {errors.requirements && <p className="error-message">{errors.requirements.message}</p>}
-        </div>
-
-          {/* ¿Ofrece certificación? */}
-        <div className="form-group">
-  <label htmlFor="certification">¿Ofrece certificación?</label>
-  <Controller
-    name="certification"
-    control={control}
-    defaultValue={false}
-    render={({ field }) => <input type="checkbox" className="form-check-input" id="certification" {...field} />}
-  /> 
-         </div>
-
+                <label htmlFor="backgroundImage">Imagen de Fondo</label>
+                <Controller
+                    name="backgroundImage"
+                    control={control}
+                    defaultValue={null}
+                    rules={{ required: "La imagen de fondo es requerida." }}
+                    render={({ field }) => (
+                        <input
+                            type="file"
+                            accept="image/*"
+                            id="backgroundImage"
+                            onChange={(e) => {
+                                const file = e.target.files[0]; // Asegúrate de acceder al primer archivo
+                                console.log('Archivo capturado:', file); // Verifica que se esté capturando correctamente
+                                setBackgroundImage(file); // Almacena el archivo en el estado
+                                field.onChange(file); // Almacena el archivo en el control de react-hook-form
+                            }}
+                        />
+                    )}
+                />
+                {errors.backgroundImage && <p className="error-message">{errors.backgroundImage.message}</p>}
+            </div>
          
        {/* Video Presentación */}
        <div className="form-group">
-  <label htmlFor="presentationVideo">Video de Presentación</label>
-  <Controller
-    name="presentationVideo"
-    control={control}
-    defaultValue={""}
-    rules={{
-      validate: {
-        required: (files) => files.length > 0 || "Debes seleccionar un video.",
-        maxSize: (files) => 
-          // Convierte FileList a array y verifica el tamaño
-          Array.from(files).every((file) => file.size <= 800 * 1024 * 1024) ||
-          "El video no debe superar los 800MB.",
-      },
-    }}
-    render={({ field }) => (
-      <input
-        type="file"
-        accept="video/*"
-        id="presentationVideo"
-        onChange={(e) => field.onChange(e.target.files)}
-      />
-    )}
-  />
-  {errors.presentationVideo && (
-    <p className="error-message">{errors.presentationVideo.message}</p>
-  )}
-       </div>
-
-
-        {/* Imagen de Fondo */}
-        <div className="form-group">
-          <label htmlFor="backgroundImage">Imagen de Fondo</label>
-          <Controller
-            name="backgroundImage"
-            control={control}
-            defaultValue={null}
-            rules={{ required: "La imagen de fondo es requerida." }}
-            render={({ field }) => (
-              <input type="file" accept="image/*" id="backgroundImage" onChange={(e) => field.onChange(e.target.files)} />
-            )}
-          />
-          {errors.backgroundImage && <p className="error-message">{errors.backgroundImage.message}</p>}
-        </div>
-
-        {/* Clases */}
-        <h3>Clases</h3>
-        {classes.map((classItem, index) => (
-       <div key={classItem.id} className="class-section">
-        <h4>Clase {index + 1}</h4>
-
-       {/* Nombre de la clase */}
-        <div className="form-group">
-        <label htmlFor={`title-${classItem.id}`}>Nombre de la clase</label>
+        <label>Video URL (YouTube)</label>
         <Controller
-        name={`classes[${index}].title`}
-        control={control}
-        defaultValue={classItem.title || ""}
-        rules={{
-          required: "El nombre del archivo requerido.",
-          maxLength: {
-            value: 50,
-            message: "El nombre del archivo no puede superar los 50 caracteres.",
-          },
-        }}
-        render={({ field }) => (
-          <input
-            className="form-input"
-            id={`title-${classItem.id}`}
-            {...field}
-            onChange={(e) => {
-              field.onChange(e.target.value);
-              const updatedClasses = [...classes];
-              updatedClasses[index].title = e.target.value; // Actualizar el estado local
-              setClasses(updatedClasses);
-            }} 
-          />
-        )}
-      />
-      {errors.classes?.[index]?.className && <p className="error-message">{errors.classes[index].className.message}</p>}
-    </div>
+          name="videoUrl"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <input
+              type="text"
+              placeholder="https://www.youtube.com/watch?v=XXXXXX"
+              {...field}
+              onBlur={() => setIsPreviewVisible(isYouTubeUrl(field.value))}
+            />
+          )}
+        />
+      </div>
 
- {/* Video de Clase */}
-<div className="form-group">
-  <label htmlFor={`classVideo-${classItem.id}`}>Video de Clase</label>
-  <Controller
-    name={`classes[${index}].video.file`}
-    control={control}
-    rules={{
-      validate: {
-        required: (files) => files && files.length > 0 || "El video es requerido.",
-        maxSize: (files) =>
-          files && Array.from(files).every((file) => file.size <= 800 * 1024 * 1024) ||
-          "El video no debe superar los 800MB.",
-      },
-    }}
-    render={({ field }) => (
-      <input
-        className="form-input"
-        type="file"
-        accept="video/*"
-        id={`classVideo-${classItem.id}`}
-        onChange={(e) => {
-          const file = e.target.files[0]; // Obtiene el archivo
-
-          // Maneja el caso cuando no hay archivo (es decir, cuando se cancela la selección)
-          if (file) {
-            field.onChange([file]); // Envuelve el archivo en un array
-            handleFileChange(index, "video", file); // Procesa el archivo
-
-            // Guardar solo la URL del video como blob en el estado
-            const updatedClasses = [...classes];
-            updatedClasses[index].video.url = URL.createObjectURL(file); // Establece la URL del archivo en el estado
-            setClasses(updatedClasses);
-          } else {
-            field.onChange([]); // Limpia el valor como un array vacío
-            handleFileChange(index, "video", null); // Limpia el estado
-          }
-        }}
-      />
-    )}
-  />
-  {errors.classes?.[index]?.video?.file && (
-    <p className="error-message">{errors.classes[index].video.file.message}</p>
-  )}
-</div>
-
-
-    {/* Campo para el nombre del video */}
-    <div className="form-group">
-      <label htmlFor={`videoName-${classItem.id}`}>Nombre del Video</label>
-      <Controller
-        name={`classes[${index}].video.name`}
-        control={control}
-        defaultValue={classItem.video.name}
-        rules={{
-          required: "El nombre del video es requerido.",
-          maxLength: {
-            value: 50,
-            message: "El nombre del video no puede superar los 50 caracteres.",
-          },
-        }}
-        render={({ field }) => (
-          <input
-            className="form-input"
-            id={`videoName-${classItem.id}`}
-            {...field}
-            onChange={(e) => {
-              field.onChange(e.target.value);
-              const updatedClasses = [...classes];
-              updatedClasses[index].video.name = e.target.value; // Actualizar el nombre en el estado
-              setClasses(updatedClasses);
-            }}
-          />
-        )}
-      />
-      {errors.classes?.[index]?.video?.name && <p className="error-message">{errors.classes[index].video.name.message}</p>}
-    </div>
-
-{/* Archivo Adjunto */}
-<div className="form-group">
-  <label htmlFor={`classFile-${classItem.id}`}>Archivo Adjunto</label>
-  <Controller
-    name={`classes[${index}].file.file`}
-    control={control}
-    rules={{
-      validate: {
-        // Validación para tipos de archivo permitidos
-        fileType: (file) => {
-          if (!file) return true; // Si no hay archivo, es válido
-          const allowedTypes = ['.rar', '.pdf', '.doc', '.docx', '.ppt', '.pptx', '.jpg', '.jpeg', '.png'];
-          const fileExtension = file.name.slice((Math.max(0, file.name.lastIndexOf(".")) || Infinity) + 1);
-          return allowedTypes.includes(`.${fileExtension}`) || "El archivo debe ser .rar, .pdf, .doc, .docx, .ppt, .pptx, .jpg, .jpeg o .png.";
-        },
-        // Validación para tamaño máximo del archivo
-        maxSize: (file) => {
-          if (!file) return true; // Si no hay archivo, es válido
-          return file.size <= 50 * 1024 * 1024 || "El archivo no debe superar los 50MB.";
-        },
-      },
-    }}
-    render={({ field }) => (
-      <input
-        className="form-input"
-        type="file"
-        id={`classFile-${classItem.id}`}
-        onChange={(e) => {
-          const file = e.target.files[0];
-          field.onChange(file);
-          handleFileChange(index, "file", file);
-        }}
-      />
-    )}
-  />
-
-  {errors.classes?.[index]?.file?.file && <p className="error-message">{errors.classes[index].file.file.message}</p>}
-</div>
-
-
-{/* Campo para el nombre del archivo */}
-<div className="form-group">
-  <label htmlFor={`attachmentName-${classItem.id}`}>Nombre del Archivo</label>
-  <Controller
-    name={`classes[${index}].file.name`}
-    control={control}
-    defaultValue={classItem.file.name}
-    rules={{
-      required: "El nombre del archivo requerido.",
-      maxLength: {
-        value: 50,
-        message: "El nombre del archivo no puede superar los 50 caracteres.",
-      },
-    }}
-    render={({ field }) => (
-      <input
-        className="form-input"
-        id={`attachmentName-${classItem.id}`}
-        {...field}
-        onChange={(e) => {
-          field.onChange(e.target.value);
-          const updatedClasses = [...classes];
-          updatedClasses[index].file.name = e.target.value; // Actualizar el nombre en el estado
-          setClasses(updatedClasses);
-        }}
-      />
-    )}
-  />
-  {errors.classes?.[index]?.file?.name && <p className="error-message">{errors.classes[index].file.name.message}</p>}
-</div>
-
-   {/* Botón para quitar clase */}
-   <button
-      type="button"
-      className="btn-remove-class"
-      onClick={() => handleRemoveClass(index)}
-    >
-      Quitar Clase
-    </button>
-
-  </div>
-))}
-       <button type="button" onClick={addNewClass}>Agregar Nueva Clase</button>
+      {/* Vista previa de YouTube */}
+      {isPreviewVisible && (
+        <div className="video-preview">
+          <h4>Vista previa del video:</h4>
+          <iframe
+            width="560"
+            height="315"
+            src={`https://www.youtube.com/embed/${new URL(videoUrl).searchParams.get('v')}`}
+            title="YouTube video preview"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
+      )}
 
         {/* Fechas */}
         <div className="form-group">

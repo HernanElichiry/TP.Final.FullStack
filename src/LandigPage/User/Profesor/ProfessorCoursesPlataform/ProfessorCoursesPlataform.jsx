@@ -1,6 +1,4 @@
 
-
-
 /*const  initialCourseData = {
   id: "course-1",
   courseName: "curso avanzado de programación",
@@ -154,21 +152,18 @@ import { v4 as uuidv4 } from 'uuid';
 import { useParams } from 'react-router-dom';
 
 
+
 const CoursePlatform = () => {
   const { id } = useParams(); // Aquí obtenemos el parámetro 'id' de la URL
+  const { courseName, startDate, endDate } = JSON.parse(sessionStorage.getItem('courseData'));
+
 
   const [courseData, setCourseData] = useState({
-    id: "",
-    courseName: "",
-    //courseDescription: "",
-    //courseDuration: "",
-    // category: "",
-    //presentationVideo: "",
-   // backgroundImage: "",
-    startDate: "",
-    endDate: "",
-    noDate: false,
-    //selectedTopics: [],
+   // id: "",
+   // courseName: "",
+   // startDate: "",
+   // endDate: "",
+   // noDate: false,
     classes: []
   }); // creamos una variable de estado donde almacenaremos los datos de back
 
@@ -177,35 +172,31 @@ const CoursePlatform = () => {
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/courses/${id}`); // Llamada a la API con el ID
+        const response = await fetch(`http://localhost:3000/classes/bycourseid/${id}`); // Llamada a la API con el ID
         const data = await response.json(); // Convertir la respuesta a JSON
         console.log('Datos antes de almacenar en el estado:', data);
-        
+
+       
         // Transformar los datos a la estructura que necesitas
         const transformedData = {
-          id: `course-${data.id}`,
-          courseName: data.title || "", 
-          //courseDescription: data.description || "", /// este dato no lo uso
-          //courseDuration: data.duration ? String(data.duration) : "", //este tampoco
-         // category: data.category.name || "", //este tampoco
-          //presentationVideo: `https://example.com/path/to/${data.media.videoname}` || "", // esto tampoco
-         // backgroundImage: `https://example.com/path/to/${data.media.filename}` || "", // esto tampoco
-          startDate: "", // Puedes asignar una fecha de inicio si la tienes
-          endDate: "", // Puedes asignar una fecha de finalización si la tienes
-          noDate: false,
-         // selectedTopics: data.courseTopics.map(topic => topic.topic.topic), // Extraer los nombres de los temas
-          classes: data.classes.map((cls, index) => ({
-            id: `class-${index + 1}`, // Asignar un ID único
+          id: "", //id de las clases
+          courseName: courseName || "", // los datos del curso no vienen del endpoint sino del storage
+          startDate: startDate || "", //  los datos del curso no vienen del endpoint sino del storage
+          endDate: startDate || "", //  los datos del curso no vienen del endpoint sino del storage
+          //noDate: false, // este dato es manual
+          classes: data.map((cls, index) => ({
+            classname: cls.title, // Nombre de la clase
+            id: `class-${index + 1}`, // aqui deberia ser cls.id pero aun no se ha asignado
             video: {
-              id: `video-${index + 1}`, // ID para el video
-              name: cls.title, // Título de la clase
-              url: `https://example.com/path/to/${data.media.videoname}` // URL del video (ajusta esto según tu lógica)
+              //id: `video-${index + 1}`, // ID para el video deberia venir del back
+              name: cls.title, // Título del video pero no esta llegando
+              url: `https://example.com/path/to/${cls.title}` // URL del video (ajusta esto según tu lógica) deberia decir videoname pero ese dato no esta llegando
             },
             file: {
-              name: "", // Aquí puedes agregar lógica si tienes archivos asociados
-              url: "" // Aquí puedes agregar la URL si la tienes
+              name: cls.content, // "aqui va el nombre del descagable", // Aquí puedes agregar lógica si tienes archivos asociados
+              url: `http://localhost:3000/uploads/files/${cls.content}` || "no hay archivo" // Aquí puedes agregar la URL si la tienes
             },
-            classname: cls.title // Nombre de la clase
+            
           }))
         };
 
@@ -218,12 +209,6 @@ const CoursePlatform = () => {
     fetchCourse(); // Ejecutar la llamada a la API
   }, [id]); // Ejecutar cuando el ID cambie
 
-
-  // bien, ya tenemos los datos para manipularlos!! :)
-  //ahora Bien, esta plataforma busca poder crear nuevas clases, editar las ya existentes y elminar las que sean necesarias
-
-  
-  
 
 //////////////////////// creando nueva clase
 const [newClassData, setNewClassData] = useState({ // defino la estructura de una nueva clase, ponemos un id pero lo debe hacer el back
@@ -266,7 +251,7 @@ const handleCreateClassInState = () => {
     },
     file: {
       name: newClassData.fileName,
-      url: newClassData.fileFile ? URL.createObjectURL(newClassData.fileFile) : null, // Crear URL solo si hay un archivo
+      url: newClassData.fileFile //? URL.createObjectURL(newClassData.fileFile) : null, // Crear URL solo si hay un archivo
     },
     classname: newClassData.classname
   };
@@ -403,41 +388,41 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
       return;
     }
 
-  // Función que envía todas las clases nuevas al backend
-  if (newClasses.length > 0) {
-    const newclassFormData = new FormData();
-    console.log("Nuevas Clases:", newClasses);
+
+    if (newClasses.length > 0) {
+      console.log("Nuevas Clases:", newClasses, );
   
-    newClasses.forEach((newClass, index) => {
-      // Aquí se envían los nombres de los archivos, no los objetos
-      if (newClass.video.url) { /// ponerle indice `fileFiles[${index}]`
-        newclassFormData.append(`videoName`, newClass.video.name); // Usa newClass.video.name
-      }
-      if (newClass.file.url) {
-        newclassFormData.append(`fileName`, newClass.file.name); // Usa newClass.file.name
-      }
-      newclassFormData.append(`title`, newClass.classname);
-     
-      newclassFormData.append(`videoUrl`, newClass.video.url);
-      newclassFormData.append(`fileUrl`, newClass.file.url);
-    });
+      for (const newClass of newClasses) {
+        const classFormData = new FormData();
   
-    // Enviar la solicitud al backend (ajusta el endpoint según tu API)
-    try {
-      const response = await fetch('/api/classes', {
-        method: 'POST',
-        body: newclassFormData,
-      });
-      if (response.ok) {
-        console.log('Clases creadas exitosamente');
-      } else {
-        const errorResponse = await response.json(); // Obtiene la respuesta de error
-        console.error('Error al crear las clases:', errorResponse);
+        classFormData.append('course_id', id.toString()); // ID del curso, asumiendo que ya es un string
+        classFormData.append('title', newClass.classname); // Título de la clase
+        classFormData.append('duration', id.toString()); // Duración como string (ajusta si tienes un valor específico)
+        classFormData.append('content', 'contenido aqui'); // Contenido de la clase
+  
+        // Agrega el archivo si está disponible
+        if (newClass.file && newClass.file.url) {
+          classFormData.append('file', newClass.file.url); // Archivo cargado por el input
+        }
+  
+        try {
+          const response = await fetch('http://localhost:3000/classes', {
+            method: 'POST',
+            body: classFormData,
+          });
+  
+          if (response.ok) {
+            console.log(`Clase '${newClass.classname}' creada exitosamente`);
+          } else {
+            const errorResponse = await response.json(); // Obtiene la respuesta de error
+            console.error(`Error al crear la clase '${newClass.classname}':`, errorResponse);
+          }
+        } catch (error) {
+          console.error(`Error en la petición para la clase '${newClass.classname}':`, error);
+        }
       }
-    } catch (error) {
-      console.error('Error en la petición:', error);
-    }
-  }
+    };
+  
   
     // Filtrar las clases modificadas para no incluir aquellas que fueron eliminadas
     if (modifiedClasses.length > 0) {
@@ -532,10 +517,10 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
         </div>
       <div className="course-platform">
         <div className="course-list-container">
-          <div className="course-details">
-            <h1>{courseData.courseName}</h1>
-             <p>Fecha de Inicio: {courseData.startDate}</p>
-             <p>Fecha de Finalización: {courseData.endDate}</p>
+          <div className="course-dates">
+            <h1>{courseName}</h1>
+             <p>Fecha de Inicio: {startDate}</p>
+             <p>Fecha de Finalización: {endDate}</p>
             <h2>Clases</h2>
             <ul className="course-list">
               {courseData.classes.map((classItem, classIndex) => (

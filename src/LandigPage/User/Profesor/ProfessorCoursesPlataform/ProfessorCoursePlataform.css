@@ -19,7 +19,7 @@ body {
 }
 
 /* Course details (left column) */
-.course-details {
+.course-dates {
   flex: 1;
   min-width: 300px;
   max-width: 400px;
@@ -32,17 +32,17 @@ body {
   transition: transform 0.2s ease-in-out;
 }
 
-.course-details:hover {
+.course-dates:hover {
   transform: scale(1.02);
 }
 
-.course-details h1 {
+.course-dates h1 {
   margin-bottom: 15px;
   font-size: 24px;
   font-weight: bold;
 }
 
-.course-details p {
+.course-dates p {
   margin: 8px 0;
   font-size: 14px;
   color: #666;

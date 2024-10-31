@@ -216,6 +216,7 @@
 
 
 .instructor-section {
+
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -223,6 +224,7 @@
   padding: 20px;
  
   justify-content: space-between;
+ 
   border:  solid white;
   border-radius: 10px;
 }
@@ -248,6 +250,7 @@
 }
 
 .instructor-description {
+  border: solid;
 
   max-width: 400px;
 }
@@ -264,13 +267,16 @@
 }
 
 .instructor-video {
+margin-right: 10px;
+
   flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: end;
+
 }
 
 .instructor-video video {
-  height: 350px;
-  max-width: 600px;
-  border-radius: 10px;
+
+width: 0%;
+
 }

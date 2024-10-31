@@ -10,6 +10,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const { login } = useUser();
 
+
   const handleLogin = async (e) => {
     e.preventDefault();
     // Lógica de autenticación aquí

@@ -30,6 +30,7 @@ const CourseDetail = () => {
         }
 
         const data = await response.json();
+        console.log(data);
         setCourse(data); // Guardar el curso en el estado
 
         // Construir la URL de la imagen del curso
@@ -81,9 +82,9 @@ const CourseDetail = () => {
             <h2>Sobre el curso</h2>
             <p>{course.description}</p>
             <h2>Requisitos</h2>
-            <p>{course.category.requisitos}</p> {/* Asegúrate de tener un campo diferente si es necesario */}
+            <p>{course.category.requisitos || ""}</p> {/* Asegúrate de tener un campo diferente si es necesario */}
             <h2>Certificación</h2>
-            <p>{course.category.certificacion}</p> {/* Asegúrate de tener un campo diferente si es necesario */}
+            <p>{course.category.certificacion || "" }</p> {/* Asegúrate de tener un campo diferente si es necesario */}
           </section>
         </div>
         <div className="course-sidebar">
@@ -145,7 +146,7 @@ const CourseDetail = () => {
           </div>
         </div>
         <div className="instructor-video">
-        {/* <iframe
+        { <iframe
           width="560"
           height="315"
           src={course.media.videoUrl.replace("watch?v=", "embed/")}
@@ -153,13 +154,13 @@ const CourseDetail = () => {
           style={{ border: 'none' }}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-        ></iframe> */}
+        ></iframe> }
         <video></video>
       </div>
       </div>
       <Testimonials />
       <PaymentMethods />
-      <Modalities />
+     
       <SubscriptionSection />
       <FAQ />
       <FooterApp />
