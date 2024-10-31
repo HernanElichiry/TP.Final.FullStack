@@ -13,11 +13,9 @@ const ProfesorCoursesCard = ({ course }) => {
   const [videoFile, setVideoFile] = useState(null);
   const [backgroundImageFile, setBackgroundImageFile] = useState(null); // Estado para almacenar la URL de la imagen
   const [errorMessages, setErrorMessages] = useState({});
+ 
 
-
-
-
-
+ 
   useEffect(() =>{
     const fetchImage = async() => {
 
@@ -36,9 +34,7 @@ const ProfesorCoursesCard = ({ course }) => {
   fetchImage();
   }, [] );
 
- 
 
-  
   const courseData = { 
     courseName: course.title, 
     startDate: course.startdate || "00/00/00",
@@ -112,6 +108,7 @@ const handleVideoFileChange = (e) => {
     if (!isModalOpen) {  // Verificación para evitar abrir varias veces
       setIsDeleteConfirm(isDelete);
       setIsModalOpen(true);
+      console.log("curso seleccionado", course);
     }
   };
 
@@ -134,14 +131,14 @@ const handleVideoFileChange = (e) => {
   
     // Validaciones de todos los campos
     switch (name) {
-      case 'courseName':
+      case 'title':
         if (value.trim() === '') {
           errorMessage = 'El nombre del curso es obligatorio.';
         }
        
         break;
   
-      case 'courseDescription':
+      case 'description':
         if (value.trim().length < 10) {
           errorMessage = 'La descripción debe tener al menos 10 caracteres.';
         } 
@@ -157,7 +154,7 @@ const handleVideoFileChange = (e) => {
         }
         break;
   
-      case 'courseDuration':
+      case 'duration':
         if (isNaN(value) || value <= 0) {
           errorMessage = 'La duración debe ser un número positivo.';
         }
@@ -202,9 +199,9 @@ const handleVideoFileChange = (e) => {
   const handleUpdate = async () => {
   // Verificamos campo por campo si hay cambios
   const hasChanges = {
-    courseName: formValues.courseName !== course.courseName,
+    courseName: formValues.title !== course.title,
     courseDescription: formValues.courseDescription !== course.courseDescription,
-    category: formValues.category !== course.category,
+    category: formValues.category !== course.category.name,
     courseDuration: formValues.courseDuration !== course.courseDuration,
     startDate: formValues.startDate !== course.startDate,
     endDate: formValues.endDate !== course.endDate,
@@ -232,12 +229,12 @@ const handleVideoFileChange = (e) => {
     const formData = new FormData();
   
     // Añadir solo las propiedades que deseas actualizar
-    formData.append('courseName', formValues.courseName);
-    formData.append('courseDescription', formValues.courseDescription);
-    formData.append('category', formValues.category);
-    formData.append('courseDuration', formValues.courseDuration);
-    formData.append('startDate', formValues.startDate);
-    formData.append('endDate', formValues.endDate);
+    formData.append('title', formValues.title);
+    formData.append('description', formValues.courseDescription);
+    formData.append('category', formValues.category.name); // seguramente category.id
+    formData.append('duration', formValues.duration); // recuerda que debe ser un string
+    formData.append('startDate', formValues.startDate);// se debe enviar como string
+    formData.append('endDate', formValues.endDate); // string
     
 
     if (videoFile) {
@@ -320,23 +317,24 @@ const handleVideoFileChange = (e) => {
   <div className="form-row">
     <div className="form-column">
     <>
-    <label>Nombre del curso:</label>
+    <label htmlFor= "title" >Nombre del curso:</label>
     <input
+      id="title"
       type="text"
-      name="courseName"
+      name="title"
       value={formValues.title}
       onChange={handleFormChange}
     />
-    {errorMessages.courseName && <p className="error">{errorMessages.courseName}</p>}
+    {errorMessages.title && <p className="error">{errorMessages.title}</p>}
     </>
-      <label htmlFor="courseDescription">Descripción:</label>
+      <label htmlFor="description">Descripción:</label>
       <textarea
-        id="courseDescription" // Agrega id para que coincida con htmlFor
-        name="courseDescription"
+        id="description" // Agrega id para que coincida con htmlFor
+        name="description"
         value={formValues.description}
         onChange={handleFormChange}  
       />
-       {errorMessages.courseDescription && <p className="error">{errorMessages.courseDescription}</p>}
+       {errorMessages.description && <p className="error">{errorMessages.description}</p>}
 
       <label htmlFor="category">Categoría:</label>
       <input
@@ -362,15 +360,15 @@ const handleVideoFileChange = (e) => {
       </div>
     </div>
     <div className="form-column">
-      <label htmlFor="courseDuration">Duración (Horas):</label>
+      <label htmlFor="duration">Duración (Horas):</label>
       <input
         type="text"
-        id="courseDuration" // Agrega id para que coincida con htmlFor
-        name="courseDuration"
+        id="duration" // Agrega id para que coincida con htmlFor
+        name="duration"
         value={formValues.duration}
         onChange={handleFormChange}
       />
-      {errorMessages.courseDuration && <p className="error">{errorMessages.courseDuration}</p>}
+      {errorMessages.duration && <p className="error">{errorMessages.duration}</p>}
       
       
       <label htmlFor="startDate">Fecha de Inicio:</label>
