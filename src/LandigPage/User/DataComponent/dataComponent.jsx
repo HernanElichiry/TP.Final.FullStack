@@ -1,34 +1,101 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Form, Input, Button, DatePicker, message } from "antd";
+import moment from "moment";
+import { useUser } from "../UserContext/UserContext";
 import "./dataComponent.css";
-import { Form, Input, Button, DatePicker } from "antd";
+import Cookies from "js-cookie";
 
 const DataComponent = () => {
+  const { user } = useUser(); // Obtener el usuario del contexto
   const [userData, setUserData] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
     birthDate: null,
     email: "",
   });
+  const [loading, setLoading] = useState(false);
 
+  const userId = user?.sub; // Obtener el ID del usuario desde el contexto
+
+  // Cargar los datos del usuario al montar el componente
+  useEffect(() => {
+
+    if (!userId) {
+      message.error("No se pudo identificar al usuario.");
+      return;
+    }
+
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/users/${userId}`);
+        if (response.ok) {
+          const data = await response.json();
+          setUserData({
+            name: data.name,
+            birthDate: data.birthdate,
+            email: data.email,
+          });
+        } else {
+          message.error("Error al cargar los datos del usuario");
+        }
+      } catch (error) {
+        console.error("Error al obtener los datos del usuario:", error);
+        message.error("Error al conectar con el servidor");
+      }
+    };
+
+    fetchUserData();
+  }, [userId]);
+
+  // Manejadores para cambios en el formulario
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUserData({
-      ...userData,
+    setUserData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
+    }));
   };
 
   const handleDateChange = (date, dateString) => {
-    setUserData({
-      ...userData,
+    setUserData((prevData) => ({
+      ...prevData,
       birthDate: dateString,
-    });
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí puedes enviar userData a tu backend o API
-    console.log("Datos del usuario actualizados:", userData);
+
+    const { name, birthDate, email } = userData;
+    if (!name || !birthDate || !email) {
+      message.error("Por favor, complete todos los campos antes de actualizar.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const token = Cookies.get("token"); // Obtener el token de las cookies
+
+      const response = await fetch(`http://localhost:3000/users/${userId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Incluir el token en el encabezado
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (response.ok) {
+        message.success("Datos del usuario actualizados con éxito");
+      } else {
+        message.error("Error al actualizar los datos del usuario");
+      }
+    } catch (error) {
+      console.error("Error al actualizar los datos del usuario:", error);
+      message.error("Ocurrió un error, inténtalo nuevamente");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -38,22 +105,13 @@ const DataComponent = () => {
       onSubmitCapture={handleSubmit}
     >
       <h2>Actualizar Perfil</h2>
-      <Form.Item label="Nombre">
+      <Form.Item label="Nombre Completo">
         <Input
           type="text"
-          name="firstName"
-          value={userData.firstName}
+          name="name"
+          value={userData.name}
           onChange={handleChange}
-          placeholder="Ingrese su nombre"
-        />
-      </Form.Item>
-      <Form.Item label="Apellido">
-        <Input
-          type="text"
-          name="lastName"
-          value={userData.lastName}
-          onChange={handleChange}
-          placeholder="Ingrese su apellido"
+          placeholder="Ingrese su nombre completo"
         />
       </Form.Item>
       <Form.Item label="Fecha de Nacimiento">
@@ -69,14 +127,14 @@ const DataComponent = () => {
           type="email"
           name="email"
           value={userData.email}
-          onChange={handleChange}
-          placeholder="Ingrese su email"
+          readOnly
         />
       </Form.Item>
-      <Button type="primary" htmlType="submit" className="btn-submit">
+      <Button type="primary" htmlType="submit" className="btn-submit" loading={loading}>
         Actualizar
       </Button>
     </Form>
   );
 };
+
 export default DataComponent;
