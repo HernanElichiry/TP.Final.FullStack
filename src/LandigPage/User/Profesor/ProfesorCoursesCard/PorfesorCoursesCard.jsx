@@ -14,6 +14,10 @@ const ProfesorCoursesCard = ({ course }) => {
   const [backgroundImageFile, setBackgroundImageFile] = useState(null); // Estado para almacenar la URL de la imagen
   const [errorMessages, setErrorMessages] = useState({});
 
+
+
+
+
   useEffect(() =>{
     const fetchImage = async() => {
 
@@ -34,8 +38,16 @@ const ProfesorCoursesCard = ({ course }) => {
 
  
 
+  
+  const courseData = { 
+    courseName: course.title, 
+    startDate: course.startdate || "00/00/00",
+    endDate: course.enddate || "00/00/00"
+  };
+
 
   const handleClick = () => {
+    sessionStorage.setItem('courseData', JSON.stringify(courseData));
     window.open(`/course-platform/${course.id}`, '_blank'); // Abre en una nueva pestaña
   };
 
