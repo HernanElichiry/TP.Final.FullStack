@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./ChangePassword.css";
 import { Form, Input, Button } from "antd";
+import Cookies from "js-cookie";
 
 const ChangePasswordForm = () => {
   const [passwordData, setPasswordData] = useState({
@@ -8,7 +9,7 @@ const ChangePasswordForm = () => {
     newPassword: "",
     confirmPassword: "",
   });
-
+  const [loading, setLoading] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPasswordData({
@@ -17,10 +18,47 @@ const ChangePasswordForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí puedes añadir la lógica para cambiar la contraseña
-    console.log("Datos de la contraseña:", passwordData);
+    // Validación de que las nuevas contraseñas coincidan
+    if (passwordData.newPassword !== passwordData.confirmPassword) {
+      message.error("Las contraseñas no coinciden");
+      return;
+    }
+    
+    try {
+      const token = Cookies.get("token"); // Obtener el token del usuario
+      const response = await fetch("http://localhost:3000/change-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Enviar el token en el encabezado para autenticación
+        },
+        body: JSON.stringify({
+          currentPassword: passwordData.currentPassword,
+          newPassword: passwordData.newPassword,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        message.success("Contraseña actualizada con éxito");
+        setPasswordData({
+          currentPassword: "",
+          newPassword: "",
+          confirmPassword: "",
+        });
+      } else {
+        message.error(data.message || "Error al cambiar la contraseña");
+      }
+    } catch (error) {
+      console.error("Error al cambiar la contraseña:", error);
+      message.error("Ocurrió un error, inténtalo nuevamente");
+    } finally {
+      setLoading(false);
+    }
+
   };
 
   return (
@@ -31,30 +69,38 @@ const ChangePasswordForm = () => {
     >
       <h2>Cambiar Contraseña</h2>
       <Form.Item label="Contraseña Actual">
-        <Input.Password
+      <Input.Password
           name="currentPassword"
           value={passwordData.currentPassword}
           onChange={handleChange}
           placeholder="Ingrese su contraseña actual"
+          required
         />
       </Form.Item>
       <Form.Item label="Nueva Contraseña">
-        <Input.Password
+      <Input.Password
           name="newPassword"
           value={passwordData.newPassword}
           onChange={handleChange}
           placeholder="Ingrese su nueva contraseña"
+          required
         />
       </Form.Item>
       <Form.Item label="Confirmar Nueva Contraseña">
-        <Input.Password
+      <Input.Password
           name="confirmPassword"
           value={passwordData.confirmPassword}
           onChange={handleChange}
           placeholder="Confirme su nueva contraseña"
+          required
         />
       </Form.Item>
-      <Button type="primary" htmlType="submit" className="btn-submit">
+      <Button
+        type="primary"
+        htmlType="submit"
+        className="btn-submit"
+        loading={loading}
+      >
         Cambiar Contraseña
       </Button>
     </Form>

@@ -11,53 +11,62 @@ import {
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 import { Link, Outlet } from "react-router-dom";
+import { useUser } from "../UserContext/UserContext";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 
-// Función getItem para crear elementos de menú
-function getItem(label, key, icon, children) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  };
-}
+function Sidebar() {
+  const { logout } = useUser();
+  const [collapsed, setCollapsed] = useState(true);
 
-// Definición de los items del menú
-const items = [
-  getItem("Hans", "1", <SettingOutlined />),
-  getItem("User", "sub1", <UserOutlined />, [
-    getItem(
-      <Link to="change-password">Change Password</Link>,
-      "3",
-      <LockOutlined />
-    ),
-    getItem(<Link to="data">Data</Link>, "4", <EditFilled />),
-  ]),
-  getItem("Courses", "sub2", <ReadOutlined />, [
-    getItem(
-      <Link to="my-courses-alumno">My courses</Link>,
-      "6",
-      <AuditOutlined />
-    ),
-    getItem(
-      <Link to="favorites-alumno">Favorites</Link>,
-      "8",
-      <PushpinFilled />
-    ),
-  ]),
-  getItem("Log out", "9", <CloseCircleOutlined />),
-];
-
-// Definición de los items del breadcrumb
-const breadcrumbItems = [{ title: "User" }, { title: "Hans" }];
-
-const UserMenu = () => {
-  const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  const breadcrumbItems = [{ title: "User" }, { title: "Hans" }];
+
+  // Función getItem para crear elementos de menú
+  function getItem(label, key, icon, children) {
+    return {
+      key,
+      icon,
+      children,
+      label,
+    };
+  }
+
+  // Definición de los items del menú
+  const items = [
+    getItem("Hans", "1", <SettingOutlined />),
+    getItem("User", "sub1", <UserOutlined />, [
+      getItem(
+        <Link to="change-password">Change Password</Link>,
+        "3",
+        <LockOutlined />
+      ),
+      getItem(<Link to="data">Data</Link>, "4", <EditFilled />),
+    ]),
+    getItem("Courses", "sub2", <ReadOutlined />, [
+      getItem(
+        <Link to="my-courses-alumno">My courses</Link>,
+        "6",
+        <AuditOutlined />
+      ),
+      getItem(
+        <Link to="favorites-alumno">Favorites</Link>,
+        "8",
+        <PushpinFilled />
+      ),
+    ]),
+    getItem("Log out", "9", <CloseCircleOutlined />),
+  ];
+
+  const handleMenuClick = (e) => {
+    if (e.key === "9") {
+      logout();
+    }
+  };
+
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider
@@ -71,6 +80,7 @@ const UserMenu = () => {
           defaultSelectedKeys={["1"]}
           mode="inline"
           items={items}
+          onClick={handleMenuClick}
         />
       </Sider>
       <Layout>
@@ -89,10 +99,9 @@ const UserMenu = () => {
             <Outlet />
           </div>
         </Content>
-
       </Layout>
     </Layout>
   );
-};
+}
 
-export default UserMenu;
+export default Sidebar;

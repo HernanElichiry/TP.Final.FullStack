@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./login.css";
+import { useUser } from "../User/UserContext/UserContext";
 const RegisterForm = () => {
   const [completeName, setCompleteName] = useState("");
   const [birthdate, setBirthdate] = useState(null);
@@ -14,6 +15,7 @@ const RegisterForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isProfessor, setIsProfessor] = useState(false);
   const navigate = useNavigate();
+  const { login } = useUser();
 
   const handleLogin = () => {
     // Lógica de autenticación aquí
@@ -58,7 +60,7 @@ const RegisterForm = () => {
       return;
     }
 
-    const role_id = isProfessor ? 2 : 1;
+    const role_id = isProfessor ? 2 : 3;
 
     const userData = {
       name: completeName, // Cambia esto
@@ -80,7 +82,11 @@ const RegisterForm = () => {
       });
 
       if (res.ok) {
-        navigate("/Login");
+        const data = await res.json();
+
+        login(data.accest_token);
+
+        navigate("/")
       } else {
         const errorData = await res.json(); // Captura el error del servidor
         setErrorMessage(errorData.message || "Error al registrar un usuario");

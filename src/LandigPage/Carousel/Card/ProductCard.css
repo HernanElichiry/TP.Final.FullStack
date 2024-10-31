@@ -131,6 +131,9 @@
   display: flex;
   justify-content: center;
 }
+.slick-slide {
+  display: inline-block;
+}
 
 .slider-container {
   width: 100%;   /* Ancho del carrusel responsivo */
@@ -163,4 +166,51 @@
 
 .big-box {
   margin-top: 60px;
+}
+@media (max-width: 768px) {
+  /* Contenedor de las tarjetas */
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* Reduce el espacio entre tarjetas */
+    justify-content: center;
+  }
+
+  /* Ajuste de cada tarjeta */
+  .card-product-container {
+    flex: 1 1 48%; /* Ocupa aproximadamente el 50% del contenedor */
+    margin: 5px; /* Espaciado pequeño entre tarjetas */
+    max-width: 160px; /* Ancho máximo para limitar el tamaño */
+    height: 220px; /* Altura ajustada para móviles */
+  }
+
+  .card-product-image {
+    height: 100px;
+  }
+
+  .card-product-image img {
+    height: 100%;
+  }
+
+  .card-product-container h2 {
+    font-size: 14px;
+    padding: 5px;
+  }
+
+  .card-product-container p {
+    font-size: 12px;
+  }
+
+  .price-favorite-container {
+    padding: 0 5px;
+  }
+
+  .card-product-container .buttons .show-more-button {
+    padding: 2px;
+    font-size: 12px;
+  }
+
+  .card-product-container .buttons .transparent-button {
+    font-size: 14px;
+  }
 }

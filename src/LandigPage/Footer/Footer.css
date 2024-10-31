@@ -70,3 +70,41 @@
 .footer-text {
   margin-top: 1rem;
 }
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column; /* Cambia a columna para móviles */
+    align-items: center; /* Centra los elementos en móviles */
+    text-align: center; /* Centra el texto en móviles */
+  }
+
+  .footer-left {
+    text-align: center; /* Centra el texto en móviles */
+    margin-bottom: 1rem; /* Espaciado inferior */
+  }
+
+  .footer-right {
+    text-align: center; /* Centra el texto en móviles */
+    margin-bottom: 1rem; /* Espaciado inferior */
+  }
+
+  .footer-link-container {
+    flex-direction: column; /* Cambia a columna para enlaces en móviles */
+    gap: 0.5rem; /* Espaciado entre enlaces */
+    justify-content: center; /* Centra los enlaces */
+  }
+
+  .footer-link {
+    font-size: 0.9rem; /* Reduce el tamaño de la fuente en móviles */
+  }
+
+  .social-icons {
+    justify-content: center; /* Centra los íconos sociales en móviles */
+    margin-top: 1rem; /* Espaciado superior */
+  }
+
+  .social-icons a {
+    font-size: 1.2rem; /* Ajusta el tamaño de los íconos en móviles */
+  }
+}
