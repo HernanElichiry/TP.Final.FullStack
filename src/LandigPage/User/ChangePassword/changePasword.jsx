@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./ChangePassword.css";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button,message  } from "antd";
 import Cookies from "js-cookie";
 import { useUser } from "../UserContext/UserContext";
 
@@ -31,8 +31,7 @@ const ChangePasswordForm = () => {
     try {
       const token = Cookies.get("token"); // Obtener el token del usuario
       const user_id = user.sub;
-      console.log(user_id);
-      console.log(token);
+
       const response = await fetch(`http://localhost:3000/auth/change-password/${user_id}`, {
         method: "PATCH", 
         headers: {
@@ -45,8 +44,6 @@ const ChangePasswordForm = () => {
         }),
       });
 
-      const data = await response.json();
-      
       if (response.ok) {
         message.success("Contraseña actualizada con éxito");
         setPasswordData({
@@ -55,7 +52,7 @@ const ChangePasswordForm = () => {
           confirmPassword: "",
         });
       } else {
-        message.error(data.message || "falla la consulta");
+        message.error("Error en los datos ingresados");
       }
     } catch (error) {
       console.error("falla la consulta:", error);
