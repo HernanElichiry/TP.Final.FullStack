@@ -44,6 +44,8 @@ const ChangePasswordForm = () => {
         }),
       });
 
+      const data = await response.text();
+ 
       if (response.ok) {
         message.success("Contraseña actualizada con éxito");
         setPasswordData({
@@ -52,10 +54,11 @@ const ChangePasswordForm = () => {
           confirmPassword: "",
         });
       } else {
-        message.error("Error en los datos ingresados");
+         // Parseamos el string JSON a objeto
+      const errorData = JSON.parse(data);
+      message.error(errorData.message || "Error en la consulta");
       }
     } catch (error) {
-      console.error("falla la consulta:", error);
       message.error("Ocurrió un error, inténtalo nuevamente");
     } finally {
       setLoading(false);
