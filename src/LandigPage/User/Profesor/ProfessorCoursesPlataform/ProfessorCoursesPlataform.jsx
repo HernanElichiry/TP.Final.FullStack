@@ -151,13 +151,10 @@ import ReactPlayer from 'react-player';
 import { v4 as uuidv4 } from 'uuid';
 import { useParams } from 'react-router-dom';
 
-
-
 const CoursePlatform = () => {
+ 
   const { id } = useParams(); // Aquí obtenemos el parámetro 'id' de la URL
   const { courseName, startDate, endDate } = JSON.parse(sessionStorage.getItem('courseData'));
-
-
   const [courseData, setCourseData] = useState({
    // id: "",
    // courseName: "",
@@ -168,7 +165,6 @@ const CoursePlatform = () => {
   }); // creamos una variable de estado donde almacenaremos los datos de back
 
   //traemos los datos del back 
-
   useEffect(() => {
     const fetchCourse = async () => {
       try {
@@ -186,15 +182,15 @@ const CoursePlatform = () => {
           //noDate: false, // este dato es manual
           classes: data.map((cls, index) => ({
             classname: cls.title, // Nombre de la clase
-            id: `class-${index + 1}`, // aqui deberia ser cls.id pero aun no se ha asignado
+            id: cls.id || `class-${index + 1}`, // aqui deberia ser cls.id pero aun no se ha asignado
             video: {
               //id: `video-${index + 1}`, // ID para el video deberia venir del back
-              name: cls.title, // Título del video pero no esta llegando
-              url: `https://example.com/path/to/${cls.title}` // URL del video (ajusta esto según tu lógica) deberia decir videoname pero ese dato no esta llegando
+             // name: "", // Título del video pero no esta llegando
+              url: cls.videourl 
             },
             file: {
-              name: cls.content, // "aqui va el nombre del descagable", // Aquí puedes agregar lógica si tienes archivos asociados
-              url: `http://localhost:3000/uploads/files/${cls.content}` || "no hay archivo" // Aquí puedes agregar la URL si la tienes
+             // name: "Material descargable", // Aquí puedes agregar lógica si tienes archivos asociados
+               url: `http://localhost:3000/uploads/files/${cls.fileurl}` || "no hay archivo" // Aquí puedes agregar la URL si la tienes
             },
             
           }))
@@ -209,16 +205,16 @@ const CoursePlatform = () => {
     fetchCourse(); // Ejecutar la llamada a la API
   }, [id]); // Ejecutar cuando el ID cambie
 
-
 //////////////////////// creando nueva clase
 const [newClassData, setNewClassData] = useState({ // defino la estructura de una nueva clase, ponemos un id pero lo debe hacer el back
   //id: `class-${uuidv4()}`,
-  videoName: '',
-  videoFile: null,
-  fileName: '',
+  //videoName: '',
+  videoFile: '',
+ // fileName: '',
   fileFile: null,
   classname: ''
 });
+
 
 // Arreglo para almacenar todas las clases nuevas creadas
   const [newClasses, setNewClasses] = useState([]);
@@ -227,13 +223,12 @@ const [newClassData, setNewClassData] = useState({ // defino la estructura de un
 // Función que abre el modal para crear una clase nueva
 const openCreateModal = () => {
   setNewClassData({
-    videoName: '',
-    videoFile: null,
-    fileName: '',
-    fileFile: null,
-    classname: ''
+    videoFile: '',     // Reiniciar el campo del enlace de video
+    fileFile: null,    // Reiniciar el campo de archivo
+    classname: ''      // Reiniciar el nombre de la clase
   });
-  setIsCreateModalOpen(true);
+  setIsPreviewVisible(false); // Asegurarse de ocultar la vista previa del video
+  setIsCreateModalOpen(true); // Abrir el modal
 };
 
 // funcion apra cerrar el modal
@@ -246,11 +241,11 @@ const handleCreateClassInState = () => {
   const newClass = {
     id: `class-${uuidv4()}`, // ID único para la nueva clase
     video: {
-      name: newClassData.videoName,
-      url: newClassData.videoFile ? URL.createObjectURL(newClassData.videoFile) : null, // Crear URL solo si hay un archivo de video
+      //name: newClassData.videoName || '',
+      url: newClassData.videoFile  //? URL.createObjectURL(newClassData.videoFile) : null, // Crear URL solo si hay un archivo de video
     },
     file: {
-      name: newClassData.fileName,
+      //name: newClassData.fileName || 'Material descargable',
       url: newClassData.fileFile //? URL.createObjectURL(newClassData.fileFile) : null, // Crear URL solo si hay un archivo
     },
     classname: newClassData.classname
@@ -266,6 +261,25 @@ const handleCreateClassInState = () => {
   }));
 
   setIsCreateModalOpen(false); // Cerrar el modal
+};
+
+
+const [isPreviewVisible, setIsPreviewVisible] = useState(false);
+
+//Función para verificar si la URL es un enlace válido de YouTube
+const isYouTubeUrl = (url) => {
+  const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/;
+  return youtubeRegex.test(url);
+};
+
+// Manejar el cambio en el input de URL
+const handleUrlChange = (e) => {
+  const url = e.target.value || ''; // Si el campo está vacío, asigna una cadena vacía
+  setNewClassData((prevData) => ({
+    ...prevData,
+    videoFile: url
+  }));
+  setIsPreviewVisible(isYouTubeUrl(url)); // Solo muestra la vista previa si es un enlace de YouTube válido
 };
 ////////////////////////////////////// cerrando nueva clase
 
@@ -302,9 +316,8 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
   const [selectedClass, setSelectedClass] = useState(null); //1. seleciono la clase para editar
   const [isModalOpen, setIsModalOpen] = useState(false); // manejo del modal de edicion
   const [classData, setClassData] = useState({ // 
-    videoName: '',
-    videoFile: null,
-    fileName: '',
+
+    videoFile:'',
     fileFile: null,
     classname: ''
   });
@@ -314,10 +327,8 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
   const openUpdateModal = (classItem) => { // abro el modal y lo seteo con los datos de la clase
     
     setSelectedClass(classItem); // la clase que seleccione la guardo en un estado
-    setClassData({   // seteo el modal con esa informacion
-      videoName: classItem.video.name,
-      videoFile: null, 
-      fileName: classItem.file.name,
+    setClassData({   // seteo el modal con esa informacion,
+      videoFile: classItem.file.url, 
       fileFile: null, 
       classname: classItem.classname
     });
@@ -327,9 +338,7 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
   const closeModal = () => {
     setIsModalOpen(false);
     setClassData({
-      videoName: '',
-      videoFile: null,
-      fileName: '',
+      videoFile: '',
       fileFile: null,
       classname: ''
     });
@@ -349,12 +358,12 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
     const updatedClass = {
       ...selectedClass,
       video: {
-        name: classData.videoName || selectedClass.video.name,
-        url: classData.videoFile ? URL.createObjectURL(classData.videoFile) : selectedClass.video.url,
+        //name: classData.videoName || selectedClass.video.name,
+        url: classData.videoFile //? URL.createObjectURL(classData.videoFile) : selectedClass.video.url,
       },
       file: {
-        name: classData.fileName || selectedClass.file.name,
-        url: classData.fileFile ? URL.createObjectURL(classData.fileFile) : selectedClass.file.url,
+       // name: classData.fileName || selectedClass.file.name,
+        url: classData.fileFile // ? URL.createObjectURL(classData.fileFile) : selectedClass.file.url,
       },
       classname: classData.classname || selectedClass.classname,
     };
@@ -397,8 +406,8 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
   
         classFormData.append('course_id', id.toString()); // ID del curso, asumiendo que ya es un string
         classFormData.append('title', newClass.classname); // Título de la clase
-        classFormData.append('duration', id.toString()); // Duración como string (ajusta si tienes un valor específico)
-        classFormData.append('content', 'contenido aqui'); // Contenido de la clase
+        //classFormData.append('duration', id.toString()); // Duración como string (ajusta si tienes un valor específico)
+        classFormData.append('videourl', newClass.video.url.toString()); // Contenido de la clase
   
         // Agrega el archivo si está disponible
         if (newClass.file && newClass.file.url) {
@@ -453,8 +462,6 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
       }
     });
 
-
-    
     console.log("Datos que se enviarán a la API (clases modificadas):", Array.from(formData.entries()));
   
     // Realizar la solicitud PATCH para las clases modificadas
@@ -474,8 +481,6 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
       alert('Hubo un problema con la actualización.');
     } }
 
-
-  
     // Procesar las clases eliminadas
     if (deletedClasses.length > 0) {
       console.log("Clases eliminadas:", deletedClasses);
@@ -533,7 +538,7 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
                       <p >{classItem.video.name}</p>
                     </div>
                     <div className="attachment-item">
-                      <a href={classItem.file.url} target="_blank" rel="noopener noreferrer">{classItem.file.name}</a>
+                      <a href={classItem.file.url} target="_blank" rel="noopener noreferrer">Material descargable</a>
                     </div>
                   </div>
                 </li>
@@ -550,7 +555,7 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
             url={selectedClass.video.url} 
             controls 
             width="100%" 
-            height="auto" 
+            height="85%" 
           />
           <div className="video-actions">
             <button className="btn query-btn" onClick={() => openUpdateModal(selectedClass)}>
@@ -578,17 +583,6 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
                      />
                    </div>
                 <div className="form-group">
-                  <label htmlFor="videoName">Nombre del Video</label>
-                  <input
-                    type="text"
-                    className="form-input"
-                    id="videoName"
-                    value={classData.videoName}
-                    onChange={(e) => setClassData({ ...classData, videoName: e.target.value })}
-                  />
-                </div>
-
-                <div className="form-group">
                   <label htmlFor="videoFile">Selecciona Video</label>
                   <input
                     type="file"
@@ -598,18 +592,6 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
                     className="form-input"
                   />
                 </div>
-
-                <div className="form-group">
-                  <label htmlFor="fileName">Nombre del Archivo</label>
-                  <input
-                    type="text"
-                    className="form-input"
-                    id="fileName"
-                    value={classData.fileName}
-                    onChange={(e) => setClassData({ ...classData, fileName: e.target.value })}
-                  />
-                </div>
-
                 <div className="form-group">
                   <label htmlFor="fileFile">Selecciona Archivo</label>
                   <input
@@ -620,7 +602,6 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
                     className="form-input"
                   />
                 </div>
-
                 <div className="modal-actions">
                   <button type="submit" className="btn update-btn">Actualizar Clase</button>
                   <button className="btn update-btn" onClick={() => handleDeleteClass(selectedClass.id)}> Eliminar Clase </button>
@@ -629,11 +610,7 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
             </div>
           </div>
         )}
-
-       
       </div>
-     
-
         {isCreateModalOpen && (
   <div className="modal">
     <div className="modal-content">
@@ -650,40 +627,36 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
             onChange={(e) => setNewClassData({ ...newClassData, classname: e.target.value })}
           />
         </div>
-        
-        <div className="form-group">
-          <label htmlFor="videoName">Nombre del Video</label>
-          <input
-            type="text"
-            className="form-input"
-            id="videoName"
-            value={newClassData.videoName}
-            onChange={(e) => setNewClassData({ ...newClassData, videoName: e.target.value })}
-          />
-        </div>
+        <div>
+      {/* Campo para ingresar la URL del video de YouTube */}
+      <div className="form-group">
+        <label>Video URL (YouTube)</label>
+        <input
+          type="text"
+          placeholder="https://www.youtube.com/watch?v=XXXXXX"
+          value={newClassData.videoFile}
+          onChange={handleUrlChange}
+          onBlur={() => setIsPreviewVisible(isYouTubeUrl(newClassData.videoFile))}
+          className="form-input"
+        />
+      </div>
 
-        <div className="form-group">
-          <label htmlFor="videoFile">Selecciona Video</label>
-          <input
-            type="file"
-            accept="video/*"
-            name="videoFile"
-            onChange={(e) => setNewClassData({ ...newClassData, videoFile: e.target.files[0] })}
-            className="form-input"
-          />
+      {/* Vista previa del video de YouTube */}
+      {isPreviewVisible && (
+        <div className="video-preview">
+          <h4>Vista previa del video:</h4>
+          <iframe
+            width="560"
+            height="315"
+            src={`https://www.youtube.com/embed/${new URL(newClassData.videoFile).searchParams.get('v')}`}
+            title="YouTube video preview"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
         </div>
-
-        <div className="form-group">
-          <label htmlFor="fileName">Nombre del Archivo</label>
-          <input
-            type="text"
-            className="form-input"
-            id="fileName"
-            value={newClassData.fileName}
-            onChange={(e) => setNewClassData({ ...newClassData, fileName: e.target.value })}
-          />
-        </div>
-
+      )}
+    </div>
         <div className="form-group">
           <label htmlFor="fileFile">Selecciona Archivo</label>
           <input
@@ -694,7 +667,6 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
             className="form-input"
           />
         </div>
-
         <div className="modal-actions">
           <button type="submit" className="btn update-btn">Crear Clase</button>
         </div>
