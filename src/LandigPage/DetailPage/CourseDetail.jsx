@@ -9,13 +9,17 @@ import FooterApp from "../Footer/Footer";
 import Modalities from "../Components/Modalities";
 import foto from "../Components/foto.jpg";
 
+
 const CourseDetail = () => {
   const { id } = useParams(); // Obtener el ID del curso desde la URL
   const [course, setCourse] = useState(null); // Estado para almacenar el curso
   const [imageUrl, setImageUrl] = useState(""); // Estado para almacenar la URL de la imagen
 
+
   useEffect(() => {
     window.scrollTo(0, 0);
+
+
 
     const fetchCourse = async () => {
       try {
@@ -30,7 +34,7 @@ const CourseDetail = () => {
         }
 
         const data = await response.json();
-        console.log(data);
+
         setCourse(data); // Guardar el curso en el estado
 
         // Construir la URL de la imagen del curso

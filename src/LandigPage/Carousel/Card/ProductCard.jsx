@@ -6,6 +6,7 @@ import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { useUser } from "../../User/UserContext/UserContext"; 
+import { message } from 'antd';
 import "./ProductCard.css";
 
 export const ProductCard = ({ product, onFavoriteToggle, isFavorited, user }) => {
@@ -18,7 +19,10 @@ export const ProductCard = ({ product, onFavoriteToggle, isFavorited, user }) =>
     if (user) {
       onFavoriteToggle(product); // Llama a la función para alternar favorito
     } else {
-      alert("Inicia sesión para agregar a favoritos."); // Mensaje para usuarios no logueados
+      message.warning("Inicia sesión para agregar a favoritos.", 3); // Mensaje para usuarios no logueados con duración de 3 segundos
+      const hide = message.loading('Cargando...', 0); // 0 significa que el mensaje de carga es indefinido
+      setTimeout(hide, 3000); // Ocultar después de 3 segundos
+      message.info('Este es un mensaje informativo.');
     }
   };
 
