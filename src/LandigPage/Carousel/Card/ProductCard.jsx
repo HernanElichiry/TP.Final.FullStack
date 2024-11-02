@@ -40,23 +40,28 @@ export const ProductCard = ({ product, onFavoriteToggle, isFavorited, user }) =>
     }
     return stars;
   };
-  useEffect(() =>{
-    const fetchImage = async() => {
+  useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        const imageResponse = await fetch(`http://localhost:3000/uploads/images/${product.media.filename}`, {
+          method: 'GET',
+          mode: 'cors',
+          credentials: 'include',
+        });
 
-    // Construir la URL de la imagen del curso
-    const imageResponse = await fetch(`http://localhost:3000/uploads/images/${product.media.filename}`, {
-      method: 'GET',
-      mode: 'cors',
-      credentials: 'include',
-    });
+        if (imageResponse.ok) {
+          const imageBlob = await imageResponse.blob();
+          setImageUrl(URL.createObjectURL(imageBlob));
+        }
+      } catch (error) {
+        console.error("Error fetching image:", error);
+      }
+    };
 
-    // Convertir la imagen a Blob y luego a URL
-        const imageBlob = await imageResponse.blob();
-        setImageUrl(URL.createObjectURL(imageBlob)); // Guardar la URL de la imagen
-  }
-
-  fetchImage();
-  },);
+    if (product.media && product.media.filename) {
+      fetchImage();
+    }
+  }, [product.media?.filename]); // Ejecuta solo si cambia `product.media.filename`
 
 
 
