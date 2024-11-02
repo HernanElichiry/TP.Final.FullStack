@@ -6,6 +6,7 @@
   
   .courses-grid {
     display: flex;
+    
     flex-wrap: wrap; /* Permite que las tarjetas se envuelvan a la siguiente línea */
     gap: 20px; /* Espacio entre tarjetas */
     justify-content: flex-start; /* Alinea las tarjetas a la izquierda */
@@ -64,4 +65,11 @@
   .btn-delete:hover {
     background-color: #c82333; /* Color al pasar el mouse */
     transform: scale(1.05); /* Efecto de aumento al pasar el mouse */
+  }
+  .no-courses-message {
+    font-size: 24px;          /* Tamaño de fuente más grande */
+    font-weight: bold;        /* Texto en negrita */
+    color: #555;              /* Color de texto */
+    text-align: center;       /* Centrar el texto */
+    margin-top: 50px;         /* Separación superior */
   }
