@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "./ChangePassword.css";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button,message  } from "antd";
 import Cookies from "js-cookie";
+import { useUser } from "../UserContext/UserContext";
 
 const ChangePasswordForm = () => {
   const [passwordData, setPasswordData] = useState({
@@ -9,6 +10,7 @@ const ChangePasswordForm = () => {
     newPassword: "",
     confirmPassword: "",
   });
+  const { user } = useUser();
   const [loading, setLoading] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,11 +27,13 @@ const ChangePasswordForm = () => {
       message.error("Las contraseñas no coinciden");
       return;
     }
-    
+    setLoading(true); // Comienza a cargar
     try {
       const token = Cookies.get("token"); // Obtener el token del usuario
-      const response = await fetch("http://localhost:3000/change-password", {
-        method: "POST",
+      const user_id = user.sub;
+
+      const response = await fetch(`http://localhost:3000/auth/change-password/${user_id}`, {
+        method: "PATCH", 
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`, // Enviar el token en el encabezado para autenticación
@@ -40,8 +44,8 @@ const ChangePasswordForm = () => {
         }),
       });
 
-      const data = await response.json();
-
+      const data = await response.text();
+ 
       if (response.ok) {
         message.success("Contraseña actualizada con éxito");
         setPasswordData({
@@ -50,10 +54,11 @@ const ChangePasswordForm = () => {
           confirmPassword: "",
         });
       } else {
-        message.error(data.message || "Error al cambiar la contraseña");
+         // Parseamos el string JSON a objeto
+      const errorData = JSON.parse(data);
+      message.error(errorData.message || "Error en la consulta");
       }
     } catch (error) {
-      console.error("Error al cambiar la contraseña:", error);
       message.error("Ocurrió un error, inténtalo nuevamente");
     } finally {
       setLoading(false);
