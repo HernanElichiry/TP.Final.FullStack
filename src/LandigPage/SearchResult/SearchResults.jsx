@@ -1,37 +1,36 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { courses } from '../MockCourses/MockCourses';
-import { ProductCard } from '../Carousel/Card/ProductCard';
-import SearchBar from '../SearchBar/SearchBar';
-import './SearchResults.css';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { courses } from "../MockCourses/MockCourses";
+import { ProductCard } from "../Carousel/Card/ProductCard";
+import SearchBar from "../SearchBar/SearchBar";
+import "./SearchResults.css";
 
 const SearchResults = () => {
   const { searchTerm } = useParams();
   const [searchResults, setSearchResults] = useState([]);
-console.log(searchTerm);
+
   useEffect(() => {
-    if (searchTerm) {
-      const normalizedSearchTerm = searchTerm.toLowerCase().trim();
-
-      const filteredResults = courses.filter(course => {
-        // Busca por título
-        const normalizedTitle = course.title.toLowerCase();
-        if (normalizedTitle.includes(normalizedSearchTerm)) {
-          return true;
-        }
-
-        // Busca por topics
-        const foundInTopics = course.topics.some(topic =>
-          topic.toLowerCase().includes(normalizedSearchTerm)
+    const fetchSearchResults = async () => {
+      try {
+        const res = await fetch(
+          `http://localhost:3000/courses/search?term=${searchTerm}`
         );
-        if (foundInTopics) {
-          return true;
+
+        console.log(searchTerm);
+
+        if (res.ok) {
+          const data = await res.json();
+          setSearchResults(data);
+        } else {
+          setSearchResults([]);
         }
-
-        return false;
-      });
-
-      setSearchResults(filteredResults);
+      } catch (error) {
+        console.error("error fetching search results", error);
+        setSearchResults([]);
+      }
+    };
+    if (searchTerm && searchTerm.trim() !== "") {
+      fetchSearchResults();
     } else {
       setSearchResults([]);
     }
@@ -43,7 +42,7 @@ console.log(searchTerm);
       <div className="search-results">
         <div className="product-list">
           {searchResults.length > 0 ? (
-            searchResults.map(course => (
+            searchResults.map((course) => (
               <ProductCard key={course.id} product={course} />
             ))
           ) : (
