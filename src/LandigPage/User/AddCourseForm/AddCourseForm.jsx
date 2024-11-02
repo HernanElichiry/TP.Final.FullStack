@@ -12,6 +12,7 @@ import { useUser } from "../UserContext/UserContext";
 const AddCourseForm = () => {
   const { control, handleSubmit, formState: { errors }, watch, setError,  setValue } = useForm();
   const {user} = useUser(); 
+
   const startDate = watch('startDate');
   const [noDates, setNoDates] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState(null); // Variable de estado para la imagen
@@ -57,6 +58,7 @@ const AddCourseForm = () => {
 
 
   const onSubmit = async (data) => {
+
     if (!noDates && new Date(data.endDate) <= new Date(data.startDate)) {
       setError("endDate", { type: "manual", message: "La fecha de finalización debe ser posterior a la de inicio." });
       return;
@@ -80,14 +82,14 @@ const AddCourseForm = () => {
     if(backgroundImage) {
     formData.append('file', backgroundImage); //le pongo file y no filename por el interceptor
    } 
-
+   formData.append('price', data.price);
+   data.topics.forEach(topic => formData.append('topicIds[]', topic));
    /*if(!noDates) {
   formData.append('startDate', data.startDate);
   formData.append('endDate', data.endDate);
   }*/
     
-formData.append('price', data.price);
-data.topics.forEach(topic => formData.append('topicIds[]', topic));
+
   
 
     // Para verificar que los datos están correctos antes de enviar
