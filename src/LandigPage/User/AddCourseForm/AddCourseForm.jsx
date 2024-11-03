@@ -395,7 +395,7 @@ try {
   {errors.price && <p className="error-message">{errors.price.message}</p>}
           </div>
 
-        <button type="submit">Guardar Curso</button>
+          <button type="submit" className="save-course-button">Guardar Curso</button>
       </form>
     </div>
   );

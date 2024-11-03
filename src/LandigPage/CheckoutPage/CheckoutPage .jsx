@@ -1,12 +1,13 @@
+// CheckoutPage.jsx
 import React, { useState } from 'react';
 import { Form, Input, Button, Radio, Divider, notification } from 'antd';
 import { CreditCardOutlined, WalletOutlined, BarcodeOutlined } from '@ant-design/icons';
+import './CheckoutPage.css'; // Asegúrate de tener este archivo CSS
 
 const CheckoutPage = ({ course }) => {
   const [paymentMethod, setPaymentMethod] = useState('credit_card');
 
   const handlePaymentSubmit = (values) => {
-    // Aquí podrías agregar la lógica para enviar la compra al backend
     notification.success({
       message: 'Compra exitosa',
       description: `El pago del curso "${course.title}" ha sido procesado exitosamente.`,
@@ -16,13 +17,13 @@ const CheckoutPage = ({ course }) => {
   };
 
   return (
-    <div style={{ maxWidth: '600px', margin: '0 auto', padding: '20px' }}>
+    <div className="checkout-container">
       <h2>Proceso de Pago</h2>
       <Divider />
       <Radio.Group
         onChange={(e) => setPaymentMethod(e.target.value)}
         value={paymentMethod}
-        style={{ marginBottom: '20px' }}
+        className="payment-methods"
       >
         <Radio.Button value="credit_card">
           <CreditCardOutlined /> Tarjeta de Crédito

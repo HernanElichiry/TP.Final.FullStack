@@ -1,13 +1,28 @@
-.ant-radio-group {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-  }
-  
-  .ant-btn-primary {
-    background-color: #1890ff;
-    border-color: #1890ff;
-  }
-  h2 {
-    text-align: center;
-  }
+.checkout-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #001529; /* Fondo azul oscuro */
+  color: white; /* Texto blanco para contraste */
+  border-radius: 8px; /* Esquinas redondeadas */
+}
+
+.payment-methods {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.ant-btn-primary {
+  background-color: #4caf50; /* Color de fondo del botón */
+  border-color: #4caf50; /* Color del borde del botón */
+}
+
+.ant-btn-primary:hover {
+  background-color: #45a049; /* Color de fondo al pasar el mouse */
+}
+
+h2 {
+  text-align: center;
+  color: #ffffff; /* Texto del título en blanco */
+}
