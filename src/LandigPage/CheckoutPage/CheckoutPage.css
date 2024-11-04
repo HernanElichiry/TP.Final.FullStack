@@ -1,28 +1,91 @@
 .checkout-container {
-  max-width: 600px;
+  background-color: #1c1f3a; /* Azul oscuro */
+  color: #ffffff; /* Texto claro */
+  max-width: 500px;
   margin: 0 auto;
-  padding: 20px;
-  background-color: #001529; /* Fondo azul oscuro */
-  color: white; /* Texto blanco para contraste */
-  border-radius: 8px; /* Esquinas redondeadas */
-}
-
-.payment-methods {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
-}
-
-.ant-btn-primary {
-  background-color: #4caf50; /* Color de fondo del botón */
-  border-color: #4caf50; /* Color del borde del botón */
-}
-
-.ant-btn-primary:hover {
-  background-color: #45a049; /* Color de fondo al pasar el mouse */
-}
-
-h2 {
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   text-align: center;
-  color: #ffffff; /* Texto del título en blanco */
+}
+
+.checkout-title {
+  color: #ffd700; /* Dorado */
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.checkout-divider {
+  border-color: #444c6a;
+}
+
+.checkout-details p {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.checkout-form .ant-form-item-label > label {
+  color: #ffffff;
+}
+
+.checkout-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.checkout-radio-button {
+  color: #ffffff;
+  background-color: #333a5e;
+  border-color: #444c6a;
+}
+
+.checkout-radio-button:hover {
+  background-color: #4a5479;
+}
+
+.checkout-input {
+  background-color: #333a5e;
+  color: #ffffff;
+  border: 1px solid #444c6a;
+}
+
+.checkout-input::placeholder {
+  color: #b0b5d1;
+}
+
+.checkout-info-text {
+  font-size: 1rem;
+  color: #b0b5d1;
+}
+
+.checkout-button {
+  background-color: #ffd700;
+  color: #1c1f3a;
+  font-weight: bold;
+  border: none;
+}
+
+.checkout-button:hover {
+  background-color: #e6be00;
+}
+
+.checkout-error {
+  color: #ff4d4f;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.loading-text {
+  color: #ffd700;
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
 }
