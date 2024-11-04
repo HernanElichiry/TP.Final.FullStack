@@ -14,16 +14,41 @@ const CheckoutPage = () => {
     return <div className="checkout-error">Error al cargar los detalles de compra.</div>;
   }
 
-  // Manejo del envío del formulario
   const handlePaymentSubmit = (values) => {
     setIsLoading(true); // Inicia el estado de carga
-    setTimeout(() => {
-      setIsLoading(false); // Detiene el estado de carga después de un tiempo simulado
-      notification.success({
-        message: "Compra exitosa",
-        description: `El pago del curso "${course.title}" ha sido procesado exitosamente.`,
-      });
-    }, 5000); // Simula una espera de 2 segundos
+
+    // Simulación del tiempo de procesamiento del pago
+    setTimeout(async () => {
+      try {
+        // Realizar la petición POST para la compra del curso
+        const response = await fetch(`http://localhost:3000/buy-courses/${user.sub}/${course.id}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        setIsLoading(false); // Detener el estado de carga
+
+        if (response.ok && data) { // Asegúrate de que el backend devuelva { success: true/false }
+          notification.success({
+            message: "Compra exitosa",
+            description: `El pago del curso "${course.title}" ha sido procesado exitosamente.`,
+          });
+        } else if (data.statusCode === 409) { // Verifica si el usuario ya compró el curso
+          notification.error({
+            message: "Error en la compra",
+            description: data.message,
+          });
+        }
+      } catch (error) {
+        setIsLoading(false); // Detener el estado de carga en caso de error
+        notification.error({
+          message: "Error en la compra",
+          description: "No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.",
+        });
+      }
+    }, 2000); // Simulación de un tiempo de espera de 2 segundos antes de ejecutar el fetch
   };
 
   const handlePaymentMethodChange = (e) => {
@@ -91,7 +116,7 @@ const CheckoutPage = () => {
           {isLoading ? (
             <div className="loading-container">
               <Spin indicator={<LoadingOutlined style={{ fontSize: 24, color: "#ffd700" }} spin />} />
-              <p className="loading-text">Verificando datos...</p>
+              <p className="loading-text">Procesando pago...</p>
             </div>
           ) : (
             <Button type="primary" htmlType="submit" block className="checkout-button">
