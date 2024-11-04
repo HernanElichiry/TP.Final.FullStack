@@ -13,9 +13,7 @@ const ProfesorCoursesCard = ({ course }) => {
   const [videoFile, setVideoFile] = useState(null);
   const [backgroundImageFile, setBackgroundImageFile] = useState(null); // Estado para almacenar la URL de la imagen
   const [errorMessages, setErrorMessages] = useState({});
- 
-
- 
+  
   useEffect(() =>{
     const fetchImage = async() => {
 
@@ -41,12 +39,10 @@ const ProfesorCoursesCard = ({ course }) => {
     endDate: course.enddate || "00/00/00"
   };
 
-
   const handleClick = () => {
     sessionStorage.setItem('courseData', JSON.stringify(courseData));
     window.open(`/course-platform/${course.id}`, '_blank'); // Abre en una nueva pestaña
   };
-
  // Manejador de cambio del precio (input)
  const handlePriceChange = (e) => {
   const rawValue = e.target.value.replace(/\D/g, ''); // Eliminar todo lo que no sea número

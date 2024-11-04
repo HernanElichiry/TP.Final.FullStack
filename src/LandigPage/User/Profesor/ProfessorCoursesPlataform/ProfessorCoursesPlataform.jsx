@@ -156,11 +156,7 @@ const CoursePlatform = () => {
   const { id } = useParams(); // Aquí obtenemos el parámetro 'id' de la URL
   const { courseName, startDate, endDate } = JSON.parse(sessionStorage.getItem('courseData'));
   const [courseData, setCourseData] = useState({
-   // id: "",
-   // courseName: "",
-   // startDate: "",
-   // endDate: "",
-   // noDate: false,
+    
     classes: []
   }); // creamos una variable de estado donde almacenaremos los datos de back
 
@@ -171,11 +167,10 @@ const CoursePlatform = () => {
         const response = await fetch(`http://localhost:3000/classes/bycourseid/${id}`); // Llamada a la API con el ID
         const data = await response.json(); // Convertir la respuesta a JSON
         console.log('Datos antes de almacenar en el estado:', data);
-
-       
+  
         // Transformar los datos a la estructura que necesitas
         const transformedData = {
-          id: "", //id de las clases
+          //classId: data.id,  //id de las clases
           courseName: courseName || "", // los datos del curso no vienen del endpoint sino del storage
           startDate: startDate || "", //  los datos del curso no vienen del endpoint sino del storage
           endDate: startDate || "", //  los datos del curso no vienen del endpoint sino del storage
@@ -203,18 +198,14 @@ const CoursePlatform = () => {
     };
 
     fetchCourse(); // Ejecutar la llamada a la API
-  }, [id]); // Ejecutar cuando el ID cambie
+  }, [id, courseData]); // Ejecutar cuando el ID cambie
 
 //////////////////////// creando nueva clase
 const [newClassData, setNewClassData] = useState({ // defino la estructura de una nueva clase, ponemos un id pero lo debe hacer el back
-  //id: `class-${uuidv4()}`,
-  //videoName: '',
   videoFile: '',
- // fileName: '',
   fileFile: null,
   classname: ''
 });
-
 
 // Arreglo para almacenar todas las clases nuevas creadas
   const [newClasses, setNewClasses] = useState([]);
@@ -242,7 +233,7 @@ const handleCreateClassInState = () => {
     id: `class-${uuidv4()}`, // ID único para la nueva clase
     video: {
       //name: newClassData.videoName || '',
-      url: newClassData.videoFile  //? URL.createObjectURL(newClassData.videoFile) : null, // Crear URL solo si hay un archivo de video
+      url: newClassData.videoFile  // ? URL.createObjectURL(newClassData.videoFile) : null, // Crear URL solo si hay un archivo de video
     },
     file: {
       //name: newClassData.fileName || 'Material descargable',
@@ -262,7 +253,6 @@ const handleCreateClassInState = () => {
 
   setIsCreateModalOpen(false); // Cerrar el modal
 };
-
 
 const [isPreviewVisible, setIsPreviewVisible] = useState(false);
 
@@ -285,7 +275,6 @@ const handleUrlChange = (e) => {
 
 
 /////////////////////////// logica para eliminar clase
-
 const [deletedClasses, setDeletedClasses] = useState([]); //guardo las clases que voy a borrar
 
   const handleDeleteClass = (classId) => {
@@ -316,19 +305,17 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
   const [selectedClass, setSelectedClass] = useState(null); //1. seleciono la clase para editar
   const [isModalOpen, setIsModalOpen] = useState(false); // manejo del modal de edicion
   const [classData, setClassData] = useState({ // 
-
     videoFile:'',
     fileFile: null,
     classname: ''
   });
   const [modifiedClasses, setModifiedClasses] = useState([]); // guardo las clases que ya modifique
 
-
   const openUpdateModal = (classItem) => { // abro el modal y lo seteo con los datos de la clase
     
     setSelectedClass(classItem); // la clase que seleccione la guardo en un estado
     setClassData({   // seteo el modal con esa informacion,
-      videoFile: classItem.file.url, 
+      videoFile: selectedClass.video.url || '', 
       fileFile: null, 
       classname: classItem.classname
     });
@@ -344,31 +331,22 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
     });
   }; // sierro el modal y borro los estados
 
-  const handleFileChange = (event) => {
-    const { name, files } = event.target;
-    if (files.length > 0) {
-      setClassData((prevData) => ({
-        ...prevData,
-        [name]: files[0], 
-      }));
-    }
-  };
+
 
   const handleUpdateClassInState = () => {
     const updatedClass = {
       ...selectedClass,
       video: {
         //name: classData.videoName || selectedClass.video.name,
-        url: classData.videoFile //? URL.createObjectURL(classData.videoFile) : selectedClass.video.url,
+        url: classData.videoFile ? classData.videoFile : selectedClass.video.url,
       },
       file: {
        // name: classData.fileName || selectedClass.file.name,
-        url: classData.fileFile // ? URL.createObjectURL(classData.fileFile) : selectedClass.file.url,
+        url: classData.fileFile  ? classData.fileFile : selectedClass.file.url,
       },
       classname: classData.classname || selectedClass.classname,
     };
   
-   
   
     // Actualiza el estado de courseData para ver los cambios en front
     setCourseData((prevCourseData) => {
@@ -399,7 +377,7 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
 
 
     if (newClasses.length > 0) {
-      console.log("Nuevas Clases:", newClasses, );
+      console.log("Nuevas Clases:", newClasses);
   
       for (const newClass of newClasses) {
         const classFormData = new FormData();
@@ -432,75 +410,73 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
       }
     };
   
-  
-    // Filtrar las clases modificadas para no incluir aquellas que fueron eliminadas
+     // Realizar la solicitud PATCH para las clases modificadas
+    // 1 Filtrar las clases modificadas para no incluir aquellas que fueron eliminadas
     if (modifiedClasses.length > 0) {
     const filteredModifiedClasses = modifiedClasses.filter(
       (classItem) => !deletedClasses.includes(classItem.id)
     );
-  
-    console.log("Clases modificadas (sin las eliminadas):", filteredModifiedClasses);
-    const formData = new FormData();
-   // formData.append('course_id', courseData.id);
-  
-    // Agregar las clases modificadas para la solicitud PATCH
-    filteredModifiedClasses.forEach((classItem) => {
-      formData.append(`class_id`, classItem.id);
-      formData.append(`title`, classItem.classname);
-      formData.append(`videoName`, classItem.video.name);
-      formData.append(`fileName`, classItem.file.name);
-  
-      // Verificar si se ha subido un nuevo video o archivo
-      formData.append(`videoUrl`, classItem.videoFile ? classItem.video.url : classItem.video.url);
-      formData.append(`fileUrl`, classItem.fileFile ? classItem.file.url : classItem.file.url);
-  
-      if (classItem.videoFile) {
-        formData.append(`videoFile`, classItem.videoFile);
-      }
-      if (classItem.fileFile) {
-        formData.append(`fileFile`, classItem.fileFile);
-      }
-    });
 
-    console.log("Datos que se enviarán a la API (clases modificadas):", Array.from(formData.entries()));
-  
-    // Realizar la solicitud PATCH para las clases modificadas
-    try {
-      const patchResponse = await fetch('/api/update-classes', {
-        method: 'PATCH',
-        body: formData,
-      });
-  
-      if (patchResponse.ok) {
-        alert('Los cambios de las clases se han actualizado con éxito');
-      } else {
-        alert('Hubo un error al actualizar las clases.');
+    console.log("Nuevas Clases:", filteredModifiedClasses);
+    for (const updatedClasses of filteredModifiedClasses) {
+      const updatedFormData = new FormData(); 
+    
+      //updatedFormData.append('course_id', id.toString()); // ID del curso, asumiendo que ya es un string
+      updatedFormData.append('title',updatedClasses.classname); // Título de la clase
+      updatedFormData.append('videourl', updatedClasses.video.url.toString()); // Contenido de la clase
+
+      // Agrega el archivo si está disponible
+      if (updatedClasses.file && updatedClasses.file.url) {
+        updatedFormData.append('file',updatedClasses.file.url); // Archivo cargado por el input
       }
-    } catch (error) {
-      console.error('Error al guardar los cambios:', error);
-      alert('Hubo un problema con la actualización.');
-    } }
+    
+      try {
+        const response = await fetch(`http://localhost:3000/classes/${updatedClasses.id}`, {
+          method: 'PATCH', 
+          body: updatedFormData,
+        });
+
+        if (response.ok) {
+          console.log(`Clase modificada exitosamente`);
+        } else {
+          const errorResponse = await response.json(); // Obtiene la respuesta de error
+          console.error(`Error al modificar la clase '${updatedClasses.classname}':`, errorResponse);
+        }
+      } catch (error) {
+        console.error(`Error en la petición para la clase '${updatedClasses.classname}':`, error);
+      }
+    }
+   
+   
+    }
 
     // Procesar las clases eliminadas
     if (deletedClasses.length > 0) {
       console.log("Clases eliminadas:", deletedClasses);
-      try {
-        const deleteResponse = await fetch('/api/delete-classes', {
-          method: 'DELETE',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ classIds: deletedClasses }), //en el backend, se verá así: {"classIds": ["class-1", "class-2"]}
-        });
-  
-        if (deleteResponse.ok) {
-          alert('Las clases eliminadas se han procesado con éxito');
-          setDeletedClasses([]); // Limpia la lista de eliminadas
-        } else {
-          alert('Hubo un error al eliminar las clases.');
+     
+      for( const deletedClass of deletedClasses) {
+        try {
+          const deleteResponse = await fetch(`http://localhost:3000/classes/${deletedClass}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ classIds: deletedClass }), 
+          });
+    
+          if (deleteResponse.ok) {
+            alert('Las clases eliminadas se han procesado con éxito');
+            setDeletedClasses([]); // Limpia la lista de eliminadas
+          } else {
+            alert('Hubo un error al eliminar las clases.');
+          }
+        } catch (error) {
+          console.error('Error al eliminar las clases:', error);
+          alert('Hubo un problema con la eliminación.');
         }
-      } catch (error) {
-        console.error('Error al eliminar las clases:', error);
-        alert('Hubo un problema con la eliminación.');
-      }
+  
+
+      } 
+      
+     
     }
   
     // Reiniciar el estado de clases modificadas y eliminadas
@@ -572,36 +548,58 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
               <h2>Actualizar Clase</h2>
               <button onClick={closeModal} style={{ float: 'right', marginBottom: '10px' }}>Cerrar</button>
               <form onSubmit={(e) => { e.preventDefault(); handleUpdateClassInState(); }}>
-              <div className="form-group">
-               <label htmlFor="classname">Nombre de la Clase</label>
-                <input
-                  type="text"
-                  className="form-input"
-                   id="classname"
-                     value={classData.classname} // Vincular con el estado de classname
-                   onChange={(e) => setClassData({ ...classData, classname: e.target.value })} // Actualizar el estado
-                     />
-                   </div>
-                <div className="form-group">
-                  <label htmlFor="videoFile">Selecciona Video</label>
-                  <input
-                    type="file"
-                    accept="video/*"
-                    name="videoFile"
-                    onChange={handleFileChange}
-                    className="form-input"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="fileFile">Selecciona Archivo</label>
-                  <input
-                    type="file"
-                    accept=".pdf,.docx,.pptx"
-                    name="fileFile"
-                    onChange={handleFileChange}
-                    className="form-input"
-                  />
-                </div>
+            {/* Campo para editar el nombre de la clase */}
+        <div className="form-group">
+          <label htmlFor="classname">Nombre de la Clase</label>
+          <input
+            type="text"
+            className="form-input"
+            id="classname"
+            value={classData.classname}
+            onChange={(e) => setClassData({ ...classData, classname: e.target.value })}
+          />
+        </div>
+
+        {/* Campo para ingresar la URL del video de YouTube */}
+        <div className="form-group">
+  <label>Video URL (YouTube)</label>
+  <input
+    type="text"
+    placeholder="https://www.youtube.com/watch?v=XXXXXX"
+    value={classData.videoFile || ''} // Usar videoFile para la URL
+    onChange={(e) => setClassData({ ...classData, videoFile: e.target.value })}
+    onBlur={() => setIsPreviewVisible(isYouTubeUrl(classData.videoFile))}
+    className="form-input"
+  />
+</div>
+
+        {/* Vista previa del video de YouTube */}
+        {isPreviewVisible && isYouTubeUrl(classData.videoFile) && (
+  <div className="video-preview">
+    <h4>Vista previa del video:</h4>
+    <iframe
+      width="560"
+      height="315"
+      src={`https://www.youtube.com/embed/${new URL(classData.videoFile).searchParams.get('v')}`}
+      title="YouTube video preview"
+      frameBorder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+    ></iframe>
+  </div>
+)}
+
+        {/* Campo para seleccionar un archivo adicional */}
+        <div className="form-group">
+          <label htmlFor="fileFile">Selecciona Archivo</label>
+          <input
+            type="file"
+            accept=".pdf,.docx,.pptx"
+            name="fileFile"
+            onChange={(e) => setClassData({ ...classData, fileFile: e.target.files[0] })}
+            className="form-input"
+          />
+        </div>
                 <div className="modal-actions">
                   <button type="submit" className="btn update-btn">Actualizar Clase</button>
                   <button className="btn update-btn" onClick={() => handleDeleteClass(selectedClass.id)}> Eliminar Clase </button>
