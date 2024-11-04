@@ -17,16 +17,17 @@ import { useUser } from "../UserContext/UserContext";
 const { Header, Content, Sider } = Layout;
 
 function Sidebar() {
-  const { logout } = useUser(); // Función de logout desde el contexto
+  const { user,logout } = useUser(); // Función de logout desde el contexto
   const [collapsed, setCollapsed] = useState(true);
-
+  
   // Uso del tema para obtener colores y bordes
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
+  const email = user?.email || "User";
   // Definición de los items del breadcrumb
-  const breadcrumbItems = [{ title: "Professor" }, { title: "Hans" }];
+  const breadcrumbItems = [{ title: "Professor" }, { title: email }];
 
   // Función getItem para crear elementos de menú
   function getItem(label, key, icon, children) {
@@ -40,7 +41,7 @@ function Sidebar() {
 
   // Definición de los items del menú con evento logout en el item "Log out"
   const items = [
-    getItem("Hans", "1", <SettingOutlined />),
+    getItem(email, "1", <SettingOutlined />),
     getItem("Professor", "sub1", <UserOutlined />, [
       getItem(
         <Link to="change-password">Change Password</Link>,

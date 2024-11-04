@@ -1,0 +1,13 @@
+.ant-radio-group {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  
+  .ant-btn-primary {
+    background-color: #1890ff;
+    border-color: #1890ff;
+  }
+  h2 {
+    text-align: center;
+  }

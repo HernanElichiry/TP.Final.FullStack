@@ -21,7 +21,7 @@ import SearchResults from "./LandigPage/SearchResult/SearchResults";
 import CategoriesPage from "./LandigPage/Categorias/CategoriesPage";
 import Admin from "./LandigPage/admin/admin";
 import CoursePlatform from "./LandigPage/User/Profesor/ProfessorCoursesPlataform/ProfessorCoursesPlataform";
-
+import CheckoutPage from "./LandigPage/CheckoutPage/CheckoutPage ";
 
 function App() {
   return (
@@ -52,6 +52,7 @@ function App() {
               <Route path= "/course-platform/:id" element={<CoursePlatform/>} />
               <Route path="/search/:searchTerm" element={<SearchResults />} />
               <Route path="/course/:id" element={<CourseDetail />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
            
             </Routes>
           </FavoritesProvider>

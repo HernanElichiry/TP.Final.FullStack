@@ -16,14 +16,16 @@ import { useUser } from "../UserContext/UserContext";
 const { Header, Content, Sider } = Layout;
 
 function Sidebar() {
-  const { logout } = useUser();
+  const { user,logout } = useUser();
   const [collapsed, setCollapsed] = useState(true);
 
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  const breadcrumbItems = [{ title: "User" }, { title: "Hans" }];
+  const email = user?.email || "User";
+
+  const breadcrumbItems = [{ title: "User" }, { title: email }];
 
   // Función getItem para crear elementos de menú
   function getItem(label, key, icon, children) {
@@ -37,7 +39,7 @@ function Sidebar() {
 
   // Definición de los items del menú
   const items = [
-    getItem("Hans", "1", <SettingOutlined />),
+    getItem(email, "1", <SettingOutlined />),
     getItem("User", "sub1", <UserOutlined />, [
       getItem(
         <Link to="change-password">Change Password</Link>,
