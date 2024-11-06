@@ -9,6 +9,7 @@ const SearchResults = () => {
   const [searchResults, setSearchResults] = useState([]); // Estado para almacenar los resultados de búsqueda
   const [isLoading, setIsLoading] = useState(false); // Estado para indicar la carga
   const [error, setError] = useState(null); // Estado para almacenar errores
+  const [imageUrl, setImageUrl] = useState("");
 
   useEffect(() => {
     const fetchSearchResults = async () => {
@@ -17,7 +18,9 @@ const SearchResults = () => {
         setIsLoading(true); // Indica que la carga ha comenzado
         try {
           const response = await fetch(
-            `http://localhost:3000/courses/search?term=${searchTerm}`
+            `http://localhost:3000/courses/search?term=${encodeURIComponent(
+              searchTerm
+            )}`
           );
           if (!response.ok) throw new Error("Error al buscar cursos");
 
