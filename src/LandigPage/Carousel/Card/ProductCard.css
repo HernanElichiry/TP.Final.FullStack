@@ -148,6 +148,11 @@
   padding: 0.7rem;
 }
 
+.rating-star {
+  font-size: 20px; /* Ajusta el tamaño si es necesario */
+  color: #FFD700; /* Color amarillo dorado */
+}
+
 @media (max-width: 1200px) {
   .slick-slide {
     padding: 0 10px;
@@ -176,6 +181,10 @@
     justify-content: center;
   }
 
+  .rating-star {
+    font-size: 13px; /* Ajusta el tamaño si es necesario */
+   
+  }
   /* Ajuste de cada tarjeta */
   .card-product-container {
     flex: 1 1 48%; /* Ocupa aproximadamente el 50% del contenedor */
