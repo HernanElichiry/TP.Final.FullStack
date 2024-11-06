@@ -1,40 +1,40 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { courses } from '../MockCourses/MockCourses';
-import { ProductCard } from '../Carousel/Card/ProductCard';
-import SearchBar from '../SearchBar/SearchBar';
-import './SearchResults.css';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { ProductCard } from "../Carousel/Card/ProductCard";
+import SearchBar from "../SearchBar/SearchBar";
+import "./SearchResults.css";
 
 const SearchResults = () => {
-  const { searchTerm } = useParams();
-  const [searchResults, setSearchResults] = useState([]);
-console.log(searchTerm);
+  const { searchTerm } = useParams(); // Obtiene el término de búsqueda desde la URL
+  const [searchResults, setSearchResults] = useState([]); // Estado para almacenar los resultados de búsqueda
+  const [isLoading, setIsLoading] = useState(false); // Estado para indicar la carga
+  const [error, setError] = useState(null); // Estado para almacenar errores
+
   useEffect(() => {
-    if (searchTerm) {
-      const normalizedSearchTerm = searchTerm.toLowerCase().trim();
+    const fetchSearchResults = async () => {
+      if (searchTerm) {
+        console.log("Término de búsqueda:", searchTerm);
+        setIsLoading(true); // Indica que la carga ha comenzado
+        try {
+          const response = await fetch(
+            `http://localhost:3000/courses/search?term=${searchTerm}`
+          );
+          if (!response.ok) throw new Error("Error al buscar cursos");
 
-      const filteredResults = courses.filter(course => {
-        // Busca por título
-        const normalizedTitle = course.title.toLowerCase();
-        if (normalizedTitle.includes(normalizedSearchTerm)) {
-          return true;
+          const data = await response.json(); // Convierte la respuesta a JSON
+          setSearchResults(data); // Actualiza los resultados de búsqueda con los datos del backend
+        } catch (error) {
+          console.error("Error al obtener los resultados de búsqueda:", error);
+          setError("No se pudieron cargar los resultados de búsqueda");
+        } finally {
+          setIsLoading(false); // Finaliza la carga
         }
+      } else {
+        setSearchResults([]); // Si no hay término de búsqueda, se limpia la lista de resultados
+      }
+    };
 
-        // Busca por topics
-        const foundInTopics = course.topics.some(topic =>
-          topic.toLowerCase().includes(normalizedSearchTerm)
-        );
-        if (foundInTopics) {
-          return true;
-        }
-
-        return false;
-      });
-
-      setSearchResults(filteredResults);
-    } else {
-      setSearchResults([]);
-    }
+    fetchSearchResults(); // Llama a la función
   }, [searchTerm]);
 
   return (
@@ -42,8 +42,12 @@ console.log(searchTerm);
       <SearchBar className="search-page" />
       <div className="search-results">
         <div className="product-list">
-          {searchResults.length > 0 ? (
-            searchResults.map(course => (
+          {isLoading ? (
+            <p>Cargando resultados...</p>
+          ) : error ? (
+            <p>{error}</p>
+          ) : searchResults.length > 0 ? (
+            searchResults.map((course) => (
               <ProductCard key={course.id} product={course} />
             ))
           ) : (

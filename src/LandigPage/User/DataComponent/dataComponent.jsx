@@ -18,7 +18,6 @@ const DataComponent = () => {
 
   // Cargar los datos del usuario al montar el componente
   useEffect(() => {
-
     if (!userId) {
       message.error("No se pudo identificar al usuario.");
       return;
@@ -67,7 +66,9 @@ const DataComponent = () => {
 
     const { name, birthDate, email } = userData;
     if (!name || !birthDate || !email) {
-      message.error("Por favor, complete todos los campos antes de actualizar.");
+      message.error(
+        "Por favor, complete todos los campos antes de actualizar."
+      );
       return;
     }
 
@@ -123,15 +124,24 @@ const DataComponent = () => {
         />
       </Form.Item>
       <Form.Item label="Email">
-        <Input
-          type="email"
-          name="email"
-          value={userData.email}
-          readOnly
-        />
+        <Input type="email" name="email" value={userData.email} readOnly />
       </Form.Item>
-      <Button type="primary" htmlType="submit" className="btn-submit" loading={loading}>
+      <Button
+        type="primary"
+        htmlType="submit"
+        className="btn-submit"
+        loading={loading}
+      >
         Actualizar
+      </Button>
+      <Button
+        type="primary"
+        danger
+        htmlType="submit"
+        className="btn-submit"
+        loading={loading}
+      >
+        eliminar cuenta
       </Button>
     </Form>
   );
