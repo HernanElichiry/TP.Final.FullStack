@@ -7,7 +7,7 @@ import Modal from 'react-modal'; // Importa react-modal
 import { useUser } from '../../UserContext/UserContext';
 import Cookies from 'js-cookie';
 
-const ProfesorCoursesCard = ({ course }) => {
+const ProfesorCoursesCard = ({ course}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteConfirm, setIsDeleteConfirm] = useState(false);
   const [formValues, setFormValues] = useState(course);
@@ -15,6 +15,7 @@ const ProfesorCoursesCard = ({ course }) => {
   const [backgroundImageFile, setBackgroundImageFile] = useState(null); // Estado para almacenar la URL de la imagen
   const [errorMessages, setErrorMessages] = useState({});
   const {user} = useUser(); 
+
   
   useEffect(() =>{
     const fetchImage = async() => {
@@ -274,6 +275,7 @@ const handleVideoFileChange = (e) => {
     
       if (response.ok) {
         console.log("Curso actualizado correctamente");
+        window.location.reload(); // Recarga la página para ver los cambios
       } else {
         console.error("Error al actualizar el curso:", await response.text());
       }
@@ -284,20 +286,35 @@ const handleVideoFileChange = (e) => {
   };
 
   const handleDelete = async () => {
+    const token = Cookies.get('token'); // Obtén el token de las cookies
+  
     try {
-      const response = await fetch(`/api/courses/${course.id}`, {
-        method: 'DELETE',
+      const response = await fetch(`http://localhost:3000/courses/disable/${course.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
       });
+  
       if (response.ok) {
-        console.log("Curso eliminado correctamente");
+        console.log("Curso eliminado con éxito");
+        alert(`Curso ${course.title} eliminado con éxito`);
+        window.location.reload(); 
       } else {
-        console.error("Error al eliminar el curso");
+        const errorText = await response.text();
+        console.error("Error al eliminar el curso:", errorText);
+        alert(`Error al eliminar el curso: ${errorText}`);
       }
     } catch (error) {
-      console.error("Error en la solicitud de eliminación:", error);
+      console.error("Error en la solicitud de delete:", error);
+      alert("Error en la solicitud de delete. Por favor, intenta de nuevo.");
     }
-    handleCloseModal();
+  
+    handleCloseModal(); // Cierra el modal después de intentar eliminar el curso
   };
+   
+  
 
   return (
     <div className="profesor-course-card" >

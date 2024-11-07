@@ -152,35 +152,34 @@ const handleUrlChange = (e) => {
 
 
 /////////////////////////// logica para eliminar clase
-  const handleDeleteClass = async  (classId) => {
-    if (classId) {
-      
-        try {
-          const deleteResponse = await fetch(`http://localhost:3000/classes/${classId}`, {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-            //body: JSON.stringify( { classIds: classId }),
-          });
-    
-          if (deleteResponse.ok) {
-            alert('Las clases ha sido eliminada con éxito');
-            
-          } else {
-            alert('Hubo un error al eliminar las clases.');
-          }
-        } catch (error) {
-          console.error('Error al eliminar las clases:', error);
-          
-        }
-     
+const handleDeleteClass = async (classId, className) => {
+  if (!classId) return;
+
+  const isConfirmed = window.confirm(`¿Estás seguro que deseas eliminar la clase "${className}"?`);
+
+  if (isConfirmed) {
+    try {
+      const deleteResponse = await fetch(`http://localhost:3000/classes/${classId}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (deleteResponse.ok) {
+        alert('La clase ha sido eliminada con éxito');
+      } else {
+        alert('Hubo un error al eliminar la clase.');
+      }
+    } catch (error) {
+      console.error('Error al eliminar la clase:', error);
     }
-  
-    setCourseData((prevCourseData) => { // para reflejar los cambios en el front antes de hacer una solicitud quito el la clase
-      //que pienso eliminar
+
+    // Actualizar el estado en el frontend
+    setCourseData((prevCourseData) => {
       const updatedClasses = prevCourseData.classes.filter((classItem) => classItem.id !== classId);
       return { ...prevCourseData, classes: updatedClasses };
     });
-  };
+  }
+};
 ///////////////////////////////// fin de la seccion de eliminacion de clases 
 
 //////// funcion que maneja el menu desplegable para cada clase
@@ -309,7 +308,7 @@ const [expandedClassIndex, setExpandedClassIndex] = useState(null);
        <div className="video-actions">
             <button className="btn create-btn" onClick={openCreateModal}>Agregar Nueva Clase</button>
             <button className="btn query-btn" onClick={() => openUpdateModal(selectedClass)}> Actualizar Clase </button>  
-            <button className="btn update-btn" onClick={() => handleDeleteClass(selectedClass.id)}> Eliminar Clase </button>
+            <button className="btn update-btn" onClick={() => handleDeleteClass(selectedClass.id, selectedClass.classname)}> Eliminar Clase </button>
           </div>
        </div>
        

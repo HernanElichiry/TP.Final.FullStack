@@ -37,7 +37,8 @@ const MyCoursesProfessor = () => {
     fetchCourses();
   }, []); // Se ejecuta una vez al montar el componente
 
-
+ 
+     
 
   return (
     <div className="my-courses-container">
@@ -45,7 +46,7 @@ const MyCoursesProfessor = () => {
   <div className="courses-grid">
     {courses.length > 0 ? (
       courses.map((course) => (
-        <ProfesorCoursesCard key={course.id} course={course} />
+        <ProfesorCoursesCard key={course.id} course={course}/>
       ))
     ) : (
       <p className="no-courses-message">No tiene cursos cargados.</p>
