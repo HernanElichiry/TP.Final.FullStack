@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   UserOutlined,
+  LogoutOutlined,
   SettingOutlined,
   CloseCircleOutlined,
   ReadOutlined,
@@ -18,9 +19,9 @@ import { useUser } from "../UserContext/UserContext";
 const { Header, Content, Sider } = Layout;
 
 function Sidebar() {
-  const { user,logout } = useUser(); // Función de logout desde el contexto
+  const { user, logout } = useUser(); // Función de logout desde el contexto
   const [collapsed, setCollapsed] = useState(true);
-  
+
   // Uso del tema para obtener colores y bordes
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -65,7 +66,8 @@ function Sidebar() {
         <PushpinFilled />
       ),
     ]),
-    getItem("Log out", "9", <CloseCircleOutlined />), // Item para el logout
+    getItem("Log out", "9", <LogoutOutlined />), // Item para el logout
+    getItem("Eliminar mi cuenta", "10", <CloseCircleOutlined />),
   ];
 
   // Manejador del clic en el menú
