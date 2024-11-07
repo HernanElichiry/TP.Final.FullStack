@@ -89,9 +89,6 @@ const AddCourseForm = () => {
   formData.append('endDate', data.endDate);
   }*/
     
-
-  
-
     // Para verificar que los datos están correctos antes de enviar
 console.log("Datos del formulario a enviar:");
 for (const [key, value] of formData.entries()) {
@@ -136,7 +133,6 @@ try {
           />
           {errors.courseName && <p className="error-message">{errors.courseName.message}</p>}
         </div>
-
         {/* Descripción */}
         <div className="form-group">
           <label htmlFor="courseDescription">Descripción</label>
@@ -149,7 +145,6 @@ try {
           />
           {errors.courseDescription && <p className="error-message">{errors.courseDescription.message}</p>}
         </div>
-
         {/* Duración */}
         <div className="form-group">
           <label htmlFor="courseDuration">Duración (en horas)</label>
@@ -395,7 +390,7 @@ try {
   {errors.price && <p className="error-message">{errors.price.message}</p>}
           </div>
 
-        <button type="submit">Guardar Curso</button>
+          <button type="submit" className="save-course-button">Guardar Curso</button>
       </form>
     </div>
   );

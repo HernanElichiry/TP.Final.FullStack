@@ -1,9 +1,8 @@
-import { createContext, useState, useEffect } from "react";
-import { useUser } from "./UserContext/UserContext";
-import Cookies from "js-cookie";
+import { createContext, useState, useEffect } from 'react';
+import { useUser } from './UserContext/UserContext';
+import Cookies from 'js-cookie';
 
 export const FavoritesContext = createContext();
-
 export const FavoritesProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
   const { user } = useUser(); // Obtener el usuario desde el contexto

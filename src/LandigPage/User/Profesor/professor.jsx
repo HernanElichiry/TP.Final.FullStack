@@ -10,6 +10,7 @@ import {
   EditFilled,
   AuditOutlined,
   FormOutlined,
+  ShoppingCartOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 import { Link, Outlet } from "react-router-dom";
@@ -58,9 +59,10 @@ function Sidebar() {
         "8",
         <AuditOutlined />
       ),
+      getItem(<Link to="purchased-courses-professor">Purchased Courses</Link>, "10", <ShoppingCartOutlined />),
       getItem(
         <Link to="favorites-professor">Favorites</Link>,
-        "10",
+        "12",
         <PushpinFilled />
       ),
     ]),
