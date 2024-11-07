@@ -67,7 +67,7 @@ function Sidebar() {
       ),
     ]),
     getItem("Log out", "9", <LogoutOutlined />), // Item para el logout
-    getItem("Eliminar mi cuenta", "10", <CloseCircleOutlined />),
+    getItem("Eliminar mi cuenta", "11", <CloseCircleOutlined />),
   ];
 
   // Manejador del clic en el menú
