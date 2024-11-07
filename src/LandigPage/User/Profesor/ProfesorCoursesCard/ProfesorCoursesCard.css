@@ -113,3 +113,10 @@ button:hover {
   font-size: 14px;
   display: block;  /* asegúrate de que esté visible */
 }
+
+
+#description{
+width: 22rem;
+height: 80px;
+
+}
