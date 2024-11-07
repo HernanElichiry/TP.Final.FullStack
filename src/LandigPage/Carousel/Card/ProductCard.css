@@ -122,10 +122,7 @@
   margin: 0 2px;  /* Reducimos el margen */
 }
 
-.rating-star {
-  color: rgb(44, 43, 43);
-  margin-right: 3px;
-}
+
 
 .slider-align {
   display: flex;
@@ -146,6 +143,11 @@
   font-size: 35px;
   color: #ffffff;
   padding: 0.7rem;
+}
+
+.rating-star {
+  font-size: 26px; /* Ajusta el tamaño si es necesario */
+  color: #01031c; /* Color amarillo dorado */
 }
 
 @media (max-width: 1200px) {
@@ -176,6 +178,10 @@
     justify-content: center;
   }
 
+  .rating-star {
+    font-size: 13px; /* Ajusta el tamaño si es necesario */
+   
+  }
   /* Ajuste de cada tarjeta */
   .card-product-container {
     flex: 1 1 48%; /* Ocupa aproximadamente el 50% del contenedor */

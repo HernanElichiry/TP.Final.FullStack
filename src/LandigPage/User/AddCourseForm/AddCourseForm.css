@@ -97,40 +97,33 @@
 }
 
 /* Botón de añadir video */
-button[type="button"] {
+.save-course-button {
   margin-top: 10px;
   padding: 10px 20px;
   border: none;
   border-radius: 6px;
-  background-color: #007bff;
+  background-color: #007bff; /* Color de fondo para los botones de tipo botón */
   color: white;
   cursor: pointer;
   font-size: 1em;
   transition: background-color 0.3s ease, transform 0.3s; /* Transición de fondo y elevación */
+  display: block; /* Para el botón de enviar */
+  width: 100%; /* Para el botón de enviar */
 }
 
-button[type="button"]:hover {
-  background-color: #0056b3;
+.save-course-button[type="submit"] {
+  padding: 15px; /* Estilo específico para el botón de enviar */
+  background-color: #28a745; /* Color de fondo para el botón de enviar */
+  font-size: 1.125em; /* Tamaño de fuente específico para el botón de enviar */
+}
+
+.save-course-button:hover {
+  background-color: #0056b3; /* Color de fondo al pasar el ratón para el botón de tipo botón */
   transform: translateY(-2px); /* Efecto de elevación al pasar el ratón */
 }
 
-/* Botón de enviar */
-button[type="submit"] {
-  display: block;
-  width: 100%;
-  padding: 15px;
-  border: none;
-  border-radius: 6px;
-  background-color: #28a745;
-  color: white;
-  font-size: 1.125em;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s; /* Transición de fondo y elevación */
-}
-
-button[type="submit"]:hover {
-  background-color: #218838;
-  transform: translateY(-2px); /* Efecto de elevación al pasar el ratón */
+.save-course-button[type="submit"]:hover {
+  background-color: #218838; /* Color de fondo al pasar el ratón para el botón de enviar */
 }
 
 /* Responsive adjustments */

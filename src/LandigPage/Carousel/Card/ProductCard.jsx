@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
-import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
-import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
+import { faStar as solidStar, faStarHalfAlt as halfStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
 import { useUser } from "../../User/UserContext/UserContext"; 
 import { message } from 'antd';
 import "./ProductCard.css";
@@ -30,17 +30,39 @@ export const ProductCard = ({ product, onFavoriteToggle, isFavorited, user }) =>
     navigate(`/course/${product.id}`);
   };
 
-  const renderStars = () => {   // Esta Función para renderizar las estrellas de acuerdo a la valoración del curso
-
+  const renderStars = () => {
     const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      stars.push(
-        <FontAwesomeIcon
-          key={i}
-          icon={i <= product.rating ? solidStar : regularStar}
-          className="rating-star"
-        />
-      );
+    const totalStars = 5; // Total de estrellas a mostrar
+  
+    for (let i = 1; i <= totalStars; i++) {
+      // Si el número entero de la calificación es mayor o igual a i, pintamos una estrella completa
+      if (i <= Math.floor(product.rating)) {
+        stars.push(
+          <FontAwesomeIcon
+            key={i}
+            icon={solidStar} // Estrella completa
+            className="rating-star"
+          />
+        );
+      }
+      // Si el valor decimal de la calificación es mayor o igual a 0.5 y aún no hemos pintado esta estrella
+      else if (i === Math.floor(product.rating) + 1 && product.rating % 1 >= 0.5) {
+        stars.push(
+          <FontAwesomeIcon
+            key={i}
+            icon={halfStar} // Media estrella
+            className="rating-star"
+          />
+        );
+      } else {
+        stars.push(
+          <FontAwesomeIcon
+            key={i}
+            icon={regularStar} // Estrella vacía
+            className="rating-star"
+          />
+        );
+      }
     }
     return stars;
   };
