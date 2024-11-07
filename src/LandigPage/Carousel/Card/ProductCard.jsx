@@ -12,7 +12,7 @@ import "./ProductCard.css";
 export const ProductCard = ({ product, onFavoriteToggle, isFavorited, user }) => {
   const navigate = useNavigate(); // me permite el direccionamiento
   const [imageUrl, setImageUrl] = useState(''); // Estado para almacenar la URL de la imagen
- 
+
 
   const handleFavoriteClick = () => {
 
@@ -20,9 +20,6 @@ export const ProductCard = ({ product, onFavoriteToggle, isFavorited, user }) =>
       onFavoriteToggle(product); // Llama a la función para alternar favorito
     } else {
       message.warning("Inicia sesión para agregar a favoritos.", 3); // Mensaje para usuarios no logueados con duración de 3 segundos
-      const hide = message.loading('Cargando...', 0); // 0 significa que el mensaje de carga es indefinido
-      setTimeout(hide, 3000); // Ocultar después de 3 segundos
-      message.info('Este es un mensaje informativo.');
     }
   };
 

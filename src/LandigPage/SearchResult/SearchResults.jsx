@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ProductCard } from "../Carousel/Card/ProductCard";
 import SearchBar from "../SearchBar/SearchBar";
+import { message } from 'antd';
 import "./SearchResults.css";
+import { useNavigate } from "react-router-dom";
 
 const SearchResults = () => {
   const { searchTerm } = useParams(); // Obtiene el término de búsqueda desde la URL
@@ -10,11 +12,12 @@ const SearchResults = () => {
   const [isLoading, setIsLoading] = useState(false); // Estado para indicar la carga
   const [error, setError] = useState(null); // Estado para almacenar errores
   const [imageUrl, setImageUrl] = useState("");
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchSearchResults = async () => {
       if (searchTerm) {
-        console.log("Término de búsqueda:", searchTerm);
         setIsLoading(true); // Indica que la carga ha comenzado
         try {
           const response = await fetch(
@@ -26,6 +29,10 @@ const SearchResults = () => {
 
           const data = await response.json(); // Convierte la respuesta a JSON
           setSearchResults(data); // Actualiza los resultados de búsqueda con los datos del backend
+          if(Array.isArray(data) && data.length === 0){
+            navigate("/");
+            message.warning("No se encontraron resultados", 3);
+          }
         } catch (error) {
           console.error("Error al obtener los resultados de búsqueda:", error);
           setError("No se pudieron cargar los resultados de búsqueda");
