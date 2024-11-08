@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import "./PopupCourseDetail.css"; // Estilos para el popup
 import { useEffect, useState } from "react";
 import { useUser } from "../UserContext/UserContext";
-import {message  } from "antd";
+import { message } from "antd";
 
 export const PopupCourseDetail = ({ course, onClose }) => {
   const [imageUrl, setImageUrl] = useState("");
@@ -37,17 +37,17 @@ export const PopupCourseDetail = ({ course, onClose }) => {
   // Manejador de evento para enviar la calificación al servidor
   const handleSubmitRating = async () => {
     try {
-        const response = await fetch("http://localhost:3000/rating", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              rating,
-              course_id: course.id,
-              user_id: user.user.sub, 
-            }),
-          });
+      const response = await fetch("http://localhost:3000/rating", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          rating,
+          course_id: course.id,
+          user_id: user.user.sub,
+        }),
+      });
       if (response.ok) {
         message.success("Califico el curso correctamente");
         setShowRatingModal(false); // Cierra el modal al enviar
@@ -76,10 +76,12 @@ export const PopupCourseDetail = ({ course, onClose }) => {
           <button className="close-button" onClick={onClose}>
             &times;
           </button>
-          <img
+          <motion.img
             className="popup-image"
             src={imageUrl}
             alt={`Imagen del curso ${course.title}`}
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 100 }}
           />
           <h3 className="popup-title">{course.title}</h3>
           <div className="popup-divider"></div>
@@ -139,7 +141,6 @@ export const PopupCourseDetail = ({ course, onClose }) => {
               ))}
             </div>
             <button onClick={handleSubmitRating}>Enviar </button>
-            
           </motion.div>
         </motion.div>
       )}
