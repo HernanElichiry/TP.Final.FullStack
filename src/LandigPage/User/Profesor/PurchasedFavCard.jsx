@@ -1,55 +1,45 @@
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import "./PurchasedFavCard.css";
 
-import { useEffect,useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import "./PurchasedFavCard.css"; // Asegúrate de importar el archivo CSS
-export const PurchasedFavCard = ({ course }) => {
-  const navigate = useNavigate();
+export const PurchasedFavCard = ({ course, setSelectedId, isExpanded = false }) => {
+    const [imageUrl, setImageUrl] = useState("");
 
-  const [imageUrl, setImageUrl] = useState(""); // Estado para almacenar la URL de la imagen
+    useEffect(() => {
+        const fetchCourseImage = async () => {
+            try {
+                const imageResponse = await fetch(
+                    `http://localhost:3000/uploads/images/${course.media.filename}`,
+                    { method: "GET", mode: "cors", credentials: "include" }
+                );
 
-  useEffect(() => {
+                if (!imageResponse.ok) throw new Error("Error al obtener la imagen");
 
-    const fetchCourse = async () => {
-      try {
-        
-        // Construir la URL de la imagen del curso
-        
-        const imageResponse = await fetch(
-          `http://localhost:3000/uploads/images/${course.media.filename}`,
-          {
-            method: "GET",
-            mode: "cors",
-            credentials: "include",
-          }
-        );
-        
-        if (!imageResponse.ok) {
-          throw new Error("Error al obtener la imagen");
-        }
+                const imageBlob = await imageResponse.blob();
+                setImageUrl(URL.createObjectURL(imageBlob));
+            } catch (error) {
+                console.error("Error al obtener la imagen:", error);
+            }
+        };
+        fetchCourseImage();
+    }, [course.media.filename]);
 
-        // Convertir la imagen a Blob y luego a URL
-        const imageBlob = await imageResponse.blob();
-        setImageUrl(URL.createObjectURL(imageBlob)); // Guardar la URL de la imagen
-      } catch (error) {
-        console.error("Error al obtener la imagen:", error);
-      }
-    };
-    fetchCourse();
-
-  }, []); 
-
-  const handleCardClick = () => {
-    navigate(`/course/${course.id}`);
-  };
-
-
-
-  return (
-    <div className="PurchasedFavCard" onClick={handleCardClick} aria-label={`Ver detalles del curso ${course.title}`}>
-      <img className="img-pur" src={imageUrl} alt={`Imagen del curso ${course.title}`} />
-      <div className="fav-card-content">
-        <h3>{course.title}</h3>
-      </div>
-    </div>
-  );
+    return (
+        <motion.div
+            className={`PurchasedFavCard ${isExpanded ? "expanded" : ""}`}
+            layoutId={course.id}
+            onClick={() => setSelectedId(isExpanded ? null : course.id)}
+        >
+            <img className="img-pur" src={imageUrl} alt={`Imagen del curso ${course.title}`} />
+            <div className="fav-card-content">
+                <h3>{course.title}</h3>
+                {isExpanded && (
+                    <div className="expanded-content">
+                        <p>{course.description}</p>
+                        <button onClick={() => setSelectedId(null)}>Cerrar</button>
+                    </div>
+                )}
+            </div>
+        </motion.div>
+    );
 };
