@@ -59,7 +59,11 @@ function Sidebar() {
         "8",
         <AuditOutlined />
       ),
-      getItem(<Link to="purchased-courses-professor">Purchased Courses</Link>, "10", <ShoppingCartOutlined />),
+      getItem(
+        <Link to="purchased-courses-professor">Purchased Courses</Link>,
+        "10",
+        <ShoppingCartOutlined />
+      ),
       getItem(
         <Link to="favorites-professor">Favorites</Link>,
         "12",
@@ -67,7 +71,6 @@ function Sidebar() {
       ),
     ]),
     getItem("Log out", "9", <LogoutOutlined />), // Item para el logout
-    getItem("Eliminar mi cuenta", "11", <CloseCircleOutlined />),
   ];
 
   // Manejador del clic en el menú

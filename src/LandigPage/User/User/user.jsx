@@ -62,7 +62,6 @@ function Sidebar() {
       ),
     ]),
     getItem("Log out", "9", <LogoutOutlined />),
-    getItem("Eliminar mi cuenta", "10", <CloseCircleOutlined />),
   ];
 
   const handleMenuClick = (e) => {
