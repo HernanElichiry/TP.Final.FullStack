@@ -17,12 +17,7 @@ const RegisterForm = () => {
   const navigate = useNavigate();
   const { login } = useUser();
 
-  const handleLogin = () => {
-    // Lógica de autenticación aquí
-    // Si es exitoso:
 
-    navigate("/Login");
-  };
 
   // Expresiones regulares para validaciones
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -30,7 +25,7 @@ const RegisterForm = () => {
     /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
   const handleSubmit = async (e) => {
-   // e.preventDefault();
+    e.preventDefault();
 
     // Validar que las contraseñas coincidan antes de enviar
     if (password !== confirmPassword) {
@@ -70,7 +65,6 @@ const RegisterForm = () => {
       role_id,
     };
 
-    console.log("User Data to Send:", userData); // Agregar este log
 
     try {
       const res = await fetch("http://localhost:3000/auth/register", {
@@ -85,8 +79,7 @@ const RegisterForm = () => {
         const data = await res.json();
 
         login(data.accest_token);
-
-        navigate("/")
+        navigate("/");
       } else {
         const errorData = await res.json(); // Captura el error del servidor
         setErrorMessage(errorData.message || "Error al registrar un usuario");
