@@ -23,7 +23,8 @@ body {
   flex: 1;
   min-width: 300px;
   max-width: 400px;
-  max-height: 720px;
+  max-height: 530px;
+  
   padding: 1rem;
   background-color: #f7f7f7;
   border-radius: 10px;
@@ -127,6 +128,7 @@ body {
 }
 
 /* Video player (right column) */
+
 .video-player {
   flex: 2;
   min-width: 300px;
@@ -140,13 +142,8 @@ body {
 .video-player video {
   width: 100%;
   height: auto;
-  max-height: 500px;
   border-radius: 10px;
-}
-
-.video-player p {
-  font-size: 16px;
-  color: #555;
+  max-height: 600px; /* Controla el tamaño máximo en pantallas grandes */
 }
 
 /* Responsive Design */
@@ -164,6 +161,26 @@ body {
   .course-details {
     padding: 1.5rem; /* Menos padding en pantallas pequeñas */
   }
+}
+
+/* Ajustes para pantallas grandes (e.g., 27 pulgadas) */
+@media screen and (min-width: 1600px) {
+  .video-player {
+    max-width: 100%;
+    height: 730px;
+  }
+ 
+  .course-dates {
+    max-height: 730px;
+} }
+
+/* Ajustes para pantallas medianas (e.g., 15.6 pulgadas) */
+@media screen and (min-width: 1200px) and (max-width: 1599px) {
+  .video-player {
+    max-width: 100%;
+    height: 530px;
+  }
+
 }
 
 /* Small screen adjustments */
@@ -209,19 +226,14 @@ body {
   text-align: center;
   text-decoration: none;
   color: white;
+
   transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
 }
 
-.download-btn {
-  background-color: #007bff;
-}
 
-.completed-btn {
-  background-color: #28a745;
-}
 
 .query-btn {
-  background-color: #ffc107;
+  background-color: #000000;
 }
 
 .btn:hover {

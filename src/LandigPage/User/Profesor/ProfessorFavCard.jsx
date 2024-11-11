@@ -1,24 +1,5 @@
-// import React from "react";
-// import "./ProfessorFavCard.css";
-// import foto from "./fotos/fisica.jpg";
 
-// export const FavCardProfessor = () => {
-//   return (
-//     <>
-//       <div className="card-course-container">
-//         <div className="card-course-image">
-//           <img src={foto} />
-//         </div>
-//         <h2>Fisica Básica</h2>
-//         <p>Rating: 5 </p>
-//         <p>Precio: $125.000 </p>
-//         <button className="button is-primary is-small">Buy It!</button>
-//       </div>
-//     </>
-//   );
-// };
-
-import { useContext, useEffect,useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons"; // Importar el ícono de "X"
@@ -34,9 +15,9 @@ export const FavCardProfessor = ({ course }) => {
 
     const fetchCourse = async () => {
       try {
-        
+
         // Construir la URL de la imagen del curso
-        
+
         const imageResponse = await fetch(
           `http://localhost:3000/uploads/images/${course.media.filename}`,
           {
@@ -45,7 +26,7 @@ export const FavCardProfessor = ({ course }) => {
             credentials: "include",
           }
         );
-        
+
         if (!imageResponse.ok) {
           throw new Error("Error al obtener la imagen");
         }
@@ -59,7 +40,7 @@ export const FavCardProfessor = ({ course }) => {
     };
     fetchCourse();
 
-  }, []); 
+  }, []);
 
   const handleCardClick = () => {
     navigate(`/course/${course.id}`);
