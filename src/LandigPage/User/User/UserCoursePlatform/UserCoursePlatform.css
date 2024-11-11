@@ -1,0 +1,218 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+  
+    color: #333;
+  }
+  
+  .course-platform {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+  }
+  
+  /* Course details (left column) */
+  .course-dates {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    max-height: 530px;
+    
+    padding: 1rem;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .course-dates:hover {
+    transform: scale(1.02);
+  }
+  
+  .course-dates h1 {
+    margin-bottom: 15px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .course-dates p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .course-list {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+  }
+  
+  .class-section {
+    margin-bottom: 10px;
+  }
+  
+  .class-section h3 {
+    font-size: 18px;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    position: relative;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 100%;
+  }
+  
+  .class-section h3::after {
+    content: "▼";
+    font-size: 12px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .class-section h3:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+  }
+  
+  .class-content {
+    padding-left: 15px;
+    margin-top: 10px;
+    display: none;
+    animation: slide-down 0.3s ease-in-out;
+  }
+  
+  .class-content.open {
+    display: block;
+  }
+  
+  .class-videos {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .video-item {
+    padding: 8px 0;
+    cursor: pointer;
+    color: #007bff;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+  }
+  
+  .video-item:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+  
+  .attachment-item {
+    margin-top: 10px;
+  }
+  
+  .attachment-item a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .attachment-item a:hover {
+    color: #0056b3;
+  }
+  
+  /* Video player (right column) */
+  
+  .video-player {
+    flex: 2;
+    min-width: 300px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .video-player video {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    max-height: 600px; /* Controla el tamaño máximo en pantallas grandes */
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    .course-platform {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .course-details, .video-player {
+      width: 100%;
+      max-width: 500px;
+    }
+  
+    .course-details {
+      padding: 1.5rem; /* Menos padding en pantallas pequeñas */
+    }
+  }
+  
+  /* Ajustes para pantallas grandes (e.g., 27 pulgadas) */
+  @media screen and (min-width: 1600px) {
+    .video-player {
+      max-width: 100%;
+      height: 730px;
+    }
+   
+    .course-dates {
+      max-height: 730px;
+  } }
+  
+  /* Ajustes para pantallas medianas (e.g., 15.6 pulgadas) */
+  @media screen and (min-width: 1200px) and (max-width: 1599px) {
+    .video-player {
+      max-width: 100%;
+      height: 530px;
+    }
+  
+  }
+  
+  /* Small screen adjustments */
+  @media screen and (max-width: 480px) {
+    .course-details h1 {
+      font-size: 20px;
+    }
+  
+    .course-details p {
+      font-size: 12px;
+    }
+  
+    .class-section h3 {
+      font-size: 16px;
+    }
+  
+    .video-player p {
+      font-size: 14px;
+    }
+  }
+  
+  /* Animations */
+  @keyframes slide-down {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+ 
+  
