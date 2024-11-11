@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate  } from "react-router-dom";
 import "./CourseDetail.css";
 import Testimonials from "../Components/Testimonials";
 import SubscriptionSection from "../Components/SuscriptionSection";
 import PaymentMethods from "../Components/PaymentMethods";
 import FAQ from "../Components/FAQ";
 import FooterApp from "../Footer/Footer";
-import Modalities from "../Components/Modalities";
+import { message} from 'antd';
 import foto from "../Components/foto.jpg";
+import { useUser } from "../User/UserContext/UserContext";
 
 
 const CourseDetail = () => {
   const { id } = useParams(); // Obtener el ID del curso desde la URL
   const [course, setCourse] = useState(null); // Estado para almacenar el curso
   const [imageUrl, setImageUrl] = useState(""); // Estado para almacenar la URL de la imagen
-
+  const {user} = useUser();
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -66,6 +68,18 @@ const CourseDetail = () => {
   if (!course) {
     return <div>Curso no encontrado</div>;
   }
+  const handleBuyNow = () => {
+    if (user) {
+      navigate("/checkout", {
+        state: {
+          course,
+          user,
+        },
+      });
+    } else {
+      message.warning("Inicia sesión para comprar un curso.", 3);
+    }
+  };
 
 
   return (
@@ -121,7 +135,7 @@ const CourseDetail = () => {
             <p className="original-price">${course.price * 1.2}</p>
             <p className="discounted-price">${course.price}</p>
             <p className="installments">¡Hasta 12 cuotas!</p>
-            <button className="enroll-button">Comprar ahora</button>
+            <button onClick={handleBuyNow} className="enroll-button">Comprar ahora</button>
           </div>
         </div>
       </div>

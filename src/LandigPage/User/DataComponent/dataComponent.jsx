@@ -6,7 +6,7 @@ import "./dataComponent.css";
 import Cookies from "js-cookie";
 
 const DataComponent = () => {
-  const { user } = useUser(); // Obtener el usuario del contexto
+  const { user, logout } = useUser(); // Obtener el usuario del contexto
   const [userData, setUserData] = useState({
     name: "",
     birthDate: null,
@@ -18,7 +18,6 @@ const DataComponent = () => {
 
   // Cargar los datos del usuario al montar el componente
   useEffect(() => {
-
     if (!userId) {
       message.error("No se pudo identificar al usuario.");
       return;
@@ -67,7 +66,9 @@ const DataComponent = () => {
 
     const { name, birthDate, email } = userData;
     if (!name || !birthDate || !email) {
-      message.error("Por favor, complete todos los campos antes de actualizar.");
+      message.error(
+        "Por favor, complete todos los campos antes de actualizar."
+      );
       return;
     }
 
@@ -98,6 +99,36 @@ const DataComponent = () => {
     }
   };
 
+  const handleRemoveUser = async () => {
+    setLoading(true);
+    try {
+      const token = Cookies.get("token");
+
+      const response = await fetch(
+        `http://localhost:3000/users/${userId}/deactivate`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        message.success("Cuenta eliminada exitosamente.");
+        logout();
+        window.location.ref = "/login";
+      } else {
+        message.error("Error al eliminar la cuenta.");
+      }
+    } catch (err) {
+      console.error("Error al eliminar la cuenta:", err);
+      err.message("Ocurrió un error, intentalo nuevamente.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Form
       className="form-container"
@@ -123,15 +154,25 @@ const DataComponent = () => {
         />
       </Form.Item>
       <Form.Item label="Email">
-        <Input
-          type="email"
-          name="email"
-          value={userData.email}
-          readOnly
-        />
+        <Input type="email" name="email" value={userData.email} readOnly />
       </Form.Item>
-      <Button type="primary" htmlType="submit" className="btn-submit" loading={loading}>
+      <Button
+        type="primary"
+        htmlType="submit"
+        className="btn-submit"
+        loading={loading}
+      >
         Actualizar
+      </Button>
+      <Button
+        type="primary"
+        danger
+        onClick={handleRemoveUser}
+        className="btn-submit"
+        style={{ marginTop: "1rem" }}
+        loading={loading}
+      >
+        eliminar cuenta
       </Button>
     </Form>
   );

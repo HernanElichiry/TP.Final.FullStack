@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   UserOutlined,
+  LogoutOutlined,
   SettingOutlined,
   CloseCircleOutlined,
   ReadOutlined,
@@ -16,7 +17,7 @@ import { useUser } from "../UserContext/UserContext";
 const { Header, Content, Sider } = Layout;
 
 function Sidebar() {
-  const { user,logout } = useUser();
+  const { user, logout } = useUser();
   const [collapsed, setCollapsed] = useState(true);
 
   const {
@@ -60,7 +61,7 @@ function Sidebar() {
         <PushpinFilled />
       ),
     ]),
-    getItem("Log out", "9", <CloseCircleOutlined />),
+    getItem("Log out", "9", <LogoutOutlined />),
   ];
 
   const handleMenuClick = (e) => {

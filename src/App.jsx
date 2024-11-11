@@ -22,6 +22,7 @@ import CategoriesPage from "./LandigPage/Categorias/CategoriesPage";
 import Admin from "./LandigPage/admin/admin";
 import CoursePlatform from "./LandigPage/User/Profesor/ProfessorCoursesPlataform/ProfessorCoursesPlataform";
 import CheckoutPage from "./LandigPage/CheckoutPage/CheckoutPage ";
+import { PurchasedCoursesProf } from "./LandigPage/User/Profesor/PurchasedCoursesProf";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
                 <Route path="change-password" element={<ChangePasswordForm />}/>  
                 <Route path="data" element={<DataComponent />} />
                 <Route path="my-courses-professor" element={<MyCoursesProfessor />} />
+                <Route path="purchased-courses-professor" element={<PurchasedCoursesProf />} />
                 <Route path="favorites-professor" element={<FavoritesProfessor />}/>
               </Route>
               <Route path= "/course-platform/:id" element={<CoursePlatform/>} />
