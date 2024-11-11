@@ -10,6 +10,13 @@
   justify-content: center; /* Centrar las tarjetas */
 }
 
+
+.h1category-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: white;
+}
 /* Ajustes para diferentes tamaños de pantalla */
 @media (min-width: 600px) {
   .product-list {
