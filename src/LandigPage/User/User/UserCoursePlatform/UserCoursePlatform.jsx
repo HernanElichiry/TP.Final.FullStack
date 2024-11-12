@@ -3,7 +3,7 @@ import './UserCoursePlatform.css';
 import ReactPlayer from 'react-player';
 import { useParams } from 'react-router-dom';
 
-const CoursePlatform = () => {
+const UserCoursePlatform = () => {
     const { id } = useParams(); // Aquí obtenemos el parámetro 'id' de la URL
     const { courseName, startDate, endDate } = JSON.parse(sessionStorage.getItem('courseData'));
     
@@ -105,12 +105,11 @@ const CoursePlatform = () => {
                     url={selectedClass?.videourl || `https://via.placeholder.com/800x450?text=No+Video+Available`}
                     controls
                     width="100%"
-                    height="85%"
+                    height="100%"
                 />
             </div>
-
         </div>
     );
 };
 
-export default CoursePlatform;
+export default UserCoursePlatform;

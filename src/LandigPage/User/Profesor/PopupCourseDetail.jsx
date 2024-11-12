@@ -31,8 +31,16 @@ export const PopupCourseDetail = ({ course, onClose }) => {
 
   // Manejador de evento para "Acceder al curso"
   const handleAccessCourse = () => {
-    window.location.href = `/courses/${course.id}`;
+    sessionStorage.setItem('courseData', JSON.stringify(courseData));
+    window.open(`/course-user-platform/${course.id}`, '_blank'); // Abre en una nueva pestaña
+  };  
+
+  const courseData = {
+    courseName: course.title,
+    startDate: course.startdate || "00/00/00",
+    endDate: course.enddate || "00/00/00"
   };
+
 
   // Manejador de evento para enviar la calificación al servidor
   const handleSubmitRating = async () => {

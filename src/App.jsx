@@ -23,6 +23,7 @@ import Admin from "./LandigPage/admin/admin";
 import CoursePlatform from "./LandigPage/User/Profesor/ProfessorCoursesPlataform/ProfessorCoursesPlataform";
 import CheckoutPage from "./LandigPage/CheckoutPage/CheckoutPage ";
 import { PurchasedCoursesProf } from "./LandigPage/User/Profesor/PurchasedCoursesProf";
+import UserCoursePlatform from "./LandigPage/User/User/UserCoursePlatform/UserCoursePlatform";
 
 function App() {
   return (
@@ -50,8 +51,10 @@ function App() {
                 <Route path="my-courses-professor" element={<MyCoursesProfessor />} />
                 <Route path="purchased-courses-professor" element={<PurchasedCoursesProf />} />
                 <Route path="favorites-professor" element={<FavoritesProfessor />}/>
+            
               </Route>
               <Route path= "/course-platform/:id" element={<CoursePlatform/>} />
+                <Route path= "/course-user-platform/:id" element={<UserCoursePlatform/>} />
               <Route path="/search/:searchTerm" element={<SearchResults />} />
               <Route path="/course/:id" element={<CourseDetail />} />
               <Route path="/checkout" element={<CheckoutPage />} />

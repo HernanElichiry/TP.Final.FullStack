@@ -9,7 +9,6 @@ import { useUser } from "../UserContext/UserContext";
 const AddCourseForm = () => {
   const { control, handleSubmit, formState: { errors }, watch, setError, setValue } = useForm();
   const { user } = useUser();
-
   const startDate = watch('startDate');
   const [noDates, setNoDates] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState(null); // Variable de estado para la imagen
@@ -42,7 +41,6 @@ const AddCourseForm = () => {
       setAvailableTopics([]);
     }
   }, [selectedCategoryId, categories, setValue]);
-
 
   const videoUrl = watch('videoUrl'); // Observa el valor de videoUrl
   const [isPreviewVisible, setIsPreviewVisible] = useState(false);

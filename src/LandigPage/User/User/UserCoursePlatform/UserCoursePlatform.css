@@ -143,12 +143,13 @@
     width: 100%;
     height: auto;
     border-radius: 10px;
-    max-height: 600px; /* Controla el tamaño máximo en pantallas grandes */
+    /*max-height: 600px;*/ /* Controla el tamaño máximo en pantallas grandes */
   }
   
   /* Responsive Design */
   @media screen and (max-width: 768px) {
     .course-platform {
+  
       flex-direction: column;
       align-items: center;
     }

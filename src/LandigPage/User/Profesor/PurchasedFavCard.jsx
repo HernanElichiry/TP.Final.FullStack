@@ -24,6 +24,28 @@ export const PurchasedFavCard = ({ course, setSelectedId, isExpanded = false }) 
         fetchCourseImage();
     }, [course.media.filename]);
 
+
+
+
+
+  useEffect(() => {
+    const fetchImage = async () => {
+      // Construir la URL de la imagen del curso
+      const imageResponse = await fetch(`http://localhost:3000/uploads/images/${course.media.filename}`, {
+        method: 'GET',
+        mode: 'cors',
+        credentials: 'include',
+      });
+      // Convertir la imagen a Blob y luego a URL
+      const imageBlob = await imageResponse.blob();
+      setBackgroundImageFile(URL.createObjectURL(imageBlob)); // Guardar la URL de la imagen
+    }
+
+    fetchImage();
+  }, []);
+
+
+
     return (
         <motion.div
             className={`PurchasedFavCard ${isExpanded ? "expanded" : ""}`}
