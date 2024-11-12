@@ -5,6 +5,9 @@ import SearchBar from "../SearchBar/SearchBar";
 import { message } from 'antd';
 import "./SearchResults.css";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { useUser } from "../User/UserContext/UserContext";
+import { FavoritesContext } from "../User/FavoritesContext";
 
 const SearchResults = () => {
   const { searchTerm } = useParams(); // Obtiene el término de búsqueda desde la URL
@@ -13,6 +16,8 @@ const SearchResults = () => {
   const [error, setError] = useState(null); // Estado para almacenar errores
   const [imageUrl, setImageUrl] = useState("");
   const navigate = useNavigate();
+  const { favorites, toggleFavorite } = useContext(FavoritesContext);
+  const { user } = useUser();
 
 
   useEffect(() => {
@@ -58,7 +63,13 @@ const SearchResults = () => {
             <p>{error}</p>
           ) : searchResults.length > 0 ? (
             searchResults.map((course) => (
-              <ProductCard key={course.id} product={course} />
+              <ProductCard key={course.id}
+              product={course}
+              onFavoriteToggle={user ? toggleFavorite : null}
+              isFavorited={
+                user ? favorites.some((fav) => fav.id === course.id) : false
+              }
+              user={user} />
             ))
           ) : (
             <p>No se encontraron resultados para "{searchTerm}".</p>
