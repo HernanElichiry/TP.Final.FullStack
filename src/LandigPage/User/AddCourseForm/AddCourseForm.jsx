@@ -56,16 +56,16 @@ const AddCourseForm = () => {
     return new Intl.NumberFormat('de-DE', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
-    }).format(price || 0); 
+    }).format(price || 0);
   };
 
   const onSubmit = async (data) => {
 
-    if (!noDates && new Date(data.endDate) <= new Date(data.startDate)) {
+    /*if (!noDates && new Date(data.endDate) <= new Date(data.startDate)) {
       setError("endDate", { type: "manual", message: "La fecha de finalización debe ser posterior a la de inicio." });
       return;
-    }
-    console.log(data.topics)
+    }*/
+
     const token = Cookies.get('token'); // Obtén el token de las cookies
     const formData = new FormData();
 
@@ -86,10 +86,14 @@ const AddCourseForm = () => {
     }
     formData.append('price', data.price);
     data.topics.forEach(topic => formData.append('topicIds[]', topic));
-    /*if(!noDates) {
-   formData.append('startDate', data.startDate);
-   formData.append('endDate', data.endDate);
-   }*/
+
+    if (!noDates) {
+      if (data.endDate) {
+        formData.append("deactivationDate", new Date(data.endDate).toISOString().split("T")[0]);
+      }
+      //formData.append('startDate', data.startDate);
+      //formData.append('endDate', data.endDate);
+    }
 
     // Para verificar que los datos están correctos antes de enviar
     console.log("Datos del formulario a enviar:");
@@ -109,7 +113,7 @@ const AddCourseForm = () => {
       if (response.ok) {
         console.log('Curso agregado exitosamente');
       } else {
-        const errorData = await response.json(); 
+        const errorData = await response.json();
         console.error('Error al agregar el curso:', errorData);
       }
     } catch (error) {
@@ -130,7 +134,12 @@ const AddCourseForm = () => {
             name="courseName"
             control={control}
             defaultValue=""
-            rules={{ required: "El nombre del curso es requerido.", maxLength: { value: 70, message: "El nombre no puede superar los 70 caracteres." } }}
+            rules={{
+              required: "El nombre del curso es requerido.", maxLength: {
+                value: 70,
+                message: "El nombre no puede superar los 70 caracteres."
+              }
+            }}
             render={({ field }) => <input className="form-input" id="courseName" {...field} />}
           />
           {errors.courseName && <p className="error-message">{errors.courseName.message}</p>}
@@ -189,7 +198,6 @@ const AddCourseForm = () => {
           />
           {errors.category && <p className="error-message">{errors.category.message}</p>}
         </div>
-
         {/* Tópicos */}
         <div className="form-group">
           <label>Temas (mínimo 3)</label>
@@ -243,7 +251,6 @@ const AddCourseForm = () => {
           />
           {errors.institution && <p className="error-message">{errors.institution.message}</p>}
         </div>
-
         {/* Imagen de Fondo */}
         <div className="form-group">
           <label htmlFor="backgroundImage">Imagen de Fondo</label>
@@ -270,7 +277,6 @@ const AddCourseForm = () => {
           />
           {errors.backgroundImage && <p className="error-message">{errors.backgroundImage.message}</p>}
         </div>
-
         {/* Video Presentación */}
         <div className="form-group">
           <label>Video URL (YouTube)</label>
@@ -291,7 +297,6 @@ const AddCourseForm = () => {
           />
           {errors.videoUrl && <p className="error-message">{errors.videoUrl.message}</p>}
         </div>
-
         {/* Vista previa de YouTube */}
         {isPreviewVisible && (
           <div className="video-preview">
@@ -323,24 +328,6 @@ const AddCourseForm = () => {
         {!noDates && (
           <>
             <div className="form-group">
-              <label htmlFor="startDate">Fecha de Inicio</label>
-              <Controller
-                name="startDate"
-                control={control}
-                defaultValue=""
-                rules={{ required: "La fecha de inicio es requerida." }}
-                render={({ field }) => (
-                  <DatePicker
-                    id="startDate"
-                    selected={field.value ? new Date(field.value) : null}
-                    onChange={(date) => field.onChange(date)}
-                  />
-                )}
-              />
-              {errors.startDate && <p className="error-message">{errors.startDate.message}</p>}
-            </div>
-
-            <div className="form-group">
               <label htmlFor="endDate">Fecha de Fin</label>
               <Controller
                 name="endDate"
@@ -352,7 +339,7 @@ const AddCourseForm = () => {
                     id="endDate"
                     selected={field.value ? new Date(field.value) : null}
                     onChange={(date) => field.onChange(date)}
-                    minDate={startDate ? new Date(startDate) : new Date()}
+                  //minDate={startDate ? new Date(startDate) : new Date()}
                   />
                 )}
               />
@@ -395,7 +382,7 @@ const AddCourseForm = () => {
         </div>
 
 
-          <button type="submit" className="save-course-button">Guardar Curso</button>
+        <button type="submit" className="save-course-button">Guardar Curso</button>
       </form>
     </div>
   );

@@ -10,7 +10,7 @@ export const HomePageText = () => {
           <strong>Einstein.</strong>
         </h1>
         <p className="landingpage-p">Todo el conocimiento en un solo lugar</p>
-        <SearchBar />
+        <SearchBar/>
       </div>
       <img
         src={einsteinImage}

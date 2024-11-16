@@ -1,5 +1,15 @@
 .search-results {
+  border: solid red;
   padding: 20px;
+}
+
+.search-bar-container{
+  display: flex;
+
+  justify-content: center; /* Centrar las tarjetas */
+  padding: 50px;
+
+
 }
 
 .product-list {
@@ -22,11 +32,11 @@
   }
 }
 
-.search-page {
-  display: flex;
-  margin-left: 1rem;
-  margin-top: 0;
-  width: 630px;
+.search-page{
+
+display: flex;
+justify-content: center;
+
 }
 
 .search-page input {

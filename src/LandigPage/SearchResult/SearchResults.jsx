@@ -54,7 +54,8 @@ const SearchResults = () => {
 
   return (
     <>
-      <SearchBar className="search-page" />
+    <div className="search-bar-container" > <SearchBar className="search-page" /></div>
+     
       <div className="search-results">
         <div className="product-list">
           {isLoading ? (

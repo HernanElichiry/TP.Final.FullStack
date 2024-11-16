@@ -6,7 +6,8 @@
   padding: 20px;
   box-sizing: border-box;
   position: relative;
-  overflow: hidden; /* Para evitar desplazamientos indeseados */
+  overflow: hidden;
+  
 }
 
 .landingpage-text {
@@ -14,7 +15,7 @@
 }
 
 .background-img {
-  width: 50%; /* La imagen ocupa la mitad del contenedor */
+  width: 60%; /* La imagen ocupa la mitad del contenedor */
   height: auto; /* Mantiene la proporción de la imagen */
   object-fit: cover; /* Cubre el área sin distorsionar */
   z-index: 0; /* Se coloca detrás del texto */
@@ -24,6 +25,7 @@
 @media screen and (max-width: 768px) {
   .background-img {
     display: none; /* Oculta la imagen en pantallas pequeñas */
+    width: 50%; 
   }
   
   .landingpage-container {

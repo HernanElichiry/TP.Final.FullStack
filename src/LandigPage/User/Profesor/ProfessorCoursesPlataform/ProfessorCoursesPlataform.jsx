@@ -25,7 +25,7 @@ const CoursePlatform = () => {
         const transformedData = {
           courseName: courseName || "", // los datos del curso no vienen del endpoint sino del storage
           startDate: startDate || "", //  los datos del curso no vienen del endpoint sino del storage
-          endDate: startDate || "", //  los datos del curso no vienen del endpoint sino del storage
+          endDate: endDate || "", //  los datos del curso no vienen del endpoint sino del storage
           classes: data.map((cls) => ({
             classname: cls.title,
             id: cls.id,
@@ -55,7 +55,6 @@ const CoursePlatform = () => {
 
   // Arreglo para almacenar todas las clases nuevas creadas
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false); // Estado para controlar el modal de creación de clases
-
   // Función que abre el modal para crear una clase nueva
   const openCreateModal = () => {
     setNewClassData({
@@ -273,7 +272,6 @@ const CoursePlatform = () => {
       [name]: errorMessage
     }));
   };
-
 
   const handleUpdateClassInState = async () => {
 

@@ -37,7 +37,7 @@ const ProfesorCoursesCard = ({ course }) => {
   const courseData = {
     courseName: course.title,
     startDate: course.startdate || "00/00/00",
-    endDate: course.enddate || "00/00/00"
+    endDate: course.deactivationDate || "00/00/00"
   };
 
   const handleClick = () => {

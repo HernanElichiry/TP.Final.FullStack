@@ -197,46 +197,45 @@ body {
 
 /* info section */
 
+/* Estilos generales */
 .info-section {
   background-color: #2c2d44;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 1000;
   align-items: center;
   padding: 20px;
   margin-top: 70px;
+  gap: 20px;
+  flex-wrap: wrap; /* Permite que los elementos se acomoden en varias filas */
 }
 
-.info-rectangle {
+/* Rectángulos grandes en pantallas grandes */
+.info-rectangle,
+.info-rectangle2 {
   height: 600px;
-  width: 45%;
-  background: linear-gradient(135deg, #f8e624, #f7c32e);
+  width: 40%;
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  position: relative; /* Para posicionar elementos dentro del contenedor */
+}
+
+/* Estilos de contenido */
+.info-rectangle {
+  background: linear-gradient(135deg, #fbee64, #f7c32e);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
 }
 
-.info-rectangle::before {
-  content: url('path/to/icon.svg'); /* Icono relevante */
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 50px; /* Ajusta el tamaño del icono según sea necesario */
-  height: 50px;
-}
-
-.info-rectangle h2 { 
+.info-rectangle h2 {
   color: #000000;
-  margin-bottom: 0px;
   font-size: 4rem;
   font-weight: bold;
   text-align: left;
   margin-top: 30px;
-  line-height: 1.2; /* Ajusta el interlineado */
+  line-height: 1.2;
 }
 
 .info-rectangle p {
@@ -250,58 +249,91 @@ body {
 }
 
 .info-rectangle2 {
-  height: 600px;
-  width: 45%;
-  background-color:  #fefefe;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
- 
-}
-
-.info-rectangle2 img {
-  
- width: 70%;
+  background-color: #fefefe;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 
 .info-rectangle2 p {
- font-size: 50px;
- color: #999999;
- font-weight: bold;
- 
- 
- }
-
-.info-rectangle2::before {
-  content: url('path/to/another-icon.svg'); /* Otro icono relevante */
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 50px; /* Ajusta el tamaño del icono según sea necesario */
-  height: 50px;
+  font-size: 40px;
+  color: #999999;
+  font-weight: bold;
+  margin-top: 50px;
 }
 
 .info-button {
   color: #000000;
-  background-color: none;
+  background-color: #fffcf4;
   border: solid black;
-  padding: 25px;
-  width: 60%;
-  font-size: 20px;
+  padding: 20px; /* Reduce padding para pantallas pequeñas */
+  width: 80%; /* Ocupa el 100% del ancho disponible del contenedor */
+  max-width: 500px; /* Evita que el botón sea demasiado grande */
+  font-size: 18px; /* Ajuste de fuente para pantallas más pequeñas */
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 30px auto 0 auto; /* Centra el botón horizontalmente y ajusta el margen superior */
-}
-
-.info-button svg {
-  margin-right: 10px; /* Espacio entre el icono y el texto */
+  margin: 30px auto 0 auto;
 }
 
 .info-button:hover {
   color: #f8e624;
   background-color: black;
 }
+
+/* Estilos responsivos */
+@media (max-width: 1200px) {
+  /* Ajustes para pantallas medianas */
+  .info-rectangle,
+  .info-rectangle2 {
+    width: 45%; /* Más estrecho en pantallas medianas */
+    height: auto;
+    padding: 15px;
+  }
+
+  .info-rectangle h2 {
+    font-size: 3rem;
+  }
+
+  .info-rectangle p,
+  .info-rectangle2 p {
+    font-size: 1.2rem;
+    margin-right: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Ajustes para pantallas pequeñas */
+  .info-section {
+    flex-direction: column; /* Cambia a columna para apilar los rectángulos */
+    align-items: center;
+  }
+
+  .info-rectangle,
+  .info-rectangle2 {
+    width: 80%; /* Ocupan un ancho mayor en pantallas pequeñas */
+    margin-bottom: 20px;
+  }
+
+  .info-rectangle h2 {
+    font-size: 2.5rem;
+  }
+
+  .info-rectangle p,
+  .info-rectangle2 p {
+    font-size: 1rem;
+  }
+
+  .info-button {
+    width: 80%; /* Botón más ancho en pantallas pequeñas */
+    padding: 15px;
+    font-size: 16px;
+  }
+
+
+}
+
 
 /* jobs */
 .jobs-main-container {

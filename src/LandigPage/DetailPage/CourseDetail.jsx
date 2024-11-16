@@ -21,8 +21,6 @@ const CourseDetail = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
 
-
-
     const fetchCourse = async () => {
       try {
         // Solicitud GET para obtener el curso por ID
@@ -38,6 +36,7 @@ const CourseDetail = () => {
         const data = await response.json();
 
         setCourse(data); // Guardar el curso en el estado
+        console.log(data)
 
         // Construir la URL de la imagen del curso
 
@@ -165,15 +164,14 @@ const CourseDetail = () => {
         </div>
         <div className="instructor-video">
         { <iframe
-          width="560"
-          height="315"
+         
           src={course.media.videoUrl.replace("watch?v=", "embed/")}
           title="Video del curso"
           style={{ border: 'none' }}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe> }
-        <video></video>
+       
       </div>
       </div>
       <Testimonials />
