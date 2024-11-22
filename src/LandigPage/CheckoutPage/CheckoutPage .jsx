@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Form, Input, Button, Radio, Divider, notification, Spin } from "antd";
 import { CreditCardOutlined, WalletOutlined, BarcodeOutlined, ShoppingOutlined, LoadingOutlined } from "@ant-design/icons";
+import Cookies from "js-cookie";
 import "./CheckoutPage.css";
 
 const CheckoutPage = () => {
@@ -17,6 +18,9 @@ const CheckoutPage = () => {
   const handlePaymentSubmit = (values) => {
     setIsLoading(true); // Inicia el estado de carga
 
+    // Obtiene el token de las cookies
+    const token = Cookies.get("token"); 
+
     // Simulación del tiempo de procesamiento del pago
     setTimeout(async () => {
       try {
@@ -25,6 +29,7 @@ const CheckoutPage = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
           },
         });
         const data = await response.json();
