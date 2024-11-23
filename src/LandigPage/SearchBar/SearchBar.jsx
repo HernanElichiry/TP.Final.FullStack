@@ -21,7 +21,7 @@ function SearchBar({ className = "search-bar" }) {
   };
 
   return (
-    <form className="search-bar" onSubmit={handleSubmit}>
+    <form className={className}onSubmit={handleSubmit}>
       <div className="search-container">
         <input
           className="search-input"

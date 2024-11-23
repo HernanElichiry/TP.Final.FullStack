@@ -1,12 +1,29 @@
+
 .search-results {
-  padding: 20px;
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.search-results h1 { 
+display: flex;
+color: #fff3f3;
+font-size: 1.5rem;
+margin-bottom: 30px;
+width: 100%;
+ }
+
+
+  .search-bar-container{
+  display: flex;
+  justify-content: center; 
+  padding: 35px;
 }
 
 .product-list {
-  display: flex;
-  flex-wrap: wrap; /* Usar flex-wrap para ajustar las tarjetas */
-  gap: 20px; /* Espacio entre las tarjetas */
-  justify-content: center; /* Centrar las tarjetas */
+display: flex;
+justify-content: center;
 }
 
 /* Ajustes para diferentes tamaños de pantalla */
@@ -22,11 +39,10 @@
   }
 }
 
-.search-page {
-  display: flex;
-  margin-left: 1rem;
-  margin-top: 0;
-  width: 630px;
+.search-page{
+display: flex;
+justify-content: center;
+
 }
 
 .search-page input {

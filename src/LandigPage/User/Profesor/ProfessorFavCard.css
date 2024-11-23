@@ -6,33 +6,35 @@
   text-align: center;
   transition: transform 0.3s ease;
   margin: 0 10px;
-  height: 370px; /* Ajusta la altura mínima según necesites */
-  overflow: hidden; /* Oculta el contenido que desborda del contenedor */
+  height: 370px;
+  /* Ajusta la altura mínima según necesites */
+  overflow: hidden;
+  /* Oculta el contenido que desborda del contenedor */
   cursor: pointer;
 }
 
 .img-fav {
   width: 25%;
-  height: 200px; /* Ajusta la altura de las imágenes según necesites */
-  object-fit: cover; /* Ajusta la forma en que las imágenes se ajustan al contenedor */
+  height: 200px;
+  /* Ajusta la altura de las imágenes según necesites */
+  object-fit: cover;
+  /* Ajusta la forma en que las imágenes se ajustan al contenedor */
   border-radius: 8px;
   margin-bottom: 15px;
-  transition: filter 0.3s ease-in-out; /* Agrega una transición suave al cambio de filtro */
+  transition: filter 0.3s ease-in-out;
+  /* Agrega una transición suave al cambio de filtro */
 }
 
 /**/
 
 
 .fav-card button {
-
-
-color: red;
-cursor: pointer;
-size: 1.5rem;
-transition: color 0.2s;
+  color: red;
+  cursor: pointer;
+  size: 1.5rem;
+  transition: color 0.2s;
 }
 
 .fav-card button:hover {
-color: darkred;
+  color: darkred;
 }
-

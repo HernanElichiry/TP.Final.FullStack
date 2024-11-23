@@ -2,7 +2,7 @@
 import './Components.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChalkboardTeacher } from "@fortawesome/free-solid-svg-icons";
-
+import image from './Einstein inspired.png'
 import video from "./video.mp4";
 
 const InfoSection = () => {
@@ -20,8 +20,7 @@ const InfoSection = () => {
         </button>
       </div>
       <div className="info-rectangle2">
-        <video src={video} autoPlay muted loop></video>
-        <p>Más de 200 capacitaciones gratuitas.</p>
+        <img src={image} alt="imagen aqui" />
       </div>
     </div>
   );

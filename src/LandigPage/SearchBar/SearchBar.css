@@ -1,7 +1,7 @@
 .search-bar {
   margin-top: 15%;
   width: 100%;
-  max-width: 630px;
+  max-width: 600px;
 }
 
 .search-container {
@@ -42,7 +42,7 @@
 /* Media Queries */
 @media screen and (max-width: 768px) {
   .search-bar {
-    width: 90%;
+    width: 80%;
   }
 
   .search-input {

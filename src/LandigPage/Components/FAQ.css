@@ -1,5 +1,9 @@
 .faq {
-  background-color: #2c2d44;
+  
+  display: flex;
+  background-color: #00072d;
+height: 750px;
+  margin-top: 70px;
 }
 
 .faq-container {
@@ -10,18 +14,20 @@
 }
 
 .faq-container h2 {
+  
   padding-bottom: 50px;
-  font-size: 35px; /* Tamaño de fuente para escritorio */
+  font-size: 30px; /* Tamaño de fuente para escritorio */
   color: #fff;
   font-weight: bold;
 }
 
 .faq-item {
+ 
   cursor: pointer;
 }
 
 .faq-question {
-  color: #f8e624;
+  color: #f7c32e;
   font-size: 20px;
   font-weight: bold;
   padding: 0px 0;
@@ -31,7 +37,9 @@
 }
 
 .faq-answer {
-  color: rgb(142, 142, 172);
+ 
+  margin-top: 10px;
+  color: rgb(243, 243, 246);
   font-size: 20px;
   padding: 0px 0;
 }

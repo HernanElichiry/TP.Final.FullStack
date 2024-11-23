@@ -1,75 +1,88 @@
 .my-courses-container {
-    max-width: 1200px; /* Ajusta según el ancho deseado */
-    margin: 0 auto; /* Centra el contenedor en la página */
-    padding: 20px; /* Añadir un poco de espacio alrededor */
-  }
+  max-width: 100%; /* Usar 100% para adaptarse al contenedor */
+  margin: 0 auto; /* Centrar el contenedor */
+  padding: 20px; /* Espaciado alrededor */
+
+}
+
+.courses-grid {
+  display: flex;
+  flex-wrap: wrap; /* Permitir que las tarjetas se envuelvan*/
+  gap: 20px; /* Espacio entre tarjetas */
   
-  .courses-grid {
-    display: flex;
-    
-    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan a la siguiente línea */
-    gap: 20px; /* Espacio entre tarjetas */
-    justify-content: flex-start; /* Alinea las tarjetas a la izquierda */
-  }
-  
+}
+
+.profesor-course-card {
+  box-sizing: border-box;
+  flex: 0 1 calc(33.33% - 20px); /* 3 tarjetas por fila en pantallas grandes */
+  max-width: 367px; /* Limitar el tamaño máximo */
+  border: 1px solid #ddd; /* Opcional, para visualización */
+  border-radius: 8px; /* Esquinas redondeadas */
+  overflow: hidden; /* Asegurar que no sobresalgan elementos */
+  background-color: #fff; /* Fondo blanco */
+  transition: transform 0.3s ease; /* Efecto suave al pasar el mouse */
+}
+
+.profesor-course-card:hover {
+  transform: translateY(-5px); /* Levantar la tarjeta ligeramente */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra al pasar el mouse */
+}
+
+
+
+@media (max-width: 576px) {
   .profesor-course-card {
-    flex: 0 1 calc(33.333% - 20px); /* Establece un ancho base de 1/3 menos el espacio de gap */
-    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+    flex: 0 1 calc(100% - 20px); /* Una tarjeta por fila en pantallas pequeñas */
   }
-  
-  /* Media Queries para Responsividad */
-  @media (max-width: 1200px) {
-    .profesor-course-card {
-      flex: 0 1 calc(50% - 20px); /* Dos tarjetas por fila en pantallas medianas */
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .profesor-course-card {
-      flex: 0 1 calc(100% - 20px); /* Una tarjeta por fila en pantallas pequeñas */
-    }
-  }
-  
-  .course-buttons {
-    display: flex; /* Usamos flexbox para alinear los botones */
-    justify-content: space-between; /* Espacio entre los botones */
-    margin-top: 10px; /* Espacio superior */
-  }
-  
-  .btn-update,
-  .btn-delete {
-    background-color: #007bff; /* Color de fondo */
-    color: white; /* Color del texto */
-    border: none; /* Sin borde */
-    border-radius: 4px; /* Bordes redondeados */
-    padding: 10px 15px; /* Espaciado interno */
-    cursor: pointer; /* Cambia el cursor al pasar el mouse */
-    transition: background-color 0.3s, transform 0.2s; /* Transición suave para el hover y el clic */
-    flex: 1; /* Hacer que los botones ocupen el mismo ancho */
-    margin: 0 5px; /* Espacio entre botones */
-  }
-  
-  .btn-update {
-    background-color: #28a745; /* Color de fondo para el botón de actualizar */
-  }
-  
-  .btn-update:hover {
-    background-color: #218838; /* Color al pasar el mouse */
-    transform: scale(1.05); /* Efecto de aumento al pasar el mouse */
-  }
-  
-  .btn-delete {
-    background-color: #dc3545; /* Color de fondo para el botón de eliminar */
-  }
-  
-  .btn-delete:hover {
-    background-color: #c82333; /* Color al pasar el mouse */
-    transform: scale(1.05); /* Efecto de aumento al pasar el mouse */
-  }
-  .no-courses-message {
-    font-size: 24px;          /* Tamaño de fuente más grande */
-    font-weight: bold;        /* Texto en negrita */
-    color: #555;              /* Color de texto */
-    text-align: center;       /* Centrar el texto */
-    margin-top: 50px;         /* Separación superior */
-  }
+}
+
+
+
+/* Botones dentro de las tarjetas */
+.course-buttons {
+  display: flex;
+  justify-content: space-between; /* Botones separados */
+  gap: 10px; /* Espacio entre los botones */
+  margin-top: 10px;
+}
+
+.btn-update,
+.btn-delete {
+  flex: 1;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.btn-update {
+  background-color: #28a745;
+}
+
+.btn-update:hover {
+  background-color: #218838;
+  transform: scale(1.05); /* Ligeramente más grande */
+}
+
+.btn-delete {
+  background-color: #dc3545;
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+}
+
+/* Mensaje cuando no hay cursos */
+.no-courses-message {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #555;
+  text-align: center;
+  margin-top: 50px;
+}
+
+/* Imágenes dentro de las tarjetas */
+

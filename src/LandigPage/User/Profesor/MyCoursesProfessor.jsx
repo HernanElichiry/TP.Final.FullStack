@@ -15,7 +15,7 @@ const MyCoursesProfessor = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const token = Cookies.get("token"); // Obtener el token del usuario
+       const token = Cookies.get("token"); // Obtener el token del usuario
        const user_id = user.user.sub;
    
        const response = await fetch(`http://localhost:3000/courses/instructor/${user_id}`, {
@@ -37,12 +37,8 @@ const MyCoursesProfessor = () => {
     fetchCourses();
   }, []); // Se ejecuta una vez al montar el componente
 
- 
-     
-
   return (
     <div className="my-courses-container">
-  <h2>Mis Cursos</h2>
   <div className="courses-grid">
     {courses.length > 0 ? (
       courses.map((course) => (

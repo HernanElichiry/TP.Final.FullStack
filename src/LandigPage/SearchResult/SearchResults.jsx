@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { useUser } from "../User/UserContext/UserContext";
 import { FavoritesContext } from "../User/FavoritesContext";
+import CategoriesBar from "./CategoriesBar/CategoriesBar";
 
 const SearchResults = () => {
   const { searchTerm } = useParams(); // Obtiene el término de búsqueda desde la URL
@@ -54,15 +55,20 @@ const SearchResults = () => {
 
   return (
     <>
-      <SearchBar className="search-page" />
+    <div className="search-bar-container" > <SearchBar className="search-page" /></div>
+     <CategoriesBar></CategoriesBar>
       <div className="search-results">
-        <div className="product-list">
+        <div>
           {isLoading ? (
             <p>Cargando resultados...</p>
           ) : error ? (
             <p>{error}</p>
           ) : searchResults.length > 0 ? (
-            searchResults.map((course) => (
+            <> 
+            <h1>Resultados para {searchTerm}...</h1>
+            <div className="product-list">
+              
+            {searchResults.map((course) => (
               <ProductCard key={course.id}
               product={course}
               onFavoriteToggle={user ? toggleFavorite : null}
@@ -70,7 +76,10 @@ const SearchResults = () => {
                 user ? favorites.some((fav) => fav.id === course.id) : false
               }
               user={user} />
-            ))
+            ))}
+            
+            </div>
+            </>
           ) : (
             <p>No se encontraron resultados para "{searchTerm}".</p>
           )}

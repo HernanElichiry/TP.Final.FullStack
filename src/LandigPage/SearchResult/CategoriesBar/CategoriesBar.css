@@ -1,0 +1,55 @@
+.categories-navbar {
+    padding: 1rem;
+    margin: 0 0 30px;
+    border: solid red;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    margin-left: 10%;
+    
+  }
+  
+  .categories-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .categories-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .category-item {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    font-size: 1rem;
+    color: #333;
+    background-color: #fff;
+
+    border-radius: 8px;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  
+  .category-item:hover {
+    background-color: #ffd501;
+    color: #000000;
+  }
+  
+/* Ajustes para diferentes tamaños de pantalla */
+@media (max-width: 1600px) {
+    .categories-navbar {
+      
+       
+        width: 70%;
+        margin-left: 15%;
+        
+      }
+      
+   
+  }
+  

@@ -1,6 +1,7 @@
 
 
 .card-product-container {
+
   background-color: #fffffff6;
   border-radius: 8px;
   /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
@@ -9,7 +10,7 @@
   height: 410px; /* Alto fijo */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /*justify-content: space-between;*/
   cursor: pointer;
   overflow: hidden;
  /* transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -123,23 +124,40 @@
 }
 
 
-
-.slider-align {
-  display: flex;
-  justify-content: center;
+/* Contenedor del carrusel */
+.slider-container {
+  
+  width: 100%; /* Ancho del contenedor fluido */
+  max-width: 1300px; /* Max ancho si lo deseas */
+  margin: 50px auto; /* Centrado */
 }
+
+/* Estilo de las tarjetas dentro del carrusel */
 .slick-slide {
   display: inline-block;
+  padding: 0 10px; /* Espaciado entre tarjetas */
+  box-sizing: border-box;
 }
 
-.slider-container {
-  width: 100%;   /* Ancho del carrusel responsivo */
-  max-width: 1300px;
-  margin: 15px auto;
-  margin-top: 40px;
+.slick-track {
+  display: flex;
+  justify-content: space-between; /* Espacio entre las tarjetas */
+  align-items: center;
+}
+
+/* Ajustar el tamaño de las tarjetas dentro del carrusel */
+.slick-slide div {
+  display: flex;
+  justify-content: center;
+ 
+}
+
+.slick-list {
+  overflow: hidden; /* Evita que el contenido se desborde */
 }
 
 .Slider-description {
+  
   font-size: 35px;
   color: #ffffff;
   padding: 0.7rem;
@@ -167,6 +185,7 @@
 }
 
 .big-box {
+
   margin-top: 60px;
 }
 @media (max-width: 768px) {

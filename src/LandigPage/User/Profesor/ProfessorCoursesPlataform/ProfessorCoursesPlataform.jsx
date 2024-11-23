@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react'; // mas useEffect
 import './ProfessorCoursePlataform.css';
 import ReactPlayer from 'react-player';
-
 import { useParams } from 'react-router-dom';
-
+import Cookies from 'js-cookie';
 
 const CoursePlatform = () => {
-
   const { id } = useParams(); // Aquí obtenemos el parámetro 'id' de la URL
   const { courseName, startDate, endDate } = JSON.parse(sessionStorage.getItem('courseData'));
   const [courseData, setCourseData] = useState({
     classes: []
   },
-  ); // creamos una variable de estado donde almacenaremos los datos de back
+  ); 
+  // creamos una variable de estado donde almacenaremos los datos de back
 
   //traemos los datos del back 
   useEffect(() => {
@@ -20,12 +19,10 @@ const CoursePlatform = () => {
       try {
         const response = await fetch(`http://localhost:3000/classes/bycourseid/${id}`); // Llamada a la API con el ID
         const data = await response.json(); // Convertir la respuesta a JSON
-
-
         const transformedData = {
           courseName: courseName || "", // los datos del curso no vienen del endpoint sino del storage
           startDate: startDate || "", //  los datos del curso no vienen del endpoint sino del storage
-          endDate: startDate || "", //  los datos del curso no vienen del endpoint sino del storage
+          endDate: endDate || "", //  los datos del curso no vienen del endpoint sino del storage
           classes: data.map((cls) => ({
             classname: cls.title,
             id: cls.id,
@@ -55,7 +52,6 @@ const CoursePlatform = () => {
 
   // Arreglo para almacenar todas las clases nuevas creadas
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false); // Estado para controlar el modal de creación de clases
-
   // Función que abre el modal para crear una clase nueva
   const openCreateModal = () => {
     setNewClassData({
@@ -119,10 +115,15 @@ const CoursePlatform = () => {
       classFormData.append('file', newClass.fileurl); // Archivo cargado por el input
     }
 
+    const token = Cookies.get('token');
+
     try {
       const response = await fetch('http://localhost:3000/classes', {
         method: 'POST',
         body: classFormData,
+        headers: {
+          'Authorization': `Bearer ${token}`, // Asegúrate de que el token esté presente
+          }
       });
 
       if (response.ok) {
@@ -172,16 +173,20 @@ const CoursePlatform = () => {
 
 
   /////////////////////////// logica para eliminar clase
+
   const handleDeleteClass = async (classId, className) => {
     if (!classId) return;
 
     const isConfirmed = window.confirm(`¿Estás seguro que deseas eliminar la clase "${className}"?`);
+    const token = Cookies.get('token');
 
     if (isConfirmed) {
       try {
         const deleteResponse = await fetch(`http://localhost:3000/classes/${classId}`, {
           method: 'DELETE',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Authorization': `Bearer ${token}`, // Incluye el token
+          },
         });
 
         if (deleteResponse.ok) {
@@ -274,7 +279,6 @@ const CoursePlatform = () => {
     }));
   };
 
-
   const handleUpdateClassInState = async () => {
 
     const { classname, videoFile, fileFile } = classData;
@@ -302,8 +306,6 @@ const CoursePlatform = () => {
       setErrorMessages(errorMessages);
       return;
     }
-
-
 
     const updatedClass = {
       ...selectedClass,
@@ -337,10 +339,17 @@ const CoursePlatform = () => {
       updatedFormData.append('file', classData.fileFile); // Archivo cargado por el input
     }
 
+
+   
+     const token = Cookies.get('token'); // Obtén el token de las cookies
+
     try {
       const response = await fetch(`http://localhost:3000/classes/${selectedClass.id}`, {
         method: 'PATCH',
         body: updatedFormData,
+        headers: {
+        'Authorization': `Bearer ${token}`, // Asegúrate de que el token esté presente
+        }
       });
 
       if (response.ok) {

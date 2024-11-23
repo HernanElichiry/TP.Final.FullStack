@@ -17,7 +17,7 @@ function ResponsiveCarousel({ courses, text = "inserte texto" }) {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
-    arrows: false, // Eliminar las flechas de navegación
+    arrows: true, // Eliminar las flechas de navegación
     autoplay: false, // Hacer que las diapositivas se deslicen automáticamente
     // Velocidad de la transición automática en milisegundos
     responsive: [

@@ -1,0 +1,60 @@
+/*Descrtipcopn*/
+
+.description-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 450px;
+    margin-top: 70px;
+    background-color:#00072d;  
+  
+     text-align: center;
+    padding: 40px 20px;
+  
+  }
+  
+  .description-section h3 {
+    width: 60%;
+    color: #ffffff;
+    margin-bottom: 30px;
+    font-size: 40px;
+    margin-left: 20%;
+  }
+  
+  .description-row {  
+  
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .description-column {  
+   
+    background-color: none;
+    border-radius: 10px;
+    
+    padding: 20px;
+    flex: 1;
+    min-width: 200px;
+    max-width: 300px;
+    text-align: left;
+    background: linear-gradient(166deg, #f4e866, #fad920);
+    box-shadow: 10px 10px 10px black;
+    
+  }
+  
+  .description-column h4 {
+    color: #000000;
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+  
+  .description-column h4 strong {
+    color: #000000;
+  }
+  
+  .description-column p {
+    color: #000000;
+    line-height: 1.6;
+  }
