@@ -63,6 +63,7 @@ export const ProductCard = ({ product, onFavoriteToggle, isFavorited, user }) =>
     }
     return stars;
   };
+  
   useEffect(() => {
     const fetchImage = async () => {
       try {
@@ -85,8 +86,6 @@ export const ProductCard = ({ product, onFavoriteToggle, isFavorited, user }) =>
       fetchImage();
     }
   }, [product.media?.filename]); // Ejecuta solo si cambia `product.media.filename`
-
-
 
   return (
     <div className="card-product-container">

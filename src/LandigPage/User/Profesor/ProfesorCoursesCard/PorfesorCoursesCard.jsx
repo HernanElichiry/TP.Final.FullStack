@@ -7,6 +7,7 @@ import Modal from 'react-modal'; // Importa react-modal
 import { useUser } from '../../UserContext/UserContext';
 import Cookies from 'js-cookie';
 
+
 const ProfesorCoursesCard = ({ course }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteConfirm, setIsDeleteConfirm] = useState(false);
@@ -192,7 +193,7 @@ const ProfesorCoursesCard = ({ course }) => {
       // endDate: formValues.endDate !== '', // course.endDate,
       price: formValues.price !== course.price,
       presentationVideo: videoFile !== null, // verifica Si hay un nuevo video cargado
-    //  backgroundImageFile: backgroundImageFile !== null
+      backgroundImageFile: backgroundImageFile !== null
 
     };
 
@@ -234,7 +235,7 @@ const ProfesorCoursesCard = ({ course }) => {
     }
 
     const token = Cookies.get('token'); // Obtén el token de las cookies
-
+   
     try {
       const response = await fetch(`http://localhost:3000/courses/${course.id}`, {
         method: 'PATCH',
@@ -249,6 +250,8 @@ const ProfesorCoursesCard = ({ course }) => {
         window.location.reload(); // Recarga la página para ver los cambios
       } else {
         console.error("Error al actualizar el curso:", await response.text());
+       console.log(token);
+        return;
       }
     } catch (error) {
       console.error("Error en la solicitud de actualización:", error);

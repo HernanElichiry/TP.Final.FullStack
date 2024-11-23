@@ -22,7 +22,7 @@ const Testimonials = () => {
 
   return (
     <section id="testimonios">
-      <h2 className='titulo'>Más de 300.000 valoraciones positivas</h2>
+      <h2 className='titulo'>Más de 150.000 valoraciones positivas</h2>
       <div className="testimonio-container">
         {testimonials.map((testimonial, index) => (
           <div key={index} className="testimonio">

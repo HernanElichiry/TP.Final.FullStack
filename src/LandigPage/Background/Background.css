@@ -1,83 +1,98 @@
+/* Contenedor principal */
 .landingpage-container {
+  /*border-top: solid rgb(250, 242, 242) 1px;*/
+  border-bottom: solid rgb(250, 242, 242) 1px;
   display: flex;
-  align-items: center; /* Centra verticalmente el contenido */
-  justify-content: space-between; /* Espacia los elementos */
-  height: 100vh;
-  padding: 20px;
+  flex-direction: row; /* Layout horizontal */
+  align-items: center; /* Centra verticalmente */
+  justify-content: space-between; /* Espacio dinámico entre elementos */
+  padding: 2%; /* Espaciado proporcional */
   box-sizing: border-box;
   position: relative;
+  height: 70vh; /* Altura dinámica */
+  gap: 3%; /* Espaciado dinámico */
   overflow: hidden;
-  
 }
 
+/* Texto dentro del contenedor */
 .landingpage-text {
-  z-index: 1; /* Asegura que el texto esté sobre la imagen */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  min-width: 300px; /* Asegura que no se reduzca demasiado en pantallas pequeñas */
 }
 
+/* Imagen de fondo */
 .background-img {
-  width: 60%; /* La imagen ocupa la mitad del contenedor */
-  height: auto; /* Mantiene la proporción de la imagen */
-  object-fit: cover; /* Cubre el área sin distorsionar */
-  z-index: 0; /* Se coloca detrás del texto */
+  flex: 1;
+  border-radius: 50px;
+  width: 100%; /* Ajusta el ancho */
+  max-width: 1100px; /* Limita el ancho en pantallas grandes */
+  height: auto;
+  object-fit: cover;
+  z-index: 0;
 }
 
-/* Media Queries para Responsividad */
-@media screen and (max-width: 768px) {
-  .background-img {
-    display: none; /* Oculta la imagen en pantallas pequeñas */
-    width: 50%; 
-  }
-  
-  .landingpage-container {
-    background-image: url('./einstein4.png');
-    background-size: cover; /* La imagen cubre todo el contenedor */
-    background-position: center; /* Centra la imagen */
-  }
-
-  .landingpage-text {
-    text-align: center; /* Alinea el texto al centro en pantallas pequeñas */
-  }
-}
-
+/* Estilo para el título */
 .landingpage-text h1 strong {
   color: #ffb300;
   font-weight: bold;
-  font-size: 120px; /* Tamaño grande */
-  margin-left: 1.5%;
+  font-size: 5vw; /* Tamaño proporcional */
+  line-height: 1.2;
 }
 
+/* Estilo para el párrafo */
 .landingpage-text p {
   color: rgb(222, 235, 246);
-  font-size: 50px; /* Tamaño grande */
+  font-size: 2.5vw; /* Tamaño proporcional */
   font-weight: bold;
-  margin-left: 3%;
+  margin-top: 1rem;
 }
 
-/* Media Queries para Responsividad */
-@media screen and (max-width: 1024px) {
+/* Media query para pantallas medianas (1280px o menos) */
+@media (max-width: 1280px) {
+  .landingpage-container {
+    flex-direction: column;
+    height: auto;
+    gap: 20px;
+    padding: 5%;
+  }
+
+  .background-img {
+    max-width: 80%; /* Reduces the image size */
+    margin: 0 auto;
+  }
+
+  .landingpage-text {
+    width: 90%;
+    text-align: center;
+  }
+
   .landingpage-text h1 strong {
-    font-size: 8vw; /* Tamaño relativo para pantallas pequeñas */
-    color: #070707
+    font-size: 6vw;
   }
+
   .landingpage-text p {
-    font-size: 4vw; /* Tamaño relativo para pantallas pequeñas */
-    color: #070707
-  }
-}
-@media screen and (max-width: 920px) {
-  .landingpage-text h1 strong {
-    font-size: 10vw; /* Tamaño relativo para pantallas pequeñas */
-  }
-  .landingpage-text p {
-    font-size: 5vw; /* Tamaño relativo para pantallas pequeñas */
+    font-size: 3.5vw;
   }
 }
 
-@media screen and (max-width: 768px) {
-  .landingpage-text h1 strong {
-    font-size: 10vw; /* Tamaño relativo para pantallas pequeñas */
+/* Media query para pantallas más pequeñas (768px o menos) */
+@media (max-width: 768px) {
+  .landingpage-container {
+    gap: 10px;
   }
+
+  .background-img {
+    max-width: 100%;
+  }
+
+  .landingpage-text h1 strong {
+    font-size: 8vw; /* Menor tamaño de fuente */
+  }
+
   .landingpage-text p {
-    font-size: 5vw; /* Tamaño relativo para pantallas pequeñas */
+    font-size: 5vw;
   }
 }

@@ -1,9 +1,4 @@
-.big-box {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajusta el tamaño de las columnas */
-  gap: 20px; /* Espacio entre los elementos */
-  padding: 20px; /* Espacio interno del contenedor */
-}
+
 
 @media screen and (max-width: 768px) {
   .big-box {
