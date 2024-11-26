@@ -267,7 +267,7 @@
 }
 
 .instructor-description {
-  border: solid;
+
 
   max-width: 400px;
 }
@@ -281,6 +281,7 @@
 .instructor-description p {
   font-size: 16px;
   color: #d7d6d6;
+ 
 }
 
 .instructor-video {

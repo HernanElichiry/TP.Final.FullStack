@@ -3,6 +3,7 @@ import './ProfessorCoursePlataform.css';
 import ReactPlayer from 'react-player';
 import { useParams } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import { message } from 'antd';
 
 const CoursePlatform = () => {
   const { id } = useParams(); // Aquí obtenemos el parámetro 'id' de la URL
@@ -95,7 +96,7 @@ const CoursePlatform = () => {
     // Verificar si hay errores de validación antes de proceder
     const hasErrors = Object.values(errorMessages).some(error => error !== "");
     if (hasErrors) {
-      alert("Hay errores en el formulario.");
+      message.error("Hay errores en el formulario.");
       return; // No enviar si hay errores
     }
 
@@ -127,7 +128,7 @@ const CoursePlatform = () => {
       });
 
       if (response.ok) {
-        console.log(`Clase '${newClass.classname}' creada exitosamente`);
+        message.success(`Clase '${newClass.classname}' creada exitosamente`);   
         const createdClass = await response.json();
 
         // Actualizar el estado `courseData` para reflejar los cambios en el frontend
@@ -190,10 +191,11 @@ const CoursePlatform = () => {
         });
 
         if (deleteResponse.ok) {
-          alert('La clase ha sido eliminada con éxito');
+          message.success('La clase ha sido eliminada con éxito')
 
         } else {
-          alert('Hubo un error al eliminar la clase.');
+          message.error('Hubo un error al eliminar la clase.');
+        
         }
       } catch (error) {
         console.error('Error al eliminar la clase:', error);
@@ -353,7 +355,7 @@ const CoursePlatform = () => {
       });
 
       if (response.ok) {
-        alert(`Clase modificada exitosamente`);
+        message.success(`Clase modificada exitosamente`)
         setCourseData((prevCourseData) => {
           const updatedClasses = prevCourseData.classes.map((classItem) =>
             classItem.id === selectedClass.id ? updatedClass : classItem
@@ -363,10 +365,12 @@ const CoursePlatform = () => {
         closeModal(); // Cierra el modal después de actualizar
       } else {
         const errorResponse = await response.json(); // Obtiene la respuesta de error
+        message.error(`Error al modificar la clase '${updatedClass.classname}'`)
         console.error(`Error al modificar la clase '${updatedClass.classname}':`, errorResponse);
       }
     } catch (error) {
       console.error(`Error en la petición para la clase '${updatedClass.classname}':`, error);
+      message.error(`Error en la petición para la clase '${updatedClass.classname}'`);
     }
   };
 
