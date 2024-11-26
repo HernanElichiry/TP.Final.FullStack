@@ -1,6 +1,9 @@
-
-import './Components.css';
-import logo2 from './logo2.png'
+import "./Components.css";
+import logo2 from "./logo2.png";
+import visalogo from "./visalogo1.png";
+import masterlogo from "./masterlogo.png";
+import paypallogo from "./paypallogo.png";
+import amexlogo from "./amexlogo.png";
 
 const PaymentMethods = () => {
   return (
@@ -8,19 +11,19 @@ const PaymentMethods = () => {
       <h2>Medios de Pago</h2>
       <div className="payment-icons">
         <div className="payment-icon">
-          <img src={logo2} alt="Visa" />
+          <img src={visalogo} alt="Visa" />
           <span>Visa</span>
         </div>
         <div className="payment-icon">
-          <img src={logo2}  alt="MasterCard" />
+          <img src={masterlogo} alt="MasterCard" />
           <span>MasterCard</span>
         </div>
         <div className="payment-icon">
-          <img src={logo2}  alt="PayPal" />
+          <img src={paypallogo} alt="PayPal" />
           <span>PayPal</span>
         </div>
         <div className="payment-icon">
-          <img src={logo2}  alt="American Express" />
+          <img src={amexlogo} alt="American Express" />
           <span>Amex</span>
         </div>
       </div>
