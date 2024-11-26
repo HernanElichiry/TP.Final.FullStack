@@ -49,6 +49,7 @@
 }
 
 .card-product-container h2 {
+
   font-size: 18px;  /* Aumentamos el tamaño de la fuente */
   margin-bottom: 5px;  /* Reducimos el margen inferior */
   color: #333;
@@ -58,7 +59,7 @@
 }
 
 .card-product-container p {
-  font-size: 16px;  /* Aumentamos el tamaño de la fuente */
+  font-size: 20px;  /* Aumentamos el tamaño de la fuente */
   color: #555;
   margin-left: 10px;  /* Reducimos el margen izquierdo */
   flex-grow: 1;  /* Para que el texto ocupe el espacio disponible */
@@ -92,9 +93,9 @@
 .card-product-container .buttons .show-more-button {
   background-color: #000000;
   color: white;
-  border: none;
+  
   border-radius: 4px;
-  padding: 5px 10px;  /* Reducimos el padding */
+  padding: 8px 10px;  /* Reducimos el padding */
   font-size: 14px;  /* Ajustamos el tamaño de la fuente */
   cursor: pointer;
   transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
@@ -114,13 +115,14 @@
 }
 
 .card-product-container .buttons .transparent-button {
+
   background: none;
   color: #da0505;
   border: none;
   cursor: pointer;
-  font-size: 18px;  /* Ajustamos el tamaño de la fuente */
+  font-size: 25px;  /* Ajustamos el tamaño de la fuente */
   padding: 5px;  /* Ajustamos el padding */
-  margin: 0 2px;  /* Reducimos el margen */
+ 
 }
 
 

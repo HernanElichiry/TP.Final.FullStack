@@ -162,6 +162,9 @@ body {
   .course-details {
     padding: 1.5rem; /* Menos padding en pantallas pequeñas */
   }
+ 
+
+
 }
 
 /* Ajustes para pantallas grandes (e.g., 27 pulgadas) */
@@ -182,6 +185,8 @@ body {
     height: 530px;
   }
 
+ 
+
 }
 
 /* Small screen adjustments */
@@ -201,6 +206,7 @@ body {
   .video-player p {
     font-size: 14px;
   }
+
 }
 
 /* Animations */
@@ -226,12 +232,11 @@ body {
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-  color: white;
-
+  
+  color: rgb(255, 255, 255);
+  background-color: #000000;
   transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
 }
-
-
 
 .query-btn {
   background-color: #000000;

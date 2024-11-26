@@ -5,6 +5,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./AddCourseForm.css";
 import { useUser } from "../UserContext/UserContext";
+import { message } from "antd";
+import { useNavigate } from "react-router-dom";
+
 
 const AddCourseForm = () => {
   const { control, handleSubmit, formState: { errors }, watch, setError, setValue } = useForm();
@@ -15,7 +18,8 @@ const AddCourseForm = () => {
   const [categories, setCategories] = useState([]);
   const [availableTopics, setAvailableTopics] = useState([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState("");
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -112,6 +116,8 @@ const AddCourseForm = () => {
 
       if (response.ok) {
         console.log('Curso agregado exitosamente');
+        message.success("Curso agregado exitosamente", 2); // Mensaje de éxito
+        navigate("/professormenu/my-courses-professor");
       } else {
         const errorData = await response.json();
         console.error('Error al agregar el curso:', errorData);

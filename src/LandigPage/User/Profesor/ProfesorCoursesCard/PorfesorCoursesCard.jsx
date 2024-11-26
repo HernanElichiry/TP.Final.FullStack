@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import Modal from 'react-modal'; // Importa react-modal
 import { useUser } from '../../UserContext/UserContext';
 import Cookies from 'js-cookie';
+import { message } from 'antd';
 
 
 const ProfesorCoursesCard = ({ course }) => {
@@ -273,8 +274,10 @@ const ProfesorCoursesCard = ({ course }) => {
 
       if (response.ok) {
         console.log("Curso eliminado con éxito");
-        alert(`Curso ${course.title} eliminado con éxito`);
-        window.location.reload();
+        message.success(`Curso ${course.title} eliminado con éxito`)
+        setTimeout(() => {
+          window.location.reload();
+      }, 2000);
       } else {
         const errorText = await response.text();
         console.error("Error al eliminar el curso:", errorText);
@@ -316,10 +319,10 @@ const ProfesorCoursesCard = ({ course }) => {
 
       >
         {isDeleteConfirm ? (
-          <div>
+          <div className='Delete-section'>
             <h2>¿Estás seguro que deseas eliminar este curso?</h2>
-            <button onClick={handleDelete}>Confirmar</button>
-            <button onClick={handleCloseModal}>Cancelar</button>
+            <button className="Delete-Button" onClick={handleDelete}>Confirmar</button>
+            <button className="Delete-Cancel-Button"onClick={handleCloseModal}>Cancelar</button>
           </div>
         ) : (
           <div>

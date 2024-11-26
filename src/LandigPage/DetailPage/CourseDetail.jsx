@@ -112,10 +112,10 @@ const CourseDetail = () => {
                 <strong>Categoría:</strong> {course.category.name}
               </p>
               <p>
-                <strong>Plataforma:</strong> {course.platform}
+                <strong>Institucion:</strong> {course.platform}
               </p>
               <p>
-                <strong>Tipo de capacitación:</strong> {course.type} {/* Asegúrate de tener este dato */}
+                <strong>Tipo de capacitación:</strong> Online
               </p>
               <p>
                 <strong>Valoración:</strong> {course.rating} {/* Asegúrate de tener este dato */}
@@ -145,7 +145,7 @@ const CourseDetail = () => {
         <ul>
           {course.classes.map((clase,index) => (
             <li key={index}>
-              Clase: {clase.title}
+              Clase {index + 1} : {clase.title}.
             </li>
           ))}
         </ul>
@@ -159,7 +159,7 @@ const CourseDetail = () => {
           />
           <div className="instructor-description">
             <h2>Sobre {course.instructor.name}</h2>
-            <p>{course.instructor.description}</p> {/* Asegúrate de tener un campo para la descripción del instructor */}
+            <p>{course.description}</p> 
           </div>
         </div>
         <div className="instructor-video">

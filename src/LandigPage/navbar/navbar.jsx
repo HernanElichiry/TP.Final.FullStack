@@ -66,14 +66,14 @@ function Navbar() {
         {/* Navbar izquierda: nombre y enlaces principales */}
         <div className="navbar-start">
           <Link to="/" className="navbar-item" onClick={handleLinkClick}>
-            Test Vocacional
+            Crea tu capacitacion
           </Link>
           <Link
             to="/bolsa-de-trabajo"
             className="navbar-item"
             onClick={handleLinkClick}
           >
-            Bolsa de trabajo
+            En promocion
           </Link>
           <Link
             to="/capacitaciones"
