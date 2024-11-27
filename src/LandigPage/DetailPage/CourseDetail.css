@@ -106,11 +106,9 @@
 .course-content p,
 .course-content ul,
 .course-content li {
-  
   font-size: 16px;
   color: #d9d9d9;
  
-  
 }
 
 .course-content ul {
@@ -215,8 +213,7 @@
 }
 
 .course-price-section .enroll-button {
- 
-  background-color: #ffb300;
+ background-color: #ffb300;
   color: #000000;
   padding: 10px 20px;
   border: none;
@@ -236,7 +233,6 @@
 .instructor-section {
   max-width: 80%; 
   margin: 0 auto;
-
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -252,7 +248,6 @@
   width: 50%;
   height: 350px;
   max-height: 600px;
- 
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
   padding: 20px;
   
@@ -267,8 +262,6 @@
 }
 
 .instructor-description {
-
-
   max-width: 400px;
 }
 
@@ -281,15 +274,12 @@
 .instructor-description p {
   font-size: 16px;
   color: #d7d6d6;
- 
 }
 
 .instructor-video {
- 
   margin-right: 10px;
   flex: 1;
   display: flex;  
-
   justify-content: end;
 
 }
@@ -297,8 +287,5 @@
 .instructor-video iframe { 
   height: 315px;
   width: 100%;
- 
-
-
 
 }

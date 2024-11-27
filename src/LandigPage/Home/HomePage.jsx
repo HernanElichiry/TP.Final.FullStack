@@ -56,12 +56,12 @@ function HomePage() {
       
       {/*componente que integra: texto de presentacion, la imagen de einstein y la barra de navegacion*/}
       <div className="big-box">
-        <ResponsiveCarousel courses={bestRatedCourses} text=" Carreras mejor valorados" />
-        <ResponsiveCarousel courses={promotionCourses} text=" Cursos en promocion" />
+        <ResponsiveCarousel courses={bestRatedCourses} text=" Mejor valorados" />
+        <ResponsiveCarousel courses={promotionCourses} text=" Gratis! Gratis! Gratis!" />
         
         <ResponsiveCarousel
           courses={universityCourses}
-          text="Las mejores universidades promocionan en EINSTEIN"
+          text="Capacitaciones unicas de EINSTEIN"
         />
         
        

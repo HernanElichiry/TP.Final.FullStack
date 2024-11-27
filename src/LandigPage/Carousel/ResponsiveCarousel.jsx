@@ -6,6 +6,7 @@ import { ProductCard } from "./Card/ProductCard";
 import "./Card/ProductCard.css"; // Estilos para ProductCard y el carrusel
 import { FavoritesContext } from "../User/FavoritesContext"; // Importar el contexto de favoritos
 import { useUser } from "../User/UserContext/UserContext";
+import { color } from "framer-motion";
 
 function ResponsiveCarousel({ courses, text = "inserte texto" }) {
   const { favorites, toggleFavorite } = useContext(FavoritesContext);
@@ -28,25 +29,26 @@ function ResponsiveCarousel({ courses, text = "inserte texto" }) {
           slidesToScroll: 1,
           initialSlide: 2,
           infinite: courses.length > 1, // Aplica también aquí la condición
-          dots: true,
+          dots: false,
+     
         },
       },
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 5,
           slidesToScroll: 1,
           infinite: courses.length > 3, // Evitar repeticiones en caso de menos de 3 elementos
-          dots: true,
+          dots: false,
         },
       },
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 4,
           slidesToScroll: 1,
           initialSlide: 2,
-          infinite: courses.length > 2, // Evitar repeticiones en caso de menos de 2 elementos
+          infinite: courses.length > 3, // Evitar repeticiones en caso de menos de 2 elementos
         },
       },
       {
@@ -55,7 +57,11 @@ function ResponsiveCarousel({ courses, text = "inserte texto" }) {
           slidesToShow: 2,
           slidesToScroll: 1,
           initialSlide: 2,
-          infinite: courses.length > 1, // Evitar repeticiones en caso de menos de 2 elementos
+          infinite: true,
+          dots: false,
+          arrows: false, 
+          autoplay: true,
+          speed: 700, // Evitar repeticiones en caso de menos de 2 elementos
         },
       },
     ],

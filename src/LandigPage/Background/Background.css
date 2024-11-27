@@ -16,6 +16,7 @@
 
 /* Texto dentro del contenedor */
 .landingpage-text {
+
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -28,7 +29,7 @@
   flex: 1;
   border-radius: 50px;
   width: 100%; /* Ajusta el ancho */
-  max-width: 1100px; /* Limita el ancho en pantallas grandes */
+  max-width: 850px; /* Limita el ancho en pantallas grandes */
   height: auto;
   object-fit: cover;
   z-index: 0;
@@ -38,7 +39,7 @@
 .landingpage-text h1 strong {
   color: #ffb300;
   font-weight: bold;
-  font-size: 5vw; /* Tamaño proporcional */
+  font-size: 6vw; 
   line-height: 1.2;
 }
 
@@ -60,13 +61,17 @@
   }
 
   .background-img {
-    max-width: 80%; /* Reduces the image size */
+    max-width: 0%; /* Reduces the image size */
     margin: 0 auto;
+   
   }
 
   .landingpage-text {
+  
     width: 90%;
     text-align: center;
+
+    align-items: center;
   }
 
   .landingpage-text h1 strong {
@@ -81,18 +86,78 @@
 /* Media query para pantallas más pequeñas (768px o menos) */
 @media (max-width: 768px) {
   .landingpage-container {
+  
+  justify-content: center; 
+  align-items: center;
     gap: 10px;
   }
 
   .background-img {
-    max-width: 100%;
+    max-width: 0%;
   }
 
-  .landingpage-text h1 strong {
+   
+  .landingpage-text h1 {
+    align-self: center;
     font-size: 8vw; /* Menor tamaño de fuente */
   }
 
-  .landingpage-text p {
-    font-size: 5vw;
+  
+  .landingpage-text h1 strong {
+    
+    font-size: 8vw; /* Menor tamaño de fuente */
   }
+
+
+
+  .landingpage-text p {
+    align-self: center;
+    width: 70%;
+   
+    font-size: 5vw;
+
+  }
+
+  .landingpage-text {
+  
+    width: 100%;
+    align-items:start;
+  }
+
+
 }
+
+/* Media query para pantallas más pequeñas (768px o menos) */
+@media (min-width: 1600px) {
+
+  /* Imagen de fondo */
+/*.background-img {
+  flex: 1;
+  border-radius: 50px;
+  width: 100%; 
+  max-width: 1100px; 
+  height: auto;
+  object-fit: cover;
+  z-index: 0;
+}*/
+  
+
+/* Estilo para el título 
+.landingpage-text h1 strong {
+  color: #ffb300;
+  font-weight: bold;
+  font-size: 5vw; 
+  line-height: 1.2;
+}*/
+
+/* Estilo para el párrafo 
+.landingpage-text p {
+  color: rgb(222, 235, 246);
+  font-size: 2.5vw; 
+  font-weight: bold;
+  margin-top: 1rem;
+}*/
+  
+
+}
+
