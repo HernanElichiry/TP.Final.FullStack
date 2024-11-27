@@ -38,6 +38,11 @@
   color: #ffffff;
   
 }
+.course-overlay h1{
+  text-align: center; 
+  margin: 0;
+
+}
 
 .course-header h1 {
   font-size: 60px;
