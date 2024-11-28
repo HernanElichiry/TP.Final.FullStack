@@ -682,7 +682,8 @@ width: 550px;
 /* payment */
 
 .payment-methods {
-  margin: 20px 0;
+
+  margin: 0px 0;
   padding: 20px;
   border-radius: 10px;
   background-color: white;

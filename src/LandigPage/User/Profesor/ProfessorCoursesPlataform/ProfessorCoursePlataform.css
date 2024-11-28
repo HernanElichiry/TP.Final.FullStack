@@ -20,6 +20,9 @@ body {
 
 /* Course details (left column) */
 .course-dates {
+  display: flex;
+  flex-direction: column;
+  
   flex: 1;
   min-width: 300px;
   max-width: 400px;
@@ -148,21 +151,39 @@ body {
 }
 
 /* Responsive Design */
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 426px) and (max-width: 978px) {
   .course-platform {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  
   }
 
   .course-details, .video-player {
-    width: 100%;
-    max-width: 500px;
+    
+   height: 285px;
+ 
   }
 
   .course-details {
     padding: 1.5rem; /* Menos padding en pantallas pequeñas */
   }
+  .course-platform {
+
+    border: solid rgb(255, 204, 0);
+  }
+  
+  /* Course details (left column) */
+  .course-dates {
+    display: flex; 
+   min-width: 300px;
+    max-width: 100px;
+    max-height: 285px;
+    
+  }
  
+  .video-actions button{
+    display: none;
+   }
 
 
 }
@@ -180,9 +201,15 @@ body {
 
 /* Ajustes para pantallas medianas (e.g., 15.6 pulgadas) */
 @media screen and (min-width: 1200px) and (max-width: 1599px) {
+  .course-dates {
+    min-width: 400px;
+    max-width: 400px;
+    max-height: 600px;
+
+  }
   .video-player {
     max-width: 100%;
-    height: 530px;
+    height: 600px;
   }
 
  
@@ -190,8 +217,34 @@ body {
 }
 
 /* Small screen adjustments */
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 425px) {
+  .course-platform {
+    flex-direction: column;
+    align-items: center;
+  
+  }
+
+  .course-details, .video-player {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .course-details {
+    padding: 1.5rem; /* Menos padding en pantallas pequeñas */
+  }
+  
+  
+  /* Course details (left column) */
+  .course-dates {
+    display: flex; 
+   min-width: 300px;
+    max-width: 400px;
+    max-height: 260px;
+    
+  }
+ 
   .course-details h1 {
+  
     font-size: 20px;
   }
 
@@ -207,7 +260,14 @@ body {
     font-size: 14px;
   }
 
+ .video-actions button{
+  display: none;
+ }
+
+
 }
+
+
 
 /* Animations */
 @keyframes slide-down {
