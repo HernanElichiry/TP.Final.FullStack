@@ -59,11 +59,11 @@ const FAQ = () => {
         <h2>Preguntas Frecuentes</h2>
 
         {/* Mostrar toggle solo en mobile */}
-        {/* {isMobile && (
+        {isMobile && (
           <div className="faq-mobile-toggle" onClick={toggleShowFAQs}>
             Haz clic para ver las preguntas frecuentes
           </div>
-        )} */}
+        )}
 
         {/* Mostrar preguntas en desktop siempre, y en mobile solo si se hace clic */}
         {(showFAQs || isMobile) &&
