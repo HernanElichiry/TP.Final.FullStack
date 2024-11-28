@@ -24,6 +24,7 @@ function HomePage() {
   const [bestRatedCourses, setBestRatedCourses] = useState([]);
   const [promotionCourses, setPromotionCourses] = useState([]);
   const [universityCourses, setUniversityCourses] = useState([]);
+  const [einsteinCourses, setEinsteinCourses] = useState([]);
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -31,6 +32,9 @@ function HomePage() {
         const response = await fetch("http://localhost:3000/courses"); // URL de la API
         const data = await response.json();
         setCourses(data);
+
+        //Cursos solo de Einstein 
+        setEinsteinCourses(data.filter(course => course.platform === "Einstein"));
 
         // Ordenar las copias de los cursos
         setBestRatedCourses([...data].sort((a, b) => b.rating - a.rating));
@@ -49,7 +53,7 @@ function HomePage() {
     <>
       <HomePageText /> 
      
-      <ResponsiveCarousel courses={promotionCourses} text=" Cursos en promocion" />
+      <ResponsiveCarousel courses={einsteinCourses} text=" Cursos de Einstein" />
       <InfoSection></InfoSection>
       <Description></Description>
       

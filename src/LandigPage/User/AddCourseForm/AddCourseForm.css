@@ -142,3 +142,33 @@
     font-size: 0.9em; /* Ajustar tamaño de fuente en pantallas pequeñas */
   }
 }
+.topics-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Espaciado entre los checkboxes */
+}
+
+.topic-label {
+  width: 25%; /* 4 checkboxes por fila */
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .topic-label {
+    width: 50%; /* 2 checkboxes por fila en pantallas más pequeñas */
+  }
+}
+
+@media (max-width: 480px) {
+  .topic-label {
+    width: 100%; /* 1 checkbox por fila en pantallas muy pequeñas */
+  }
+}
+
+/* Estilo para el mensaje de error */
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 5px;
+}
