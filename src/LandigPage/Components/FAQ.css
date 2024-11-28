@@ -58,7 +58,6 @@ hr {
   border-top: 1px solid black;
 }
 
-
 /* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
   .faq-container {
@@ -92,5 +91,3 @@ hr {
     text-align: center;
   }
 }
-
-
