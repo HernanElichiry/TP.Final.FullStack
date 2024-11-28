@@ -38,11 +38,6 @@
   color: #ffffff;
   
 }
-.course-overlay h1{
-  text-align: center; 
-  margin: 0;
-
-}
 
 .course-header h1 {
   font-size: 60px;
@@ -111,9 +106,11 @@
 .course-content p,
 .course-content ul,
 .course-content li {
+  
   font-size: 16px;
   color: #d9d9d9;
  
+  
 }
 
 .course-content ul {
@@ -209,7 +206,6 @@
   font-weight: bold;
   color:  #ffb300;
   margin: 5px 0;
-  
 }
 
 .course-price-section .installments {
@@ -219,7 +215,8 @@
 }
 
 .course-price-section .enroll-button {
- background-color: #ffb300;
+ 
+  background-color: #ffb300;
   color: #000000;
   padding: 10px 20px;
   border: none;
@@ -236,46 +233,47 @@
 /*seccion video*/
 
 
-/* Sección del instructor - Estilos responsivos */
 .instructor-section {
-  max-width: 80%;
+  max-width: 80%; 
   margin: 0 auto;
+
   display: flex;
   align-items: center;
-  flex-wrap: wrap; /* Permite que los elementos se apilen en pantallas pequeñas */
+  flex-wrap: wrap;
   padding: 20px;
   justify-content: space-between;
-  border: solid white;
+  border:  solid white;
   border-radius: 10px;
-  gap: 20px; /* Espaciado entre elementos */
 }
 
 .instructor-info {
   display: flex;
   align-items: center;
-  width: 100%; /* Aseguramos que ocupe todo el ancho en pantallas pequeñas */
-  max-width: 600px;
-  height: auto;
+  width: 50%;
+  height: 350px;
+  max-height: 600px;
+ 
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  flex-wrap: wrap; /* Permitir flexibilidad para contenido interno */
+  
 }
 
 .instructor-photo {
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   object-fit: cover;
   margin-right: 20px;
-  flex-shrink: 0; /* Evitar que se reduzca demasiado en pantallas pequeñas */
 }
 
 .instructor-description {
-  max-width: 100%; /* Se adapta a pantallas pequeñas */
+
+
+  max-width: 400px;
 }
 
 .instructor-description h2 {
-  color: #ffb300;
+  color:  #ffb300;
   font-size: 24px;
   margin-bottom: 10px;
 }
@@ -283,211 +281,21 @@
 .instructor-description p {
   font-size: 16px;
   color: #d7d6d6;
+ 
 }
 
 .instructor-video {
+ 
+  margin-right: 10px;
   flex: 1;
-  display: flex;
+  display: flex;  
+
   justify-content: end;
-  width: 100%; /* Ocupa todo el ancho en dispositivos pequeños */
-}
-
-.instructor-video iframe {
-  height: auto;
-  width: 100%; /* Aseguramos que el video sea responsivo */
-  max-width: 600px; /* Límites en pantallas grandes */
-  aspect-ratio: 16/9; /* Mantener proporción del video */
-}
-/* Imágenes responsivas */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Media Queries para hacerlo responsive */
-
-@media (max-width: 1149px) {
-  .course-content {
-    flex-direction: column; /* Cambia a layout vertical */
-  }
 
 }
 
-
-/* Para pantallas medianas (tablets o laptops pequeñas) */
-@media (max-width: 1024px) {
-  .course-header {
-    height: 400px; /* Reduce la altura */
-  }
-  .course-header h1 {
-    font-size: 35px;
-    margin: 0;
-  }
-  
-  .course-header h2 {
-    font-size: 25px;
-    margin: 10px 0 0;
-  }
-  
-  .course-header h3 {
-    font-size: 20px;
-    margin: 5px 0 0;
-  }
-
-  .course-content section {
-    margin-bottom: 10px;
-    padding: 10px;
-    
-  }
-
-  .course-content {
-    flex-direction: column; /* Cambia a layout vertical */
-  }
-
-  .course-content h2 {
-    font-size: 25px;
-  }
-  
-  .course-content p,
-  .course-content ul,
-  .course-content li {
-    font-size: 16px;
-  }
-  
-  .instructor-section {
-    padding: 15px;
-    gap: 15px;
-  }
-
-  .instructor-info {
-    width: 100%;
-    flex-direction: column; /* Colocar contenido en columna */
-    align-items: center; /* Centrar contenido */
-    text-align: center; /* Textos centrados */
-  }
-
-  .instructor-photo {
-    margin-right: 0;
-    margin-bottom: 10px; /* Espacio debajo de la foto */
-  }
-
-  .instructor-description h2 {
-    font-size: 22px;
-  }
-
-  .instructor-description p {
-    font-size: 14px;
-  }
-  
-}
-
-/* Para pantallas pequeñas (móviles) */
-@media (max-width: 768px) {
-  .course-header {
-    height: 300px; /* Más pequeña aún */
-  }
-  .course-header h1 {
-    font-size: 24px;
-    
-    margin: 0;
-  }
-  
-  .course-header h2 {
-    font-size: 20px;
-    margin: 10px 0 0;
-  }
-  
-  .course-header h3 {
-    font-size: 15px;
-    margin: 5px 0 0;
-  }
-  .course-content h2 {
-    font-size: 22px;
-  }
-  
-  .course-content p,
-  .course-content ul,
-  .course-content li {
-    font-size: 13px;
-  }
-
-
-
-  .course-sidebar {
-    padding: 10px; /* Reduce padding */
-  }
-
-  .instructor-section {
-    padding: 10px;
-    gap: 10px;
-  }
-
-  .instructor-info {
-    text-align: center;
-    padding: 10px;
-  }
-
-  .instructor-description h2 {
-    font-size: 20px;
-  }
-
-  .instructor-description p {
-    font-size: 12px;
-  }
-
-  .instructor-video iframe {
-    max-width: 100%; /* Video ocupa todo el ancho */
-  }
-
-}
-
-/* Para pantallas muy pequeñas (teléfonos compactos) */
-@media (max-width: 480px) {
-  .course-header {
-    height: 250px;
-  }
-
-  .course-header h1 {
-    font-size: 20px;
-    
-    margin: 0;
-  }
-  
-  .course-header h2 {
-    font-size: 15px;
-    margin: 10px 0 0;
-  }
-  
-  .course-header h3 {
-    font-size: 13px;
-    margin: 5px 0 0;
-  }
-
-  .instructor-section {
-    padding: 5px;
-  }
-
-  .instructor-info {
-    flex-direction: column; /* Foto y descripción en columnas */
-    align-items: center;
-  }
-
-  .instructor-photo {
-    width: 100px;
-    height: 100px; /* Tamaño reducido en móviles */
-  }
-
-  .instructor-description h2 {
-    font-size: 18px;
-  }
-
-  .instructor-description p {
-    font-size: 12px;
-  }
-
-  .instructor-video iframe {
-    height: auto;
-    max-width: 100%; /* Aseguramos un diseño fluido */
-  }
-
+.instructor-video iframe { 
+  height: 315px;
+  width: 100%;
+ 
 }

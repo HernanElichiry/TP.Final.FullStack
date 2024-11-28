@@ -125,9 +125,6 @@ const CourseDetail = () => {
                   <strong>Topics: </strong> {courseTopic.topic.topic}
                 </p>
               ))}
-              <p>
-                <strong>Precio:</strong> {course.price} dólares
-              </p>
             </div>
           </div>
           <div className="course-price-section">

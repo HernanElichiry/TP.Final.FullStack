@@ -3,6 +3,7 @@ import "./PopupCourseDetail.css"; // Estilos para el popup
 import { useEffect, useState } from "react";
 import { useUser } from "../UserContext/UserContext";
 import { message } from "antd";
+import Cookies from 'js-cookie';
 
 export const PopupCourseDetail = ({ course, onClose }) => {
   const [imageUrl, setImageUrl] = useState("");
@@ -45,10 +46,12 @@ export const PopupCourseDetail = ({ course, onClose }) => {
   // Manejador de evento para enviar la calificación al servidor
   const handleSubmitRating = async () => {
     try {
+      const token = Cookies.get("token");
       const response = await fetch("http://localhost:3000/rating", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Agrega el token de autenticación si es necesario
         },
         body: JSON.stringify({
           rating,
