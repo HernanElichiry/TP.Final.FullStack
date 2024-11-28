@@ -1,7 +1,0 @@
-
-
-@media screen and (max-width: 768px) {
-  .big-box {
-      grid-template-columns: repeat(2, 1fr); /* Cambia a dos columnas en pantallas pequeñas */
-  }
-}

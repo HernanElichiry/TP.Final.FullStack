@@ -1,4 +1,4 @@
-* {
+/* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -18,7 +18,7 @@
     justify-content: center;
   }
   
-  /* Course details (left column) */
+ 
   .course-dates {
     flex: 1;
     min-width: 300px;
@@ -127,7 +127,7 @@
     color: #0056b3;
   }
   
-  /* Video player (right column) */
+  
   
   .video-player {
     flex: 2;
@@ -143,10 +143,10 @@
     width: 100%;
     height: auto;
     border-radius: 10px;
-    /*max-height: 600px;*/ /* Controla el tamaño máximo en pantallas grandes */
+  
   }
   
-  /* Responsive Design */
+
   @media screen and (max-width: 768px) {
     .course-platform {
   
@@ -160,11 +160,11 @@
     }
   
     .course-details {
-      padding: 1.5rem; /* Menos padding en pantallas pequeñas */
+      padding: 1.5rem; 
     }
   }
   
-  /* Ajustes para pantallas grandes (e.g., 27 pulgadas) */
+
   @media screen and (min-width: 1600px) {
     .video-player {
       max-width: 100%;
@@ -175,7 +175,7 @@
       max-height: 730px;
   } }
   
-  /* Ajustes para pantallas medianas (e.g., 15.6 pulgadas) */
+
   @media screen and (min-width: 1200px) and (max-width: 1599px) {
     .video-player {
       max-width: 100%;
@@ -183,8 +183,7 @@
     }
   
   }
-  
-  /* Small screen adjustments */
+
   @media screen and (max-width: 480px) {
     .course-details h1 {
       font-size: 20px;
@@ -203,7 +202,7 @@
     }
   }
   
-  /* Animations */
+ 
   @keyframes slide-down {
     0% {
       opacity: 0;
@@ -213,7 +212,7 @@
       opacity: 1;
       transform: translateY(0);
     }
-  }
+  } */
   
  
   

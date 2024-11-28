@@ -288,7 +288,6 @@ flex-direction: column;
 }
 
 /* Rectángulos grandes en pantallas grandes */
-
 .info-rectangle2 {
   align-items: center;
   display: flex;
@@ -309,10 +308,9 @@ width: 550px;
 }
 
 .info-rectangle h2 {
+ display: flex;
   color: #000000;
   font-size: 4.1rem;
-
-
   text-align: left;
   line-height: 1.2;
 }
@@ -327,7 +325,7 @@ width: 550px;
 
 
 .info-rectangle p {
-  
+  display: flex;
   color: #000000;
   font-size: 1.4rem;
   line-height: 1.5;
@@ -387,39 +385,74 @@ width: 550px;
 
   .info-rectangle p,
   .info-rectangle2 p {
-    
     font-size: 1.2rem;
     margin-right: 20px;
+  }
+    
+  .info-rectangle2 img{
+    border-radius: 30px;
+    box-shadow: 8px 8px 40px #000000;   
   }
 }
 
 @media (max-width: 768px) {
-  /* Ajustes para pantallas pequeñas */
+
   .info-section {
-    flex-direction: column; /* Cambia a columna para apilar los rectángulos */
-    align-items: center;
+    height: 100%;
+    gap: 60px;
+    
   }
-
-  .info-rectangle,
+  
   .info-rectangle2 {
-    width: 80%; /* Ocupan un ancho mayor en pantallas pequeñas */
-    margin-bottom: 20px;
-  }
-
-  .info-rectangle h2 {
-    font-size: 2.5rem;
-  }
-
-  .info-rectangle p,
-  .info-rectangle2 p {
-    font-size: 1rem;
-  }
-
-  .info-button {
-    width: 80%; /* Botón más ancho en pantallas pequeñas */
+    align-items: center;
+    width: 150px;
     padding: 15px;
-    font-size: 16px;
+    
   }
+  
+  .info-rectangle {
+    padding: 15px;
+  height: 300px;
+  width: 40%;
+  }
+  
+  .info-rectangle h2 {
+    width: 250px;
+    font-size: 1.9rem;
+    line-height: 1.2;
+  }
+  
+  .info-rectangle2 img{
+ 
+
+    border-radius: 30px;
+    box-shadow: 8px 8px 40px #000000;   
+  }
+  
+
+  .info-rectangle p {
+    font-size: 14px;
+    line-height: 1.3;
+    margin-top: 10px;
+    width: 200px;
+    
+  }
+  
+
+  .info-button {  
+   padding: 12px; /* Reduce padding para pantallas pequeñas */
+  font-size: 10px; /* Ajuste de fuente para pantallas más pequeñas */
+   margin-top: 10px;
+    gap: 5px;
+    margin-bottom: 5px;
+   
+  }
+  
+  .info-button:hover {
+    box-shadow: 0px 0px 5px #000000; 
+  }
+
+
 
 
 }
@@ -427,7 +460,6 @@ width: 550px;
 
 /* jobs */
 .jobs-main-container {
-
   justify-content: center;
   display: flex;
   flex-wrap: wrap;
@@ -621,9 +653,11 @@ width: 550px;
 /* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
   .subscription-container {
+  
     flex-direction: column; /* Cambiar a columna en móviles */
     align-items: center; /* Centrar elementos en móviles */
     padding: 10px; /* Espaciado reducido */
+    margin-top: 25px;
   }
 
   .subscription-text {
@@ -633,19 +667,20 @@ width: 550px;
   }
 
   .subscription-text h2 {
-    font-size: 1.5em; /* Tamaño de fuente reducido para móviles */
+    font-size: 1.2em; /* Tamaño de fuente reducido para móviles */
     margin-bottom: 10px; /* Espaciado ajustado */
   }
 
   .subscription-image {
-    width: 90%; /* Ancho ajustado para móviles */
+    width: 80%; /* Ancho ajustado para móviles */
     height: auto; /* Permitir ajuste automático de altura en móviles */
     margin-bottom: 20px; /* Espaciado inferior */
   }
 
   .subscribe-button {
+    align-self: center;
     padding: 8px 16px; /* Espaciado ajustado */
-    font-size: 0.9em; /* Tamaño de fuente reducido para móviles */
+    font-size: 0.8em; /* Tamaño de fuente reducido para móviles */
   }
 }
 
@@ -716,7 +751,8 @@ width: 550px;
 /* payment */
 
 .payment-methods {
-  margin: 20px 0;
+
+  margin: 0px 0;
   padding: 20px;
   border-radius: 10px;
   background-color: white;

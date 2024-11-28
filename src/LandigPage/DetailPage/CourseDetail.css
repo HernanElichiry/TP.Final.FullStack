@@ -111,11 +111,9 @@
 .course-content p,
 .course-content ul,
 .course-content li {
-  
   font-size: 16px;
   color: #d9d9d9;
  
-  
 }
 
 .course-content ul {
@@ -221,8 +219,7 @@
 }
 
 .course-price-section .enroll-button {
- 
-  background-color: #ffb300;
+ background-color: #ffb300;
   color: #000000;
   padding: 10px 20px;
   border: none;

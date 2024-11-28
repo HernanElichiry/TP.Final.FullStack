@@ -171,10 +171,11 @@ const CourseDetail = () => {
        
       </div>
       </div>
-      <Testimonials />
+      <Testimonials /> 
+      <SubscriptionSection />
       <PaymentMethods />
      
-      <SubscriptionSection />
+     
       <FAQ />
       <FooterApp />
     </div>

@@ -1,48 +1,115 @@
 .my-courses-container {
-  max-width: 100%; /* Usar 100% para adaptarse al contenedor */
-  margin: 0 auto; /* Centrar el contenedor */
-  padding: 20px; /* Espaciado alrededor */
+
+  max-width: 100%;
+  /* Usar 100% para adaptarse al contenedor */
+  margin: 0 auto;
+  /* Centrar el contenedor */
+  padding: 10px;
+  /* Espaciado alrededor */
 
 }
 
 .courses-grid {
+
   display: flex;
-  flex-wrap: wrap; /* Permitir que las tarjetas se envuelvan*/
-  gap: 20px; /* Espacio entre tarjetas */
-  
+  flex-wrap: wrap;
+  /* Permitir que las tarjetas se envuelvan*/
+  gap: 20px;
+  /* Espacio entre tarjetas */
+
 }
 
 .profesor-course-card {
   box-sizing: border-box;
-  flex: 0 1 calc(33.33% - 20px); /* 3 tarjetas por fila en pantallas grandes */
-  max-width: 367px; /* Limitar el tamaño máximo */
-  border: 1px solid #ddd; /* Opcional, para visualización */
-  border-radius: 8px; /* Esquinas redondeadas */
-  overflow: hidden; /* Asegurar que no sobresalgan elementos */
-  background-color: #fff; /* Fondo blanco */
-  transition: transform 0.3s ease; /* Efecto suave al pasar el mouse */
+  flex: 0 1 calc(33.33% - 20px);
+  /* 3 tarjetas por fila en pantallas grandes */
+  max-width: 367px;
+  /* Limitar el tamaño máximo */
+  border: 1px solid #ddd;
+  /* Opcional, para visualización */
+  border-radius: 8px;
+  /* Esquinas redondeadas */
+  overflow: hidden;
+  /* Asegurar que no sobresalgan elementos */
+  background-color: #fff;
+  /* Fondo blanco */
+  transition: transform 0.3s ease;
+  /* Efecto suave al pasar el mouse */
 }
 
 .profesor-course-card:hover {
-  transform: translateY(-5px); /* Levantar la tarjeta ligeramente */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra al pasar el mouse */
+  transform: translateY(-5px);
+  /* Levantar la tarjeta ligeramente */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  /* Sombra al pasar el mouse */
 }
-
-
 
 @media (max-width: 576px) {
   .profesor-course-card {
-    flex: 0 1 calc(100% - 20px); /* Una tarjeta por fila en pantallas pequeñas */
+    flex: 0 1 calc(100% - 0px);
+    border: 1px solid #ffffff;
+    height: 15rem;
+
   }
 }
 
+
+@media (min-width: 577px) and (max-width: 649px) {
+  .profesor-course-card {
+    flex: 0 1 calc(40% - 0px);
+    height: 250px;
+  }
+
+  .course-buttons {
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+
+}
+
+
+
+
+@media (min-width: 650px) and (max-width: 768px) {
+  .profesor-course-card {
+    flex: 0 1 calc(40% - 0px);
+    height: 250px;
+  }
+
+  .course-buttons {
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+}
+
+@media (min-width: 769px) and (max-width: 820px) {
+  .profesor-course-card {
+    flex: 0 1 calc(40% - 0px);
+    height: 250px;
+
+  }
+}
+
+@media (min-width: 821px) and (max-width: 1200px) {
+  .profesor-course-card {
+    flex: 0 1 calc(35% - 0px);
+    height: 250px;
+
+  }
+}
 
 
 /* Botones dentro de las tarjetas */
 .course-buttons {
   display: flex;
-  justify-content: space-between; /* Botones separados */
-  gap: 10px; /* Espacio entre los botones */
+  justify-content: space-between;
+  /* Botones separados */
+  gap: 10px;
+  /* Espacio entre los botones */
   margin-top: 10px;
 }
 
@@ -63,7 +130,8 @@
 
 .btn-update:hover {
   background-color: #218838;
-  transform: scale(1.05); /* Ligeramente más grande */
+  transform: scale(1.05);
+  /* Ligeramente más grande */
 }
 
 .btn-delete {
@@ -85,4 +153,3 @@
 }
 
 /* Imágenes dentro de las tarjetas */
-

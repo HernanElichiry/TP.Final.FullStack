@@ -1,7 +1,7 @@
 
 
 .card-product-container {
-
+  
   background-color: #fffffff6;
   border-radius: 8px;
   /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
@@ -115,7 +115,7 @@
 }
 
 .card-product-container .buttons .transparent-button {
-
+ 
   background: none;
   color: #da0505;
   border: none;
@@ -128,7 +128,7 @@
 
 /* Contenedor del carrusel */
 .slider-container {
-  
+ 
   width: 100%; /* Ancho del contenedor fluido */
   max-width: 1300px; /* Max ancho si lo deseas */
   margin: 50px auto; /* Centrado */
@@ -136,6 +136,7 @@
 
 /* Estilo de las tarjetas dentro del carrusel */
 .slick-slide {
+  
   display: inline-block;
   padding: 0 10px; /* Espaciado entre tarjetas */
   box-sizing: border-box;
@@ -171,26 +172,31 @@
 }
 
 @media (max-width: 1200px) {
-  .slick-slide {
+ 
+  /*.slick-slide {
     padding: 0 10px;
-  }
+  } */
 }
 
-@media (max-width: 768px) {
-  .slick-slide {
-    padding: 0 20px;
-  }
+@media (max-width: 1200px) {
+  
+  /*.slider-align{
+    border: solid yellow;
+  }*/
 
-  .slick-slide:nth-last-child(n+5) {
-    display: none;
-  }
+  
+/* Contenedor del carrusel */
+.slider-container {
+ 
+  
+  margin: 10px auto; /* Centrado */
 }
 
-.big-box {
 
-  margin-top: 60px;
+.Slider-description {
+  font-size: 25px;
+  padding: 0.7rem;
 }
-@media (max-width: 768px) {
   /* Contenedor de las tarjetas */
   .card-container {
     display: flex;
@@ -205,6 +211,84 @@
   }
   /* Ajuste de cada tarjeta */
   .card-product-container {
+    
+    flex: 1 1 48%; /* Ocupa aproximadamente el 50% del contenedor */
+    margin: 5px; /* Espaciado pequeño entre tarjetas */
+    max-width: 160px; /* Ancho máximo para limitar el tamaño */
+    height: 220px; /* Altura ajustada para móviles */
+  }
+
+  .card-product-image {
+    height: 100px;
+  }
+
+  .card-product-image img {
+    height: 100%;
+  }
+
+  .card-product-container h2 {
+    font-size: 14px;
+    padding: 5px;
+  }
+
+  .card-product-container p {
+    font-size: 12px;
+  }
+
+  .price-favorite-container {
+    padding: 0 5px;
+  }
+
+  .card-product-container .buttons .show-more-button {
+    padding: 2px;
+    font-size: 12px;
+  }
+
+  .card-product-container .buttons .transparent-button {
+    font-size: 14px;
+  }
+
+   
+
+}
+
+/*.big-box {
+
+  margin-top: 60px;
+} */
+
+@media (max-width: 768px) {
+  /*.slider-align{
+    border: solid yellow;
+  }*/
+
+  
+/* Contenedor del carrusel */
+.slider-container {
+  width: 100%; /* Ancho del contenedor fluido */
+  margin: 10px auto; /* Centrado */
+}
+
+
+.Slider-description {
+  font-size: 18px;
+  padding: 0.7rem;
+}
+  /* Contenedor de las tarjetas */
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* Reduce el espacio entre tarjetas */
+    justify-content: center;
+  }
+
+  .rating-star {
+    font-size: 13px; /* Ajusta el tamaño si es necesario */
+   
+  }
+  /* Ajuste de cada tarjeta */
+  .card-product-container {
+    
     flex: 1 1 48%; /* Ocupa aproximadamente el 50% del contenedor */
     margin: 5px; /* Espaciado pequeño entre tarjetas */
     max-width: 160px; /* Ancho máximo para limitar el tamaño */

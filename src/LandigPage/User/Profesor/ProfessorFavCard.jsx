@@ -1,24 +1,19 @@
-
-import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons"; // Importar el ícono de "X"
-import { FavoritesContext } from '../FavoritesContext';
-import "./ProfessorFavCard.css"; // Asegúrate de importar el archivo CSS
+import { faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { FavoritesContext } from "../FavoritesContext";
+import "./ProfessorFavCard.css";
 
 export const FavCardProfessor = ({ course }) => {
   const navigate = useNavigate();
-  const { toggleFavorite } = useContext(FavoritesContext); // Obtener la función toggleFavorite del contexto
-  const [imageUrl, setImageUrl] = useState(""); // Estado para almacenar la URL de la imagen
+  const { toggleFavorite } = useContext(FavoritesContext);
+  const [imageUrl, setImageUrl] = useState("");
 
   useEffect(() => {
-
-    const fetchCourse = async () => {
+    const fetchCourseImage = async () => {
       try {
-
-        // Construir la URL de la imagen del curso
-
-        const imageResponse = await fetch(
+        const response = await fetch(
           `http://localhost:3000/uploads/images/${course.media.filename}`,
           {
             method: "GET",
@@ -27,38 +22,52 @@ export const FavCardProfessor = ({ course }) => {
           }
         );
 
-        if (!imageResponse.ok) {
-          throw new Error("Error al obtener la imagen");
+        if (response.ok) {
+          const imageBlob = await response.blob();
+          setImageUrl(URL.createObjectURL(imageBlob));
+        } else {
+          console.error("Error al obtener la imagen");
         }
-
-        // Convertir la imagen a Blob y luego a URL
-        const imageBlob = await imageResponse.blob();
-        setImageUrl(URL.createObjectURL(imageBlob)); // Guardar la URL de la imagen
       } catch (error) {
         console.error("Error al obtener la imagen:", error);
       }
     };
-    fetchCourse();
 
-  }, []);
+    fetchCourseImage();
+  }, [course.media.filename]);
 
-  const handleCardClick = () => {
-    navigate(`/course/${course.id}`);
-  };
+  const handleCardClick = () => navigate(`/course/${course.id}`);
 
   const handleRemoveFavorite = (e) => {
-    e.stopPropagation(); // Evitar que el clic en el botón también active la redirección
+    e.stopPropagation(); // Evitar activar el clic general de la tarjeta
     toggleFavorite(course);
   };
 
   return (
-    <div className="fav-card" onClick={handleCardClick} aria-label={`Ver detalles del curso ${course.title}`}>
-      <img className='img-fav' src={imageUrl} alt={`Imagen del curso ${course.title}`} />
+    <div className="card-course-container">
+      <img
+        className="img-fav"
+        src={imageUrl}
+        alt={`Imagen del curso ${course.title}`}
+      />
       <div className="fav-card-content">
         <h3>{course.title}</h3>
-        <p>Precio: {course.price} <button onClick={handleRemoveFavorite} className="remove-button">
-          <FontAwesomeIcon icon={faTimes} />
-        </button></p>
+        <div className="card-buttons">
+          <button
+            className="detail-button"
+            onClick={handleCardClick}
+            aria-label="Ver detalles del curso"
+          >
+            <FontAwesomeIcon icon={faInfoCircle} /> Detalles
+          </button>
+          <button
+            className="remove-button"
+            onClick={handleRemoveFavorite}
+            aria-label="Eliminar de favoritos"
+          >
+            <FontAwesomeIcon icon={faTimes} /> Eliminar
+          </button>
+        </div>
       </div>
     </div>
   );
