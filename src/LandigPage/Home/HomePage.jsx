@@ -34,11 +34,15 @@ function HomePage() {
         setCourses(data);
 
         //Cursos solo de Einstein 
-        setEinsteinCourses(data.filter(course => course.platform === "Einstein"));
+        setEinsteinCourses(data.filter(course => course.platform === "Einstein")
+         .sort(() => Math.random() - 0.5));
 
         // Ordenar las copias de los cursos
-        setBestRatedCourses([...data].sort((a, b) => b.rating - a.rating));
-        setPromotionCourses([...data].sort((a, b) => a.price - b.price));
+        setBestRatedCourses([...data]
+          .sort((a, b) => b.rating - a.rating)
+          .slice(0, 10)
+        );
+        setPromotionCourses(data.filter(course => course.price == 0));
         setUniversityCourses([...data].sort((a, b) => a.platform.localeCompare(b.platform)));
       } catch (error) {
         console.error("Error al obtener los cursos:", error);
