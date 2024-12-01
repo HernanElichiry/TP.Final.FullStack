@@ -29,6 +29,7 @@ const CourseDetail = () => {
           mode: "cors", // Permitir solicitudes entre diferentes orígenes
         });
 
+
         if (!response.ok) {
           throw new Error("Error al obtener el curso");
         }
@@ -36,8 +37,6 @@ const CourseDetail = () => {
         const data = await response.json();
 
         setCourse(data); // Guardar el curso en el estado
-        console.log(data)
-
         // Construir la URL de la imagen del curso
 
         const imageResponse = await fetch(
@@ -69,12 +68,17 @@ const CourseDetail = () => {
   }
   const handleBuyNow = () => {
     if (user) {
-      navigate("/checkout", {
-        state: {
-          course,
-          user,
-        },
-      });
+      if(user.sub != course.instructor.id)
+         navigate("/checkout", {
+            state: {
+              course,
+            user,
+             },
+           });
+        else
+        {
+          message.warning("No puedes comprar tu propio curso", 3);
+        }
     } else {
       message.warning("Inicia sesión para comprar un curso.", 3);
     }
