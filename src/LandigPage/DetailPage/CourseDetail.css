@@ -382,7 +382,7 @@ img {
 }
 
 /* Para pantallas pequeñas (móviles) */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .course-header {
     height: 300px; /* Más pequeña aún */
   }
@@ -432,11 +432,17 @@ img {
   }
 
   .instructor-description p {
-    font-size: 12px;
+    font-size: 15px;
   }
 
   .instructor-video iframe {
+    height: auto;
     max-width: 100%; /* Video ocupa todo el ancho */
+    width: 100%; /* El video ocupa todo el ancho */
+  max-width: 500px; /* Establece un límite de tamaño máximo */
+  min-width: 200px; /* Evita que se haga demasiado pequeño en pantallas muy pequeñas */
+  aspect-ratio: 16/9; /* Mantiene la relación de aspecto correcta */
+  margin: 0 auto; /* Centra el video horizontalmente */
   }
 
 }
