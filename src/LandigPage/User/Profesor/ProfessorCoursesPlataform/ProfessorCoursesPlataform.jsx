@@ -428,8 +428,6 @@ const CoursePlatform = () => {
           </div>
 
         </div>
-
-
         {isModalOpen && (
           <div className="modal">
             <div className="modal-content">

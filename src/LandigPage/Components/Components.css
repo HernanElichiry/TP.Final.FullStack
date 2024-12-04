@@ -615,10 +615,12 @@ width: 550px;
   display: flex;
   justify-content: center;
   width: 100%;
+margin-bottom: 70px;
   margin-top: 70px;
   align-items: center;
   gap: 5%;
   padding: 20px;
+ 
 }
 
 .subscription-text {
@@ -657,11 +659,11 @@ width: 550px;
 
 .subscription-image {
   display: flex;
-  
+ 
   background-color: #f7c32e;
   border-radius: 5%;
   width: 540px; /* Mantener ancho para escritorio */
-  height: 500px; /* Mantener altura para escritorio */
+  height:auto; /* Mantener altura para escritorio */
   padding: 15px;
 }
 
@@ -674,7 +676,7 @@ width: 550px;
 /* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
   .subscription-container {
-  
+ 
     flex-direction: column; /* Cambiar a columna en móviles */
     align-items: center; /* Centrar elementos en móviles */
     padding: 10px; /* Espaciado reducido */
@@ -748,8 +750,8 @@ width: 550px;
   }
 
   .company-logo {
-    max-width: 200px; /* Ancho máximo más pequeño */
-    max-height: 100px; /* Alto máximo más pequeño */
+    max-width: 250px; /* Ancho máximo más pequeño */
+    max-height: auto; /* Alto máximo más pequeño */
   }
 }
 
@@ -763,8 +765,8 @@ width: 550px;
   }
 
   .company-logo {
-    max-width: 150px; /* Ancho máximo aún más pequeño */
-    max-height: 75px; /* Alto máximo aún más pequeño */
+    max-width: 140px; /* Ancho máximo aún más pequeño */
+    max-height: auto; /* Alto máximo aún más pequeño */
   }
 }
 
@@ -772,24 +774,29 @@ width: 550px;
 /* payment */
 
 .payment-methods {
+ 
+  padding: 60px;
 
-  margin: 0px 0;
-  padding: 20px;
-  border-radius: 10px;
   background-color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: center;
+  
 }
 
+
 .payment-methods h2 {
-  font-size: 24px;
+  font-size: 25px;
   color: #333;
   margin-bottom: 20px;
 }
 
 .payment-icons {
+  width: 50%;
+  margin: 40px auto;
+ 
   display: flex;
-  justify-content: center;
+
+  justify-content: space-around;
   gap: 20px;
   flex-wrap: wrap;
 }
@@ -801,8 +808,8 @@ width: 550px;
 }
 
 .payment-icon img {
-  width: 50px;
-  height: 50px;
+  width: 65px;
+  height: auto;
   margin-bottom: 10px;
 }
 
@@ -812,9 +819,10 @@ width: 550px;
 }
 
 .payment-methods p {
+
   font-size: 16px;
   color: #666;
-  margin-top: 20px;
+  margin-top: 50px;
 }
 
 

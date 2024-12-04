@@ -171,14 +171,8 @@
   color: #01031c; /* Color amarillo dorado */
 }
 
-@media (max-width: 1200px) {
- 
-  /*.slick-slide {
-    padding: 0 10px;
-  } */
-}
-
-@media (max-width: 1200px) {
+/* para telefonos pequenos en horizontal */
+@media (min-width: 600px) and (max-width: 920px) and (orientation:landscape) {
   
   /*.slider-align{
     border: solid yellow;
@@ -188,8 +182,87 @@
 /* Contenedor del carrusel */
 .slider-container {
  
-  
+ height: 300px; 
+ height: auto;
   margin: 10px auto; /* Centrado */
+}
+
+
+.Slider-description {
+  font-size: 25px;
+  padding: 0.7rem;
+}
+  /* Contenedor de las tarjetas */
+  .card-container {
+    
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* Reduce el espacio entre tarjetas */
+    justify-content: center;
+  }
+
+  .rating-star {
+    font-size: 13px; /* Ajusta el tamaño si es necesario */
+   
+  }
+  /* Ajuste de cada tarjeta */
+  .card-product-container {
+   
+   /* flex: 1 1 48%; /* Ocupa aproximadamente el 50% del contenedor */
+    margin: 5px;
+    min-width: 180px; /* Espaciado pequeño entre tarjetas */
+     /* Ancho máximo para limitar el tamaño */
+    height: auto; /* Altura ajustada para móviles */
+  }
+
+  .card-product-image {
+    height: 100px;
+  }
+
+  .card-product-image img {
+    height: 100%;
+  }
+
+  .card-product-container h2 {
+    font-size: 14px;
+    padding: 5px;
+  }
+
+  .card-product-container p {
+    font-size: 12px;
+  }
+
+  .price-favorite-container {
+    padding: 0 5px;
+  }
+
+  .card-product-container .buttons .show-more-button {
+    padding: 2px;
+    font-size: 12px;
+  }
+
+  .card-product-container .buttons .transparent-button {
+    font-size: 14px;
+  }
+
+   
+
+} /* fin */
+
+
+/*para tablets en vertical seria ideal*/
+@media (min-width: 768px) and (max-width: 1200px) and (orientation:portrait) {
+  
+  /*.slider-align{
+    border: solid yellow;
+  }*/
+
+  
+/* Contenedor del carrusel */
+.slider-container {
+ 
+  margin: 10px auto; /* Centrado */
+  height: auto;
 }
 
 
@@ -214,8 +287,9 @@
     
     flex: 1 1 48%; /* Ocupa aproximadamente el 50% del contenedor */
     margin: 5px; /* Espaciado pequeño entre tarjetas */
-    max-width: 160px; /* Ancho máximo para limitar el tamaño */
-    height: 220px; /* Altura ajustada para móviles */
+    min-width: 175px; /* Ancho máximo para limitar el tamaño */
+   /* height: 220px; /* Altura ajustada para móviles */
+    height: auto;
   }
 
   .card-product-image {
@@ -257,7 +331,7 @@
   margin-top: 60px;
 } */
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   /*.slider-align{
     border: solid yellow;
   }*/
@@ -265,6 +339,7 @@
   
 /* Contenedor del carrusel */
 .slider-container {
+
   width: 100%; /* Ancho del contenedor fluido */
   margin: 10px auto; /* Centrado */
 }
@@ -290,8 +365,9 @@
   .card-product-container {
     
     flex: 1 1 48%; /* Ocupa aproximadamente el 50% del contenedor */
-    margin: 5px; /* Espaciado pequeño entre tarjetas */
-    max-width: 160px; /* Ancho máximo para limitar el tamaño */
+    margin: 5px; 
+    min-width: 170px;/* Espaciado pequeño entre tarjetas */
+    /*max-width: 160px; /* Ancho máximo para limitar el tamaño */
     height: 220px; /* Altura ajustada para móviles */
   }
 

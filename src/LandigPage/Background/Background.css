@@ -1,5 +1,6 @@
 /* Contenedor principal */
 .landingpage-container {
+ 
   /*border-top: solid rgb(250, 242, 242) 1px;*/
   border-bottom: solid rgb(250, 242, 242) 1px;
   display: flex;
@@ -54,6 +55,7 @@
 /* Media query para pantallas medianas (1280px o menos) */
 @media (max-width: 1280px) {
   .landingpage-container {
+   
     flex-direction: column;
     height: auto;
     gap: 20px;
@@ -130,16 +132,16 @@
 /* Media query para pantallas más pequeñas (768px o menos) */
 @media (min-width: 1600px) {
 
+ /* .landingpage-container {
+  border: solid yellow;
+    }*/
+
   /* Imagen de fondo */
-/*.background-img {
-  flex: 1;
-  border-radius: 50px;
+.background-img {
   width: 100%; 
-  max-width: 1100px; 
-  height: auto;
-  object-fit: cover;
-  z-index: 0;
-}*/
+  min-width: 1100px; 
+
+}
   
 
 /* Estilo para el título 
@@ -148,7 +150,7 @@
   font-weight: bold;
   font-size: 5vw; 
   line-height: 1.2;
-}*/
+}
 
 /* Estilo para el párrafo 
 .landingpage-text p {

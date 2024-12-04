@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useUser } from "../User/UserContext/UserContext";
 import { useState, useEffect } from "react";
 
+
 function Navbar() {
   const { user, logout } = useUser();
   const [isActive, setIsActive] = useState(false);
@@ -76,9 +77,9 @@ function Navbar() {
             En promocion
           </Link>
           <Link
-            to="/capacitaciones"
+            to="/#gratis"
             className="navbar-item"
-            onClick={handleLinkClick}
+            //onClick={handleLinkClick}
           >
             Capacitaciones gratuitas
           </Link>
@@ -101,7 +102,7 @@ function Navbar() {
               {categories.map((category) => (
                 <Link
                   key={category.id}
-                  to={`/CategoriesPage/${category.name}`}
+                  to={`/search/${category.name}`}
                   className="navbar-item"
                   onClick={handleLinkClick}
                 >
