@@ -16,6 +16,7 @@ function Navbar() {
 
   const handleLinkClick = () => {
     setIsActive(false);
+    console.log(user);
     setIsDropdownActive(false);
   };
 
