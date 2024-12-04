@@ -65,7 +65,7 @@ function HomePage() {
       {/*componente que integra: texto de presentacion, la imagen de einstein y la barra de navegacion*/}
       <div className="big-box">
         <ResponsiveCarousel courses={bestRatedCourses} text=" Mejor valorados" />
-        <ResponsiveCarousel courses={promotionCourses} text=" Gratis! Gratis! Gratis!" />
+        <ResponsiveCarousel courses={promotionCourses} id="gratis" text=" Gratis! Gratis! Gratis!" />
         
         <ResponsiveCarousel
           courses={universityCourses}

@@ -26,7 +26,7 @@ const CategoriesBar = () => {
         {categories.map((category) => (
           <Link
             key={category.id}
-            to={`/CategoriesPage/${category.name}`}
+            to={`/search/${category.name}`}
             className="category-item"
           >
             {category.name}

@@ -123,8 +123,8 @@ const ProfesorCoursesCard = ({ course }) => {
     // Validaciones de todos los campos
     switch (name) {
       case 'title':
-        if (value.trim().length > 50) {
-          errorMessage = 'El nombre del curso no debe superar los 50 caracteres';
+        if (value.trim().length > 70) {
+          errorMessage = 'El nombre del curso no debe superar los 70 caracteres';
         }
         break;
     
@@ -133,8 +133,8 @@ const ProfesorCoursesCard = ({ course }) => {
           errorMessage = 'La descripción debe tener al menos 100 caracteres.';
         }
 
-        if (value.trim().length > 200) {
-          errorMessage = 'La descripción no debe superar los 200 caracteres.';
+        if (value.trim().length > 320) {
+          errorMessage = 'La descripción no debe superar los 320 caracteres.';
         }
         break;
 

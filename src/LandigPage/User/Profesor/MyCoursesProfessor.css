@@ -51,11 +51,18 @@
     height: 15rem;
 
   }
+
+
+  .btn-update,
+  .btn-delete {
+  display: none;
+}
 }
 
 
 @media (min-width: 577px) and (max-width: 649px) {
   .profesor-course-card {
+  
     flex: 0 1 calc(40% - 0px);
     height: 250px;
   }
@@ -65,6 +72,11 @@
     gap: 10px;
     margin-top: 10px;
   }
+
+  .btn-update,
+  .btn-delete {
+  display: none;
+}
 
 
 }
@@ -74,6 +86,7 @@
 
 @media (min-width: 650px) and (max-width: 768px) {
   .profesor-course-card {
+   
     flex: 0 1 calc(40% - 0px);
     height: 250px;
   }
@@ -84,27 +97,62 @@
     margin-top: 10px;
   }
 
+  .btn-update,
+  .btn-delete {
+  display: none;
+}
+
 }
 
 @media (min-width: 769px) and (max-width: 820px) {
   .profesor-course-card {
+    
     flex: 0 1 calc(40% - 0px);
     height: 250px;
 
   }
+
+  .btn-update,
+  .btn-delete {
+  display: none;
+}
 }
 
-@media (min-width: 821px) and (max-width: 1200px) {
+@media (min-width: 821px) and (max-width: 1023px) {
   .profesor-course-card {
+  
     flex: 0 1 calc(35% - 0px);
     height: 250px;
 
   }
+
+  .btn-update,
+  .btn-delete {
+  display: none;
+}
+
+
+
+}
+
+
+
+
+@media (min-width: 1024px) and (max-width: 1200px) {
+  .profesor-course-card {
+  
+    flex: 0 1 calc(35% - 0px);
+    height: 250px;
+
+  }
+
+
 }
 
 
 /* Botones dentro de las tarjetas */
 .course-buttons {
+
   display: flex;
   justify-content: space-between;
   /* Botones separados */
