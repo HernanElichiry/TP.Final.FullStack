@@ -30,6 +30,7 @@ function ResponsiveCarousel({ courses, text = "inserte texto" }) {
           initialSlide: 2,
           infinite: courses.length > 1, // Aplica también aquí la condición
           dots: false,
+         
      
         },
       },
@@ -38,8 +39,9 @@ function ResponsiveCarousel({ courses, text = "inserte texto" }) {
         settings: {
           slidesToShow: 4,
           slidesToScroll: 1,
-          infinite: courses.length > 3, // Evitar repeticiones en caso de menos de 3 elementos
+          infinite: courses.length > 1, // Evitar repeticiones en caso de menos de 3 elementos
           dots: false,
+          
         },
       },
       {
