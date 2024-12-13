@@ -172,7 +172,7 @@ const DataComponent = () => {
         style={{ marginTop: "1rem" }}
         loading={loading}
       >
-        eliminar cuenta
+        Eliminar cuenta
       </Button>
     </Form>
   );

@@ -1,7 +1,7 @@
 .categories-navbar {
     padding: 1rem;
     margin: 0 0 30px;
-    border: solid red;
+    border: solid #ffb300;
     border-radius: 10px;
     display: flex;
     justify-content: center;

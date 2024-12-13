@@ -175,8 +175,8 @@ const AddCourseForm = () => {
             rules={{
               required: "La descripción es requerida.",
               maxLength: {
-                value: 300,
-                message: "La descripción no puede superar los 250 caracteres.",
+                value: 320,
+                message: "La descripción no puede superar los 320 caracteres.",
               },
               minLength: {
                 value: 100,
@@ -256,7 +256,7 @@ const AddCourseForm = () => {
         </div>
         {/* Tópicos */}
         <div className="form-group">
-          <label>Temas (mínimo 3)</label>
+          <label>Temas (mínimo 1)</label>
           <Controller
             name="topics"
             control={control}

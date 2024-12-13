@@ -159,7 +159,7 @@ const CourseDetail = () => {
             className="instructor-photo"
           />
           <div className="instructor-description">
-            <h2>Sobre {course.instructor.name}</h2>
+            <h2> {course.instructor.name}</h2>
             <p>{course.description}</p> 
           </div>
         </div>

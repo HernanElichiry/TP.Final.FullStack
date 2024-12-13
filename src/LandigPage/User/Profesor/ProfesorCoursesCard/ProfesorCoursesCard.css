@@ -41,23 +41,30 @@
 }
 
 .modal {
+ 
+  border: solid rgb(241, 198, 5);
   border-radius: 8px;
   padding: 20px;
   color: aliceblue;
+  
 }
 
 
 .form-row {
-  background-color: rgb(245, 247, 249);
-  border: solid ;
+ 
+  background-color: rgb(255, 255, 255);
   display: flex;
   justify-content: space-between; /* Asegura espacio entre las columnas */
   border-radius: 5px;
   padding: 2%;
-  width: 120%;
+  width: 110%;
+ 
 }
 
 .form-column {
+  display: flex;
+  flex-direction: column; 
+   width: 100%;
   flex: 1; /* Cada columna tomará el mismo espacio */
   margin-right: 15px; /* Espaciado entre columnas */
 }
@@ -68,13 +75,15 @@
 
 .form-group {
   margin-bottom: 15px;
+  width: 100%;
 }
 
+
+
 .form-input {
-  width: 100%;
   padding: 8px;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid #d3d3d3;
 }
 
 .error {
