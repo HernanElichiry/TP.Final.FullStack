@@ -18,7 +18,7 @@ const { Header, Content, Sider } = Layout;
 
 function Sidebar() {
   const { user, logout } = useUser();
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
 
   const {
     token: { colorBgContainer, borderRadiusLG },

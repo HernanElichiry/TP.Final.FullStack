@@ -20,7 +20,7 @@ const { Header, Content, Sider } = Layout;
 
 function Sidebar() {
   const { user, logout } = useUser(); // Función de logout desde el contexto
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
 
   // Uso del tema para obtener colores y bordes
   const {
